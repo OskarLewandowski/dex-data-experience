@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="images/main-window">
+    <file>main-window.qrc</file>
+    <file>mw-add-file.svg</file>
+    <file>mw-data-analysis.svg</file>
+    <file>mw-exit.svg</file>
+    <file>mw-help.svg</file>
+    <file>mw-modify-data.svg</file>
+    <file>mw-settings.svg</file>
+  </qresource>
+</RCC>
