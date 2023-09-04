@@ -1,5 +1,6 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 from main_window import Ui_MainWindow
+from main_window_functions import exit_confirmation_dialog, handleResize
 
 
 class MyMainWindow(QtWidgets.QMainWindow):
@@ -9,50 +10,35 @@ class MyMainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle("Dex")
 
-        self.resizeEvent = self.handleResize
-
         self.default_font_size = 26
         self.default_icon_size = QtCore.QSize(70, 70)
 
-        self.handleResize(None)
+        # connections
+        self.ui.button_exit.clicked.connect(self.exitButton)
 
-    def handleResize(self, event):
-        if event:
-            width = self.width()
-            height = self.height()
+    def resizeEvent(self, event):
+        handleResize(self, event)
 
-            font_size = int(self.default_font_size * ((width + height) / (800 + 400)) / 2)
-            icon_size_width = int(self.default_icon_size.width() * (width / 800))
-            icon_size_height = int(self.default_icon_size.height() * (height / 600))
+    def exitButton(self):
+        confirmed = exit_confirmation_dialog()
+
+        if confirmed:
+            sys.exit()
+
+    def closeEvent(self, event):
+        confirmed = exit_confirmation_dialog()
+
+        if confirmed:
+            event.accept()
         else:
-            font_size = self.default_font_size
-            icon_size_width = self.default_icon_size.width()
-            icon_size_height = self.default_icon_size.height()
-
-        font = QtGui.QFont()
-        font.setPointSize(font_size)
-
-        self.ui.button_add_file.setFont(font)
-        self.ui.button_modify_data.setFont(font)
-        self.ui.button_analysis_data.setFont(font)
-        self.ui.button_settings.setFont(font)
-        self.ui.button_help.setFont(font)
-        self.ui.button_exit.setFont(font)
-
-        icon_size = QtCore.QSize(icon_size_width, icon_size_height)
-
-        self.ui.button_add_file.setIconSize(icon_size)
-        self.ui.button_modify_data.setIconSize(icon_size)
-        self.ui.button_analysis_data.setIconSize(icon_size)
-        self.ui.button_settings.setIconSize(icon_size)
-        self.ui.button_help.setIconSize(icon_size)
-        self.ui.button_exit.setIconSize(icon_size)
+            event.ignore()
 
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon("./images/app-icon/dex-icon-512x512.png"))
     MainWindow = MyMainWindow()
     MainWindow.show()
     sys.exit(app.exec())
