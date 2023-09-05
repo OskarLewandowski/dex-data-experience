@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_dialog_add_file(object):
     def setupUi(self, dialog_add_file):
         dialog_add_file.setObjectName("dialog_add_file")
-        dialog_add_file.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
+        dialog_add_file.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         dialog_add_file.resize(800, 600)
         dialog_add_file.setMinimumSize(QtCore.QSize(800, 600))
         icon = QtGui.QIcon()

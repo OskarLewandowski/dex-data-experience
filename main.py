@@ -1,6 +1,6 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 from main_window import Ui_MainWindow
-from main_window_functions import exit_confirmation_dialog, handleResize
+from main_window_functions import exitConfirmationDialog, handleResize, openAddFileDialog
 
 
 class MyMainWindow(QtWidgets.QMainWindow):
@@ -15,23 +15,27 @@ class MyMainWindow(QtWidgets.QMainWindow):
 
         # connections
         self.ui.button_exit.clicked.connect(self.exitButton)
+        self.ui.button_add_file.clicked.connect(self.openAddFileDialog)
 
     def resizeEvent(self, event):
         handleResize(self, event)
 
     def exitButton(self):
-        confirmed = exit_confirmation_dialog()
+        confirmed = exitConfirmationDialog()
 
         if confirmed:
             sys.exit()
 
     def closeEvent(self, event):
-        confirmed = exit_confirmation_dialog()
+        confirmed = exitConfirmationDialog()
 
         if confirmed:
             event.accept()
         else:
             event.ignore()
+
+    def openAddFileDialog(self):
+        openAddFileDialog(self)
 
 
 if __name__ == "__main__":

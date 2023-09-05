@@ -1,11 +1,27 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
+from add_file import Ui_dialog_add_file
+
+"""
+Manage window for import data
+"""
+
+
+def openAddFileDialog(self):
+    dialog = QtWidgets.QDialog()
+    add_file_ui = Ui_dialog_add_file()
+    add_file_ui.setupUi(dialog)
+
+    result = dialog.exec()
+    if result == QtWidgets.QDialog.DialogCode.Accepted:
+        pass
+
 
 """
 Confirmation window for closing the program
 """
 
 
-def exit_confirmation_dialog():
+def exitConfirmationDialog():
     msg = QtWidgets.QMessageBox()
     msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
     msg.setText('Czy na pewno chcesz zamknąć program?')
