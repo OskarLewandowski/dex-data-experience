@@ -9,11 +9,20 @@ import pandas as pd
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QButtonGroup
+from PyQt6.QtCore import Qt
 
 
 class Ui_dialog_add_file(object):
 
     def setupUi(self, dialog_add_file):
+
+        # variable
+        # to keep file path
+        self.filePathGlobal = None
+
+        # to kepp data frame
+        self.dataFrameGlobal = None
+
         dialog_add_file.setObjectName("dialog_add_file")
         dialog_add_file.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         dialog_add_file.resize(800, 600)
@@ -55,12 +64,15 @@ class Ui_dialog_add_file(object):
         self.label_2 = QtWidgets.QLabel(parent=dialog_add_file)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_2.addWidget(self.label_2)
-        self.radioButton1_semicolon = QtWidgets.QRadioButton(parent=dialog_add_file)
-        self.radioButton1_semicolon.setObjectName("radioButton1_semicolon")
-        self.verticalLayout_2.addWidget(self.radioButton1_semicolon)
+
         self.radioButton1_comma = QtWidgets.QRadioButton(parent=dialog_add_file)
         self.radioButton1_comma.setObjectName("radioButton1_comma")
         self.verticalLayout_2.addWidget(self.radioButton1_comma)
+
+        self.radioButton1_semicolon = QtWidgets.QRadioButton(parent=dialog_add_file)
+        self.radioButton1_semicolon.setObjectName("radioButton1_semicolon")
+        self.verticalLayout_2.addWidget(self.radioButton1_semicolon)
+
         self.radioButton1_tab = QtWidgets.QRadioButton(parent=dialog_add_file)
         self.radioButton1_tab.setObjectName("radioButton1_tab")
         self.verticalLayout_2.addWidget(self.radioButton1_tab)
@@ -72,6 +84,7 @@ class Ui_dialog_add_file(object):
         self.lineEdit_custom_delimiter = QtWidgets.QLineEdit(parent=dialog_add_file)
         self.lineEdit_custom_delimiter.setEnabled(False)
         self.lineEdit_custom_delimiter.setObjectName("lineEdit_custom_delimiter")
+        self.lineEdit_custom_delimiter.setMaxLength(1)
         self.horizontalLayout.addWidget(self.lineEdit_custom_delimiter)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.horizontalLayout_3.addLayout(self.verticalLayout_2)
@@ -85,12 +98,15 @@ class Ui_dialog_add_file(object):
         self.label_3 = QtWidgets.QLabel(parent=dialog_add_file)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_3.addWidget(self.label_3)
-        self.radioButton2_dot = QtWidgets.QRadioButton(parent=dialog_add_file)
-        self.radioButton2_dot.setObjectName("radioButton2_dot")
-        self.verticalLayout_3.addWidget(self.radioButton2_dot)
+
         self.radioButton2_comma = QtWidgets.QRadioButton(parent=dialog_add_file)
         self.radioButton2_comma.setObjectName("radioButton2_comma")
         self.verticalLayout_3.addWidget(self.radioButton2_comma)
+
+        self.radioButton2_dot = QtWidgets.QRadioButton(parent=dialog_add_file)
+        self.radioButton2_dot.setObjectName("radioButton2_dot")
+        self.verticalLayout_3.addWidget(self.radioButton2_dot)
+
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout_3.addItem(spacerItem2)
@@ -134,6 +150,7 @@ class Ui_dialog_add_file(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.pushButton_refresh = QtWidgets.QPushButton(parent=dialog_add_file)
+        self.pushButton_refresh.setEnabled(False)
         self.pushButton_refresh.setObjectName("pushButton_refresh")
         self.horizontalLayout_2.addWidget(self.pushButton_refresh)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
@@ -162,10 +179,15 @@ class Ui_dialog_add_file(object):
         self.decimal_separator_button_group.addButton(self.radioButton2_dot)
         self.decimal_separator_button_group.addButton(self.radioButton2_comma)
 
+        self.radioButton1_comma.setChecked(True)
+        self.radioButton2_comma.setChecked(True)
+
         # connections
         self.pushButton_cancel.clicked.connect(dialog_add_file.reject)
         self.pushButton_choose_file.clicked.connect(self.chooseFile)
         self.radioButton1_custom.toggled.connect(self.customDelimiterToggled)
+
+        self.pushButton_refresh.clicked.connect(self.customLoadData)
 
     def retranslateUi(self, dialog_add_file):
         _translate = QtCore.QCoreApplication.translate
@@ -182,8 +204,8 @@ class Ui_dialog_add_file(object):
         self.radioButton2_dot.setText(_translate("dialog_add_file", "kropka"))
         self.radioButton2_comma.setText(_translate("dialog_add_file", "przecinek"))
         self.label_4.setText(_translate("dialog_add_file", "Nagłówki:"))
-        self.checkBox_skip_headers.setText(_translate("dialog_add_file", "pomiń nagłówki"))
-        self.pushButton_refresh.setText(_translate("dialog_add_file", "Odśwież"))
+        self.checkBox_skip_headers.setText(_translate("dialog_add_file", "brak nagłówków"))
+        self.pushButton_refresh.setText(_translate("dialog_add_file", " Zatwierdź zmiany "))
         self.pushButton_load.setText(_translate("dialog_add_file", "Załaduj"))
         self.pushButton_cancel.setText(_translate("dialog_add_file", "Anuluj"))
 
@@ -198,46 +220,95 @@ class Ui_dialog_add_file(object):
 
             if fileName[0]:
                 filePath = str(fileName[0])
+                self.filePathGlobal = filePath
                 fileName = os.path.basename(filePath)
 
                 self.lineEdit_filename.setText(fileName)
-                self.enableLoadButton()
+                self.enableLockedButton()
 
             if filePath.endswith(".csv"):
                 try:
                     obj = pd.read_csv(filePath)
+                    self.dataFrameGlobal = obj
                     self.displayDataInTableView(obj)
                 except:
                     obj = pd.read_csv(filePath, encoding='iso-8859-1')
+                    self.dataFrameGlobal = obj
                     self.displayDataInTableView(obj)
         except:
             self.lineEdit_filename.clear()
             self.pushButton_load.setEnabled(False)
             self.tableView_data_table.setModel(None)
+            self.checkBox_skip_headers.setChecked(False)
+            self.pushButton_refresh.setEnabled(False)
 
-    def displayDataInTableView(self, data_frame):
-        model = QtGui.QStandardItemModel()
-        num_rows, num_cols = data_frame.shape
+    def customLoadData(self):
+        try:
+            filePath = self.filePathGlobal
 
-        if num_rows > 15:
-            num_rows = 15
+            delimiter = ","
+            if self.radioButton1_semicolon.isChecked():
+                delimiter = ";"
+            elif self.radioButton1_comma.isChecked():
+                delimiter = ","
+            elif self.radioButton1_tab.isChecked():
+                delimiter = "\t"
+            elif self.radioButton1_custom.isChecked():
+                if self.lineEdit_custom_delimiter.text() == "" or self.lineEdit_custom_delimiter.text() == " ":
+                    delimiter = ","
+                else:
+                    delimiter = self.lineEdit_custom_delimiter.text()
 
-        model.setColumnCount(num_cols)
-        model.setRowCount(num_rows)
+            decimal_separator = "."
+            if self.radioButton2_comma.isChecked():
+                decimal_separator = ","
 
-        headers = list(data_frame.columns)
-        model.setHorizontalHeaderLabels(headers)
+            skip_headers = self.checkBox_skip_headers.isChecked()
 
-        for row in range(num_rows):
-            for col in range(num_cols):
-                item = QtGui.QStandardItem(str(data_frame.iat[row, col]))
-                model.setItem(row, col, item)
+            if skip_headers:
+                obj = pd.read_csv(filePath, delimiter=delimiter, decimal=decimal_separator, header=None)
+                self.dataFrameGlobal = obj
+                self.displayDataInTableView(obj, headers=False)
+            else:
+                obj = pd.read_csv(filePath, delimiter=delimiter, decimal=decimal_separator)
+                self.dataFrameGlobal = obj
+                self.displayDataInTableView(obj)
 
-        self.tableView_data_table.setModel(model)
+        except Exception as e:
+            print("ERROR" + e)
 
-    def enableLoadButton(self):
+    def displayDataInTableView(self, data_frame, headers=True):
+        try:
+            model = QtGui.QStandardItemModel()
+            num_rows, num_cols = data_frame.shape
+
+            if num_rows > 15:
+                num_rows = 15
+
+            model.setColumnCount(num_cols)
+            model.setRowCount(num_rows)
+
+            if headers:
+                header_labels = list(data_frame.columns)
+            else:
+                header_labels = [str(i) for i in range(1, num_cols)]
+
+            model.setHorizontalHeaderLabels(header_labels)
+
+            for row in range(num_rows):
+                for col in range(num_cols):
+                    item = QtGui.QStandardItem(str(data_frame.iat[row, col]))
+                    item.setFlags(Qt.ItemFlag.ItemIsSelectable)
+                    model.setItem(row, col, item)
+
+            self.tableView_data_table.setModel(model)
+        except Exception as e:
+            print("Error" + str(e))
+
+    def enableLockedButton(self):
         if bool(self.lineEdit_filename.text()):
             self.pushButton_load.setEnabled(True)
+            self.pushButton_refresh.setEnabled(True)
 
     def customDelimiterToggled(self, checked):
         if checked:
