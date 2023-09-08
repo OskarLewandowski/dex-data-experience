@@ -20,6 +20,9 @@ class Ui_dialog_add_file(object):
         # to keep file path
         self.filePathGlobal = None
 
+        # to keep file name
+        self.fileNameGlobal = None
+
         # to kepp data frame
         self.dataFrameGlobal = None
 
@@ -187,7 +190,9 @@ class Ui_dialog_add_file(object):
         self.pushButton_choose_file.clicked.connect(self.chooseFile)
         self.radioButton1_custom.toggled.connect(self.customDelimiterToggled)
 
-        self.pushButton_refresh.clicked.connect(self.customLoadData)
+        self.pushButton_refresh.clicked.connect(self.loadDataCsv)
+
+        self.pushButton_load.clicked.connect(self.saveData)
 
     def retranslateUi(self, dialog_add_file):
         _translate = QtCore.QCoreApplication.translate
@@ -223,26 +228,18 @@ class Ui_dialog_add_file(object):
                 self.filePathGlobal = filePath
                 fileName = os.path.basename(filePath)
 
+                self.fileNameGlobal = fileName
+
                 self.lineEdit_filename.setText(fileName)
                 self.enableLockedButton()
 
+            # CSV FILE
             if filePath.endswith(".csv"):
-                try:
-                    obj = pd.read_csv(filePath)
-                    self.dataFrameGlobal = obj
-                    self.displayDataInTableView(obj)
-                except:
-                    obj = pd.read_csv(filePath, encoding='iso-8859-1')
-                    self.dataFrameGlobal = obj
-                    self.displayDataInTableView(obj)
+                self.loadDataCsv()
         except:
-            self.lineEdit_filename.clear()
-            self.pushButton_load.setEnabled(False)
-            self.tableView_data_table.setModel(None)
-            self.checkBox_skip_headers.setChecked(False)
-            self.pushButton_refresh.setEnabled(False)
+            self.clear()
 
-    def customLoadData(self):
+    def loadDataCsv(self):
         try:
             filePath = self.filePathGlobal
 
@@ -265,17 +262,41 @@ class Ui_dialog_add_file(object):
 
             skip_headers = self.checkBox_skip_headers.isChecked()
 
-            if skip_headers:
-                obj = pd.read_csv(filePath, delimiter=delimiter, decimal=decimal_separator, header=None)
-                self.dataFrameGlobal = obj
-                self.displayDataInTableView(obj, headers=False)
-            else:
-                obj = pd.read_csv(filePath, delimiter=delimiter, decimal=decimal_separator)
-                self.dataFrameGlobal = obj
-                self.displayDataInTableView(obj)
+            try:
+                if skip_headers:
+                    obj = pd.read_csv(filePath,
+                                      encoding='utf-8',
+                                      delimiter=delimiter,
+                                      decimal=decimal_separator,
+                                      header=None)
 
+                    self.displayDataInTableView(obj, headers=False)
+                else:
+                    obj = pd.read_csv(filePath,
+                                      encoding='utf-8',
+                                      delimiter=delimiter,
+                                      decimal=decimal_separator)
+
+                    self.displayDataInTableView(obj)
+            except:
+                if skip_headers:
+                    obj = pd.read_csv(filePath,
+                                      encoding='iso-8859-1',
+                                      delimiter=delimiter,
+                                      decimal=decimal_separator,
+                                      header=None)
+                    self.displayDataInTableView(obj, headers=False)
+                else:
+                    obj = pd.read_csv(filePath,
+                                      encoding='iso-8859-1',
+                                      delimiter=delimiter,
+                                      decimal=decimal_separator)
+                    self.displayDataInTableView(obj)
+
+            self.dataFrameGlobal = obj
         except Exception as e:
-            print("ERROR" + e)
+            self.errorMessage("0001", e)
+            self.clear()
 
     def displayDataInTableView(self, data_frame, headers=True):
         try:
@@ -291,7 +312,7 @@ class Ui_dialog_add_file(object):
             if headers:
                 header_labels = list(data_frame.columns)
             else:
-                header_labels = [str(i) for i in range(1, num_cols)]
+                header_labels = [str(i) for i in range(1, num_cols + 1)]
 
             model.setHorizontalHeaderLabels(header_labels)
 
@@ -303,7 +324,8 @@ class Ui_dialog_add_file(object):
 
             self.tableView_data_table.setModel(model)
         except Exception as e:
-            print("Error" + str(e))
+            self.errorMessage("0002", e)
+            self.clear()
 
     def enableLockedButton(self):
         if bool(self.lineEdit_filename.text()):
@@ -317,11 +339,78 @@ class Ui_dialog_add_file(object):
         else:
             self.lineEdit_custom_delimiter.setEnabled(False)
 
+    def errorMessage(self, errorCode="0000", e=""):
+        message = "Wystąpił bład: [{0}] - {1}".format(errorCode, e)
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Critical)
+        msg.setText(message)
+        msg.setWindowTitle('Błąd')
+
+        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Close)
+        msg.button(QtWidgets.QMessageBox.StandardButton.Close).setText('Zamknij')
+        reply = msg.exec()
+
+        return reply == QtWidgets.QMessageBox.StandardButton.Close
+
+    def clear(self):
+        self.lineEdit_filename.clear()
+        self.pushButton_load.setEnabled(False)
+        self.tableView_data_table.setModel(None)
+        self.checkBox_skip_headers.setChecked(False)
+        self.pushButton_refresh.setEnabled(False)
+        self.radioButton1_comma.setChecked(True)
+        self.radioButton2_comma.setChecked(True)
+        self.checkBox_skip_headers.setChecked(False)
+
+    def saveData(self):
+        confirmed = self.saveConfirmationDialog()
+        if confirmed:
+            # ToDo
+            print(self.dataFrameGlobal)
+            nextStep = self.statusConfirmationDialog()
+
+        if nextStep:
+            # ToDo
+            None
+        else:
+            self.clear()
+
+    def saveConfirmationDialog(self):
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
+        msg.setText('Czy na pewno chcesz załadować dane?')
+        msg.setWindowTitle('Ładowanie danych')
+
+        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.Abort)
+        msg.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Tak')
+        msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Anuluj')
+
+        reply = msg.exec()
+
+        return reply == QtWidgets.QMessageBox.StandardButton.Yes
+
+    def statusConfirmationDialog(self):
+
+        message = "Plik {} został pomyślnie załadowny.".format(self.fileNameGlobal)
+        msg = QtWidgets.QMessageBox()
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
+        msg.setText(message)
+        msg.setWindowTitle('Dodaj dane')
+
+        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Abort | QtWidgets.QMessageBox.StandardButton.Close)
+        msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
+        msg.button(QtWidgets.QMessageBox.StandardButton.Close).setText('Wróc do mneu głównego')
+
+        reply = msg.exec()
+
+        return reply == QtWidgets.QMessageBox.StandardButton.Close
+
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon("./images/app-icon/dex-icon-512x512.png"))
     dialog_add_file = QtWidgets.QDialog()
     ui = Ui_dialog_add_file()
     ui.setupUi(dialog_add_file)
