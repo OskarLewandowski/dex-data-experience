@@ -26,6 +26,8 @@ class Ui_dialog_add_file(object):
         # to kepp data frame
         self.dataFrameGlobal = None
 
+        self.dialogAddFileGlobal = dialog_add_file
+
         dialog_add_file.setObjectName("dialog_add_file")
         dialog_add_file.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         dialog_add_file.resize(800, 600)
@@ -370,8 +372,7 @@ class Ui_dialog_add_file(object):
             nextStep = self.statusConfirmationDialog()
 
         if nextStep:
-            # ToDo
-            None
+            self.dialogAddFileGlobal.close()
         else:
             self.clear()
 
