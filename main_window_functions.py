@@ -1,5 +1,29 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 from add_file import Ui_dialog_add_file
+from data_storage import DataStorage
+from modify_data import Ui_MainWindow_modify_data
+
+"""
+For test only
+"""
+
+
+def printDataFrames():
+    keys = DataStorage.get_all_keys()
+    print(keys)
+
+
+"""
+Window to modify data frames
+"""
+
+
+def openModifyDataWindow(self):
+    self.window = QtWidgets.QMainWindow()
+    self.ui = Ui_MainWindow_modify_data()
+    self.ui.setupUi(self.window)
+    self.window.show()
+
 
 """
 Manage window for import data

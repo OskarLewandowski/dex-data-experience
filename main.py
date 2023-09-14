@@ -1,6 +1,7 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 from main_window import Ui_MainWindow
-from main_window_functions import exitConfirmationDialog, handleResize, openAddFileDialog
+from main_window_functions import (exitConfirmationDialog, handleResize, openAddFileDialog,
+                                   printDataFrames, openModifyDataWindow)
 
 
 class MyMainWindow(QtWidgets.QMainWindow):
@@ -16,6 +17,10 @@ class MyMainWindow(QtWidgets.QMainWindow):
         # connections
         self.ui.button_exit.clicked.connect(self.exitButton)
         self.ui.button_add_file.clicked.connect(self.openAddFileDialog)
+        self.ui.button_modify_data.clicked.connect(self.openModifyDataWindow)
+
+        # for test
+        self.ui.button_help.clicked.connect(self.printDataFrames)
 
     def resizeEvent(self, event):
         handleResize(self, event)
@@ -36,6 +41,12 @@ class MyMainWindow(QtWidgets.QMainWindow):
 
     def openAddFileDialog(self):
         openAddFileDialog(self)
+
+    def openModifyDataWindow(self):
+        openModifyDataWindow(self)
+
+    def printDataFrames(self):
+        printDataFrames()
 
 
 if __name__ == "__main__":
