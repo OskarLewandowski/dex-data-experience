@@ -7,6 +7,8 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from data_storage import DataStorage
+from PyQt6.QtGui import QStandardItemModel, QStandardItem
 
 
 class Ui_MainWindow_modify_data(object):
@@ -126,6 +128,18 @@ class Ui_MainWindow_modify_data(object):
         self.retranslateUi(MainWindow_modify_data)
         QtCore.QMetaObject.connectSlotsByName(MainWindow_modify_data)
 
+        # add names to combo box
+        nameList = DataStorage.get_all_keys()
+
+        if nameList:
+            self.comboBox_Select_Data.addItems(nameList)
+
+        # connections
+        self.pushButton_Cancel.clicked.connect(MainWindow_modify_data.close)
+        self.action_Exit.triggered.connect(MainWindow_modify_data.close)
+        self.comboBox_Select_Data.currentIndexChanged.connect(self.enableLoad)
+        self.pushButton_Load.clicked.connect(self.loadDataFrame)
+
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
         MainWindow_modify_data.setWindowTitle(_translate("MainWindow_modify_data", "Modyfikuj dane"))
@@ -161,6 +175,32 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def loadDataFrame(self):
+        self.enableWindowFunction()
+        data = DataStorage.get(self.comboBox_Select_Data.currentText())
+        self.displayData(data)
+
+    def displayData(self, data):
+        model = QStandardItemModel()
+        model.setHorizontalHeaderLabels(data.columns)
+
+        for row in range(data.shape[0]):
+            items = [QStandardItem(str(data.iloc[row, col])) for col in range(data.shape[1])]
+            model.appendRow(items)
+
+        self.tableView_Data_Frame.setModel(model)
+
+    def enableWindowFunction(self):
+        self.menu_Edit.setEnabled(True)
+        self.menu_Search.setEnabled(True)
+        self.menu_Info.setEnabled(True)
+        self.pushButton_Save.setEnabled(True)
+        self.action_Save_as.setEnabled(True)
+
+    def enableLoad(self, index):
+        if index >= 0:
+            self.pushButton_Load.setEnabled(True)
 
 
 if __name__ == "__main__":
