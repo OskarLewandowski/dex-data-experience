@@ -9,6 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from data_storage import DataStorage
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
+from data_frame_model import DataFrameModel
 
 
 class Ui_MainWindow_modify_data(object):
@@ -182,13 +183,7 @@ class Ui_MainWindow_modify_data(object):
         self.displayData(data)
 
     def displayData(self, data):
-        model = QStandardItemModel()
-        model.setHorizontalHeaderLabels(data.columns)
-
-        for row in range(data.shape[0]):
-            items = [QStandardItem(str(data.iloc[row, col])) for col in range(data.shape[1])]
-            model.appendRow(items)
-
+        model = DataFrameModel(data)
         self.tableView_Data_Frame.setModel(model)
 
     def enableWindowFunction(self):
