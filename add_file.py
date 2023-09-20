@@ -366,45 +366,55 @@ class Ui_dialog_add_file(object):
         self.checkBox_skip_headers.setChecked(False)
 
     def saveData(self):
-        confirmed = self.saveConfirmationDialog()
-        if confirmed:
-            DataStorage.add(os.path.splitext(self.fileNameGlobal)[0], self.dataFrameGlobal)
-            nextStep = self.statusConfirmationDialog()
+        try:
+            confirmed = self.saveConfirmationDialog()
+            if confirmed:
+                DataStorage.add(os.path.splitext(self.fileNameGlobal)[0], self.dataFrameGlobal)
+                nextStep = self.statusConfirmationDialog()
 
-        if nextStep:
-            self.dialogAddFileGlobal.close()
-        else:
-            self.clear()
+            if nextStep:
+                self.dialogAddFileGlobal.close()
+            else:
+                self.clear()
+        except:
+            None
 
     def saveConfirmationDialog(self):
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        msg.setText('Czy na pewno chcesz załadować dane?')
-        msg.setWindowTitle('Ładowanie danych')
+        try:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            msg.setText('Czy na pewno chcesz załadować dane?')
+            msg.setWindowTitle('Ładowanie danych')
 
-        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.Abort)
-        msg.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Tak')
-        msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Anuluj')
+            msg.setStandardButtons(
+                QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.Abort)
+            msg.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Tak')
+            msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Anuluj')
 
-        reply = msg.exec()
+            reply = msg.exec()
 
-        return reply == QtWidgets.QMessageBox.StandardButton.Yes
+            return reply == QtWidgets.QMessageBox.StandardButton.Yes
+        except:
+            None
 
     def statusConfirmationDialog(self):
+        try:
+            message = "Plik {} został pomyślnie załadowny.".format(self.fileNameGlobal)
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            msg.setText(message)
+            msg.setWindowTitle('Dodaj dane')
 
-        message = "Plik {} został pomyślnie załadowny.".format(self.fileNameGlobal)
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        msg.setText(message)
-        msg.setWindowTitle('Dodaj dane')
+            msg.setStandardButtons(
+                QtWidgets.QMessageBox.StandardButton.Abort | QtWidgets.QMessageBox.StandardButton.Close)
+            msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
+            msg.button(QtWidgets.QMessageBox.StandardButton.Close).setText('Wróc do mneu głównego')
 
-        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Abort | QtWidgets.QMessageBox.StandardButton.Close)
-        msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
-        msg.button(QtWidgets.QMessageBox.StandardButton.Close).setText('Wróc do mneu głównego')
+            reply = msg.exec()
 
-        reply = msg.exec()
-
-        return reply == QtWidgets.QMessageBox.StandardButton.Close
+            return reply == QtWidgets.QMessageBox.StandardButton.Close
+        except:
+            None
 
 
 if __name__ == "__main__":

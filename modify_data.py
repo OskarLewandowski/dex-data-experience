@@ -277,26 +277,33 @@ class Ui_MainWindow_modify_data(object):
             print("Error -", e)
 
     def showInfoWidget(self):
-        if self.currentDataFrameGlobal is not None:
-            if self.action_More_Info.isChecked():
-                buffer = io.StringIO()
-                self.currentDataFrameGlobal.info(buf=buffer)
-                info_text = buffer.getvalue()
+        if self.currentDataFrameGlobal is not None and self.action_More_Info.isChecked():
 
-                if self.info_dialog is None:
-                    self.info_dialog = QtWidgets.QDialog()
-                    self.info_dialog.setModal(False)
-                    ui_info = Ui_Form_Info()
-                    ui_info.setupUi(self.info_dialog)
-                    ui_info.textEdit_info.setPlainText(info_text)
-                    self.info_dialog.show()
-                else:
-                    self.info_dialog.show()
+            buffer = io.StringIO()
+            self.currentDataFrameGlobal.info(buf=buffer)
+            info_text = buffer.getvalue()
 
-            if not self.action_More_Info.isChecked():
-                if self.info_dialog is not None:
-                    self.info_dialog.close()
-                    self.info_dialog = None
+            self.window = QtWidgets.QWidget()
+            self.ui = Ui_Form_Info()
+            self.ui.setupUi(self.window)
+
+            self.ui.textEdit_info.setPlainText(info_text)
+            self.ui.pushButton_Close.clicked.connect(self.closeButton)
+            self.window.closeEvent = self.myCloseEvent
+            self.ui.pushButton_Close.setShortcut("Ctrl+I")
+
+            self.window.show()
+
+        elif not self.action_More_Info.isChecked():
+            self.window.close()
+
+    def closeButton(self):
+        self.action_More_Info.setChecked(False)
+        self.window.close()
+
+    def myCloseEvent(self, event):
+        self.action_More_Info.setChecked(False)
+        event.accept()
 
 
 if __name__ == "__main__":

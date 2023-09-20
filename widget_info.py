@@ -38,8 +38,6 @@ class Ui_Form_Info(object):
         self.retranslateUi(Form_Info)
         QtCore.QMetaObject.connectSlotsByName(Form_Info)
 
-        self.pushButton_Close.clicked.connect(Form_Info.close)
-
     def retranslateUi(self, Form_Info):
         _translate = QtCore.QCoreApplication.translate
         Form_Info.setWindowTitle(_translate("Form_Info", "Informacje dodatkowe"))
