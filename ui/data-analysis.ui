@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow_data_analysis</class>
+ <widget class="QMainWindow" name="MainWindow_data_analysis">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Analizuj dane</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../images/app-icon/app-icon.qrc">
+    <normaloff>:/images/app-icon/dex-icon-512x512.png</normaloff>:/images/app-icon/dex-icon-512x512.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::South</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Strona 1</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Strona 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPlik">
+    <property name="title">
+     <string>Plik</string>
+    </property>
+    <addaction name="actionZapisz"/>
+    <addaction name="separator"/>
+    <addaction name="actionWyjd"/>
+   </widget>
+   <widget class="QMenu" name="menuEdycja">
+    <property name="title">
+     <string>Edycja</string>
+    </property>
+    <addaction name="actionCofnij"/>
+    <addaction name="actionPon_w"/>
+   </widget>
+   <widget class="QMenu" name="menuAnaliza_statystyczna">
+    <property name="title">
+     <string>Statystyka</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAnaliza">
+    <property name="title">
+     <string>Analiza</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuWykres">
+    <property name="title">
+     <string>Wykresy</string>
+    </property>
+   </widget>
+   <addaction name="menuPlik"/>
+   <addaction name="menuEdycja"/>
+   <addaction name="menuAnaliza_statystyczna"/>
+   <addaction name="menuAnaliza"/>
+   <addaction name="menuWykres"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionWyjd">
+   <property name="text">
+    <string>Zakończ</string>
+   </property>
+  </action>
+  <action name="actionZapisz">
+   <property name="text">
+    <string>Zapisz</string>
+   </property>
+  </action>
+  <action name="actionCofnij">
+   <property name="text">
+    <string>Cofnij</string>
+   </property>
+  </action>
+  <action name="actionPon_w">
+   <property name="text">
+    <string>Ponów</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../images/app-icon/app-icon.qrc"/>
+ </resources>
+ <connections/>
+</ui>
