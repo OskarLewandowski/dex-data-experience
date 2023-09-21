@@ -3,6 +3,19 @@ from add_file import Ui_dialog_add_file
 from data_storage import DataStorage
 from modify_data import Ui_MainWindow_modify_data
 from data_analysis import Ui_MainWindow_data_analysis
+from settings import Ui_Dialog_settings
+
+"""
+Window for settings
+"""
+
+
+def openSettings(self):
+    self.window = QtWidgets.QDialog()
+    self.ui = Ui_Dialog_settings()
+    self.ui.setupUi(self.window)
+    self.window.show()
+
 
 """
 Window for data analysis
@@ -44,13 +57,10 @@ Manage window for import data
 
 
 def openAddFileDialog(self):
-    dialog = QtWidgets.QDialog()
-    add_file_ui = Ui_dialog_add_file()
-    add_file_ui.setupUi(dialog)
-
-    result = dialog.exec()
-    if result == QtWidgets.QDialog.DialogCode.Accepted:
-        pass
+    self.window = QtWidgets.QDialog()
+    self.ui = Ui_dialog_add_file()
+    self.ui.setupUi(self.window)
+    self.window.show()
 
 
 """

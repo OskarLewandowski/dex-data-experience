@@ -1,7 +1,6 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 from main_window import Ui_MainWindow
-from main_window_functions import (exitConfirmationDialog, handleResize, openAddFileDialog,
-                                   printDataFrames, openModifyDataWindow, openDataAnalysis)
+from main_window_functions import *
 
 
 class MyMainWindow(QtWidgets.QMainWindow):
@@ -19,6 +18,7 @@ class MyMainWindow(QtWidgets.QMainWindow):
         self.ui.button_add_file.clicked.connect(self.openAddFileDialog)
         self.ui.button_modify_data.clicked.connect(self.openModifyDataWindow)
         self.ui.button_analysis_data.clicked.connect(self.openDataAnalysis)
+        self.ui.button_settings.clicked.connect(self.openSettings)
 
         # for test
         self.ui.button_help.clicked.connect(self.printDataFrames)
@@ -51,6 +51,9 @@ class MyMainWindow(QtWidgets.QMainWindow):
 
     def openDataAnalysis(self):
         openDataAnalysis(self)
+
+    def openSettings(self):
+        openSettings(self)
 
 
 if __name__ == "__main__":
