@@ -18,6 +18,7 @@ from data_frame_model import DataFrameModel
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
 from widget_info import Ui_Form_Info
+from dialog_search import Ui_Dialog_Search
 
 
 class Ui_MainWindow_modify_data(object):
@@ -154,6 +155,7 @@ class Ui_MainWindow_modify_data(object):
         self.pushButton_Load.clicked.connect(self.loadDataFrame)
         self.action_Save_as.triggered.connect(self.saveAsAction)
         self.action_More_Info.triggered.connect(self.showInfoWidget)
+        self.action_Search.triggered.connect(self.openSearchDialog)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -190,6 +192,46 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def openSearchDialog(self):
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_Search()
+        self.ui.setupUi(self.window)
+        self.ui.pushButton_Clear.clicked.connect(self.closeActionSearchDialog)
+        self.ui.pushButton_Search.clicked.connect(self.actionSearchDialog)
+        self.window.closeEvent = self.closeEventSearchDialog
+        self.window.show()
+
+    def closeEventSearchDialog(self, event):
+        self.window.close()
+        self.loadDataFrame()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
+
+    def closeActionSearchDialog(self):
+        self.window.close()
+
+    def actionSearchDialog(self):
+        try:
+            search_phrase = str(self.ui.lineEdit_Search_Text.text())
+
+            if not search_phrase:
+                self.loadDataFrame()
+            elif self.ui.checkBox_Case.isChecked():
+                mask = self.currentDataFrameGlobal.astype(str).apply(
+                    lambda row: row.str.contains(search_phrase, case=True).any(), axis=1)
+            else:
+                mask = self.currentDataFrameGlobal.astype(str).apply(
+                    lambda row: row.str.contains(search_phrase, case=False).any(), axis=1)
+
+            filtered_data = self.currentDataFrameGlobal[mask]
+            self.displayData(filtered_data)
+        except:
+            None
 
     def loadDataFrame(self):
         self.enableWindowFunction()
