@@ -19,6 +19,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
 from widget_info import Ui_Form_Info
 from dialog_search import Ui_Dialog_Search
+from change_headers import Ui_Dialog_change_headers
 
 
 class Ui_MainWindow_modify_data(object):
@@ -156,6 +157,8 @@ class Ui_MainWindow_modify_data(object):
         self.action_Save_as.triggered.connect(self.saveAsAction)
         self.action_More_Info.triggered.connect(self.showInfoWidget)
         self.action_Search.triggered.connect(self.openSearchDialog)
+        self.action_Change_Headers.triggered.connect(self.openChangeHeaders)
+        self.pushButton_Save.clicked.connect(self.saveChanges)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -192,6 +195,81 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def saveChanges(self):
+        try:
+            confirmed = self.saveConfirmationDialog()
+            if confirmed:
+                df = pd.DataFrame(self.currentDataFrameGlobal)
+                name = self.comboBox_Select_Data.currentText()
+                DataStorage.update(name, df)
+        except:
+            None
+
+    def saveConfirmationDialog(self):
+        try:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            msg.setText('Czy na pewno chcesz zapisać zmiany?')
+            msg.setWindowTitle('Zapisz zmiany')
+
+            msg.setStandardButtons(
+                QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.Abort)
+            msg.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Tak')
+            msg.button(QtWidgets.QMessageBox.StandardButton.Abort).setText('Anuluj')
+
+            reply = msg.exec()
+
+            return reply == QtWidgets.QMessageBox.StandardButton.Yes
+        except:
+            None
+
+    def openChangeHeaders(self):
+
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_change_headers()
+        self.ui.setupUi(self.window)
+
+        self.window.closeEvent = self.closeEventChangeHeader
+        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
+        self.ui.pushButton_Apply.clicked.connect(self.changeHeader)
+        self.ui.comboBox_headers_list.addItems(namesList)
+
+        self.window.show()
+
+    def changeHeader(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        newHeader = self.ui.lineEdit_new_header_name.text()
+        currentHeader = self.ui.comboBox_headers_list.currentText()
+
+        if newHeader != "" and currentHeader != "":
+            df.rename(columns={currentHeader: newHeader}, inplace=True)
+            self.currentDataFrameGlobal = df
+            msg = "Nagłówek {} został zmienniony".format(currentHeader)
+            self.ui.label_info_text.setText(msg)
+            self.updateHeaderList()
+            self.ui.lineEdit_new_header_name.clear()
+        else:
+            self.ui.label_info_text.setText("Pola nie mogą być puste")
+
+    def updateHeaderList(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+        self.ui.comboBox_headers_list.clear()
+        self.ui.comboBox_headers_list.addItems(namesList)
+        self.displayData(df)
+
+    def closeEventChangeHeader(self, event):
+        self.window.close()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
 
     def openSearchDialog(self):
         self.comboBox_Select_Data.setEnabled(False)
