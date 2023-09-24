@@ -21,6 +21,7 @@ from widget_info import Ui_Form_Info
 from dialog_search import Ui_Dialog_Search
 from change_headers import Ui_Dialog_change_headers
 from get_dummies import Ui_Dialog_Get_Dummies
+from delete_nan import Ui_Dialog_Delete_NaN
 
 
 class Ui_MainWindow_modify_data(object):
@@ -161,6 +162,7 @@ class Ui_MainWindow_modify_data(object):
         self.action_Change_Headers.triggered.connect(self.openChangeHeaders)
         self.pushButton_Save.clicked.connect(self.saveChanges)
         self.action_Get_Dummies.triggered.connect(self.openGetDummies)
+        self.action_Delete_Nan.triggered.connect(self.openDeleteNan)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -197,6 +199,51 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def openDeleteNan(self):
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_Delete_NaN()
+        self.ui.setupUi(self.window)
+        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
+        self.window.closeEvent = self.closeEventDeleteNan
+        self.ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
+        self.messageInfoDeleteNan()
+        self.window.show()
+
+    def messageInfoDeleteNan(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        rowCountBefore = df.shape[0] - 1
+        df = df.dropna()
+        rowCountAfter = df.shape[0] - 1
+
+        rowSum = rowCountBefore - rowCountAfter
+
+        if rowSum == 0:
+            self.ui.pushButton_Apply.setEnabled(False)
+
+        msg = ("Ilość wierszy przed usunięciem: {0}\n"
+               "Ilość wierszy po usunięciu: {1}\n\n"
+               "Czy chcesz usunąć {2} rekordów?").format(rowCountBefore, rowCountAfter, rowSum)
+        self.ui.textEdit_Info.setText(msg)
+
+    def applyDeleteNan(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+
+        if df.isna().any().any():
+            df = df.dropna()
+            df = df.reset_index(drop=True)
+            self.currentDataFrameGlobal = df
+            self.displayData(df)
+            self.messageInfoDeleteNan()
+
+    def closeEventDeleteNan(self, event):
+        self.window.close()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
 
     def openGetDummies(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
