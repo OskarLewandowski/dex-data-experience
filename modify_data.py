@@ -247,14 +247,19 @@ class Ui_MainWindow_modify_data(object):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         newHeader = self.ui.lineEdit_new_header_name.text()
         currentHeader = self.ui.comboBox_headers_list.currentText()
+        namesList = df.columns.tolist()
 
         if newHeader != "" and currentHeader != "":
-            df.rename(columns={currentHeader: newHeader}, inplace=True)
-            self.currentDataFrameGlobal = df
-            msg = "Nagłówek {} został zmienniony".format(currentHeader)
-            self.ui.label_info_text.setText(msg)
-            self.updateHeaderList()
-            self.ui.lineEdit_new_header_name.clear()
+            if not newHeader in namesList:
+                df.rename(columns={currentHeader: newHeader}, inplace=True)
+                self.currentDataFrameGlobal = df
+                msg = "Nagłówek '{}' został zmienniony".format(currentHeader)
+                self.ui.label_info_text.setText(msg)
+                self.updateHeaderList()
+                self.ui.lineEdit_new_header_name.clear()
+            else:
+                msg = "Nagłowkek '{}' już istnieje".format(newHeader)
+                self.ui.label_info_text.setText(msg)
         else:
             self.ui.label_info_text.setText("Pola nie mogą być puste")
 
