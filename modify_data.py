@@ -20,6 +20,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
 from widget_info import Ui_Form_Info
 from dialog_search import Ui_Dialog_Search
 from change_headers import Ui_Dialog_change_headers
+from get_dummies import Ui_Dialog_Get_Dummies
 
 
 class Ui_MainWindow_modify_data(object):
@@ -159,6 +160,7 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.triggered.connect(self.openSearchDialog)
         self.action_Change_Headers.triggered.connect(self.openChangeHeaders)
         self.pushButton_Save.clicked.connect(self.saveChanges)
+        self.action_Get_Dummies.triggered.connect(self.openGetDummies)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -195,6 +197,43 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def openGetDummies(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_Get_Dummies()
+        self.ui.setupUi(self.window)
+        self.ui.comboBox_Select_Data.addItems(namesList)
+        self.ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
+        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
+        self.window.closeEvent = self.closeEventGetDummies
+
+        self.window.show()
+
+    def applyGetDummies(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        nameColumn = self.ui.comboBox_Select_Data.currentText()
+        df = pd.get_dummies(df, columns=[nameColumn])
+        self.currentDataFrameGlobal = df
+        self.updateGetDummiesList()
+
+    def closeEventGetDummies(self, event):
+        self.window.close()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
+
+    def updateGetDummiesList(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+        self.ui.comboBox_Select_Data.clear()
+        self.ui.comboBox_Select_Data.addItems(namesList)
+        self.displayData(df)
 
     def saveChanges(self):
         try:
