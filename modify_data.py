@@ -22,6 +22,7 @@ from dialog_search import Ui_Dialog_Search
 from change_headers import Ui_Dialog_change_headers
 from get_dummies import Ui_Dialog_Get_Dummies
 from delete_nan import Ui_Dialog_Delete_NaN
+from change_datatype import Ui_Dialog_Change_Datatype
 
 
 class Ui_MainWindow_modify_data(object):
@@ -163,6 +164,7 @@ class Ui_MainWindow_modify_data(object):
         self.pushButton_Save.clicked.connect(self.saveChanges)
         self.action_Get_Dummies.triggered.connect(self.openGetDummies)
         self.action_Delete_Nan.triggered.connect(self.openDeleteNan)
+        self.action_Change_Data_Type.triggered.connect(self.openChangeDataType)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -199,6 +201,76 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def openChangeDataType(self):
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_Change_Datatype()
+        self.ui.setupUi(self.window)
+        self.listCurrentDataTypes()
+        self.listNewDataTyps()
+        self.window.closeEvent = self.closeEventChangeDataType
+        self.ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
+        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
+        self.window.show()
+
+    def listCurrentDataTypes(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+        typesList = df.dtypes
+        finalList = []
+
+        for x, y in zip(namesList, typesList):
+            add = "{0} : ({1})".format(x, y)
+            finalList.append(add)
+
+        self.ui.comboBox_Current_Datatype.addItems(finalList)
+
+    def listNewDataTyps(self):
+        dataTyps = ["Liczby całkowite : (int64)",
+                    "Typ ogólny - tekstowy : (object)",
+                    "Typ logiczny : (bool)",
+                    "Liczby zmiennoprzecinkowe : (float64)",
+                    "Data i czas : (datetime64)",
+                    "Punkt czasowy : (timedelta64)"]
+
+        self.ui.comboBox_New_Datatype.addItems(dataTyps)
+
+    def applyChangeDataType(self):
+        try:
+            df = pd.DataFrame(self.currentDataFrameGlobal)
+            namesListOrginal = df.columns.tolist()
+            indexCurrentType = self.ui.comboBox_Current_Datatype.currentIndex()
+            indexNewType = self.ui.comboBox_New_Datatype.currentIndex()
+
+            dataTypes = ['int64', 'object', 'bool', 'float64', 'datetime64', 'timedelta64']
+
+            df[namesListOrginal[indexCurrentType]] = df[namesListOrginal[indexCurrentType]].astype(
+                dataTypes[indexNewType])
+
+            self.displayData(df)
+            self.currentDataFrameGlobal = df
+            self.updateListCurrentDataTypes()
+            msg = "Typ danych w kolumnie '{}' został pomyślnie zmieniony".format(namesListOrginal[indexCurrentType])
+            self.ui.label_Info.setText(msg)
+        except:
+            msg = "Kolumna '{}' posiada nieodpowiednie dane".format(namesListOrginal[indexCurrentType])
+            self.ui.label_Info.setText(msg)
+
+    def updateListCurrentDataTypes(self):
+        self.ui.comboBox_Current_Datatype.clear()
+        self.ui.comboBox_New_Datatype.clear()
+
+        self.listCurrentDataTypes()
+        self.listNewDataTyps()
+
+    def closeEventChangeDataType(self, event):
+        self.window.close()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
 
     def openDeleteNan(self):
         self.comboBox_Select_Data.setEnabled(False)
