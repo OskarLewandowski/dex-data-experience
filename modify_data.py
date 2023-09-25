@@ -23,6 +23,7 @@ from change_headers import Ui_Dialog_change_headers
 from get_dummies import Ui_Dialog_Get_Dummies
 from delete_nan import Ui_Dialog_Delete_NaN
 from change_datatype import Ui_Dialog_Change_Datatype
+from delete import Ui_Dialog_Delete
 
 
 class Ui_MainWindow_modify_data(object):
@@ -165,6 +166,7 @@ class Ui_MainWindow_modify_data(object):
         self.action_Get_Dummies.triggered.connect(self.openGetDummies)
         self.action_Delete_Nan.triggered.connect(self.openDeleteNan)
         self.action_Change_Data_Type.triggered.connect(self.openChangeDataType)
+        self.action_Delete.triggered.connect(self.openDelete)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -201,6 +203,69 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def deleteColumn(self):
+        try:
+            df = pd.DataFrame(self.currentDataFrameGlobal)
+            columnName = self.ui.comboBox_Column_List_Select.currentText()
+            df = df.drop(columnName, axis=1)
+            self.currentDataFrameGlobal = df
+            self.displayData(df)
+            self.updateFillListDelete()
+            msg = "Kolumna '{}' została usunieta".format(columnName)
+            self.ui.label_Info.setText(msg)
+        except:
+            None
+
+    def deleteRow(self):
+        try:
+            df = pd.DataFrame(self.currentDataFrameGlobal)
+            index = self.ui.spinBox_Row_Number_Select.value()
+            df = df.drop(index)
+            df = df.reset_index(drop=True)
+
+            self.currentDataFrameGlobal = df
+            self.displayData(df)
+            self.updateFillListDelete()
+            msg = "Wiersz '{}' został usuniety".format(index)
+            self.ui.label_Info.setText(msg)
+        except:
+            None
+
+    def openDelete(self):
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_Delete()
+        self.ui.setupUi(self.window)
+        self.window.closeEvent = self.closeEventDelete
+        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
+        self.ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
+        self.ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
+        self.fillListDelete()
+        self.window.show()
+
+    def fillListDelete(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+        rowCount = df.shape[0] - 1
+        msg = "Wybierz numer wiersza od \'0\' do \'{}\'".format(rowCount)
+        self.ui.comboBox_Column_List_Select.addItems(namesList)
+        self.ui.spinBox_Row_Number_Select.setSpecialValueText(msg)
+        self.ui.spinBox_Row_Number_Select.setMaximum(rowCount)
+        self.ui.spinBox_Row_Number_Select.setValue(-1)
+
+    def updateFillListDelete(self):
+        self.ui.comboBox_Column_List_Select.clear()
+        self.ui.spinBox_Row_Number_Select.clear()
+        self.fillListDelete()
+
+    def closeEventDelete(self, event):
+        self.window.close()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
 
     def openChangeDataType(self):
         self.comboBox_Select_Data.setEnabled(False)
