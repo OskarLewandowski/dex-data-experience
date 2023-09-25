@@ -7,9 +7,10 @@
 import io
 import os
 
+import numpy as np
 import pandas as pd
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QFileDialog
+from PyQt6.QtWidgets import QFileDialog, QCompleter
 from pyreadr import pyreadr
 
 from data_storage import DataStorage
@@ -24,6 +25,7 @@ from get_dummies import Ui_Dialog_Get_Dummies
 from delete_nan import Ui_Dialog_Delete_NaN
 from change_datatype import Ui_Dialog_Change_Datatype
 from delete import Ui_Dialog_Delete
+from replace import Ui_Dialog_Replace
 
 
 class Ui_MainWindow_modify_data(object):
@@ -167,6 +169,7 @@ class Ui_MainWindow_modify_data(object):
         self.action_Delete_Nan.triggered.connect(self.openDeleteNan)
         self.action_Change_Data_Type.triggered.connect(self.openChangeDataType)
         self.action_Delete.triggered.connect(self.openDelete)
+        self.action_Change.triggered.connect(self.openReplace)
 
     def retranslateUi(self, MainWindow_modify_data):
         _translate = QtCore.QCoreApplication.translate
@@ -203,6 +206,129 @@ class Ui_MainWindow_modify_data(object):
         self.action_Search.setShortcut(_translate("MainWindow_modify_data", "Ctrl+F"))
         self.action_Delete.setText(_translate("MainWindow_modify_data", "Usuń"))
         self.action_Delete.setShortcut(_translate("MainWindow_modify_data", "Ctrl+D"))
+
+    def openReplace(self):
+        self.comboBox_Select_Data.setEnabled(False)
+        self.pushButton_Load.setEnabled(False)
+
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_Dialog_Replace()
+        self.ui.setupUi(self.window)
+        self.window.closeEvent = self.closeEventReplace
+        self.ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
+        self.fillColumnNames()
+        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
+        self.ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
+        self.ui.pushButton_Apply.clicked.connect(self.applyReplace)
+        self.window.show()
+
+    def applyReplace(self):
+        try:
+            df = pd.DataFrame(self.currentDataFrameGlobal)
+
+            valueToReplace = self.ui.lineEdit_Value_To_Replace.text()
+            newValue = self.ui.lineEdit_New_Value.text()
+            allColumnsIs = self.ui.checkBox_Replace_All.isChecked()
+            columnIs = self.ui.comboBox_Column_List_Select.currentText()
+
+            nanValueIs = self.ui.checkBox_Value_Nan.isChecked()
+            nullValueIs = self.ui.checkBox_Value_Null.isChecked()
+
+            if valueToReplace != "" and newValue != "" and (allColumnsIs is True or columnIs != ""):
+                self.ui.label_Info.clear()
+                if allColumnsIs:
+                    allColumnsList = df.columns.tolist()
+
+                    for column in allColumnsList:
+                        if not nanValueIs and not nullValueIs:
+                            df[column] = df[column].replace({valueToReplace: newValue})
+
+                        elif nanValueIs and nullValueIs:
+                            df[column] = df[column].replace({valueToReplace: newValue, np.NaN: newValue, "": newValue})
+
+                        elif nanValueIs:
+                            df[column] = df[column].replace({valueToReplace: newValue, np.NaN: newValue})
+
+                        elif nullValueIs:
+                            df[column] = df[column].replace({valueToReplace: newValue, "": newValue})
+
+                        self.ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
+                        self.displayData(df)
+                        self.currentDataFrameGlobal = df
+                else:
+                    if not nanValueIs and not nullValueIs:
+                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue})
+
+                    elif nanValueIs and nullValueIs:
+                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue, np.NaN: newValue, "": newValue})
+
+                    elif nanValueIs:
+                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue, np.NaN: newValue})
+
+                    elif nullValueIs:
+                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue, "": newValue})
+
+                    self.ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
+                    self.displayData(df)
+                    self.currentDataFrameGlobal = df
+            else:
+                self.ui.label_Info.setText("Uzupełnij puste pola!")
+        except:
+            None
+
+    def closeEventReplace(self, event):
+        self.window.close()
+        self.comboBox_Select_Data.setEnabled(True)
+        self.pushButton_Load.setEnabled(True)
+        event.accept()
+
+    def fillColumnNames(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        columnName = df.columns.tolist()
+        self.ui.comboBox_Column_List_Select.addItems(columnName)
+
+    def activeReplaceAll(self):
+        if self.ui.checkBox_Replace_All.isChecked():
+            self.ui.comboBox_Column_List_Select.setEnabled(False)
+            self.addQCompleterAll()
+        else:
+            self.ui.comboBox_Column_List_Select.setEnabled(True)
+            self.addQCompleter()
+
+    def addQCompleterAll(self):
+        try:
+            if self.ui.checkBox_Replace_All.isChecked():
+                df = pd.DataFrame(self.currentDataFrameGlobal)
+                nameColumns = df.columns.tolist()
+
+                suggestions = set()
+
+                for column in nameColumns:
+                    unique_values = df[column].unique()
+                    if len(unique_values) > 1:
+                        column_suggestions = [str(item) for item in unique_values]
+                        suggestions.update(column_suggestions)
+
+                completer = QCompleter(list(suggestions))
+
+                self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
+        except:
+            None
+
+    def addQCompleter(self):
+        try:
+            if not self.ui.checkBox_Replace_All.isChecked():
+                df = pd.DataFrame(self.currentDataFrameGlobal)
+                nameColumn = self.ui.comboBox_Column_List_Select.currentText()
+
+                suggestions = df[nameColumn].unique().tolist()
+                suggestions = [str(item) for item in suggestions]
+
+                completer = QCompleter(suggestions)
+
+                self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
+        except:
+            None
 
     def deleteColumn(self):
         try:
