@@ -192,10 +192,16 @@ class Ui_dialog_add_file(object):
         self.pushButton_cancel.clicked.connect(dialog_add_file.reject)
         self.pushButton_choose_file.clicked.connect(self.chooseFile)
         self.radioButton1_custom.toggled.connect(self.customDelimiterToggled)
-
-        self.pushButton_refresh.clicked.connect(self.loadDataCsv)
-
+        self.pushButton_refresh.hide()
         self.pushButton_load.clicked.connect(self.saveData)
+
+        self.radioButton1_comma.toggled.connect(self.loadDataCsv)
+        self.radioButton1_semicolon.toggled.connect(self.loadDataCsv)
+        self.radioButton1_tab.toggled.connect(self.loadDataCsv)
+        self.radioButton2_comma.toggled.connect(self.loadDataCsv)
+        self.radioButton2_dot.toggled.connect(self.loadDataCsv)
+        self.lineEdit_custom_delimiter.textEdited.connect(self.loadDataCsv)
+        self.checkBox_skip_headers.toggled.connect(self.loadDataCsv)
 
     def retranslateUi(self, dialog_add_file):
         _translate = QtCore.QCoreApplication.translate
@@ -246,57 +252,60 @@ class Ui_dialog_add_file(object):
         try:
             filePath = self.filePathGlobal
 
-            delimiter = ","
-            if self.radioButton1_semicolon.isChecked():
-                delimiter = ";"
-            elif self.radioButton1_comma.isChecked():
+            if filePath:
+
                 delimiter = ","
-            elif self.radioButton1_tab.isChecked():
-                delimiter = "\t"
-            elif self.radioButton1_custom.isChecked():
-                if self.lineEdit_custom_delimiter.text() == "" or self.lineEdit_custom_delimiter.text() == " ":
+                if self.radioButton1_semicolon.isChecked():
+                    delimiter = ";"
+                elif self.radioButton1_comma.isChecked():
                     delimiter = ","
-                else:
-                    delimiter = self.lineEdit_custom_delimiter.text()
+                elif self.radioButton1_tab.isChecked():
+                    delimiter = "\t"
+                elif self.radioButton1_custom.isChecked():
+                    if self.lineEdit_custom_delimiter.text() == "" or self.lineEdit_custom_delimiter.text() == " ":
+                        delimiter = ","
+                    else:
+                        delimiter = self.lineEdit_custom_delimiter.text()
 
-            decimal_separator = "."
-            if self.radioButton2_comma.isChecked():
-                decimal_separator = ","
+                decimal_separator = "."
+                if self.radioButton2_comma.isChecked():
+                    decimal_separator = ","
 
-            skip_headers = self.checkBox_skip_headers.isChecked()
+                skip_headers = self.checkBox_skip_headers.isChecked()
 
-            try:
-                if skip_headers:
-                    obj = pd.read_csv(filePath,
-                                      encoding='utf-8',
-                                      delimiter=delimiter,
-                                      decimal=decimal_separator,
-                                      header=None)
+                try:
+                    if skip_headers:
+                        obj = pd.read_csv(filePath,
+                                          encoding='utf-8',
+                                          delimiter=delimiter,
+                                          decimal=decimal_separator,
+                                          header=None)
 
-                    self.displayDataInTableView(obj, headers=False)
-                else:
-                    obj = pd.read_csv(filePath,
-                                      encoding='utf-8',
-                                      delimiter=delimiter,
-                                      decimal=decimal_separator)
+                        self.displayDataInTableView(obj, headers=False)
+                    else:
+                        obj = pd.read_csv(filePath,
+                                          encoding='utf-8',
+                                          delimiter=delimiter,
+                                          decimal=decimal_separator)
 
-                    self.displayDataInTableView(obj)
-            except:
-                if skip_headers:
-                    obj = pd.read_csv(filePath,
-                                      encoding='iso-8859-1',
-                                      delimiter=delimiter,
-                                      decimal=decimal_separator,
-                                      header=None)
-                    self.displayDataInTableView(obj, headers=False)
-                else:
-                    obj = pd.read_csv(filePath,
-                                      encoding='iso-8859-1',
-                                      delimiter=delimiter,
-                                      decimal=decimal_separator)
-                    self.displayDataInTableView(obj)
+                        self.displayDataInTableView(obj)
+                except:
+                    if skip_headers:
+                        obj = pd.read_csv(filePath,
+                                          encoding='iso-8859-1',
+                                          delimiter=delimiter,
+                                          decimal=decimal_separator,
+                                          header=None)
+                        self.displayDataInTableView(obj, headers=False)
+                    else:
+                        obj = pd.read_csv(filePath,
+                                          encoding='iso-8859-1',
+                                          delimiter=delimiter,
+                                          decimal=decimal_separator)
+                        self.displayDataInTableView(obj)
 
-            self.dataFrameGlobal = obj
+                self.dataFrameGlobal = obj
+
         except Exception as e:
             self.errorMessage("0001", e)
             self.clear()
@@ -358,12 +367,13 @@ class Ui_dialog_add_file(object):
     def clear(self):
         self.lineEdit_filename.clear()
         self.pushButton_load.setEnabled(False)
-        self.tableView_data_table.setModel(None)
         self.checkBox_skip_headers.setChecked(False)
         self.pushButton_refresh.setEnabled(False)
         self.radioButton1_comma.setChecked(True)
         self.radioButton2_comma.setChecked(True)
         self.checkBox_skip_headers.setChecked(False)
+        self.filePathGlobal = None
+        self.tableView_data_table.setModel(None)
 
     def saveData(self):
         try:
