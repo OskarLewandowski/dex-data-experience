@@ -10,6 +10,8 @@ import pandas as pd
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QButtonGroup
 from PyQt6.QtCore import Qt
+
+from data_frame_model import DataFrameModel
 from data_storage import DataStorage
 
 
@@ -312,28 +314,8 @@ class Ui_dialog_add_file(object):
 
     def displayDataInTableView(self, data_frame, headers=True):
         try:
-            model = QtGui.QStandardItemModel()
-            num_rows, num_cols = data_frame.shape
-
-            if num_rows > 15:
-                num_rows = 15
-
-            model.setColumnCount(num_cols)
-            model.setRowCount(num_rows)
-
-            if headers:
-                header_labels = list(data_frame.columns)
-            else:
-                header_labels = [str(i) for i in range(1, num_cols + 1)]
-
-            model.setHorizontalHeaderLabels(header_labels)
-
-            for row in range(num_rows):
-                for col in range(num_cols):
-                    item = QtGui.QStandardItem(str(data_frame.iat[row, col]))
-                    item.setFlags(Qt.ItemFlag.ItemIsSelectable)
-                    model.setItem(row, col, item)
-
+            data = data_frame.head(15)
+            model = DataFrameModel(data)
             self.tableView_data_table.setModel(model)
         except Exception as e:
             self.errorMessage("0002", e)
