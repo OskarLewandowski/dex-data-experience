@@ -29,24 +29,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="tabPosition">
-       <enum>QTabWidget::South</enum>
-      </property>
-      <property name="currentIndex">
-       <number>1</number>
-      </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Strona 1</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Strona 2</string>
-       </attribute>
-      </widget>
-     </widget>
+     <widget class="QTextEdit" name="textEdit_Text"/>
     </item>
    </layout>
   </widget>
@@ -78,16 +61,19 @@
     <property name="title">
      <string>Statystyka</string>
     </property>
+    <addaction name="actiontest1"/>
    </widget>
    <widget class="QMenu" name="menuAnaliza">
     <property name="title">
      <string>Analiza</string>
     </property>
+    <addaction name="actiontest2_2"/>
    </widget>
    <widget class="QMenu" name="menuWykres">
     <property name="title">
      <string>Wykresy</string>
     </property>
+    <addaction name="actiontest2"/>
    </widget>
    <addaction name="menuPlik"/>
    <addaction name="menuEdycja"/>
@@ -114,6 +100,21 @@
   <action name="actionPon_w">
    <property name="text">
     <string>Ponów</string>
+   </property>
+  </action>
+  <action name="actiontest1">
+   <property name="text">
+    <string>test1</string>
+   </property>
+  </action>
+  <action name="actiontest2">
+   <property name="text">
+    <string>test3</string>
+   </property>
+  </action>
+  <action name="actiontest2_2">
+   <property name="text">
+    <string>test2</string>
    </property>
   </action>
  </widget>

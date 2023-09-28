@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'data-analysis.ui'
+# Form implementation generated from reading ui file '.\data-analysis.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -23,16 +23,9 @@ class Ui_MainWindow_data_analysis(object):
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.tabWidget = QtWidgets.QTabWidget(parent=self.centralwidget)
-        self.tabWidget.setTabPosition(QtWidgets.QTabWidget.TabPosition.South)
-        self.tabWidget.setObjectName("tabWidget")
-        self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
-        self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-        self.tabWidget.addTab(self.tab_2, "")
-        self.verticalLayout.addWidget(self.tabWidget)
+        self.textEdit_Text = QtWidgets.QTextEdit(parent=self.centralwidget)
+        self.textEdit_Text.setObjectName("textEdit_Text")
+        self.verticalLayout.addWidget(self.textEdit_Text)
         MainWindow_data_analysis.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow_data_analysis)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -59,11 +52,20 @@ class Ui_MainWindow_data_analysis(object):
         self.actionCofnij.setObjectName("actionCofnij")
         self.actionPon_w = QtGui.QAction(parent=MainWindow_data_analysis)
         self.actionPon_w.setObjectName("actionPon_w")
+        self.actiontest1 = QtGui.QAction(parent=MainWindow_data_analysis)
+        self.actiontest1.setObjectName("actiontest1")
+        self.actiontest2 = QtGui.QAction(parent=MainWindow_data_analysis)
+        self.actiontest2.setObjectName("actiontest2")
+        self.actiontest2_2 = QtGui.QAction(parent=MainWindow_data_analysis)
+        self.actiontest2_2.setObjectName("actiontest2_2")
         self.menuPlik.addAction(self.actionZapisz)
         self.menuPlik.addSeparator()
         self.menuPlik.addAction(self.actionWyjd)
         self.menuEdycja.addAction(self.actionCofnij)
         self.menuEdycja.addAction(self.actionPon_w)
+        self.menuAnaliza_statystyczna.addAction(self.actiontest1)
+        self.menuAnaliza.addAction(self.actiontest2_2)
+        self.menuWykres.addAction(self.actiontest2)
         self.menubar.addAction(self.menuPlik.menuAction())
         self.menubar.addAction(self.menuEdycja.menuAction())
         self.menubar.addAction(self.menuAnaliza_statystyczna.menuAction())
@@ -71,15 +73,11 @@ class Ui_MainWindow_data_analysis(object):
         self.menubar.addAction(self.menuWykres.menuAction())
 
         self.retranslateUi(MainWindow_data_analysis)
-        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow_data_analysis)
 
     def retranslateUi(self, MainWindow_data_analysis):
         _translate = QtCore.QCoreApplication.translate
         MainWindow_data_analysis.setWindowTitle(_translate("MainWindow_data_analysis", "Analizuj dane"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow_data_analysis", "Strona 1"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2),
-                                  _translate("MainWindow_data_analysis", "Strona 2"))
         self.menuPlik.setTitle(_translate("MainWindow_data_analysis", "Plik"))
         self.menuEdycja.setTitle(_translate("MainWindow_data_analysis", "Edycja"))
         self.menuAnaliza_statystyczna.setTitle(_translate("MainWindow_data_analysis", "Statystyka"))
@@ -89,6 +87,9 @@ class Ui_MainWindow_data_analysis(object):
         self.actionZapisz.setText(_translate("MainWindow_data_analysis", "Zapisz"))
         self.actionCofnij.setText(_translate("MainWindow_data_analysis", "Cofnij"))
         self.actionPon_w.setText(_translate("MainWindow_data_analysis", "Ponów"))
+        self.actiontest1.setText(_translate("MainWindow_data_analysis", "test1"))
+        self.actiontest2.setText(_translate("MainWindow_data_analysis", "test3"))
+        self.actiontest2_2.setText(_translate("MainWindow_data_analysis", "test2"))
 
 
 if __name__ == "__main__":
