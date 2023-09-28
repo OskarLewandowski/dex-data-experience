@@ -9,8 +9,6 @@ import pandas as pd
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QButtonGroup
-from PyQt6.QtCore import Qt
-
 from data_frame_model import DataFrameModel
 from data_storage import DataStorage
 
@@ -250,29 +248,39 @@ class Ui_dialog_add_file(object):
         except:
             self.clear()
 
+    def getDecimalSeparator(self):
+        if self.radioButton2_comma.isChecked():
+            return ","
+        elif self.radioButton2_dot.isChecked():
+            return "."
+        else:
+            return ","
+
+    def getDelimiter(self):
+
+        if self.radioButton1_comma.isChecked():
+            return ","
+        elif self.radioButton1_semicolon.isChecked():
+            return ";"
+        elif self.radioButton1_tab.isChecked():
+            return "\t"
+        elif self.radioButton1_custom.isChecked():
+            custom_delimiter = self.lineEdit_custom_delimiter.text()
+            if custom_delimiter.strip():
+                return custom_delimiter
+            else:
+                return ","
+        else:
+            return ","
+
     def loadDataCsv(self):
         try:
             filePath = self.filePathGlobal
 
             if filePath:
 
-                delimiter = ","
-                if self.radioButton1_semicolon.isChecked():
-                    delimiter = ";"
-                elif self.radioButton1_comma.isChecked():
-                    delimiter = ","
-                elif self.radioButton1_tab.isChecked():
-                    delimiter = "\t"
-                elif self.radioButton1_custom.isChecked():
-                    if self.lineEdit_custom_delimiter.text() == "" or self.lineEdit_custom_delimiter.text() == " ":
-                        delimiter = ","
-                    else:
-                        delimiter = self.lineEdit_custom_delimiter.text()
-
-                decimal_separator = "."
-                if self.radioButton2_comma.isChecked():
-                    decimal_separator = ","
-
+                delimiter = self.getDelimiter()
+                decimal_separator = self.getDecimalSeparator()
                 skip_headers = self.checkBox_skip_headers.isChecked()
 
                 try:
@@ -283,6 +291,7 @@ class Ui_dialog_add_file(object):
                                           decimal=decimal_separator,
                                           header=None)
 
+                        obj.columns = [str(i) for i in range(0, len(obj.columns))]
                         self.displayDataInTableView(obj, headers=False)
                     else:
                         obj = pd.read_csv(filePath,
@@ -298,6 +307,8 @@ class Ui_dialog_add_file(object):
                                           delimiter=delimiter,
                                           decimal=decimal_separator,
                                           header=None)
+
+                        obj.columns = [str(i) for i in range(0, len(obj.columns))]
                         self.displayDataInTableView(obj, headers=False)
                     else:
                         obj = pd.read_csv(filePath,
