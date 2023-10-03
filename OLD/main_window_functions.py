@@ -1,9 +1,9 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
-from add_file import Ui_dialog_add_file
-from data_storage import DataStorage
-from modify_data import Ui_MainWindow_modify_data
-from data_analysis import Ui_MainWindow_data_analysis
-from settings import Ui_Dialog_settings
+from Views.AddFile.add_file_main_window import Ui_dialog_add_file
+from Models.data_storage_model import DataStorage
+from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
+from Views.ModifyData.data_analysis import Ui_MainWindow_data_analysis
+from Views.Settings.settings_main_window import Ui_Dialog_settings
 
 """
 Window for settings

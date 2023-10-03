@@ -17,7 +17,7 @@ class Ui_Dialog_Delete(object):
         Dialog_Delete.setMinimumSize(QtCore.QSize(530, 190))
         Dialog_Delete.setMaximumSize(QtCore.QSize(530, 190))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_Delete.setWindowIcon(icon)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Dialog_Delete)

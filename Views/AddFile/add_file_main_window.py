@@ -9,8 +9,8 @@ import pandas as pd
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QButtonGroup
-from data_frame_model import DataFrameModel
-from data_storage import DataStorage
+from Models.data_frame_model import DataFrameModel
+from Models.data_storage_model import DataStorage
 
 
 class Ui_dialog_add_file(object):
@@ -34,7 +34,7 @@ class Ui_dialog_add_file(object):
         dialog_add_file.resize(800, 600)
         dialog_add_file.setMinimumSize(QtCore.QSize(800, 600))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         dialog_add_file.setWindowIcon(icon)
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(dialog_add_file)
@@ -424,7 +424,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    app.setWindowIcon(QtGui.QIcon("./images/app-icon/dex-icon-512x512.png"))
+    app.setWindowIcon(QtGui.QIcon("../../images/app-icon/dex-icon-512x512.png"))
     dialog_add_file = QtWidgets.QDialog()
     ui = Ui_dialog_add_file()
     ui.setupUi(dialog_add_file)

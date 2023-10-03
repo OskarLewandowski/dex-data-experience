@@ -17,7 +17,7 @@ class Ui_Dialog_Replace(object):
         Dialog_Replace.setMinimumSize(QtCore.QSize(400, 340))
         Dialog_Replace.setMaximumSize(QtCore.QSize(400, 340))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_Replace.setWindowIcon(icon)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(Dialog_Replace)

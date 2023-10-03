@@ -1,6 +1,5 @@
-from PyQt6 import QtWidgets, QtCore, QtGui
-from main_window import Ui_MainWindow
-from main_window_functions import *
+from OLD.main_window import Ui_MainWindow
+from OLD.main_window_functions import *
 
 
 class MyMainWindow(QtWidgets.QMainWindow):
@@ -60,7 +59,7 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    app.setWindowIcon(QtGui.QIcon("./images/app-icon/dex-icon-512x512.png"))
+    app.setWindowIcon(QtGui.QIcon("../images/app-icon/dex-icon-512x512.png"))
     MainWindow = MyMainWindow()
     MainWindow.show()
     sys.exit(app.exec())

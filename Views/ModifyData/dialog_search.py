@@ -17,7 +17,7 @@ class Ui_Dialog_Search(object):
         Dialog_Search.setMinimumSize(QtCore.QSize(500, 100))
         Dialog_Search.setMaximumSize(QtCore.QSize(500, 100))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_Search.setWindowIcon(icon)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Dialog_Search)

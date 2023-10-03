@@ -17,7 +17,7 @@ class Ui_Dialog_settings(object):
         Dialog_settings.setMinimumSize(QtCore.QSize(400, 200))
         Dialog_settings.setMaximumSize(QtCore.QSize(400, 200))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_settings.setWindowIcon(icon)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Dialog_settings)

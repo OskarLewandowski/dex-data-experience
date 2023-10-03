@@ -17,7 +17,7 @@ class Ui_Dialog_Delete_NaN(object):
         Dialog_Delete_NaN.setMinimumSize(QtCore.QSize(400, 200))
         Dialog_Delete_NaN.setMaximumSize(QtCore.QSize(400, 200))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_Delete_NaN.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_Delete_NaN)

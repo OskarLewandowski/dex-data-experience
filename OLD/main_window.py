@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         MainWindow.setMinimumSize(QtCore.QSize(800, 600))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
@@ -67,7 +67,7 @@ class Ui_MainWindow(object):
                                            "          margin-left: 1%;\n"
                                            "    }")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("./images/main-window/mw-add-file.svg"), QtGui.QIcon.Mode.Normal,
+        icon1.addPixmap(QtGui.QPixmap("../images/main-window/mw-add-file.svg"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.button_add_file.setIcon(icon1)
         self.button_add_file.setIconSize(QtCore.QSize(70, 70))
@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
                                               "          margin-left: 1%;\n"
                                               "    }")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("./images/main-window/mw-modify-data.svg"), QtGui.QIcon.Mode.Normal,
+        icon2.addPixmap(QtGui.QPixmap("../images/main-window/mw-modify-data.svg"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.button_modify_data.setIcon(icon2)
         self.button_modify_data.setIconSize(QtCore.QSize(70, 70))
@@ -169,7 +169,7 @@ class Ui_MainWindow(object):
                                                 "          margin-left: 1%;\n"
                                                 "    }")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("./images/main-window/mw-data-analysis.svg"), QtGui.QIcon.Mode.Normal,
+        icon3.addPixmap(QtGui.QPixmap("../images/main-window/mw-data-analysis.svg"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.button_analysis_data.setIcon(icon3)
         self.button_analysis_data.setIconSize(QtCore.QSize(70, 70))
@@ -224,7 +224,7 @@ class Ui_MainWindow(object):
                                            "          margin-left: 1%;\n"
                                            "    }")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("./images/main-window/mw-settings.svg"), QtGui.QIcon.Mode.Normal,
+        icon4.addPixmap(QtGui.QPixmap("../images/main-window/mw-settings.svg"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.button_settings.setIcon(icon4)
         self.button_settings.setIconSize(QtCore.QSize(70, 70))
@@ -275,7 +275,7 @@ class Ui_MainWindow(object):
                                        "          margin-left: 1%;\n"
                                        "    }")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("./images/main-window/mw-help.svg"), QtGui.QIcon.Mode.Normal,
+        icon5.addPixmap(QtGui.QPixmap("../images/main-window/mw-help.svg"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.button_help.setIcon(icon5)
         self.button_help.setIconSize(QtCore.QSize(70, 70))
@@ -326,7 +326,7 @@ class Ui_MainWindow(object):
                                        "          margin-left: 1%;\n"
                                        "    }")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("./images/main-window/mw-exit.svg"), QtGui.QIcon.Mode.Normal,
+        icon6.addPixmap(QtGui.QPixmap("../images/main-window/mw-exit.svg"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.button_exit.setIcon(icon6)
         self.button_exit.setIconSize(QtCore.QSize(70, 70))

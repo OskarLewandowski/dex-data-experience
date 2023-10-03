@@ -15,7 +15,7 @@ class Ui_Form_Info(object):
         Form_Info.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Form_Info.resize(800, 658)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Form_Info.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form_Info)

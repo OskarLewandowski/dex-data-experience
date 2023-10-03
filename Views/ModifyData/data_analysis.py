@@ -16,7 +16,7 @@ class Ui_MainWindow_data_analysis(object):
         MainWindow_data_analysis.resize(800, 600)
         MainWindow_data_analysis.setMinimumSize(QtCore.QSize(800, 600))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         MainWindow_data_analysis.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_data_analysis)

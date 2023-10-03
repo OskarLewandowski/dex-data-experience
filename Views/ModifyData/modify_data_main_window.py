@@ -13,19 +13,18 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QCompleter
 from pyreadr import pyreadr
 
-from data_storage import DataStorage
-from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from data_frame_model import DataFrameModel
+from Models.data_storage_model import DataStorage
+from Models.data_frame_model import DataFrameModel
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
-from widget_info import Ui_Form_Info
-from dialog_search import Ui_Dialog_Search
-from change_headers import Ui_Dialog_change_headers
-from get_dummies import Ui_Dialog_Get_Dummies
-from delete_nan import Ui_Dialog_Delete_NaN
-from change_datatype import Ui_Dialog_Change_Datatype
-from delete import Ui_Dialog_Delete
-from replace import Ui_Dialog_Replace
+from Views.ModifyData.widget_info import Ui_Form_Info
+from Views.ModifyData.dialog_search import Ui_Dialog_Search
+from Views.ModifyData.change_headers import Ui_Dialog_change_headers
+from Views.ModifyData.get_dummies import Ui_Dialog_Get_Dummies
+from Views.ModifyData.delete_nan import Ui_Dialog_Delete_NaN
+from Views.ModifyData.change_datatype import Ui_Dialog_Change_Datatype
+from Views.ModifyData.delete import Ui_Dialog_Delete
+from Views.ModifyData.replace import Ui_Dialog_Replace
 
 
 class Ui_MainWindow_modify_data(object):
@@ -39,7 +38,7 @@ class Ui_MainWindow_modify_data(object):
         MainWindow_modify_data.resize(800, 600)
         MainWindow_modify_data.setMinimumSize(QtCore.QSize(800, 600))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         MainWindow_modify_data.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_modify_data)

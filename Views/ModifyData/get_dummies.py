@@ -17,7 +17,7 @@ class Ui_Dialog_Get_Dummies(object):
         Dialog_Get_Dummies.setMinimumSize(QtCore.QSize(400, 105))
         Dialog_Get_Dummies.setMaximumSize(QtCore.QSize(400, 105))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_Get_Dummies.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_Get_Dummies)

@@ -17,7 +17,7 @@ class Ui_Dialog_change_headers(object):
         Dialog_change_headers.setMinimumSize(QtCore.QSize(400, 150))
         Dialog_change_headers.setMaximumSize(QtCore.QSize(400, 150))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         Dialog_change_headers.setWindowIcon(icon)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Dialog_change_headers)
