@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QDialog, QMainWindow
 from Models.data_storage_model import DataStorageModel
-from Views.AddFile.add_file_main_window import Ui_dialog_add_file
 from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
 from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
@@ -21,15 +20,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_settings = None
         self.window_settings_ui = None
-
-    def createWindowAddFile(self):
-        """
-        Create the add file window, to import data
-        """
-        self.window_add_file = QDialog()
-        self.window_add_file_ui = Ui_dialog_add_file()
-        self.window_add_file_ui.setupUi(self.window_add_file)
-        self.window_add_file.show()
 
     def createWindowModifyData(self):
         """
