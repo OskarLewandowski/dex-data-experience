@@ -10,7 +10,7 @@ import pandas as pd
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QButtonGroup
 from Models.data_frame_model import DataFrameModel
-from Models.data_storage_model import DataStorage
+from Models.data_storage_model import DataStorageModel
 
 
 class Ui_dialog_add_file(object):
@@ -372,7 +372,7 @@ class Ui_dialog_add_file(object):
         try:
             confirmed = self.saveConfirmationDialog()
             if confirmed:
-                DataStorage.add(os.path.splitext(self.fileNameGlobal)[0], self.dataFrameGlobal)
+                DataStorageModel.add(os.path.splitext(self.fileNameGlobal)[0], self.dataFrameGlobal)
                 nextStep = self.statusConfirmationDialog()
 
             if nextStep:

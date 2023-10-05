@@ -1,4 +1,4 @@
-class DataStorage:
+class DataStorageModel:
     _dataFrames = {}
 
     @classmethod

@@ -10,19 +10,22 @@ class Main(QMainWindow, Ui_MainWindow_Main):
         self.setupUi(self)
         self.show()
 
+        # Controllers
+        self.mainController = MainController()
+
         # Connections
         self.action_Add_Data.triggered.connect(self.openAddFileWindow)
         self.action_Modify_Data.triggered.connect(self.openModifData)
         self.action_About_Application.triggered.connect(self.printData)
 
     def openAddFileWindow(self):
-        MainController.openAddFileDialog(self)
+        self.mainController.createWindowAddFile()
 
     def openModifData(self):
-        MainController.openModifyDataWindow(self)
+        self.mainController.createWindowModifyData()
 
     def printData(self):
-        MainController.printDataFrames(self)
+        self.mainController.printDataFrames()
 
 
 app = QApplication(sys.argv)

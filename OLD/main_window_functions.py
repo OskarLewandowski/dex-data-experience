@@ -1,6 +1,6 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 from Views.AddFile.add_file_main_window import Ui_dialog_add_file
-from Models.data_storage_model import DataStorage
+from Models.data_storage_model import DataStorageModel
 from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
 from Views.ModifyData.data_analysis import Ui_MainWindow_data_analysis
 from Views.Settings.settings_main_window import Ui_Dialog_settings
@@ -35,9 +35,9 @@ For test only
 
 
 def printDataFrames():
-    keys = DataStorage.get_all_keys()
+    keys = DataStorageModel.get_all_keys()
     for i in keys:
-        print(DataStorage.get(i))
+        print(DataStorageModel.get(i))
     print(keys)
 
 

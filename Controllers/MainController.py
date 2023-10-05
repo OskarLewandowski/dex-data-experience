@@ -1,76 +1,55 @@
-from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QDialog, QMainWindow
 from Views.AddFile.add_file_main_window import Ui_dialog_add_file
-from Models.data_storage_model import DataStorage
+from Models.data_storage_model import DataStorageModel
 from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
-from Views.ModifyData.data_analysis import Ui_MainWindow_data_analysis
 from Views.Settings.settings_main_window import Ui_Dialog_settings
 
 
 class MainController:
-    """
-    Window for settings
-    """
 
-    def openSettings(self):
-        self.window = QtWidgets.QDialog()
-        self.ui = Ui_Dialog_settings()
-        self.ui.setupUi(self.window)
-        self.window.show()
+    def __init__(self):
+        self.window_add_file = None
+        self.window_add_file_ui = None
 
-    """
-    Window for data analysis
-    """
+        self.window_modify_data = None
+        self.window_modify_data_ui = None
 
-    def openDataAnalysis(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow_data_analysis()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        self.window_settings = None
+        self.window_settings_ui = None
 
-    """
-    For test only
-    """
+    def createWindowAddFile(self):
+        """
+        Create the add file window, to import data
+        """
+        self.window_add_file = QDialog()
+        self.window_add_file_ui = Ui_dialog_add_file()
+        self.window_add_file_ui.setupUi(self.window_add_file)
+        self.window_add_file.show()
+
+    def createWindowModifyData(self):
+        """
+        Window to modify data frames
+        """
+        self.window_modify_data = QMainWindow()
+        self.window_modify_data_ui = Ui_MainWindow_modify_data()
+        self.window_modify_data_ui.setupUi(self.window_modify_data)
+        self.window_modify_data.show()
+
+    def createWindowSettings(self):
+        """
+        Create the settings window
+        """
+        self.window_settings = QDialog()
+        self.window_settings_ui = Ui_Dialog_settings()
+        self.window_settings_ui.setupUi(self.window_settings)
+        self.window_settings.show()
 
     def printDataFrames(self):
-        keys = DataStorage.get_all_keys()
+        """
+        Display data frames in memory
+        !!! For test only !!!
+        """
+        keys = DataStorageModel.get_all_keys()
         for i in keys:
-            print(DataStorage.get(i))
+            print(DataStorageModel.get(i))
         print(keys)
-
-    """
-    Window to modify data frames
-    """
-
-    def openModifyDataWindow(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow_modify_data()
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-    """
-    Manage window for import data
-    """
-
-    def openAddFileDialog(self):
-        self.window = QtWidgets.QDialog()
-        self.ui = Ui_dialog_add_file()
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-    """
-    Confirmation window for closing the program
-    """
-
-    def exitConfirmationDialog(self):
-        msg = QtWidgets.QMessageBox()
-        msg.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        msg.setText('Czy na pewno chcesz zamknąć program?')
-        msg.setWindowTitle('Zamknij program')
-
-        msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
-        msg.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Tak')
-        msg.button(QtWidgets.QMessageBox.StandardButton.No).setText('Nie')
-
-        reply = msg.exec()
-
-        return reply == QtWidgets.QMessageBox.StandardButton.Yes

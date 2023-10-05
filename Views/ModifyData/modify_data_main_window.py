@@ -13,7 +13,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog, QCompleter
 from pyreadr import pyreadr
 
-from Models.data_storage_model import DataStorage
+from Models.data_storage_model import DataStorageModel
 from Models.data_frame_model import DataFrameModel
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
@@ -149,7 +149,7 @@ class Ui_MainWindow_modify_data(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow_modify_data)
 
         # add names to combo box
-        nameList = DataStorage.get_all_keys()
+        nameList = DataStorageModel.get_all_keys()
 
         if nameList:
             self.comboBox_Select_Data.addItems(nameList)
@@ -550,7 +550,7 @@ class Ui_MainWindow_modify_data(object):
             if confirmed:
                 df = pd.DataFrame(self.currentDataFrameGlobal)
                 name = self.comboBox_Select_Data.currentText()
-                DataStorage.update(name, df)
+                DataStorageModel.update(name, df)
         except:
             None
 
@@ -666,7 +666,7 @@ class Ui_MainWindow_modify_data(object):
 
     def loadDataFrame(self):
         self.enableWindowFunction()
-        data = DataStorage.get(self.comboBox_Select_Data.currentText())
+        data = DataStorageModel.get(self.comboBox_Select_Data.currentText())
         self.currentDataFrameGlobal = data
         self.displayData(self.currentDataFrameGlobal)
 
