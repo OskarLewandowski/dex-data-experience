@@ -88,6 +88,9 @@
     <addaction name="action_Right"/>
     <addaction name="action_Center"/>
     <addaction name="action_Justify"/>
+    <addaction name="separator"/>
+    <addaction name="action_Color"/>
+    <addaction name="action_Font"/>
    </widget>
    <widget class="QMenu" name="menu_Analysis">
     <property name="title">
@@ -389,6 +392,16 @@
    </property>
    <property name="text">
     <string>Ustawienia</string>
+   </property>
+  </action>
+  <action name="action_Color">
+   <property name="text">
+    <string>Kolor</string>
+   </property>
+  </action>
+  <action name="action_Font">
+   <property name="text">
+    <string>Czcionka</string>
    </property>
   </action>
  </widget>

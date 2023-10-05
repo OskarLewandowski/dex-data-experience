@@ -1,13 +1,18 @@
 from PyQt6.QtWidgets import QDialog, QMainWindow
-from Views.AddFile.add_file_main_window import Ui_dialog_add_file
 from Models.data_storage_model import DataStorageModel
+from Views.AddFile.add_file_main_window import Ui_dialog_add_file
 from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
 from Views.Settings.settings_main_window import Ui_Dialog_settings
+from Views.Main.main_window import Ui_MainWindow_Main
 
 
-class MainController:
+class MainController(QMainWindow, Ui_MainWindow_Main):
 
     def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.show()
+
         self.window_add_file = None
         self.window_add_file_ui = None
 
@@ -44,7 +49,8 @@ class MainController:
         self.window_settings_ui.setupUi(self.window_settings)
         self.window_settings.show()
 
-    def printDataFrames(self):
+    @staticmethod
+    def printDataFrames():
         """
         Display data frames in memory
         !!! For test only !!!

@@ -174,6 +174,10 @@ class Ui_MainWindow_Main(object):
                          QtGui.QIcon.State.Off)
         self.action_Settings.setIcon(icon19)
         self.action_Settings.setObjectName("action_Settings")
+        self.action_Color = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Color.setObjectName("action_Color")
+        self.action_Font = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Font.setObjectName("action_Font")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -198,6 +202,9 @@ class Ui_MainWindow_Main(object):
         self.menu_Format.addAction(self.action_Right)
         self.menu_Format.addAction(self.action_Center)
         self.menu_Format.addAction(self.action_Justify)
+        self.menu_Format.addSeparator()
+        self.menu_Format.addAction(self.action_Color)
+        self.menu_Format.addAction(self.action_Font)
         self.menu_Settings.addAction(self.action_Settings)
         self.menu_Help.addAction(self.action_About_Application)
         self.menubar_Menu.addAction(self.menu_File.menuAction())
@@ -283,6 +290,8 @@ class Ui_MainWindow_Main(object):
         self.action_About_Application.setText(_translate("MainWindow_Main", "O programie"))
         self.action_About_Application.setShortcut(_translate("MainWindow_Main", "Ctrl+F1"))
         self.action_Settings.setText(_translate("MainWindow_Main", "Ustawienia"))
+        self.action_Color.setText(_translate("MainWindow_Main", "Kolor"))
+        self.action_Font.setText(_translate("MainWindow_Main", "Czcionka"))
 
 
 if __name__ == "__main__":
