@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QDialog, QMainWindow
 from Models.data_storage_model import DataStorageModel
-from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
 from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
 
@@ -12,23 +11,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.setupUi(self)
         self.show()
 
-        self.window_add_file = None
-        self.window_add_file_ui = None
-
-        self.window_modify_data = None
-        self.window_modify_data_ui = None
-
         self.window_settings = None
         self.window_settings_ui = None
-
-    def createWindowModifyData(self):
-        """
-        Window to modify data frames
-        """
-        self.window_modify_data = QMainWindow()
-        self.window_modify_data_ui = Ui_MainWindow_modify_data()
-        self.window_modify_data_ui.setupUi(self.window_modify_data)
-        self.window_modify_data.show()
 
     def createWindowSettings(self):
         """
