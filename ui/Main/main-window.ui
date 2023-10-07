@@ -52,6 +52,7 @@
     <addaction name="action_New_File"/>
     <addaction name="action_Open_File"/>
     <addaction name="action_Save"/>
+    <addaction name="action_Save_As_New"/>
     <addaction name="separator"/>
     <addaction name="action_Print"/>
     <addaction name="action_Export_PDF"/>
@@ -402,6 +403,11 @@
   <action name="action_Font">
    <property name="text">
     <string>Czcionka</string>
+   </property>
+  </action>
+  <action name="action_Save_As_New">
+   <property name="text">
+    <string>Zapisz jako nowy...</string>
    </property>
   </action>
  </widget>

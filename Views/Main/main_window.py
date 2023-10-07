@@ -178,9 +178,12 @@ class Ui_MainWindow_Main(object):
         self.action_Color.setObjectName("action_Color")
         self.action_Font = QtGui.QAction(parent=MainWindow_Main)
         self.action_Font.setObjectName("action_Font")
+        self.action_Save_As_New = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Save_As_New.setObjectName("action_Save_As_New")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
+        self.menu_File.addAction(self.action_Save_As_New)
         self.menu_File.addSeparator()
         self.menu_File.addAction(self.action_Print)
         self.menu_File.addAction(self.action_Export_PDF)
@@ -292,6 +295,7 @@ class Ui_MainWindow_Main(object):
         self.action_Settings.setText(_translate("MainWindow_Main", "Ustawienia"))
         self.action_Color.setText(_translate("MainWindow_Main", "Kolor"))
         self.action_Font.setText(_translate("MainWindow_Main", "Czcionka"))
+        self.action_Save_As_New.setText(_translate("MainWindow_Main", "Zapisz jako nowy..."))
 
 
 if __name__ == "__main__":
