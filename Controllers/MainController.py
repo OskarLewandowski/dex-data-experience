@@ -1,8 +1,12 @@
-from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox
+import json
+import os
+import pandas as pd
+from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox
 from PyQt6 import QtGui, QtCore
 from Models.data_storage_model import DataStorageModel
 from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
+from io import StringIO
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -11,6 +15,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         super().__init__()
         self.setupUi(self)
 
+        # Variable
+        self.pathCurrentFileGlobal = None
+
         # View
         self.addFontComboBoxToolBar()
         self.addSpinBoxToolBar()
@@ -18,8 +25,100 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         # Connections
         self.fontComboBox_Text_Font.currentFontChanged['QFont'].connect(self.textEdit_Board.setCurrentFont)
         self.spinBox_Text_Size.valueChanged['int'].connect(self.textEdit_Board.setFontPointSize)
-
+        self.action_Save.triggered.connect(self.saveChanges)
+        self.action_Save_As_New.triggered.connect(self.saveProjectNew)
+        self.action_Open_File.triggered.connect(self.openFile)
         self.show()
+
+    def openFile(self):
+        try:
+            fileFilter = 'Plik Dex (*.dex)'
+            fileName = QFileDialog.getOpenFileName(
+                caption="Wczytaj projekt",
+                directory=os.path.expanduser("~/Desktop/"),
+                filter=fileFilter,
+                initialFilter="Plik Dex (*.dex)"
+            )
+
+            if fileName[0]:
+                text_data = ""
+                data_frames = {}
+
+                with open(fileName[0], "r") as file:
+                    data = json.load(file)
+
+                text_data = data.get("text_data", "")
+                self.textEdit_Board.setHtml(text_data)
+
+                data_frames = data.get("data_frames", {})
+
+                for key, jsonData in data_frames.items():
+                    df = pd.read_json(StringIO(jsonData), orient="split")
+                    DataStorageModel.add(key, df)
+
+                self.setSavedFilePath(fileName[0])
+
+
+        except Exception as e:
+            self.errorMessage("0009", str(e))
+
+    def saveChanges(self):
+        try:
+            file = self.pathCurrentFileGlobal
+            if file:
+                self.save(self.pathCurrentFileGlobal)
+            else:
+                self.saveProjectNew()
+        except Exception as e:
+            self.errorMessage("0008", str(e))
+
+    def saveProjectNew(self):
+        try:
+            fileFilter = 'Plik Dex (*.dex);;Wszystkie pliki (*.*)'
+
+            fileName = QFileDialog.getSaveFileName(
+                caption="Zapisz nowy projekt",
+                directory=os.path.expanduser("~/Desktop/" + "nowy.dex"),
+                filter=fileFilter,
+                initialFilter="Plik Dex (*.dex)"
+            )
+
+            if fileName[0]:
+                self.save(fileName[0])
+
+        except Exception as e:
+            self.errorMessage("0007", str(e))
+
+    def save(self, filePath):
+        try:
+            dataFramesDictionary = DataStorageModel.copy()
+            dataBoard = self.textEdit_Board.toHtml()
+            dataFramesJson = {}
+            dataToSave = {}
+
+            if dataBoard:
+                dataToSave["text_data"] = dataBoard
+
+            if dataFramesDictionary:
+                for key, df in dataFramesDictionary.items():
+                    dataFramesJson[key] = df.to_json(index=False, orient="split")
+
+                dataToSave["data_frames"] = dataFramesJson
+
+            if filePath:
+                with open(filePath, "w") as file:
+                    json.dump(dataToSave, file)
+
+            self.setSavedFilePath(filePath)
+
+
+        except Exception as e:
+            self.errorMessage("0006", str(e))
+
+    def setSavedFilePath(self, filePath):
+        newWindowTitle = "{} - Dex".format(filePath)
+        self.setWindowTitle(newWindowTitle)
+        self.pathCurrentFileGlobal = filePath
 
     def addFontComboBoxToolBar(self):
         self.fontComboBox_Text_Font = QFontComboBox()
@@ -42,9 +141,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.spinBox_Text_Size.setDisplayIntegerBase(10)
         self.toolBar.addWidget(self.spinBox_Text_Size)
 
-    def changeFont(self, font):
-        self.textEdit_Board.setCurrentFont(font)
-
     def createWindowSettings(self):
         """
         Create the settings window
@@ -64,3 +160,17 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         for i in keys:
             print(DataStorageModel.get(i))
         print(keys)
+
+    @staticmethod
+    def errorMessage(errorCode="0000", e=""):
+        message = "Wystąpił bład: [{0}] - {1}".format(errorCode, e)
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText(message)
+        msg.setWindowTitle('Błąd')
+
+        msg.setStandardButtons(QMessageBox.StandardButton.Close)
+        msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
+        reply = msg.exec()
+
+        return reply == QMessageBox.StandardButton.Close

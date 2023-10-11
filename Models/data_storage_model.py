@@ -41,3 +41,7 @@ class DataStorageModel:
             return True
         else:
             return False
+
+    @classmethod
+    def copy(cls):
+        return cls._dataFrames.copy()
