@@ -28,7 +28,39 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Save.triggered.connect(self.saveChanges)
         self.action_Save_As_New.triggered.connect(self.saveProjectNew)
         self.action_Open_File.triggered.connect(self.openFile)
+        self.action_New_File.triggered.connect(self.newProject)
         self.show()
+
+    def newProject(self):
+        if self.notSavedProject():
+            self.pathCurrentFileGlobal = None
+            self.setWindowTitle("Dex")
+            self.textEdit_Board.clear()
+            DataStorageModel.clear()
+        else:
+            pass
+
+    def notSavedProject(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setText('Czy chcesz zapisać projekt?')
+        msg.setWindowTitle('Nowy projekt')
+
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
+        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
+        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj')
+        msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
+
+        reply = msg.exec()
+
+        if reply == QMessageBox.StandardButton.Yes:
+            self.saveChanges()
+            return True
+        elif reply == QMessageBox.StandardButton.No:
+            return True
+        else:
+            return False
 
     def openFile(self):
         try:
@@ -57,7 +89,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                     DataStorageModel.add(key, df)
 
                 self.setSavedFilePath(fileName[0])
-
 
         except Exception as e:
             self.errorMessage("0009", str(e))

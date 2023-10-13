@@ -55,6 +55,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         if nameList:
             self.comboBox_Select_Data.clear()
             self.comboBox_Select_Data.addItems(nameList)
+            self.tableView_Data_Frame.setModel(None)
+            self.disableWindowFunction()
+        else:
+            self.comboBox_Select_Data.clear()
+            self.tableView_Data_Frame.setModel(None)
+            self.disableWindowFunction()
 
     def openReplace(self):
         self.comboBox_Select_Data.setEnabled(False)
@@ -517,6 +523,13 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.menu_Info.setEnabled(True)
         self.pushButton_Save.setEnabled(True)
         self.action_Save_as.setEnabled(True)
+
+    def disableWindowFunction(self):
+        self.menu_Edit.setEnabled(False)
+        self.menu_Search.setEnabled(False)
+        self.menu_Info.setEnabled(False)
+        self.pushButton_Save.setEnabled(False)
+        self.action_Save_as.setEnabled(False)
 
     def enableLoad(self, index):
         if index >= 0:

@@ -45,3 +45,7 @@ class DataStorageModel:
     @classmethod
     def copy(cls):
         return cls._dataFrames.copy()
+
+    @classmethod
+    def clear(cls):
+        cls._dataFrames.clear()

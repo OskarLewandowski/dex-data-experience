@@ -49,6 +49,7 @@ class AddFileController(QDialog, Ui_dialog_add_file):
         """
         Show add file window
         """
+        self.clear()
         self.show()
 
     def chooseFile(self):
