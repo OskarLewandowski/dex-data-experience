@@ -55,7 +55,9 @@
     <addaction name="action_Save_As_New"/>
     <addaction name="separator"/>
     <addaction name="action_Print"/>
+    <addaction name="action_Print_Preview"/>
     <addaction name="action_Export_PDF"/>
+    <addaction name="action_Export_DOC"/>
     <addaction name="separator"/>
     <addaction name="action_Exit"/>
    </widget>
@@ -408,6 +410,22 @@
   <action name="action_Save_As_New">
    <property name="text">
     <string>Zapisz jako nowy...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="action_Print_Preview">
+   <property name="text">
+    <string>Podgląd wydruku</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+P</string>
+   </property>
+  </action>
+  <action name="action_Export_DOC">
+   <property name="text">
+    <string>Eksportuj jako DOC</string>
    </property>
   </action>
  </widget>

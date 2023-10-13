@@ -7,6 +7,7 @@ from Models.data_storage_model import DataStorageModel
 from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
 from io import StringIO
+from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -29,7 +30,33 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Save_As_New.triggered.connect(self.saveProjectNew)
         self.action_Open_File.triggered.connect(self.openFile)
         self.action_New_File.triggered.connect(self.newProject)
+        self.action_Print.triggered.connect(self.printBoard)
+        self.action_Print_Preview.triggered.connect(self.printPreviewBoard)
         self.show()
+
+    def printPreviewBoard(self):
+        try:
+            printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+            ui_printer = QPrintPreviewDialog(printer, self)
+            ui_printer.paintRequested.connect(self.paintBoard)
+            ui_printer.showMaximized()
+            ui_printer.setWindowTitle("Podgląd wydruku")
+            ui_printer.exec()
+        except Exception as e:
+            self.errorMessage("0011", str(e))
+
+    def paintBoard(self, printer):
+        self.textEdit_Board.print(printer)
+
+    def printBoard(self):
+        try:
+            printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+            ui_printer = QPrintDialog(printer)
+
+            if ui_printer.exec() == QPrintDialog.DialogCode.Accepted:
+                self.textEdit_Board.print(printer)
+        except Exception as e:
+            self.errorMessage("0010", str(e))
 
     def newProject(self):
         if self.notSavedProject():
