@@ -56,8 +56,7 @@
     <addaction name="separator"/>
     <addaction name="action_Print"/>
     <addaction name="action_Print_Preview"/>
-    <addaction name="action_Export_PDF"/>
-    <addaction name="action_Export_DOC"/>
+    <addaction name="action_Export_As"/>
     <addaction name="separator"/>
     <addaction name="action_Exit"/>
    </widget>
@@ -140,7 +139,6 @@
    <addaction name="action_New_File"/>
    <addaction name="action_Open_File"/>
    <addaction name="action_Save"/>
-   <addaction name="action_Print"/>
    <addaction name="separator"/>
    <addaction name="action_Add_Data"/>
    <addaction name="action_Modify_Data"/>
@@ -205,13 +203,13 @@
     <string>Ctrl+P</string>
    </property>
   </action>
-  <action name="action_Export_PDF">
+  <action name="action_Export_As">
    <property name="icon">
     <iconset resource="../../images/main-window/main-window.qrc">
      <normaloff>:/images/main-window/export-pdf.svg</normaloff>:/images/main-window/export-pdf.svg</iconset>
    </property>
    <property name="text">
-    <string>Eksportuj jako PDF</string>
+    <string>Eksportuj jako plik...</string>
    </property>
   </action>
   <action name="action_Exit">
