@@ -1,6 +1,7 @@
 import json
 import os
 import pandas as pd
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox
 from PyQt6 import QtGui, QtCore
 from Models.data_storage_model import DataStorageModel
@@ -8,6 +9,7 @@ from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
 from io import StringIO
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
+from PyQt6.QtGui import QFont
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -33,7 +35,71 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Print.triggered.connect(self.printBoard)
         self.action_Print_Preview.triggered.connect(self.printPreviewBoard)
         self.action_Exit.triggered.connect(self.close)
+
+        self.action_Undo.triggered.connect(self.textEdit_Board.undo)
+        self.action_Redo.triggered.connect(self.textEdit_Board.redo)
+        self.action_Copy.triggered.connect(self.textEdit_Board.copy)
+        self.action_Cut.triggered.connect(self.textEdit_Board.cut)
+        self.action_Paste.triggered.connect(self.textEdit_Board.paste)
+
+        self.action_Bold.triggered.connect(self.toggleTextBold)
+        self.action_Italic.triggered.connect(self.toggleTextItalic)
+        self.action_Underline.triggered.connect(self.toggleTextUnderline)
+
+        self.action_Right.triggered.connect(self.alignTextRight)
+        self.action_Left.triggered.connect(self.alignTextLeft)
+        self.action_Center.triggered.connect(self.alignTextCenter)
+        self.action_Justify.triggered.connect(self.alignTextJustify)
+
         self.show()
+
+    def alignTextRight(self):
+        self.textEdit_Board.setAlignment(Qt.AlignmentFlag.AlignRight)
+
+    def alignTextLeft(self):
+        self.textEdit_Board.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+    def alignTextCenter(self):
+        self.textEdit_Board.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    def alignTextJustify(self):
+        self.textEdit_Board.setAlignment(Qt.AlignmentFlag.AlignJustify)
+
+    def toggleTextUnderline(self):
+        cursor = self.textEdit_Board.textCursor()
+        currentFormat = cursor.charFormat()
+
+        if currentFormat.fontUnderline():
+            currentFormat.setFontUnderline(False)
+        else:
+            currentFormat.setFontUnderline(True)
+
+        cursor.setCharFormat(currentFormat)
+        self.textEdit_Board.setTextCursor(cursor)
+
+    def toggleTextItalic(self):
+        cursor = self.textEdit_Board.textCursor()
+        currentFormat = cursor.charFormat()
+
+        if currentFormat.fontItalic():
+            currentFormat.setFontItalic(False)
+        else:
+            currentFormat.setFontItalic(True)
+
+        cursor.setCharFormat(currentFormat)
+        self.textEdit_Board.setTextCursor(cursor)
+
+    def toggleTextBold(self):
+        cursor = self.textEdit_Board.textCursor()
+        currentFormat = cursor.charFormat()
+
+        if currentFormat.fontWeight() == QFont.Weight.Bold:
+            currentFormat.setFontWeight(QFont.Weight.Normal)
+        else:
+            currentFormat.setFontWeight(QFont.Weight.Bold)
+
+        cursor.setCharFormat(currentFormat)
+        self.textEdit_Board.setTextCursor(cursor)
 
     def closeEvent(self, a0):
         result = self.exitApp()
