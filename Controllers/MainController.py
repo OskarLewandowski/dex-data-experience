@@ -32,7 +32,40 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_New_File.triggered.connect(self.newProject)
         self.action_Print.triggered.connect(self.printBoard)
         self.action_Print_Preview.triggered.connect(self.printPreviewBoard)
+        self.action_Exit.triggered.connect(self.close)
         self.show()
+
+    def closeEvent(self, a0):
+        result = self.exitApp()
+
+        if result == 1:
+            self.saveChanges()
+            a0.accept()
+        elif result == 2:
+            a0.accept()
+        else:
+            a0.ignore()
+
+    def exitApp(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setText('Nie zapisane zmiany zostaną utracone!\n\nCzy na pewno chcesz zamknąć program?')
+        msg.setWindowTitle('Zamknij program')
+
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
+        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz i zakończ')
+        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj i zakończ')
+        msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
+
+        reply = msg.exec()
+
+        if reply == QMessageBox.StandardButton.Yes:
+            return 1
+        elif reply == QMessageBox.StandardButton.No:
+            return 2
+        else:
+            return 3
 
     def printPreviewBoard(self):
         try:
