@@ -2,7 +2,8 @@ import json
 import os
 import pandas as pd
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox
+from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
+    QToolButton, QFontDialog, QColorDialog
 from PyQt6 import QtGui, QtCore
 from Models.data_storage_model import DataStorageModel
 from Views.Settings.settings_main_window import Ui_Dialog_settings
@@ -24,6 +25,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         # View
         self.addFontComboBoxToolBar()
         self.addSpinBoxToolBar()
+        self.addColorToolButtonToolBar()
 
         # Connections
         self.fontComboBox_Text_Font.currentFontChanged['QFont'].connect(self.textEdit_Board.setCurrentFont)
@@ -51,7 +53,60 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Center.triggered.connect(self.alignTextCenter)
         self.action_Justify.triggered.connect(self.alignTextJustify)
 
+        self.action_Font.triggered.connect(self.fontDialog)
+        self.action_Color.triggered.connect(self.colorDialog)
+        self.toolButtonColor.clicked.connect(self.colorDialog)
+        self.textEdit_Board.cursorPositionChanged.connect(self.updateTextEdit)
+
         self.show()
+
+    def fontDialog(self):
+        font, ok = QFontDialog.getFont()
+
+        if ok:
+            self.textEdit_Board.setCurrentFont(font)
+            self.updateTextEdit()
+
+    def updateTextEdit(self):
+        cursor = self.textEdit_Board.textCursor()
+        selectionFormat = cursor.charFormat()
+        textColor = selectionFormat.foreground().color()
+
+        self.iconColorBox = QtGui.QIcon()
+        self.pixmapColorBox = QtGui.QPixmap(32, 32)
+        self.pixmapColorBox.fill(textColor)
+        self.iconColorBox.addPixmap(self.pixmapColorBox)
+
+        self.toolButtonColor.setIcon(self.iconColorBox)
+
+        font = selectionFormat.font()
+        self.fontComboBox_Text_Font.setCurrentFont(font)
+
+        self.spinBox_Text_Size.setValue(font.pointSize())
+
+    def colorDialog(self):
+        color = QColorDialog.getColor()
+        self.iconColorBox = QtGui.QIcon()
+        self.pixmapColorBox = QtGui.QPixmap(32, 32)
+        self.pixmapColorBox.fill(color)
+        self.iconColorBox.addPixmap(self.pixmapColorBox)
+
+        self.toolButtonColor.setIcon(self.iconColorBox)
+
+        self.textEdit_Board.setTextColor(color)
+
+    def addColorToolButtonToolBar(self):
+        # icon
+        self.iconColorBox = QtGui.QIcon()
+        self.pixmapColorBox = QtGui.QPixmap(32, 32)
+        self.pixmapColorBox.fill(QtGui.QColor(0, 0, 0))
+        self.iconColorBox.addPixmap(self.pixmapColorBox)
+
+        # button
+        self.toolButtonColor = QToolButton()
+        self.toolButtonColor.setIcon(self.iconColorBox)
+
+        self.toolBar.addWidget(self.toolButtonColor)
 
     def alignTextRight(self):
         self.textEdit_Board.setAlignment(Qt.AlignmentFlag.AlignRight)
