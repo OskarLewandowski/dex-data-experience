@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QDialog, QMessageBox, QFileDialog, QButtonGroup
-from Views.AddFile.add_file_main_window import Ui_dialog_add_file
+from Views.AddFile.add_file_main_window import Ui_Dialog_Add_File
 from Models.data_frame_model import DataFrameModel
 from Models.data_storage_model import DataStorageModel
 import pandas as pd
@@ -7,7 +7,7 @@ import os
 from PyQt6 import QtGui
 
 
-class AddFileController(QDialog, Ui_dialog_add_file):
+class AddFileController(QDialog, Ui_Dialog_Add_File):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -20,17 +20,6 @@ class AddFileController(QDialog, Ui_dialog_add_file):
 
         # to keep data frame
         self.dataFrameGlobal = None
-
-        # radio group
-        self.delimiter_button_group = QButtonGroup(self)
-        self.delimiter_button_group.addButton(self.radioButton_A_Semicolon)
-        self.delimiter_button_group.addButton(self.radioButton_A_Comma)
-        self.delimiter_button_group.addButton(self.radioButton_A_Tab)
-        self.delimiter_button_group.addButton(self.radioButton_A_Custom)
-
-        self.decimal_separator_button_group = QButtonGroup(self)
-        self.decimal_separator_button_group.addButton(self.radioButton_B_Dot)
-        self.decimal_separator_button_group.addButton(self.radioButton_B_Comma)
 
         # connections
         self.pushButton_Cancel.clicked.connect(self.reject)
@@ -89,6 +78,7 @@ class AddFileController(QDialog, Ui_dialog_add_file):
         elif self.radioButton_B_Dot.isChecked():
             return "."
         else:
+            self.radioButton_B_Comma.setChecked(True)
             return ","
 
     def getDelimiter(self):
@@ -104,8 +94,10 @@ class AddFileController(QDialog, Ui_dialog_add_file):
             if custom_delimiter.strip():
                 return custom_delimiter
             else:
+                self.radioButton_A_Comma.setChecked(True)
                 return ","
         else:
+            self.radioButton_A_Comma.setChecked(True)
             return ","
 
     def loadDataCsv(self):
@@ -185,6 +177,8 @@ class AddFileController(QDialog, Ui_dialog_add_file):
         self.pushButton_Load.setEnabled(False)
         self.filePathGlobal = None
         self.tableView_Data_Table.setModel(None)
+        if not self.radioButton_A_Custom.isChecked():
+            self.lineEdit_Custom_Delimiter.setEnabled(False)
 
     def saveData(self):
         try:
