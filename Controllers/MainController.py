@@ -58,7 +58,36 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.toolButtonColor.clicked.connect(self.colorDialog)
         self.textEdit_Board.cursorPositionChanged.connect(self.updateTextEdit)
 
+        self.action_Export_As.triggered.connect(self.exportAs)
+
         self.show()
+
+    def exportAsPdf(self, filePath):
+        try:
+            if filePath:
+                printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+                printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
+                printer.setOutputFileName(filePath)
+                self.textEdit_Board.document().print(printer)
+        except Exception as e:
+            self.errorMessage("0013", e)
+
+    def exportAs(self):
+        try:
+            fileFilter = ('Plik PDF (*.pdf)')
+
+            filePath = QFileDialog.getSaveFileName(
+                caption="Eksportuj plik",
+                directory=os.path.expanduser("~/Desktop/raport.pdf"),
+                filter=fileFilter,
+                initialFilter='Plik PDF (*.pdf)')
+
+            filePath = str(filePath[0])
+
+            if filePath.endswith(".pdf"):
+                self.exportAsPdf(filePath)
+        except Exception as e:
+            self.errorMessage("0012", e)
 
     def fontDialog(self):
         font, ok = QFontDialog.getFont()
