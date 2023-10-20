@@ -4,6 +4,7 @@ from Models.data_frame_model import DataFrameModel
 from Models.data_storage_model import DataStorageModel
 import pandas as pd
 import os
+from PyQt6 import QtGui
 
 
 class AddFileController(QDialog, Ui_dialog_add_file):
@@ -205,7 +206,12 @@ class AddFileController(QDialog, Ui_dialog_add_file):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Question)
             msg.setText('Czy na pewno chcesz załadować dane?')
-            msg.setWindowTitle('Ładowanie danych')
+            msg.setWindowTitle('Dex')
+
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+            msg.setWindowIcon(icon)
 
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
@@ -220,16 +226,21 @@ class AddFileController(QDialog, Ui_dialog_add_file):
 
     def statusConfirmationDialog(self):
         try:
-            message = "Plik {} został pomyślnie załadowny.".format(self.fileNameGlobal)
+            message = "Plik '{}' został pomyślnie załadowny.".format(self.fileNameGlobal)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Question)
             msg.setText(message)
-            msg.setWindowTitle('Dodaj dane')
+            msg.setWindowTitle('Dex')
+
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+            msg.setWindowIcon(icon)
 
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Abort | QMessageBox.StandardButton.Close)
             msg.button(QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
-            msg.button(QMessageBox.StandardButton.Close).setText('Wróc do mneu głównego')
+            msg.button(QMessageBox.StandardButton.Close).setText('Wróc')
 
             reply = msg.exec()
 
@@ -243,7 +254,12 @@ class AddFileController(QDialog, Ui_dialog_add_file):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText(message)
-        msg.setWindowTitle('Błąd')
+        msg.setWindowTitle('Dex')
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        msg.setWindowIcon(icon)
 
         msg.setStandardButtons(QMessageBox.StandardButton.Close)
         msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')

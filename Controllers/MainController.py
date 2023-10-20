@@ -199,13 +199,18 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
     def exitApp(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Question)
-        msg.setText('Nie zapisane zmiany zostaną utracone!\n\nCzy na pewno chcesz zamknąć program?')
-        msg.setWindowTitle('Zamknij program')
+        msg.setText('Czy chcesz zapisać zmiany w pliku?')
+        msg.setWindowTitle('Dex')
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        msg.setWindowIcon(icon)
 
         msg.setStandardButtons(
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
-        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz i zakończ')
-        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj i zakończ')
+        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
+        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj')
         msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
 
         reply = msg.exec()
@@ -253,8 +258,13 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
     def notSavedProject(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Question)
-        msg.setText('Czy chcesz zapisać projekt?')
-        msg.setWindowTitle('Nowy projekt')
+        msg.setText('Czy chcesz zapisać zmiany w obecnym projekcie?')
+        msg.setWindowTitle('Dex')
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        msg.setWindowIcon(icon)
 
         msg.setStandardButtons(
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
@@ -408,7 +418,12 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText(message)
-        msg.setWindowTitle('Błąd')
+        msg.setWindowTitle('Dex')
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        msg.setWindowIcon(icon)
 
         msg.setStandardButtons(QMessageBox.StandardButton.Close)
         msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
