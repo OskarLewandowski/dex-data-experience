@@ -94,10 +94,8 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             if custom_delimiter.strip():
                 return custom_delimiter
             else:
-                self.radioButton_A_Comma.setChecked(True)
                 return ","
         else:
-            self.radioButton_A_Comma.setChecked(True)
             return ","
 
     def loadDataCsv(self):
@@ -171,6 +169,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             self.lineEdit_Custom_Delimiter.setFocus()
         else:
             self.lineEdit_Custom_Delimiter.setEnabled(False)
+            self.radioButton_A_Custom.setChecked(False)
 
     def clear(self):
         self.lineEdit_Filename.clear()
