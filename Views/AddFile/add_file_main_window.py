@@ -84,6 +84,9 @@ class Ui_Dialog_Add_File(object):
         self.checkBox_Skip_Headers = QtWidgets.QCheckBox(parent=self.groupBox_Other)
         self.checkBox_Skip_Headers.setObjectName("checkBox_Skip_Headers")
         self.verticalLayout_4.addWidget(self.checkBox_Skip_Headers)
+        self.checkBox_Transpose = QtWidgets.QCheckBox(parent=self.groupBox_Other)
+        self.checkBox_Transpose.setObjectName("checkBox_Transpose")
+        self.verticalLayout_4.addWidget(self.checkBox_Transpose)
         self.horizontalLayout_2.addWidget(self.groupBox_Other)
         self.verticalLayout_5.addLayout(self.horizontalLayout_2)
         self.tableView_Data_Table = QtWidgets.QTableView(parent=Dialog_Add_File)
@@ -126,6 +129,7 @@ class Ui_Dialog_Add_File(object):
         self.radioButton_B_Dot.setText(_translate("Dialog_Add_File", "kropka"))
         self.groupBox_Other.setTitle(_translate("Dialog_Add_File", "Inne"))
         self.checkBox_Skip_Headers.setText(_translate("Dialog_Add_File", "brak nagłówków"))
+        self.checkBox_Transpose.setText(_translate("Dialog_Add_File", "transponuj"))
         self.pushButton_Load.setText(_translate("Dialog_Add_File", "Załaduj"))
         self.pushButton_Cancel.setText(_translate("Dialog_Add_File", "Anuluj"))
 

@@ -165,6 +165,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_Transpose">
+          <property name="text">
+           <string>transponuj</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
