@@ -27,13 +27,26 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         self.radioButton_A_Custom.toggled.connect(self.customDelimiterToggled)
         self.pushButton_Load.clicked.connect(self.saveData)
 
-        self.radioButton_A_Comma.toggled.connect(self.loadDataCsv)
-        self.radioButton_A_Semicolon.toggled.connect(self.loadDataCsv)
-        self.radioButton_A_Tab.toggled.connect(self.loadDataCsv)
-        self.radioButton_B_Comma.toggled.connect(self.loadDataCsv)
-        self.radioButton_B_Dot.toggled.connect(self.loadDataCsv)
-        self.lineEdit_Custom_Delimiter.textEdited.connect(self.loadDataCsv)
-        self.checkBox_Skip_Headers.toggled.connect(self.loadDataCsv)
+        self.radioButton_A_Comma.clicked.connect(self.executeLoadDataByUser)
+        self.radioButton_A_Semicolon.clicked.connect(self.executeLoadDataByUser)
+        self.radioButton_A_Tab.clicked.connect(self.executeLoadDataByUser)
+        self.radioButton_B_Comma.clicked.connect(self.executeLoadDataByUser)
+        self.radioButton_B_Dot.clicked.connect(self.executeLoadDataByUser)
+        self.lineEdit_Custom_Delimiter.textEdited.connect(self.executeLoadDataByUser)
+        self.radioButton_A_Custom.clicked.connect(self.executeLoadDataByUser)
+        self.checkBox_Skip_Headers.clicked.connect(self.executeLoadDataByUser)
+
+        self.disableGroupBoxLoadDataSettings()
+
+    def enableGroupBoxLoadDataSettings(self):
+        self.groupBox_Separator.setEnabled(True)
+        self.groupBox_Decimal_Separator.setEnabled(True)
+        self.groupBox_Other.setEnabled(True)
+
+    def disableGroupBoxLoadDataSettings(self):
+        self.groupBox_Separator.setEnabled(False)
+        self.groupBox_Decimal_Separator.setEnabled(False)
+        self.groupBox_Other.setEnabled(False)
 
     def createWindowAddFile(self):
         """
@@ -45,7 +58,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
     def chooseFile(self):
         try:
             filePath = None
-            fileFilter = ('Pliki tekstowe (*.json; *.txt; *.csv);;'
+            fileFilter = ('Pliki tekstowe (*.json; *.txt; *.csv; *.tsv);;'
                           'Arkusz kalkulacyjny (*.xlsx; *.xls);;'
                           'Pliki R (*.RData);;'
                           'Wszystkie pliki (*.*)')
@@ -54,7 +67,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 caption="Wybierz plik",
                 directory=os.path.expanduser("~/Desktop"),
                 filter=fileFilter,
-                initialFilter='Pliki tekstowe (*.txt; *.csv)')
+                initialFilter='Pliki tekstowe (*.json; *.txt; *.csv; *.tsv)')
 
             if fileName[0]:
                 filePath = str(fileName[0])
@@ -66,11 +79,41 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.lineEdit_Filename.setText(fileName)
                 self.enableLockedButton()
 
-            # CSV FILE
+            # first data load by default settings
             if filePath.endswith(".csv"):
-                self.loadDataCsv()
+                print("CSV_1")
+                self.radioButton_A_Comma.setChecked(True)
+                self.radioButton_B_Comma.setChecked(True)
+                self.loadDataCsvTsv()
+                self.enableGroupBoxLoadDataSettings()
+            elif filePath.endswith(".tsv"):
+                print("TSV_1")
+                self.radioButton_A_Tab.setChecked(True)
+                self.radioButton_B_Comma.setChecked(True)
+                self.loadDataCsvTsv()
+                self.enableGroupBoxLoadDataSettings()
+            elif filePath.endswith(".txt"):
+                print("TXT_1")
+                self.enableGroupBoxLoadDataSettings()
+                pass
         except:
             self.clear()
+
+    def executeLoadDataByUser(self):
+        try:
+            filePath = self.filePathGlobal
+
+            if filePath.endswith(".csv"):
+                print("CSV_2")
+                self.loadDataCsvTsv()
+            elif filePath.endswith(".tsv"):
+                print("TSV_2")
+                self.loadDataCsvTsv()
+            elif filePath.endswith(".txt"):
+                print("TXT_2")
+                pass
+        except Exception as e:
+            self.errorMessage("0014", str(e))
 
     def getDecimalSeparator(self):
         if self.radioButton_B_Comma.isChecked():
@@ -78,7 +121,6 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         elif self.radioButton_B_Dot.isChecked():
             return "."
         else:
-            self.radioButton_B_Comma.setChecked(True)
             return ","
 
     def getDelimiter(self):
@@ -98,7 +140,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         else:
             return ","
 
-    def loadDataCsv(self):
+    def loadDataCsvTsv(self):
         try:
             filePath = self.filePathGlobal
 
@@ -178,6 +220,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         self.tableView_Data_Table.setModel(None)
         if not self.radioButton_A_Custom.isChecked():
             self.lineEdit_Custom_Delimiter.setEnabled(False)
+        self.disableGroupBoxLoadDataSettings()
 
     def saveData(self):
         try:
