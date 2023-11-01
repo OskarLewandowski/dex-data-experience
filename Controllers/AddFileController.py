@@ -64,6 +64,8 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                           'Pliki R (*.RData);;'
                           'Wszystkie pliki (*.*)')
 
+            excelExt = ['.xlsx', '.xls']
+
             fileName = QFileDialog.getOpenFileName(
                 caption="Wybierz plik",
                 directory=os.path.expanduser("~/Desktop"),
@@ -102,6 +104,9 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             elif filePath.endswith(".json"):
                 print("JSON_1")
                 self.loadDataJson()
+            elif filePath.endswith(tuple(excelExt)):
+                print("EXCEL_1")
+                self.loadDataExcel()
                 pass
         except:
             self.clear()
@@ -109,6 +114,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
     def executeLoadDataByUser(self):
         try:
             filePath = self.filePathGlobal
+            excelExt = ['.xlsx', '.xls']
 
             if filePath.endswith(".csv"):
                 print("CSV_2")
@@ -122,6 +128,9 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             elif filePath.endswith(".json"):
                 print("JSON_2")
                 self.loadDataJson()
+            elif filePath.endswith(tuple(excelExt)):
+                print("EXCEL_2")
+                self.loadDataExcel()
                 pass
 
         except Exception as e:
@@ -224,6 +233,19 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
 
             if filePath:
                 obj = pd.read_json(filePath, orient="records")
+
+                self.displayDataInTableView(obj)
+                self.dataFrameGlobal = obj
+
+        except Exception as e:
+            print(str(e))
+
+    def loadDataExcel(self):
+        try:
+            filePath = self.filePathGlobal
+
+            if filePath:
+                obj = pd.read_excel(filePath)
 
                 self.displayDataInTableView(obj)
                 self.dataFrameGlobal = obj
