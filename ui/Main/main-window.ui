@@ -428,11 +428,6 @@
     <string>Ctrl+Shift+P</string>
    </property>
   </action>
-  <action name="action_Export_DOC">
-   <property name="text">
-    <string>Eksportuj jako DOC</string>
-   </property>
-  </action>
  </widget>
  <resources>
   <include location="../../images/main-window/main-window.qrc"/>

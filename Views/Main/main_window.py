@@ -186,8 +186,6 @@ class Ui_MainWindow_Main(object):
         self.action_Save_As_New.setObjectName("action_Save_As_New")
         self.action_Print_Preview = QtGui.QAction(parent=MainWindow_Main)
         self.action_Print_Preview.setObjectName("action_Print_Preview")
-        self.action_Export_DOC = QtGui.QAction(parent=MainWindow_Main)
-        self.action_Export_DOC.setObjectName("action_Export_DOC")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -307,7 +305,6 @@ class Ui_MainWindow_Main(object):
         self.action_Save_As_New.setShortcut(_translate("MainWindow_Main", "Ctrl+Shift+S"))
         self.action_Print_Preview.setText(_translate("MainWindow_Main", "Podgląd wydruku"))
         self.action_Print_Preview.setShortcut(_translate("MainWindow_Main", "Ctrl+Shift+P"))
-        self.action_Export_DOC.setText(_translate("MainWindow_Main", "Eksportuj jako DOC"))
 
 
 if __name__ == "__main__":
