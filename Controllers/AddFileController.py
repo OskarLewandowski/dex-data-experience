@@ -5,6 +5,7 @@ from Models.data_storage_model import DataStorageModel
 import pandas as pd
 import os
 from PyQt6 import QtGui
+import pyreadr
 
 
 class AddFileController(QDialog, Ui_Dialog_Add_File):
@@ -107,7 +108,9 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             elif filePath.endswith(tuple(excelExt)):
                 print("EXCEL_1")
                 self.loadDataExcel()
-                pass
+            elif filePath.endswith(".RData"):
+                print("RDATA_1")
+                self.loadDataRData()
         except:
             self.clear()
 
@@ -131,7 +134,9 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             elif filePath.endswith(tuple(excelExt)):
                 print("EXCEL_2")
                 self.loadDataExcel()
-                pass
+            elif filePath.endswith(".RData"):
+                print("RDATA_2")
+                self.loadDataRData()
 
         except Exception as e:
             self.errorMessage("0014", str(e))
@@ -246,6 +251,31 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
 
             if filePath:
                 obj = pd.read_excel(filePath)
+
+                self.displayDataInTableView(obj)
+                self.dataFrameGlobal = obj
+
+        except Exception as e:
+            print(str(e))
+
+    def loadDataRData(self):
+        try:
+            filePath = self.filePathGlobal
+
+            if filePath:
+                rdata = pyreadr.read_r(filePath)
+                keys = rdata.keys()
+                obj = pd.DataFrame()
+
+                for key in keys:
+                    df = rdata[key]
+
+                    if df.shape[0] < df.shape[1]:
+                        df = df.T
+
+                    obj[key] = df
+
+                obj.index = range(len(obj))
 
                 self.displayDataInTableView(obj)
                 self.dataFrameGlobal = obj
