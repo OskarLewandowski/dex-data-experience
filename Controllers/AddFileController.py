@@ -99,6 +99,9 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.radioButton_B_Comma.setChecked(True)
                 self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
+            elif filePath.endswith(".json"):
+                print("JSON_1")
+                self.loadDataJson()
                 pass
         except:
             self.clear()
@@ -116,7 +119,11 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             elif filePath.endswith(".txt"):
                 print("TXT_2")
                 self.loadDataCsvTsvTxt()
+            elif filePath.endswith(".json"):
+                print("JSON_2")
+                self.loadDataJson()
                 pass
+
         except Exception as e:
             self.errorMessage("0014", str(e))
 
@@ -210,6 +217,19 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         except Exception as e:
             self.errorMessage("0001", str(e))
             self.clear()
+
+    def loadDataJson(self):
+        try:
+            filePath = self.filePathGlobal
+
+            if filePath:
+                obj = pd.read_json(filePath, orient="records")
+
+                self.displayDataInTableView(obj)
+                self.dataFrameGlobal = obj
+
+        except Exception as e:
+            print(str(e))
 
     def displayDataInTableView(self, data_frame):
         try:
