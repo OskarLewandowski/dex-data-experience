@@ -18,9 +18,12 @@ class DataFrameModel(QAbstractTableModel):
         return None
 
     def headerData(self, section, orientation, role):
-        if role == Qt.ItemDataRole.DisplayRole:
-            if orientation == Qt.Orientation.Horizontal:
-                return str(self._data.columns[section])
-            if orientation == Qt.Orientation.Vertical:
-                return str(self._data.index[section])
-        return None
+        try:
+            if role == Qt.ItemDataRole.DisplayRole:
+                if orientation == Qt.Orientation.Horizontal:
+                    return str(self._data.columns[section])
+                if orientation == Qt.Orientation.Vertical:
+                    return str(self._data.index[section])
+            return None
+        except Exception as e:
+            print("headerData:" + str(e))

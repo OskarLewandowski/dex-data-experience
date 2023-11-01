@@ -35,6 +35,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         self.lineEdit_Custom_Delimiter.textEdited.connect(self.executeLoadDataByUser)
         self.radioButton_A_Custom.clicked.connect(self.executeLoadDataByUser)
         self.checkBox_Skip_Headers.clicked.connect(self.executeLoadDataByUser)
+        self.checkBox_Transpose.clicked.connect(self.executeLoadDataByUser)
 
         self.disableGroupBoxLoadDataSettings()
 
@@ -84,16 +85,19 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 print("CSV_1")
                 self.radioButton_A_Comma.setChecked(True)
                 self.radioButton_B_Comma.setChecked(True)
-                self.loadDataCsvTsv()
+                self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
             elif filePath.endswith(".tsv"):
                 print("TSV_1")
                 self.radioButton_A_Tab.setChecked(True)
                 self.radioButton_B_Comma.setChecked(True)
-                self.loadDataCsvTsv()
+                self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
             elif filePath.endswith(".txt"):
                 print("TXT_1")
+                self.radioButton_A_Tab.setChecked(True)
+                self.radioButton_B_Comma.setChecked(True)
+                self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
                 pass
         except:
@@ -105,12 +109,13 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
 
             if filePath.endswith(".csv"):
                 print("CSV_2")
-                self.loadDataCsvTsv()
+                self.loadDataCsvTsvTxt()
             elif filePath.endswith(".tsv"):
                 print("TSV_2")
-                self.loadDataCsvTsv()
+                self.loadDataCsvTsvTxt()
             elif filePath.endswith(".txt"):
                 print("TXT_2")
+                self.loadDataCsvTsvTxt()
                 pass
         except Exception as e:
             self.errorMessage("0014", str(e))
@@ -124,7 +129,6 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             return ","
 
     def getDelimiter(self):
-
         if self.radioButton_A_Comma.isChecked():
             return ","
         elif self.radioButton_A_Semicolon.isChecked():
@@ -133,14 +137,14 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             return "\t"
         elif self.radioButton_A_Custom.isChecked():
             custom_delimiter = self.lineEdit_Custom_Delimiter.text()
-            if custom_delimiter.strip():
+            if custom_delimiter:
                 return custom_delimiter
             else:
                 return ","
         else:
             return ","
 
-    def loadDataCsvTsv(self):
+    def loadDataCsvTsvTxt(self):
         try:
             filePath = self.filePathGlobal
 
@@ -149,6 +153,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 delimiter = self.getDelimiter()
                 decimal_separator = self.getDecimalSeparator()
                 skip_headers = self.checkBox_Skip_Headers.isChecked()
+                transpose = self.checkBox_Transpose.isChecked()
 
                 try:
                     if skip_headers:
@@ -160,12 +165,18 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                                           header=None)
 
                         obj.columns = [str(i) for i in range(0, len(obj.columns))]
+
+                        if transpose:
+                            obj = obj.T
+
                         self.displayDataInTableView(obj)
                     else:
                         obj = pd.read_csv(filePath,
                                           encoding='utf-8',
                                           delimiter=delimiter,
                                           decimal=decimal_separator)
+                        if transpose:
+                            obj = obj.T
 
                         self.displayDataInTableView(obj)
                 except:
@@ -178,12 +189,20 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                                           header=None)
 
                         obj.columns = [str(i) for i in range(0, len(obj.columns))]
+
+                        if transpose:
+                            obj = obj.T
+
                         self.displayDataInTableView(obj)
                     else:
                         obj = pd.read_csv(filePath,
                                           encoding='iso-8859-1',
                                           delimiter=delimiter,
                                           decimal=decimal_separator)
+
+                        if transpose:
+                            obj = obj.T
+
                         self.displayDataInTableView(obj)
 
                 self.dataFrameGlobal = obj
