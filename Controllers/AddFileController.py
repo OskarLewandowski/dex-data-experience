@@ -243,7 +243,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.dataFrameGlobal = obj
 
         except Exception as e:
-            print(str(e))
+            MessageModel.error("0015", str(e))
 
     def loadDataExcel(self):
         try:
@@ -256,7 +256,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.dataFrameGlobal = obj
 
         except Exception as e:
-            print(str(e))
+            MessageModel.error("0016", str(e))
 
     def loadDataRData(self):
         try:
@@ -281,7 +281,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.dataFrameGlobal = obj
 
         except Exception as e:
-            print(str(e))
+            MessageModel.error("0017", str(e))
 
     def displayDataInTableView(self, data_frame):
         try:

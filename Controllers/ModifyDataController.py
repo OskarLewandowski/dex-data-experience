@@ -1,12 +1,5 @@
-import io
-import os
-import numpy as np
-import pandas as pd
 from PyQt6.QtWidgets import QMainWindow, QFileDialog, QCompleter, QDialog, QMessageBox, QWidget
-from pyreadr import pyreadr
-from Models.data_frame_model import DataFrameModel
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
+from PyQt6 import QtGui
 from Views.ModifyData.widget_info import Ui_Form_Info
 from Views.ModifyData.dialog_search import Ui_Dialog_Search
 from Views.ModifyData.change_headers import Ui_Dialog_change_headers
@@ -15,9 +8,17 @@ from Views.ModifyData.delete_nan import Ui_Dialog_Delete_NaN
 from Views.ModifyData.change_datatype import Ui_Dialog_Change_Datatype
 from Views.ModifyData.delete import Ui_Dialog_Delete
 from Views.ModifyData.replace import Ui_Dialog_Replace
-from Models.data_storage_model import DataStorageModel
 from Views.ModifyData.modify_data_main_window import Ui_MainWindow_modify_data
-from PyQt6 import QtGui
+from Models.data_storage_model import DataStorageModel
+from Models.data_frame_model import DataFrameModel
+from Models.message_model import MessageModel
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak
+from reportlab.lib.pagesizes import letter
+from pyreadr import pyreadr
+import numpy as np
+import pandas as pd
+import io
+import os
 
 
 class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
@@ -128,8 +129,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                     self.currentDataFrameGlobal = df
             else:
                 self.ui.label_Info.setText("Uzupełnij puste pola!")
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0026", str(e))
 
     def closeEventReplace(self, event):
         self.window.close()
@@ -166,8 +167,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 completer = QCompleter(list(suggestions))
 
                 self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0025", str(e))
 
     def addQCompleter(self):
         try:
@@ -181,8 +182,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 completer = QCompleter(suggestions)
 
                 self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0024", str(e))
 
     def deleteColumn(self):
         try:
@@ -194,8 +195,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.updateFillListDelete()
             msg = "Kolumna '{}' została usunieta".format(columnName)
             self.ui.label_Info.setText(msg)
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0023", str(e))
 
     def deleteRow(self):
         try:
@@ -209,8 +210,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.updateFillListDelete()
             msg = "Wiersz '{}' został usuniety".format(index)
             self.ui.label_Info.setText(msg)
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0022", str(e))
 
     def openDelete(self):
         self.comboBox_Select_Data.setEnabled(False)
@@ -398,8 +399,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 df = pd.DataFrame(self.currentDataFrameGlobal)
                 name = self.comboBox_Select_Data.currentText()
                 DataStorageModel.update(name, df)
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0021", str(e))
 
     def saveConfirmationDialog(self):
         try:
@@ -421,8 +422,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             reply = msg.exec()
 
             return reply == QMessageBox.StandardButton.Yes
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0020", str(e))
 
     def openChangeHeaders(self):
 
@@ -510,8 +511,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
             filtered_data = self.currentDataFrameGlobal[mask]
             self.displayData(filtered_data)
-        except:
-            None
+        except Exception as e:
+            MessageModel.error("0019", str(e))
 
     def loadDataFrame(self):
         self.enableWindowFunction()
@@ -603,7 +604,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 pyreadr.write_rdata(saveFileName[0], df)
 
         except Exception as e:
-            print("Error -", e)
+            MessageModel.error("0018", str(e))
 
     def showInfoWidget(self):
         if self.currentDataFrameGlobal is not None and self.action_More_Info.isChecked():
