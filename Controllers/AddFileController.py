@@ -2,10 +2,10 @@ from PyQt6.QtWidgets import QDialog, QMessageBox, QFileDialog
 from Views.AddFile.add_file_main_window import Ui_Dialog_Add_File
 from Models.data_frame_model import DataFrameModel
 from Models.data_storage_model import DataStorageModel
+from Models.message_model import MessageModel
 import pandas as pd
-import os
-from PyQt6 import QtGui
 import pyreadr
+import os
 
 
 class AddFileController(QDialog, Ui_Dialog_Add_File):
@@ -139,7 +139,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.loadDataRData()
 
         except Exception as e:
-            self.errorMessage("0014", str(e))
+            MessageModel.error("0014", str(e))
 
     def getDecimalSeparator(self):
         if self.radioButton_B_Comma.isChecked():
@@ -229,7 +229,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 self.dataFrameGlobal = obj
 
         except Exception as e:
-            self.errorMessage("0001", str(e))
+            MessageModel.error("0001", str(e))
             self.clear()
 
     def loadDataJson(self):
@@ -289,7 +289,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             model = DataFrameModel(data)
             self.tableView_Data_Table.setModel(model)
         except Exception as e:
-            self.errorMessage("0002", str(e))
+            MessageModel.error("0002", str(e))
             self.clear()
 
     def enableLockedButton(self):
@@ -316,80 +316,14 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
     def saveData(self):
         try:
             nextStep = None
-            confirmed = self.saveConfirmationDialog()
+            confirmed = MessageModel.saveConfirmation()
             if confirmed:
                 DataStorageModel.add(os.path.splitext(self.fileNameGlobal)[0], self.dataFrameGlobal)
-                nextStep = self.statusConfirmationDialog()
+                nextStep = MessageModel.statusConfirmation(self.fileNameGlobal)
 
             if nextStep:
                 self.close()
             else:
                 self.clear()
         except Exception as e:
-            self.errorMessage("0005", str(e))
-
-    def saveConfirmationDialog(self):
-        try:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Question)
-            msg.setText('Czy na pewno chcesz załadować dane?')
-            msg.setWindowTitle('Dex')
-
-            icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                           QtGui.QIcon.State.Off)
-            msg.setWindowIcon(icon)
-
-            msg.setStandardButtons(
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
-            msg.button(QMessageBox.StandardButton.Yes).setText('Tak')
-            msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
-
-            reply = msg.exec()
-
-            return reply == QMessageBox.StandardButton.Yes
-        except Exception as e:
-            self.errorMessage("0004", str(e))
-
-    def statusConfirmationDialog(self):
-        try:
-            message = "Plik '{}' został pomyślnie załadowny.".format(self.fileNameGlobal)
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Question)
-            msg.setText(message)
-            msg.setWindowTitle('Dex')
-
-            icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                           QtGui.QIcon.State.Off)
-            msg.setWindowIcon(icon)
-
-            msg.setStandardButtons(
-                QMessageBox.StandardButton.Abort | QMessageBox.StandardButton.Close)
-            msg.button(QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
-            msg.button(QMessageBox.StandardButton.Close).setText('Wróc')
-
-            reply = msg.exec()
-
-            return reply == QMessageBox.StandardButton.Close
-        except Exception as e:
-            self.errorMessage("0003", str(e))
-
-    @staticmethod
-    def errorMessage(errorCode="0000", e=""):
-        message = "Wystąpił bład: [{0}] - {1}".format(errorCode, e)
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Critical)
-        msg.setText(message)
-        msg.setWindowTitle('Dex')
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
-
-        msg.setStandardButtons(QMessageBox.StandardButton.Close)
-        msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
-        reply = msg.exec()
-
-        return reply == QMessageBox.StandardButton.Close
+            MessageModel.error("0005", str(e))
