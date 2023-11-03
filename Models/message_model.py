@@ -71,3 +71,58 @@ class MessageModel:
             return reply == QMessageBox.StandardButton.Yes
         except Exception as e:
             cls.error("0004", str(e))
+
+    @classmethod
+    def exitApp(cls):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setText('Czy chcesz zapisać zmiany w pliku?')
+        msg.setWindowTitle('Dex')
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        msg.setWindowIcon(icon)
+
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
+        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
+        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj')
+        msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
+
+        reply = msg.exec()
+
+        if reply == QMessageBox.StandardButton.Yes:
+            return 1
+        elif reply == QMessageBox.StandardButton.No:
+            return 2
+        else:
+            return 3
+
+    @classmethod
+    def notSavedProject(cls, func_saveChanges):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setText('Czy chcesz zapisać zmiany w obecnym projekcie?')
+        msg.setWindowTitle('Dex')
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        msg.setWindowIcon(icon)
+
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
+        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
+        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj')
+        msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
+
+        reply = msg.exec()
+
+        if reply == QMessageBox.StandardButton.Yes:
+            func_saveChanges()
+            return True
+        elif reply == QMessageBox.StandardButton.No:
+            return True
+        else:
+            return False

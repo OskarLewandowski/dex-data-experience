@@ -1,16 +1,17 @@
-import json
-import os
-import pandas as pd
+from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
+from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
     QToolButton, QFontDialog, QColorDialog
-from PyQt6 import QtGui, QtCore
 from Models.data_storage_model import DataStorageModel
+from Models.message_model import MessageModel
+from io import StringIO
 from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
-from io import StringIO
-from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
-from PyQt6.QtGui import QFont
+import pandas as pd
+import json
+import os
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -70,7 +71,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                 printer.setOutputFileName(filePath)
                 self.textEdit_Board.document().print(printer)
         except Exception as e:
-            self.errorMessage("0013", e)
+            MessageModel.error("0013", str(e))
 
     def exportAs(self):
         try:
@@ -87,7 +88,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             if filePath.endswith(".pdf"):
                 self.exportAsPdf(filePath)
         except Exception as e:
-            self.errorMessage("0012", e)
+            MessageModel.error("0012", str(e))
 
     def fontDialog(self):
         font, ok = QFontDialog.getFont()
@@ -186,7 +187,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.textEdit_Board.setTextCursor(cursor)
 
     def closeEvent(self, a0):
-        result = self.exitApp()
+        result = MessageModel.exitApp()
 
         if result == 1:
             self.saveChanges()
@@ -195,32 +196,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             a0.accept()
         else:
             a0.ignore()
-
-    def exitApp(self):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Question)
-        msg.setText('Czy chcesz zapisać zmiany w pliku?')
-        msg.setWindowTitle('Dex')
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
-
-        msg.setStandardButtons(
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
-        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
-        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj')
-        msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
-
-        reply = msg.exec()
-
-        if reply == QMessageBox.StandardButton.Yes:
-            return 1
-        elif reply == QMessageBox.StandardButton.No:
-            return 2
-        else:
-            return 3
 
     def printPreviewBoard(self):
         try:
@@ -231,7 +206,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             ui_printer.setWindowTitle("Podgląd wydruku")
             ui_printer.exec()
         except Exception as e:
-            self.errorMessage("0011", str(e))
+            MessageModel.error("0011", str(e))
 
     def paintBoard(self, printer):
         self.textEdit_Board.print(printer)
@@ -244,43 +219,16 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             if ui_printer.exec() == QPrintDialog.DialogCode.Accepted:
                 self.textEdit_Board.print(printer)
         except Exception as e:
-            self.errorMessage("0010", str(e))
+            MessageModel.error("0010", str(e))
 
     def newProject(self):
-        if self.notSavedProject():
+        if MessageModel.notSavedProject(self.saveChanges):
             self.pathCurrentFileGlobal = None
             self.setWindowTitle("Dex")
             self.textEdit_Board.clear()
             DataStorageModel.clear()
         else:
             pass
-
-    def notSavedProject(self):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Question)
-        msg.setText('Czy chcesz zapisać zmiany w obecnym projekcie?')
-        msg.setWindowTitle('Dex')
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
-
-        msg.setStandardButtons(
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
-        msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
-        msg.button(QMessageBox.StandardButton.No).setText('Nie zapisuj')
-        msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
-
-        reply = msg.exec()
-
-        if reply == QMessageBox.StandardButton.Yes:
-            self.saveChanges()
-            return True
-        elif reply == QMessageBox.StandardButton.No:
-            return True
-        else:
-            return False
 
     def openFile(self):
         try:
@@ -311,7 +259,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                 self.setSavedFilePath(fileName[0])
 
         except Exception as e:
-            self.errorMessage("0009", str(e))
+            MessageModel.error("0009", str(e))
 
     def saveChanges(self):
         try:
@@ -321,7 +269,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             else:
                 self.saveProjectNew()
         except Exception as e:
-            self.errorMessage("0008", str(e))
+            MessageModel.error("0008", str(e))
 
     def saveProjectNew(self):
         try:
@@ -338,7 +286,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                 self.save(fileName[0])
 
         except Exception as e:
-            self.errorMessage("0007", str(e))
+            MessageModel.error("0007", str(e))
 
     def save(self, filePath):
         try:
@@ -362,9 +310,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
             self.setSavedFilePath(filePath)
 
-
         except Exception as e:
-            self.errorMessage("0006", str(e))
+            MessageModel.error("0006", str(e))
 
     def setSavedFilePath(self, filePath):
         newWindowTitle = "{} - Dex".format(filePath)
@@ -411,22 +358,3 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         for i in keys:
             print(DataStorageModel.get(i))
         print(keys)
-
-    @staticmethod
-    def errorMessage(errorCode="0000", e=""):
-        message = "Wystąpił bład: [{0}] - {1}".format(errorCode, e)
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Critical)
-        msg.setText(message)
-        msg.setWindowTitle('Dex')
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
-
-        msg.setStandardButtons(QMessageBox.StandardButton.Close)
-        msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
-        reply = msg.exec()
-
-        return reply == QMessageBox.StandardButton.Close
