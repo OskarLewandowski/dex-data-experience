@@ -490,7 +490,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.window.close()
         self.loadDataFrame()
         self.comboBox_Select_Data.setEnabled(True)
-        self.pushButton_Load.setEnabled(True)
         event.accept()
 
     def closeActionSearchDialog(self):
@@ -509,8 +508,10 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 mask = self.currentDataFrameGlobal.astype(str).apply(
                     lambda row: row.str.contains(search_phrase, case=False).any(), axis=1)
 
-            filtered_data = self.currentDataFrameGlobal[mask]
-            self.displayData(filtered_data)
+            if search_phrase:
+                filtered_data = self.currentDataFrameGlobal[mask]
+                self.displayData(filtered_data)
+
         except Exception as e:
             MessageModel.error("0019", str(e))
 
