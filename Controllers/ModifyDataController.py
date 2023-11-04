@@ -488,7 +488,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     def closeEventSearchDialog(self, event):
         self.window.close()
-        self.loadDataFrame()
+        self.displayData(self.currentDataFrameGlobal)
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
@@ -500,7 +500,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             search_phrase = str(self.ui.lineEdit_Search_Text.text())
 
             if not search_phrase:
-                self.loadDataFrame()
+                self.displayData(self.currentDataFrameGlobal)
             elif self.ui.checkBox_Case.isChecked():
                 mask = self.currentDataFrameGlobal.astype(str).apply(
                     lambda row: row.str.contains(search_phrase, case=True).any(), axis=1)
