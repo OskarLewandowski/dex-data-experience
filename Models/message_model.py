@@ -49,11 +49,11 @@ class MessageModel:
             cls.error("0003", str(e))
 
     @classmethod
-    def saveConfirmation(cls):
+    def saveConfirmation(cls, text="Czy na pewno chcesz załadować dane?", bntYesText="Tak", bntAbortText="Anuluj"):
         try:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Question)
-            msg.setText('Czy na pewno chcesz załadować dane?')
+            msg.setText(text)
             msg.setWindowTitle('Dex')
 
             icon = QtGui.QIcon()
@@ -63,8 +63,8 @@ class MessageModel:
 
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
-            msg.button(QMessageBox.StandardButton.Yes).setText('Tak')
-            msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
+            msg.button(QMessageBox.StandardButton.Yes).setText(bntYesText)
+            msg.button(QMessageBox.StandardButton.Abort).setText(bntAbortText)
 
             reply = msg.exec()
 

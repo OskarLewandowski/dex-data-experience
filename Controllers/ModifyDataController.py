@@ -394,36 +394,13 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     def saveChanges(self):
         try:
-            confirmed = self.saveConfirmationDialog()
+            confirmed = MessageModel.saveConfirmation(text="Czy na pewno chcesz zapisać zmiany?", bntYesText="Zapisz")
             if confirmed:
                 df = pd.DataFrame(self.currentDataFrameGlobal)
                 name = self.comboBox_Select_Data.currentText()
                 DataStorageModel.update(name, df)
         except Exception as e:
             MessageModel.error("0021", str(e))
-
-    def saveConfirmationDialog(self):
-        try:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Question)
-            msg.setText('Czy na pewno chcesz zapisać zmiany?')
-            msg.setWindowTitle('Dex')
-
-            icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                           QtGui.QIcon.State.Off)
-            msg.setWindowIcon(icon)
-
-            msg.setStandardButtons(
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
-            msg.button(QMessageBox.StandardButton.Yes).setText('Zapisz')
-            msg.button(QMessageBox.StandardButton.Abort).setText('Anuluj')
-
-            reply = msg.exec()
-
-            return reply == QMessageBox.StandardButton.Yes
-        except Exception as e:
-            MessageModel.error("0020", str(e))
 
     def openChangeHeaders(self):
 
