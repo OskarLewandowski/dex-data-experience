@@ -15,18 +15,12 @@ class Ui_Dialog_Change_Datatype(object):
         Dialog_Change_Datatype.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog_Change_Datatype.resize(400, 150)
         Dialog_Change_Datatype.setMinimumSize(QtCore.QSize(400, 150))
-        Dialog_Change_Datatype.setMaximumSize(QtCore.QSize(400, 150))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Dialog_Change_Datatype.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_Change_Datatype)
         self.verticalLayout.setObjectName("verticalLayout")
         self.comboBox_Current_Datatype = QtWidgets.QComboBox(parent=Dialog_Change_Datatype)
         self.comboBox_Current_Datatype.setObjectName("comboBox_Current_Datatype")
         self.verticalLayout.addWidget(self.comboBox_Current_Datatype)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout.addItem(spacerItem)
         self.comboBox_New_Datatype = QtWidgets.QComboBox(parent=Dialog_Change_Datatype)
         self.comboBox_New_Datatype.setObjectName("comboBox_New_Datatype")
@@ -51,8 +45,7 @@ class Ui_Dialog_Change_Datatype(object):
     def retranslateUi(self, Dialog_Change_Datatype):
         _translate = QtCore.QCoreApplication.translate
         Dialog_Change_Datatype.setWindowTitle(_translate("Dialog_Change_Datatype", "Zmień typ danych"))
-        self.comboBox_Current_Datatype.setPlaceholderText(
-            _translate("Dialog_Change_Datatype", "Wybierz kolumnę do zmiany typu danych..."))
+        self.comboBox_Current_Datatype.setPlaceholderText(_translate("Dialog_Change_Datatype", "Wybierz kolumnę do zmiany typu danych..."))
         self.comboBox_New_Datatype.setPlaceholderText(_translate("Dialog_Change_Datatype", "Wybierz typ danych..."))
         self.pushButton_Apply.setText(_translate("Dialog_Change_Datatype", "Zastosuj"))
         self.pushButton_Cancel.setText(_translate("Dialog_Change_Datatype", "Anuluj"))
@@ -60,7 +53,6 @@ class Ui_Dialog_Change_Datatype(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Change_Datatype = QtWidgets.QDialog()
     ui = Ui_Dialog_Change_Datatype()

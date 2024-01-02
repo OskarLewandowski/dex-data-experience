@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'dialog-search.ui'
+# Form implementation generated from reading ui file '.\dialog-search.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -15,11 +15,6 @@ class Ui_Dialog_Search(object):
         Dialog_Search.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog_Search.resize(500, 100)
         Dialog_Search.setMinimumSize(QtCore.QSize(500, 100))
-        Dialog_Search.setMaximumSize(QtCore.QSize(500, 100))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Dialog_Search.setWindowIcon(icon)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Dialog_Search)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
@@ -61,7 +56,6 @@ class Ui_Dialog_Search(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Search = QtWidgets.QDialog()
     ui = Ui_Dialog_Search()

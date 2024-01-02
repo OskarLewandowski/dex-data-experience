@@ -15,10 +15,6 @@ class Ui_MainWindow_modify_data(object):
         MainWindow_modify_data.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         MainWindow_modify_data.resize(800, 600)
         MainWindow_modify_data.setMinimumSize(QtCore.QSize(800, 600))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        MainWindow_modify_data.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_modify_data)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -30,20 +26,17 @@ class Ui_MainWindow_modify_data(object):
         self.comboBox_Select_Data.setObjectName("comboBox_Select_Data")
         self.horizontalLayout.addWidget(self.comboBox_Select_Data)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout.addItem(spacerItem)
         self.tableView_Data_Frame = QtWidgets.QTableView(parent=self.centralwidget)
         self.tableView_Data_Frame.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.tableView_Data_Frame.setObjectName("tableView_Data_Frame")
         self.verticalLayout.addWidget(self.tableView_Data_Frame)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout.addItem(spacerItem1)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.pushButton_Save = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Save.setEnabled(False)
@@ -148,7 +141,6 @@ class Ui_MainWindow_modify_data(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow_modify_data = QtWidgets.QMainWindow()
     ui = Ui_MainWindow_modify_data()

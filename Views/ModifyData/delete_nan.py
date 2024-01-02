@@ -15,18 +15,13 @@ class Ui_Dialog_Delete_NaN(object):
         Dialog_Delete_NaN.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog_Delete_NaN.resize(400, 200)
         Dialog_Delete_NaN.setMinimumSize(QtCore.QSize(400, 200))
-        Dialog_Delete_NaN.setMaximumSize(QtCore.QSize(400, 200))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Dialog_Delete_NaN.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_Delete_NaN)
         self.verticalLayout.setObjectName("verticalLayout")
         self.textEdit_Info = QtWidgets.QTextEdit(parent=Dialog_Delete_NaN)
         self.textEdit_Info.setStyleSheet("QTextEdit {\n"
-                                         "    font-weight: bold;\n"
-                                         "    font-size: 16px;\n"
-                                         "}")
+"    font-weight: bold;\n"
+"    font-size: 16px;\n"
+"}")
         self.textEdit_Info.setReadOnly(True)
         self.textEdit_Info.setObjectName("textEdit_Info")
         self.verticalLayout.addWidget(self.textEdit_Info)
@@ -52,7 +47,6 @@ class Ui_Dialog_Delete_NaN(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Delete_NaN = QtWidgets.QDialog()
     ui = Ui_Dialog_Delete_NaN()

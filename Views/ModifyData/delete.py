@@ -15,11 +15,6 @@ class Ui_Dialog_Delete(object):
         Dialog_Delete.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog_Delete.resize(530, 190)
         Dialog_Delete.setMinimumSize(QtCore.QSize(530, 190))
-        Dialog_Delete.setMaximumSize(QtCore.QSize(530, 190))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Dialog_Delete.setWindowIcon(icon)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Dialog_Delete)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -31,8 +26,7 @@ class Ui_Dialog_Delete(object):
         self.comboBox_Column_List_Select = QtWidgets.QComboBox(parent=self.groupBox)
         self.comboBox_Column_List_Select.setObjectName("comboBox_Column_List_Select")
         self.verticalLayout.addWidget(self.comboBox_Column_List_Select)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout.addItem(spacerItem)
         self.pushButton_Apply_Delete_Column = QtWidgets.QPushButton(parent=self.groupBox)
         self.pushButton_Apply_Delete_Column.setAutoDefault(False)
@@ -51,8 +45,7 @@ class Ui_Dialog_Delete(object):
         self.spinBox_Row_Number_Select.setProperty("value", -1)
         self.spinBox_Row_Number_Select.setObjectName("spinBox_Row_Number_Select")
         self.verticalLayout_2.addWidget(self.spinBox_Row_Number_Select)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout_2.addItem(spacerItem1)
         self.pushButton_Apply_Delete_Row = QtWidgets.QPushButton(parent=self.groupBox_2)
         self.pushButton_Apply_Delete_Row.setAutoDefault(False)
@@ -67,8 +60,7 @@ class Ui_Dialog_Delete(object):
         self.verticalLayout_3.addWidget(self.label_Info)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.pushButton_Cancel = QtWidgets.QPushButton(parent=Dialog_Delete)
         self.pushButton_Cancel.setObjectName("pushButton_Cancel")
@@ -85,8 +77,7 @@ class Ui_Dialog_Delete(object):
         self.comboBox_Column_List_Select.setPlaceholderText(_translate("Dialog_Delete", "Wybierz kolumnę..."))
         self.pushButton_Apply_Delete_Column.setText(_translate("Dialog_Delete", "Usuń kolumnę"))
         self.groupBox_2.setTitle(_translate("Dialog_Delete", "Wiersze"))
-        self.spinBox_Row_Number_Select.setSpecialValueText(
-            _translate("Dialog_Delete", "Wybierz numer wiersza od \'0\' do \'0\': "))
+        self.spinBox_Row_Number_Select.setSpecialValueText(_translate("Dialog_Delete", "Wybierz numer wiersza od \'0\' do \'0\': "))
         self.spinBox_Row_Number_Select.setPrefix(_translate("Dialog_Delete", "Numer wiersza: "))
         self.pushButton_Apply_Delete_Row.setText(_translate("Dialog_Delete", "Usuń wiersz"))
         self.pushButton_Cancel.setText(_translate("Dialog_Delete", "Anuluj"))
@@ -94,7 +85,6 @@ class Ui_Dialog_Delete(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Delete = QtWidgets.QDialog()
     ui = Ui_Dialog_Delete()

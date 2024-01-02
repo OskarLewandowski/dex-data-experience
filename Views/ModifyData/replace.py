@@ -15,11 +15,6 @@ class Ui_Dialog_Replace(object):
         Dialog_Replace.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog_Replace.resize(400, 340)
         Dialog_Replace.setMinimumSize(QtCore.QSize(400, 340))
-        Dialog_Replace.setMaximumSize(QtCore.QSize(400, 340))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Dialog_Replace.setWindowIcon(icon)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(Dialog_Replace)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.groupBox = QtWidgets.QGroupBox(parent=Dialog_Replace)
@@ -89,7 +84,6 @@ class Ui_Dialog_Replace(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Replace = QtWidgets.QDialog()
     ui = Ui_Dialog_Replace()

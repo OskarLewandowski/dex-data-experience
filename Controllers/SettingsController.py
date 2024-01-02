@@ -2,7 +2,7 @@ import os
 
 import qdarktheme
 from PyQt6.QtWidgets import QMainWindow, QColorDialog, QPushButton
-from PyQt6.QtCore import Qt, QDir, QFile
+from PyQt6.QtCore import Qt, QDir, QFile, QCoreApplication
 from qt_material import QtStyleTools
 from xml.etree import ElementTree as ET
 from Views.Settings.settings_window import Ui_MainWindow_Settings
@@ -177,6 +177,9 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
 
             elif them_name == "Basic_dark":
                 qdarktheme.setup_theme("dark")
+            elif them_name == "Basic_default":
+                self.app = QCoreApplication.instance()
+                self.app.setStyleSheet("")
             else:
                 self.apply_stylesheet(self.app, filename)
 

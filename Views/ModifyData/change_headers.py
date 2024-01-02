@@ -15,11 +15,6 @@ class Ui_Dialog_change_headers(object):
         Dialog_change_headers.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog_change_headers.resize(400, 150)
         Dialog_change_headers.setMinimumSize(QtCore.QSize(400, 150))
-        Dialog_change_headers.setMaximumSize(QtCore.QSize(400, 150))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Dialog_change_headers.setWindowIcon(icon)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Dialog_change_headers)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -27,8 +22,7 @@ class Ui_Dialog_change_headers(object):
         self.comboBox_headers_list = QtWidgets.QComboBox(parent=Dialog_change_headers)
         self.comboBox_headers_list.setObjectName("comboBox_headers_list")
         self.verticalLayout.addWidget(self.comboBox_headers_list)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.verticalLayout.addItem(spacerItem)
         self.lineEdit_new_header_name = QtWidgets.QLineEdit(parent=Dialog_change_headers)
         self.lineEdit_new_header_name.setObjectName("lineEdit_new_header_name")
@@ -55,17 +49,14 @@ class Ui_Dialog_change_headers(object):
     def retranslateUi(self, Dialog_change_headers):
         _translate = QtCore.QCoreApplication.translate
         Dialog_change_headers.setWindowTitle(_translate("Dialog_change_headers", "Zmień nagłówki"))
-        self.comboBox_headers_list.setPlaceholderText(
-            _translate("Dialog_change_headers", "Wybierz nagłówek do zmiany nazwy..."))
-        self.lineEdit_new_header_name.setPlaceholderText(
-            _translate("Dialog_change_headers", "Wpisz nową nazwę nagłówka..."))
+        self.comboBox_headers_list.setPlaceholderText(_translate("Dialog_change_headers", "Wybierz nagłówek do zmiany nazwy..."))
+        self.lineEdit_new_header_name.setPlaceholderText(_translate("Dialog_change_headers", "Wpisz nową nazwę nagłówka..."))
         self.pushButton_Apply.setText(_translate("Dialog_change_headers", "Zastosuj"))
         self.pushButton_Cancel.setText(_translate("Dialog_change_headers", "Anuluj"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_change_headers = QtWidgets.QDialog()
     ui = Ui_Dialog_change_headers()

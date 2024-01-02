@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'widget-info.ui'
+# Form implementation generated from reading ui file '.\widget-info.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -14,10 +14,6 @@ class Ui_Form_Info(object):
         Form_Info.setObjectName("Form_Info")
         Form_Info.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Form_Info.resize(800, 658)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        Form_Info.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form_Info)
         self.verticalLayout.setObjectName("verticalLayout")
         self.textEdit_info = QtWidgets.QTextEdit(parent=Form_Info)
@@ -27,8 +23,7 @@ class Ui_Form_Info(object):
         self.verticalLayout.addWidget(self.textEdit_info)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButton_Close = QtWidgets.QPushButton(parent=Form_Info)
         self.pushButton_Close.setObjectName("pushButton_Close")
@@ -41,21 +36,19 @@ class Ui_Form_Info(object):
     def retranslateUi(self, Form_Info):
         _translate = QtCore.QCoreApplication.translate
         Form_Info.setWindowTitle(_translate("Form_Info", "Informacje dodatkowe"))
-        self.textEdit_info.setHtml(_translate("Form_Info",
-                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                              "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-                                              "p, li { white-space: pre-wrap; }\n"
-                                              "hr { height: 1px; border-width: 0; }\n"
-                                              "li.unchecked::marker { content: \"\\2610\"; }\n"
-                                              "li.checked::marker { content: \"\\2612\"; }\n"
-                                              "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                              "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_info.setHtml(_translate("Form_Info", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Close.setText(_translate("Form_Info", "Zamknij"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Form_Info = QtWidgets.QWidget()
     ui = Ui_Form_Info()

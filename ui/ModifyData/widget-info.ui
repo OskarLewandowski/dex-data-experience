@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Form_Info</class>
  <widget class="QWidget" name="Form_Info">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,10 +15,6 @@
   </property>
   <property name="windowTitle">
    <string>Informacje dodatkowe</string>
-  </property>
-  <property name="windowIcon">
-   <iconset resource="../images/app-icon/app-icon.qrc">
-    <normaloff>:/images/app-icon/dex-icon-512x512.png</normaloff>:/images/app-icon/dex-icon-512x512.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
