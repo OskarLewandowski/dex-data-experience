@@ -13,7 +13,7 @@ class MessageModel:
         msg.setWindowTitle('Dex')
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         msg.setWindowIcon(icon)
 
@@ -33,7 +33,7 @@ class MessageModel:
             msg.setWindowTitle('Dex')
 
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+            icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                            QtGui.QIcon.State.Off)
             msg.setWindowIcon(icon)
 
@@ -57,7 +57,7 @@ class MessageModel:
             msg.setWindowTitle('Dex')
 
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+            icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                            QtGui.QIcon.State.Off)
             msg.setWindowIcon(icon)
 
@@ -80,7 +80,7 @@ class MessageModel:
         msg.setWindowTitle('Dex')
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         msg.setWindowIcon(icon)
 
@@ -107,7 +107,7 @@ class MessageModel:
         msg.setWindowTitle('Dex')
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
+        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
                        QtGui.QIcon.State.Off)
         msg.setWindowIcon(icon)
 

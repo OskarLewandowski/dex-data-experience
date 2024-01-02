@@ -22,10 +22,6 @@
   <property name="windowTitle">
    <string>Dodaj plik</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../images/app-icon/app-icon.qrc">
-    <normaloff>:/images/app-icon/dex-icon-512x512.png</normaloff>:/images/app-icon/dex-icon-512x512.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
