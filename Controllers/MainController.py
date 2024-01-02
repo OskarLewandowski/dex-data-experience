@@ -7,7 +7,6 @@ from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbst
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from io import StringIO
-from Views.Settings.settings_main_window import Ui_Dialog_settings
 from Views.Main.main_window import Ui_MainWindow_Main
 import pandas as pd
 import json
@@ -19,6 +18,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        self.showMaximized()
 
         # Variable
         self.pathCurrentFileGlobal = None
@@ -330,7 +331,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
     def addSpinBoxToolBar(self):
         self.spinBox_Text_Size = QSpinBox()
         self.spinBox_Text_Size.setMinimumSize(QtCore.QSize(50, 0))
-        self.spinBox_Text_Size.setMaximumSize(QtCore.QSize(50, 16777215))
+        #self.spinBox_Text_Size.setMaximumSize(QtCore.QSize(50, 16777215))
         self.spinBox_Text_Size.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.spinBox_Text_Size.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
         self.spinBox_Text_Size.setMinimum(8)
@@ -338,15 +339,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.spinBox_Text_Size.setProperty("value", 12)
         self.spinBox_Text_Size.setDisplayIntegerBase(10)
         self.toolBar.addWidget(self.spinBox_Text_Size)
-
-    def createWindowSettings(self):
-        """
-        Create the settings window
-        """
-        self.window_settings = QDialog()
-        self.window_settings_ui = Ui_Dialog_settings()
-        self.window_settings_ui.setupUi(self.window_settings)
-        self.window_settings.show()
 
     @staticmethod
     def printDataFrames():
