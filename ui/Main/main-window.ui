@@ -22,10 +22,6 @@
   <property name="windowTitle">
    <string>Dex</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../images/app-icon/app-icon.qrc">
-    <normaloff>:/images/app-icon/dex-icon-512x512.png</normaloff>:/images/app-icon/dex-icon-512x512.png</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -39,6 +35,7 @@
       <property name="styleSheet">
        <string notr="true">QTextEdit{
 background-color: #ffffff;
+color: #000000;
 }</string>
       </property>
      </widget>

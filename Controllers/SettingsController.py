@@ -1,5 +1,6 @@
 import os
 
+import qdarktheme
 from PyQt6.QtWidgets import QMainWindow, QColorDialog, QPushButton
 from PyQt6.QtCore import Qt, QDir, QFile
 from qt_material import QtStyleTools
@@ -51,7 +52,6 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             lambda: self.changeColor('primaryTextColor', 'pushButton_Primary_Text_Color'))
         self.pushButton_Secondary_Text_Color.clicked.connect(
             lambda: self.changeColor('secondaryTextColor', 'pushButton_Secondary_Text_Color'))
-
 
     def loadLanguage(self):
         language_files = {
@@ -172,7 +172,13 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             them_name = self.comboBox_Theme.currentText()
             filename = themes_path + them_name + extension
 
-            self.apply_stylesheet(self.app, filename)
+            if them_name == "Basic_light":
+                qdarktheme.setup_theme("light")
+
+            elif them_name == "Basic_dark":
+                qdarktheme.setup_theme("dark")
+            else:
+                self.apply_stylesheet(self.app, filename)
 
     def loadSettings(self):
         if QFile.exists(SettingsController.SETTINGS_FILE):
@@ -183,12 +189,10 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 custom_theme_enabled = settings.get("custom_theme_enabled", False)
                 secondary_colors_enabled = settings.get("secondary_colors_enabled", False)
 
-
                 self.checkBox_Use_Custom_Theme.setChecked(custom_theme_enabled)
                 self.checkBox_Use_Secondary_Colors.setChecked(secondary_colors_enabled)
                 self.comboBox_Language.setCurrentIndex(language_index)
                 self.comboBox_Theme.setCurrentIndex(theme_index)
-
 
                 self.loadThem()
         else:
@@ -208,7 +212,6 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         theme_index = self.comboBox_Theme.currentIndex()
         custom_theme_enabled = self.checkBox_Use_Custom_Theme.isChecked()
         secondary_colors_enabled = self.checkBox_Use_Secondary_Colors.isChecked()
-
 
         settings = {
             "language_index": language_index,
