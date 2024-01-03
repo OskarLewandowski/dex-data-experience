@@ -95,7 +95,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         font, ok = QFontDialog.getFont()
 
         if ok:
-            self.textEdit_Board.setCurrentFont(font)
+            self.textEdit_Board.setFont(font)
             self.updateTextEdit()
 
     def updateTextEdit(self):
@@ -331,7 +331,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
     def addSpinBoxToolBar(self):
         self.spinBox_Text_Size = QSpinBox()
         self.spinBox_Text_Size.setMinimumSize(QtCore.QSize(50, 0))
-        #self.spinBox_Text_Size.setMaximumSize(QtCore.QSize(50, 16777215))
+        # self.spinBox_Text_Size.setMaximumSize(QtCore.QSize(50, 16777215))
         self.spinBox_Text_Size.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.spinBox_Text_Size.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
         self.spinBox_Text_Size.setMinimum(8)

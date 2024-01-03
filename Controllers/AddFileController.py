@@ -1,3 +1,4 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtWidgets import QDialog, QMessageBox, QFileDialog
 from Views.AddFile.add_file_main_window import Ui_Dialog_Add_File
@@ -59,6 +60,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         icon = QIcon()
         icon.addPixmap(QPixmap("images/app-icon/dex-icon-512x512.png"), QIcon.Mode.Normal,
                        QIcon.State.Off)
+        self.setWindowFlags(Qt.WindowType.WindowMinMaxButtonsHint | Qt.WindowType.WindowCloseButtonHint)
         self.setWindowIcon(icon)
         self.show()
 
