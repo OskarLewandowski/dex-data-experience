@@ -1,9 +1,13 @@
+import base64
+
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
     QToolButton, QFontDialog, QColorDialog
+from matplotlib import pyplot as plt
+
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from io import StringIO
@@ -11,6 +15,7 @@ from Views.Main.main_window import Ui_MainWindow_Main
 import pandas as pd
 import json
 import os
+import io
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -62,7 +67,56 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.action_Export_As.triggered.connect(self.exportAs)
 
+        # Plots
+        self.action_Test_1.triggered.connect(self.test_1)
+        self.action_Test_2.triggered.connect(self.test_2)
+
         self.show()
+
+    def test_1(self):
+        try:
+            plt.plot([0, 1, 2, 3, 4], [0, 1, 4, 9, 16])
+
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+
+            data = buf.read()
+            data_base64 = base64.b64encode(data).decode('utf-8')
+
+            html = f'<img src="data:image/png;base64,{data_base64}" />'
+
+            self.textEdit_Board.insertHtml(html)
+
+        except Exception as e:
+            MessageModel.error("0028", str(e))
+
+    def test_2(self):
+        try:
+            listKeys = DataStorageModel.get_all_keys()
+            df = pd.DataFrame(DataStorageModel.get(listKeys[0]))
+
+            ax = df.plot(x='Col1', y='Col2', kind='scatter')
+
+            fig = ax.get_figure()
+            fig.canvas.draw()
+
+            buf = io.BytesIO()
+            fig.savefig(buf, format='png')
+            buf.seek(0)
+
+            data = buf.read()
+            data_base64 = base64.b64encode(data).decode('utf-8')
+
+            html = f'<img src="data:image/png;base64,{data_base64}" />'
+
+            cursor = self.textEdit_Board.textCursor()
+            cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+            cursor.insertText("\n")
+            cursor.insertHtml(html)
+            cursor.insertText("\n")
+        except Exception as e:
+            MessageModel.error("0027", str(e))
 
     def exportAsPdf(self, filePath):
         try:
