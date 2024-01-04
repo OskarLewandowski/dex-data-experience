@@ -100,20 +100,22 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             oldKey = self.window_rename_key_dataframe_ui.comboBox_Keys_List.currentText()
             newKey = self.window_rename_key_dataframe_ui.lineEdit_New_Key_Name.text()
 
-            if oldKey != "" and newKey != "":
-                if DataStorageModel.rename_key(oldKey, newKey):
-                    msg = f"Nazwa zbioru '{oldKey}' została zmienniona na '{newKey}'"
-                    self.window_rename_key_dataframe_ui.label_info_text.setText(msg)
-
-                    self.updateKeysList()
-                    self.window_rename_key_dataframe_ui.lineEdit_New_Key_Name.clear()
-
-                else:
-                    self.window_rename_key_dataframe_ui.label_info_text.setText(f"Nazwa zbioru '{oldKey}' już istnieje")
+            if ":" in newKey:
+                self.window_rename_key_dataframe_ui.label_info_text.setText("Nazwa nie może zawierać ':'")
             else:
-                self.window_rename_key_dataframe_ui.label_info_text.setText("Pola nie mogą być puste")
+                if oldKey != "" and newKey != "":
+                    if DataStorageModel.rename_key(oldKey, newKey):
+                        msg = f"Nazwa zbioru '{oldKey}' została zmienniona na '{newKey}'"
+                        self.window_rename_key_dataframe_ui.label_info_text.setText(msg)
 
+                        self.updateKeysList()
+                        self.window_rename_key_dataframe_ui.lineEdit_New_Key_Name.clear()
 
+                    else:
+                        self.window_rename_key_dataframe_ui.label_info_text.setText(
+                            f"Nazwa zbioru '{oldKey}' już istnieje")
+                else:
+                    self.window_rename_key_dataframe_ui.label_info_text.setText("Pola nie mogą być puste")
 
         except Exception as e:
             MessageModel.error("0020", str(e))

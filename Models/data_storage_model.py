@@ -56,7 +56,7 @@ class DataStorageModel:
         for key, data_frame in cls._dataFrames.items():
             columns = data_frame.columns
             for column in columns:
-                result.append(f"{key}${column}")
+                result.append(f"{key} : {column}")
         return result
 
     @classmethod
