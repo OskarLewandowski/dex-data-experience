@@ -130,8 +130,23 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_scatter_plot_ui.comboBox_Data.addItems(dataKeys)
         self.window_scatter_plot_ui.comboBox_X.addItems(dataAll)
+        self.window_scatter_plot_ui.comboBox_Y.addItems(dataAll)
+        self.window_scatter_plot_ui.comboBox_Hue.addItems(dataAll)
+        self.window_scatter_plot_ui.comboBox_Size.addItems(dataAll)
+
+        self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
 
         self.window_scatter_plot.show()
+
+    def resetScatterPlot(self):
+        self.window_scatter_plot_ui.comboBox_Data.clear()
+        self.window_scatter_plot_ui.comboBox_X.clear()
+        self.window_scatter_plot_ui.comboBox_Y.clear()
+        self.window_scatter_plot_ui.comboBox_Hue.clear()
+        self.window_scatter_plot_ui.comboBox_Size.clear()
+        self.window_scatter_plot_ui.comboBox_Legend.clear()
+        self.window_scatter_plot_ui.comboBox_Markers.clear()
+        self.window_scatter_plot_ui.comboBox_Style.clear()
 
     def test_1(self):
         try:
