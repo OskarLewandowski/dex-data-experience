@@ -193,7 +193,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.currentDataFrameGlobal = df
             self.displayData(df)
             self.updateFillListDelete()
-            msg = "Kolumna '{}' została usunieta".format(columnName)
+            msg = "Kolumna '{}' została usunięta".format(columnName)
             self.ui.label_Info.setText(msg)
         except Exception as e:
             MessageModel.error("0023", str(e))
@@ -208,7 +208,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.currentDataFrameGlobal = df
             self.displayData(df)
             self.updateFillListDelete()
-            msg = "Wiersz '{}' został usuniety".format(index)
+            msg = "Wiersz '{}' został usunięty".format(index)
             self.ui.label_Info.setText(msg)
         except Exception as e:
             MessageModel.error("0022", str(e))
@@ -430,12 +430,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             if not newHeader in namesList:
                 df.rename(columns={currentHeader: newHeader}, inplace=True)
                 self.currentDataFrameGlobal = df
-                msg = "Nagłówek '{}' został zmienniony".format(currentHeader)
+                msg = "Nagłówek '{}' został zmieniony".format(currentHeader)
                 self.ui.label_info_text.setText(msg)
                 self.updateHeaderList()
                 self.ui.lineEdit_new_header_name.clear()
             else:
-                msg = "Nagłowkek '{}' już istnieje".format(newHeader)
+                msg = "Nagłówek '{}' już istnieje".format(newHeader)
                 self.ui.label_info_text.setText(msg)
         else:
             self.ui.label_info_text.setText("Pola nie mogą być puste")

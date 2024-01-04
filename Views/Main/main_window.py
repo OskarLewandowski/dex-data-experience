@@ -61,8 +61,7 @@ class Ui_MainWindow_Main(object):
         MainWindow_Main.addToolBar(QtCore.Qt.ToolBarArea.TopToolBarArea, self.toolBar)
         self.action_New_File = QtGui.QAction(parent=MainWindow_Main)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/main-window/new-file.svg"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("images/main-window/new-file.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.action_New_File.setIcon(icon)
         self.action_New_File.setObjectName("action_New_File")
         self.action_Open_File = QtGui.QAction(parent=MainWindow_Main)
@@ -131,8 +130,7 @@ class Ui_MainWindow_Main(object):
         self.action_Bold.setObjectName("action_Bold")
         self.action_Italic = QtGui.QAction(parent=MainWindow_Main)
         icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("images/main-window/italic.svg"), QtGui.QIcon.Mode.Normal,
-                         QtGui.QIcon.State.Off)
+        icon11.addPixmap(QtGui.QPixmap("images/main-window/italic.svg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.action_Italic.setIcon(icon11)
         self.action_Italic.setObjectName("action_Italic")
         self.action_Underline = QtGui.QAction(parent=MainWindow_Main)
@@ -203,6 +201,8 @@ class Ui_MainWindow_Main(object):
         self.action_Box_Plot.setObjectName("action_Box_Plot")
         self.action_Pie_Chart = QtGui.QAction(parent=MainWindow_Main)
         self.action_Pie_Chart.setObjectName("action_Pie_Chart")
+        self.action_Change_Data_Name = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Change_Data_Name.setObjectName("action_Change_Data_Name")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -215,6 +215,8 @@ class Ui_MainWindow_Main(object):
         self.menu_File.addAction(self.action_Exit)
         self.menu_Data.addAction(self.action_Add_Data)
         self.menu_Data.addAction(self.action_Modify_Data)
+        self.menu_Data.addSeparator()
+        self.menu_Data.addAction(self.action_Change_Data_Name)
         self.menu_Edit.addAction(self.action_Undo)
         self.menu_Edit.addAction(self.action_Redo)
         self.menu_Edit.addSeparator()
@@ -342,6 +344,7 @@ class Ui_MainWindow_Main(object):
         self.action_Hist_Plot.setText(_translate("MainWindow_Main", "Histogram"))
         self.action_Box_Plot.setText(_translate("MainWindow_Main", "Pudełkowy"))
         self.action_Pie_Chart.setText(_translate("MainWindow_Main", "Kołowy"))
+        self.action_Change_Data_Name.setText(_translate("MainWindow_Main", "Zmień nazwę zbioru"))
 
 
 if __name__ == "__main__":

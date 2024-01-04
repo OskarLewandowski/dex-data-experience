@@ -7,11 +7,12 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
     QToolButton, QFontDialog, QColorDialog
 from matplotlib import pyplot as plt
-
+from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from io import StringIO
 from Views.Main.main_window import Ui_MainWindow_Main
+from Views.Main.scatter_plot_window import Ui_MainWindow_Scatter_Plot
 import pandas as pd
 import json
 import os
@@ -71,7 +72,64 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Test_1.triggered.connect(self.test_1)
         self.action_Test_2.triggered.connect(self.test_2)
 
+        self.action_Scatter_Plot.triggered.connect(self.createScatterPlotWindow)
+
+        self.action_Change_Data_Name.triggered.connect(self.createRenameKeyDataframeWindow)
+
         self.show()
+
+    def createRenameKeyDataframeWindow(self):
+        self.window_rename_key_dataframe = QDialog()
+        self.window_rename_key_dataframe_ui = Ui_Dialog_Rename_Key_Dataframe()
+        self.window_rename_key_dataframe_ui.setupUi(self.window_rename_key_dataframe)
+
+        dataKeys = DataStorageModel.get_all_keys()
+
+        self.window_rename_key_dataframe_ui.comboBox_Keys_List.addItems(dataKeys)
+        self.window_rename_key_dataframe_ui.pushButton_Apply.clicked.connect(self.renameKeyDataframe)
+
+        self.window_rename_key_dataframe.show()
+
+    def updateKeysList(self):
+        dataKeys = DataStorageModel.get_all_keys()
+        self.window_rename_key_dataframe_ui.comboBox_Keys_List.clear()
+        self.window_rename_key_dataframe_ui.comboBox_Keys_List.addItems(dataKeys)
+
+    def renameKeyDataframe(self):
+        try:
+            oldKey = self.window_rename_key_dataframe_ui.comboBox_Keys_List.currentText()
+            newKey = self.window_rename_key_dataframe_ui.lineEdit_New_Key_Name.text()
+
+            if oldKey != "" and newKey != "":
+                if DataStorageModel.rename_key(oldKey, newKey):
+                    msg = f"Nazwa zbioru '{oldKey}' została zmienniona na '{newKey}'"
+                    self.window_rename_key_dataframe_ui.label_info_text.setText(msg)
+
+                    self.updateKeysList()
+                    self.window_rename_key_dataframe_ui.lineEdit_New_Key_Name.clear()
+
+                else:
+                    self.window_rename_key_dataframe_ui.label_info_text.setText(f"Nazwa zbioru '{oldKey}' już istnieje")
+            else:
+                self.window_rename_key_dataframe_ui.label_info_text.setText("Pola nie mogą być puste")
+
+
+
+        except Exception as e:
+            MessageModel.error("0020", str(e))
+
+    def createScatterPlotWindow(self):
+        self.window_scatter_plot = QMainWindow()
+        self.window_scatter_plot_ui = Ui_MainWindow_Scatter_Plot()
+        self.window_scatter_plot_ui.setupUi(self.window_scatter_plot)
+
+        dataKeys = DataStorageModel.get_all_keys()
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_scatter_plot_ui.comboBox_Data.addItems(dataKeys)
+        self.window_scatter_plot_ui.comboBox_X.addItems(dataAll)
+
+        self.window_scatter_plot.show()
 
     def test_1(self):
         try:

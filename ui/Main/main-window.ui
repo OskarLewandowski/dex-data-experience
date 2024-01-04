@@ -74,6 +74,8 @@ background-color: #ffffff;
     </property>
     <addaction name="action_Add_Data"/>
     <addaction name="action_Modify_Data"/>
+    <addaction name="separator"/>
+    <addaction name="action_Change_Data_Name"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
     <property name="title">
@@ -489,6 +491,11 @@ background-color: #ffffff;
   <action name="action_Pie_Chart">
    <property name="text">
     <string>Kołowy</string>
+   </property>
+  </action>
+  <action name="action_Change_Data_Name">
+   <property name="text">
+    <string>Zmień nazwę zbioru</string>
    </property>
   </action>
  </widget>
