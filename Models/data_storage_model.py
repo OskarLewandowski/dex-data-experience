@@ -70,3 +70,11 @@ class DataStorageModel:
                 return False
         else:
             return False
+
+    @classmethod
+    def get_data_by_key_and_column(cls, key, column):
+        if key in cls._dataFrames:
+            data_frame = cls._dataFrames[key]
+            if column in data_frame.columns:
+                return data_frame[[column]]
+        return None

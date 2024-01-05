@@ -1,12 +1,16 @@
 import base64
+import sys
 
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
-    QToolButton, QFontDialog, QColorDialog
+    QToolButton, QFontDialog, QColorDialog, QApplication, QVBoxLayout
 from matplotlib import pyplot as plt
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
@@ -17,6 +21,7 @@ import pandas as pd
 import json
 import os
 import io
+import seaborn as sns
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -135,8 +140,105 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.comboBox_Size.addItems(dataAll)
 
         self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
+        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.create_and_show_plot)
 
         self.window_scatter_plot.show()
+
+    def splitText(self, text, seperator=" : "):
+        if seperator in str(text):
+            textParts = str(text).split(seperator)
+            return textParts
+        else:
+            return None
+
+    def create_and_show_plot(self):
+        """
+        FOR TEST
+        """
+        figure, ax = plt.subplots()
+        canvas = FigureCanvas(figure)
+        layout = QVBoxLayout(self.window_scatter_plot_ui.widget_Plot)
+        layout.addWidget(canvas)
+
+        df = pd.DataFrame({
+            'x': range(1, 101),
+            'y': range(1, 101)
+        })
+
+        sns.scatterplot(data=df, x='x', y='y', ax=ax)
+
+        # todo add to ui
+        ax.set_xlim([0, 50])
+        ax.set_ylim([0, 50])
+
+        # save to file
+        # canvas.figure.savefig('scatter_plot2.png', format='png')
+
+        canvas.draw()
+
+        buf = io.BytesIO()
+        figure.savefig(buf, format='png')
+        buf.seek(0)
+
+        data = buf.read()
+        data_base64 = base64.b64encode(data).decode('utf-8')
+
+        html = f'<img src="data:image/png;base64,{data_base64}" />'
+
+        cursor = self.textEdit_Board.textCursor()
+        cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+        cursor.insertText("\n")
+        cursor.insertHtml(html)
+        cursor.insertText("\n")
+
+    def drawScatterPlot(self):
+        try:
+            data = self.window_scatter_plot_ui.comboBox_Data.currentText()
+            x = self.window_scatter_plot_ui.comboBox_X.currentText()
+            y = self.window_scatter_plot_ui.comboBox_Y.currentText()
+            hue = self.window_scatter_plot_ui.comboBox_Hue.currentText()
+            size = self.window_scatter_plot_ui.comboBox_Size.currentText()
+            style = self.window_scatter_plot_ui.comboBox_Style.currentText()
+            markers = self.window_scatter_plot_ui.comboBox_Markers.currentText()
+            legend = self.window_scatter_plot_ui.comboBox_Legend.currentText()
+
+            data = DataStorageModel.get(data)
+
+            # x
+            result = self.splitText(x)
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            print(result[0], result[1])
+
+            # y
+            result = self.splitText(y)
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            print(result[0], result[1])
+
+            # hue
+            result = self.splitText(hue)
+            hue = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            print(result[0], result[1])
+
+            # size
+            result = self.splitText(size)
+            size = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+
+            fig, ax = plt.subplots(figsize=(8, 6))
+            sns.scatterplot(data=data, x=x, y=y)
+
+            self.displayMatplotlibPlot(plt)
+
+
+        except Exception as e:
+            print(str(e))
+            # MessageModel.error("0029", str(e))
+
+    def displayMatplotlibPlot(self, plot):
+        canvas = FigureCanvasQTAgg(plot)
+        canvas.setParent(self.window_scatter_plot_ui.widget_Plot)
+        canvas.draw()
+        self.window_scatter_plot_ui.widget_Plot.layout().addWidget(canvas)
 
     def resetScatterPlot(self):
         self.window_scatter_plot_ui.comboBox_Data.clear()
@@ -149,6 +251,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.comboBox_Style.clear()
 
     def test_1(self):
+        """FOR TEST"""
         try:
             plt.plot([0, 1, 2, 3, 4], [0, 1, 4, 9, 16])
 
@@ -167,6 +270,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             MessageModel.error("0028", str(e))
 
     def test_2(self):
+        """FOR TEST"""
         try:
             listKeys = DataStorageModel.get_all_keys()
             df = pd.DataFrame(DataStorageModel.get(listKeys[0]))
