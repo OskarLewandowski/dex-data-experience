@@ -144,6 +144,19 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
         self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
 
+        self.window_scatter_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Hue.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Markers.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Size.currentIndexChanged.connect(self.drawScatterPlot)
+
+        self.window_scatter_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawScatterPlot)
+
         self.window_scatter_plot.show()
 
     def exportAsPng(self):
@@ -212,6 +225,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             style = self.window_scatter_plot_ui.comboBox_Style.currentText()
             markers = self.window_scatter_plot_ui.comboBox_Markers.currentText()
             legend = self.window_scatter_plot_ui.comboBox_Legend.currentText()
+            title = self.window_scatter_plot_ui.lineEdit_Title_Plot.text()
+            label_x = self.window_scatter_plot_ui.lineEdit_Label_X.text()
+            label_y = self.window_scatter_plot_ui.lineEdit_Label_Y.text()
 
             # data
             data = DataStorageModel.get(data)
@@ -224,7 +240,29 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             result = self.splitText(y)
             y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
 
-            sns.scatterplot(data=data, x=x, y=y, ax=self.ax)
+            # hue
+            result = self.splitText(hue)
+            hue = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if hue else None
+
+            # size
+            result = self.splitText(size)
+            size = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if size else None
+
+            if legend == "Brak":
+                legend = "false"
+
+            sns.scatterplot(data=data, x=x, y=y, ax=self.ax, hue=hue, size=size, palette=style if style else None,
+                            legend=legend,
+                            markers=markers if markers else None)
+
+            if title:
+                self.ax.set_title(title)
+
+            if label_x:
+                self.ax.set_xlabel(label_x)
+
+            if label_y:
+                self.ax.set_ylabel(label_y)
 
             self.canvas.draw()
 

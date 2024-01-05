@@ -296,7 +296,7 @@
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Styl wykresu:</string>
+                    <string>Styl punktów:</string>
                    </property>
                   </widget>
                  </item>
@@ -334,7 +334,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl wykresu...</string>
+                  <string>Wybierz styl punktów...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -409,11 +409,6 @@
                  <item>
                   <property name="text">
                    <string>Set3</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Domyślny</string>
                   </property>
                  </item>
                 </widget>
