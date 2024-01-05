@@ -1,6 +1,6 @@
 import base64
 import sys
-
+from Views.Main.about_app import Ui_Dialog_About_App
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
@@ -559,3 +559,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.spinBox_Text_Size.setProperty("value", 12)
         self.spinBox_Text_Size.setDisplayIntegerBase(10)
         self.toolBar.addWidget(self.spinBox_Text_Size)
+
+    def createAboutApp(self):
+        self.window_about_app = QDialog()
+        self.window_about_app_ui = Ui_Dialog_About_App()
+        self.window_about_app_ui.setupUi(self.window_about_app)
+        self.window_about_app.show()

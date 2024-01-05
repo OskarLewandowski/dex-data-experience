@@ -26,7 +26,7 @@ class Main:
         # Connections
         self.mainController.action_Add_Data.triggered.connect(self.addFileController.createWindowAddFile)
         self.mainController.action_Modify_Data.triggered.connect(self.modifyDataController.createWindowModifyData)
-        #self.mainController.action_About_Application.triggered.connect(self.mainController.printDataFrames)
+        self.mainController.action_About_Application.triggered.connect(self.mainController.createAboutApp)
         self.mainController.action_Settings.triggered.connect(self.settingsController.showSettingsWindow)
 
 
