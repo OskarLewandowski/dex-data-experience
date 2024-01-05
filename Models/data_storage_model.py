@@ -76,5 +76,5 @@ class DataStorageModel:
         if key in cls._dataFrames:
             data_frame = cls._dataFrames[key]
             if column in data_frame.columns:
-                return data_frame[[column]]
+                return data_frame[column]
         return None

@@ -6,7 +6,7 @@ from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
-    QToolButton, QFontDialog, QColorDialog, QApplication, QVBoxLayout
+    QToolButton, QFontDialog, QColorDialog, QApplication, QVBoxLayout, QWidget
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
@@ -140,10 +140,30 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.comboBox_Size.addItems(dataAll)
 
         self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
-        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.create_and_show_plot)
+        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
 
         self.window_scatter_plot.show()
+
+    def exportAsPng(self):
+        try:
+            fileFilter = ('Plik PNG (*.png)')
+
+            filePath = QFileDialog.getSaveFileName(
+                caption="Eksportuj wykres",
+                directory=os.path.expanduser("~/Desktop/wykres.png"),
+                filter=fileFilter,
+                initialFilter='Plik PNG (*.png)')
+
+            filePath = str(filePath[0])
+
+            if filePath.endswith(".png"):
+                self.canvas.figure.savefig(filePath, format='png')
+
+
+        except Exception as e:
+            MessageModel.error("0030", str(e))
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -152,48 +172,38 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         else:
             return None
 
-    def create_and_show_plot(self):
-        """
-        FOR TEST
-        """
-        figure, ax = plt.subplots()
-        canvas = FigureCanvas(figure)
-        layout = QVBoxLayout(self.window_scatter_plot_ui.widget_Plot)
-        layout.addWidget(canvas)
+    def drawPlotInBoard(self):
+        try:
+            if self.figure != "":
+                buf = io.BytesIO()
+                self.figure.savefig(buf, format='png')
+                buf.seek(0)
 
-        df = pd.DataFrame({
-            'x': range(1, 101),
-            'y': range(1, 101)
-        })
+                data = buf.read()
+                data_base64 = base64.b64encode(data).decode('utf-8')
 
-        sns.scatterplot(data=df, x='x', y='y', ax=ax)
+                html = f'<img src="data:image/png;base64,{data_base64}" />'
 
-        # todo add to ui
-        ax.set_xlim([0, 50])
-        ax.set_ylim([0, 50])
-
-        # save to file
-        # canvas.figure.savefig('scatter_plot2.png', format='png')
-
-        canvas.draw()
-
-        buf = io.BytesIO()
-        figure.savefig(buf, format='png')
-        buf.seek(0)
-
-        data = buf.read()
-        data_base64 = base64.b64encode(data).decode('utf-8')
-
-        html = f'<img src="data:image/png;base64,{data_base64}" />'
-
-        cursor = self.textEdit_Board.textCursor()
-        cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-        cursor.insertText("\n")
-        cursor.insertHtml(html)
-        cursor.insertText("\n")
+                cursor = self.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(html)
+                cursor.insertText("\n")
+        except Exception as e:
+            pass
 
     def drawScatterPlot(self):
         try:
+            # This 3 lines fix the problem with freezed plot
+            self.window_scatter_plot_ui.widget_Plot.deleteLater()
+            self.window_scatter_plot_ui.widget_Plot = QWidget()
+            self.window_scatter_plot_ui.frame.layout().addWidget(self.window_scatter_plot_ui.widget_Plot)
+
+            self.figure, self.ax = plt.subplots()
+            self.canvas = FigureCanvas(self.figure)
+            self.layout = QVBoxLayout(self.window_scatter_plot_ui.widget_Plot)
+            self.layout.addWidget(self.canvas)
+
             data = self.window_scatter_plot_ui.comboBox_Data.currentText()
             x = self.window_scatter_plot_ui.comboBox_X.currentText()
             y = self.window_scatter_plot_ui.comboBox_Y.currentText()
@@ -203,52 +213,42 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             markers = self.window_scatter_plot_ui.comboBox_Markers.currentText()
             legend = self.window_scatter_plot_ui.comboBox_Legend.currentText()
 
+            # data
             data = DataStorageModel.get(data)
 
             # x
             result = self.splitText(x)
             x = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
-            print(result[0], result[1])
 
             # y
             result = self.splitText(y)
             y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
-            print(result[0], result[1])
 
-            # hue
-            result = self.splitText(hue)
-            hue = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
-            print(result[0], result[1])
+            sns.scatterplot(data=data, x=x, y=y, ax=self.ax)
 
-            # size
-            result = self.splitText(size)
-            size = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            self.canvas.draw()
 
-            fig, ax = plt.subplots(figsize=(8, 6))
-            sns.scatterplot(data=data, x=x, y=y)
-
-            self.displayMatplotlibPlot(plt)
-
+            plt.close(self.figure)
 
         except Exception as e:
-            print(str(e))
-            # MessageModel.error("0029", str(e))
-
-    def displayMatplotlibPlot(self, plot):
-        canvas = FigureCanvasQTAgg(plot)
-        canvas.setParent(self.window_scatter_plot_ui.widget_Plot)
-        canvas.draw()
-        self.window_scatter_plot_ui.widget_Plot.layout().addWidget(canvas)
+            pass
 
     def resetScatterPlot(self):
-        self.window_scatter_plot_ui.comboBox_Data.clear()
-        self.window_scatter_plot_ui.comboBox_X.clear()
-        self.window_scatter_plot_ui.comboBox_Y.clear()
-        self.window_scatter_plot_ui.comboBox_Hue.clear()
-        self.window_scatter_plot_ui.comboBox_Size.clear()
-        self.window_scatter_plot_ui.comboBox_Legend.clear()
-        self.window_scatter_plot_ui.comboBox_Markers.clear()
-        self.window_scatter_plot_ui.comboBox_Style.clear()
+        self.window_scatter_plot_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_X.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_Y.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_Hue.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_Size.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_Legend.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_Markers.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.comboBox_Style.setCurrentIndex(-1)
+        self.window_scatter_plot_ui.lineEdit_Title_Plot.clear()
+        self.window_scatter_plot_ui.lineEdit_Label_X.clear()
+        self.window_scatter_plot_ui.lineEdit_Label_Y.clear()
+
+        self.window_scatter_plot_ui.widget_Plot.deleteLater()
+        self.window_scatter_plot_ui.widget_Plot = QWidget()
+        self.window_scatter_plot_ui.frame.layout().addWidget(self.window_scatter_plot_ui.widget_Plot)
 
     def test_1(self):
         """FOR TEST"""

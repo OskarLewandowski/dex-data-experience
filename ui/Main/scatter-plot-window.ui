@@ -800,6 +800,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton_Generate_Plot">
+        <property name="text">
+         <string>Generuj wykres</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -876,7 +883,7 @@
    <sender>toolButton_Data</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Data</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
@@ -892,7 +899,7 @@
    <sender>toolButton_X</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_X</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
@@ -908,7 +915,7 @@
    <sender>toolButton_Y</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Y</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
@@ -924,7 +931,7 @@
    <sender>toolButton_Hue</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Hue</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
@@ -956,7 +963,7 @@
    <sender>toolButton_Style</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Style</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
@@ -972,7 +979,7 @@
    <sender>toolButton_Size</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Size</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
@@ -988,7 +995,7 @@
    <sender>toolButton_Markers</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Markers</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>334</x>
@@ -1020,7 +1027,7 @@
    <sender>toolButton_Legend</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Legend</receiver>
-   <slot>clear()</slot>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>335</x>
