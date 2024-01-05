@@ -73,10 +73,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.action_Export_As.triggered.connect(self.exportAs)
 
-        # Plots
-        self.action_Test_1.triggered.connect(self.test_1)
-        self.action_Test_2.triggered.connect(self.test_2)
-
         self.action_Scatter_Plot.triggered.connect(self.createScatterPlotWindow)
 
         self.action_Change_Data_Name.triggered.connect(self.createRenameKeyDataframeWindow)
@@ -287,53 +283,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.widget_Plot.deleteLater()
         self.window_scatter_plot_ui.widget_Plot = QWidget()
         self.window_scatter_plot_ui.frame.layout().addWidget(self.window_scatter_plot_ui.widget_Plot)
-
-    def test_1(self):
-        """FOR TEST"""
-        try:
-            plt.plot([0, 1, 2, 3, 4], [0, 1, 4, 9, 16])
-
-            buf = io.BytesIO()
-            plt.savefig(buf, format='png')
-            buf.seek(0)
-
-            data = buf.read()
-            data_base64 = base64.b64encode(data).decode('utf-8')
-
-            html = f'<img src="data:image/png;base64,{data_base64}" />'
-
-            self.textEdit_Board.insertHtml(html)
-
-        except Exception as e:
-            MessageModel.error("0028", str(e))
-
-    def test_2(self):
-        """FOR TEST"""
-        try:
-            listKeys = DataStorageModel.get_all_keys()
-            df = pd.DataFrame(DataStorageModel.get(listKeys[0]))
-
-            ax = df.plot(x='Col1', y='Col2', kind='scatter')
-
-            fig = ax.get_figure()
-            fig.canvas.draw()
-
-            buf = io.BytesIO()
-            fig.savefig(buf, format='png')
-            buf.seek(0)
-
-            data = buf.read()
-            data_base64 = base64.b64encode(data).decode('utf-8')
-
-            html = f'<img src="data:image/png;base64,{data_base64}" />'
-
-            cursor = self.textEdit_Board.textCursor()
-            cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-            cursor.insertText("\n")
-            cursor.insertHtml(html)
-            cursor.insertText("\n")
-        except Exception as e:
-            MessageModel.error("0027", str(e))
 
     def exportAsPdf(self, filePath):
         try:
@@ -610,14 +559,3 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.spinBox_Text_Size.setProperty("value", 12)
         self.spinBox_Text_Size.setDisplayIntegerBase(10)
         self.toolBar.addWidget(self.spinBox_Text_Size)
-
-    @staticmethod
-    def printDataFrames():
-        """
-        Display data frames in memory
-        !!! For test only !!!
-        """
-        keys = DataStorageModel.get_all_keys()
-        for i in keys:
-            print(DataStorageModel.get(i))
-        print(keys)
