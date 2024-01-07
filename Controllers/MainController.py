@@ -8,10 +8,13 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
     QToolButton, QFontDialog, QColorDialog, QApplication, QVBoxLayout, QWidget
 from matplotlib import pyplot as plt
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
+from Views.Main.box_plot_window import Ui_MainWindow_Box_Plot
+from Views.Main.line_plot_window import Ui_MainWindow_Line_Plot
+from Views.Main.pie_plot_window import Ui_MainWindow_Pie_Plot
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
+from Views.Main.bar_plot_window import Ui_MainWindow_Bar_Plot
+from Views.Main.hist_plot_window import Ui_MainWindow_Hist_Plot
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from io import StringIO
@@ -77,7 +80,43 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.action_Change_Data_Name.triggered.connect(self.createRenameKeyDataframeWindow)
 
+        self.action_Bar_Plot.triggered.connect(self.createBarPlotWindow)
+        self.action_Box_Plot.triggered.connect(self.createBoxPlotWindow)
+        self.action_Hist_Plot.triggered.connect(self.createHistPlotWindow)
+        self.action_Line_Plot.triggered.connect(self.createLinePlotWindow)
+        self.action_Pie_Chart.triggered.connect(self.createPiePlotWindow)
+
         self.show()
+
+    def createPiePlotWindow(self):
+        self.window_pie_plot = QMainWindow()
+        self.window_pie_plot_ui = Ui_MainWindow_Pie_Plot()
+        self.window_pie_plot_ui.setupUi(self.window_pie_plot)
+        self.window_pie_plot.show()
+
+    def createLinePlotWindow(self):
+        self.window_line_plot = QMainWindow()
+        self.window_line_plot_ui = Ui_MainWindow_Line_Plot()
+        self.window_line_plot_ui.setupUi(self.window_line_plot)
+        self.window_line_plot.show()
+
+    def createHistPlotWindow(self):
+        self.window_hist_plot = QMainWindow()
+        self.window_hist_plot_ui = Ui_MainWindow_Hist_Plot()
+        self.window_hist_plot_ui.setupUi(self.window_hist_plot)
+        self.window_hist_plot.show()
+
+    def createBoxPlotWindow(self):
+        self.window_box_plot = QMainWindow()
+        self.window_box_plot_ui = Ui_MainWindow_Box_Plot()
+        self.window_box_plot_ui.setupUi(self.window_box_plot)
+        self.window_box_plot.show()
+
+    def createBarPlotWindow(self):
+        self.window_bar_plot = QMainWindow()
+        self.window_bar_plot_ui = Ui_MainWindow_Bar_Plot()
+        self.window_bar_plot_ui.setupUi(self.window_bar_plot)
+        self.window_bar_plot.show()
 
     def createRenameKeyDataframeWindow(self):
         self.window_rename_key_dataframe = QDialog()
