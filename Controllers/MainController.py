@@ -234,9 +234,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                 cursor = self.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
+                # cursor.insertText("\n")
                 cursor.insertHtml(html)
-                cursor.insertText("\n")
+                # cursor.insertText("\n")
         except Exception as e:
             pass
 
@@ -288,7 +288,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
             sns.scatterplot(data=data, x=x, y=y, ax=self.ax, hue=hue, size=size, palette=style if style else None,
                             legend=legend,
-                            markers=markers if markers else None)
+                            marker=markers if markers else "o")
 
             if title:
                 self.ax.set_title(title)

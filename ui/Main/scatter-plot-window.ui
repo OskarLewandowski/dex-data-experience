@@ -334,7 +334,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl punktów...</string>
+                  <string>Wybierz styl dla zgrupowanych punktów...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -517,22 +517,7 @@
                    </item>
                    <item>
                     <property name="text">
-                     <string>-</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>--</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
                      <string>|</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>:</string>
                     </property>
                    </item>
                    <item>
