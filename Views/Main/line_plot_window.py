@@ -24,7 +24,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem)
         self.groupBox = QtWidgets.QGroupBox(parent=self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -42,7 +43,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label = QtWidgets.QLabel(parent=self.groupBox)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
         self.toolButton_Data = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Data.setObjectName("toolButton_Data")
@@ -60,7 +62,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_2 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_4.addWidget(self.label_2)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem2)
         self.toolButton_X = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_X.setObjectName("toolButton_X")
@@ -78,7 +81,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_3 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_5.addWidget(self.label_3)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem3)
         self.toolButton_Y = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Y.setObjectName("toolButton_Y")
@@ -96,7 +100,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_4 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_6.addWidget(self.label_4)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem4)
         self.toolButton_Hue = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Hue.setObjectName("toolButton_Hue")
@@ -114,7 +119,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_5 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_7.addWidget(self.label_5)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_7.addItem(spacerItem5)
         self.toolButton_Size = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Size.setObjectName("toolButton_Size")
@@ -132,7 +138,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_6 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_8.addWidget(self.label_6)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_8.addItem(spacerItem6)
         self.toolButton_Style = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Style.setObjectName("toolButton_Style")
@@ -164,7 +171,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_7 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_7.setObjectName("label_7")
         self.horizontalLayout_9.addWidget(self.label_7)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_9.addItem(spacerItem7)
         self.toolButton_Markers = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Markers.setObjectName("toolButton_Markers")
@@ -201,7 +209,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_8 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_10.addWidget(self.label_8)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_10.addItem(spacerItem8)
         self.toolButton_Legend = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Legend.setObjectName("toolButton_Legend")
@@ -223,7 +232,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_9 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_12.addWidget(self.label_9)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_12.addItem(spacerItem9)
         self.toolButton_Title_Plot = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Title_Plot.setObjectName("toolButton_Title_Plot")
@@ -240,7 +250,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_10 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_10.setObjectName("label_10")
         self.horizontalLayout_13.addWidget(self.label_10)
-        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_13.addItem(spacerItem10)
         self.toolButton_Label_X = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_X.setObjectName("toolButton_Label_X")
@@ -257,7 +268,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.label_11 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_11.setObjectName("label_11")
         self.horizontalLayout_14.addWidget(self.label_11)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_14.addItem(spacerItem11)
         self.toolButton_Label_Y = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_Y.setObjectName("toolButton_Label_Y")
@@ -268,7 +280,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.verticalLayout_11.addWidget(self.lineEdit_Label_Y)
         self.verticalLayout_13.addLayout(self.verticalLayout_11)
         self.verticalLayout_2.addWidget(self.groupBox)
-        spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+                                             QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem12)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
@@ -279,7 +292,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.frame)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.widget_Plot = QtWidgets.QWidget(parent=self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_Plot.sizePolicy().hasHeightForWidth())
@@ -296,7 +310,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.pushButton_Generate_Plot = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Generate_Plot.setObjectName("pushButton_Generate_Plot")
         self.horizontalLayout_11.addWidget(self.pushButton_Generate_Plot)
-        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem13)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
@@ -304,7 +319,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.pushButton_Export = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Export.setObjectName("pushButton_Export")
         self.horizontalLayout_11.addWidget(self.pushButton_Export)
-        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem14)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
@@ -316,18 +332,18 @@ class Ui_MainWindow_Line_Plot(object):
         self.comboBox_Style.setCurrentIndex(-1)
         self.comboBox_Markers.setCurrentIndex(-1)
         self.comboBox_Legend.setCurrentIndex(-1)
-        self.pushButton_Close.clicked.connect(MainWindow_Line_Plot.close) # type: ignore
-        self.toolButton_Data.clicked.connect(self.comboBox_Data.clearEditText) # type: ignore
-        self.toolButton_X.clicked.connect(self.comboBox_X.clearEditText) # type: ignore
-        self.toolButton_Y.clicked.connect(self.comboBox_Y.clearEditText) # type: ignore
-        self.toolButton_Hue.clicked.connect(self.comboBox_Hue.clearEditText) # type: ignore
-        self.toolButton_Title_Plot.clicked.connect(self.lineEdit_Title_Plot.clear) # type: ignore
-        self.toolButton_Style.clicked.connect(self.comboBox_Style.clearEditText) # type: ignore
-        self.toolButton_Size.clicked.connect(self.comboBox_Size.clearEditText) # type: ignore
-        self.toolButton_Markers.clicked.connect(self.comboBox_Markers.clearEditText) # type: ignore
-        self.toolButton_Label_X.clicked.connect(self.lineEdit_Label_X.clear) # type: ignore
-        self.toolButton_Legend.clicked.connect(self.comboBox_Legend.clearEditText) # type: ignore
-        self.toolButton_Label_Y.clicked.connect(self.lineEdit_Label_Y.clear) # type: ignore
+        self.pushButton_Close.clicked.connect(MainWindow_Line_Plot.close)  # type: ignore
+        self.toolButton_Data.clicked.connect(lambda: self.comboBox_Data.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_X.clicked.connect(lambda: self.comboBox_X.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Y.clicked.connect(lambda: self.comboBox_Y.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Hue.clicked.connect(lambda: self.comboBox_Hue.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Title_Plot.clicked.connect(self.lineEdit_Title_Plot.clear)  # type: ignore
+        self.toolButton_Style.clicked.connect(lambda: self.comboBox_Style.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Size.clicked.connect(lambda: self.comboBox_Size.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Markers.clicked.connect(lambda: self.comboBox_Markers.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Label_X.clicked.connect(self.lineEdit_Label_X.clear)  # type: ignore
+        self.toolButton_Legend.clicked.connect(lambda: self.comboBox_Legend.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Label_Y.clicked.connect(self.lineEdit_Label_Y.clear)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Line_Plot)
 
     def retranslateUi(self, MainWindow_Line_Plot):
@@ -345,10 +361,12 @@ class Ui_MainWindow_Line_Plot(object):
         self.comboBox_Y.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz dane na osi y..."))
         self.label_4.setText(_translate("MainWindow_Line_Plot", "Grupowanie:"))
         self.toolButton_Hue.setText(_translate("MainWindow_Line_Plot", "X"))
-        self.comboBox_Hue.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz dane według, których grupować..."))
+        self.comboBox_Hue.setPlaceholderText(
+            _translate("MainWindow_Line_Plot", "Wybierz dane według, których grupować..."))
         self.label_5.setText(_translate("MainWindow_Line_Plot", "Rozmiar punktów:"))
         self.toolButton_Size.setText(_translate("MainWindow_Line_Plot", "X"))
-        self.comboBox_Size.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz dane według, których ustalić rozmiar punktów..."))
+        self.comboBox_Size.setPlaceholderText(
+            _translate("MainWindow_Line_Plot", "Wybierz dane według, których ustalić rozmiar punktów..."))
         self.label_6.setText(_translate("MainWindow_Line_Plot", "Styl punktów:"))
         self.toolButton_Style.setText(_translate("MainWindow_Line_Plot", "X"))
         self.comboBox_Style.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz styl punktów..."))
@@ -390,7 +408,8 @@ class Ui_MainWindow_Line_Plot(object):
         self.comboBox_Markers.setItemText(17, _translate("MainWindow_Line_Plot", "X"))
         self.label_8.setText(_translate("MainWindow_Line_Plot", "Legenda:"))
         self.toolButton_Legend.setText(_translate("MainWindow_Line_Plot", "X"))
-        self.comboBox_Legend.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz opcje wyświetlania legendy..."))
+        self.comboBox_Legend.setPlaceholderText(
+            _translate("MainWindow_Line_Plot", "Wybierz opcje wyświetlania legendy..."))
         self.comboBox_Legend.setItemText(0, _translate("MainWindow_Line_Plot", "auto"))
         self.comboBox_Legend.setItemText(1, _translate("MainWindow_Line_Plot", "brief"))
         self.comboBox_Legend.setItemText(2, _translate("MainWindow_Line_Plot", "full"))
@@ -410,6 +429,7 @@ class Ui_MainWindow_Line_Plot(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow_Line_Plot = QtWidgets.QMainWindow()
     ui = Ui_MainWindow_Line_Plot()
