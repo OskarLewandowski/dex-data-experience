@@ -122,6 +122,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.comboBox_Hue.currentIndexChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.comboBox_Markers.currentIndexChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.comboBox_Size.currentIndexChanged.connect(self.drawLinePlot)
+        self.window_line_plot_ui.spinBox_CI.valueChanged.connect(self.drawLinePlot)
+        self.window_line_plot_ui.comboBox_Estimator.currentIndexChanged.connect(self.drawLinePlot)
 
         self.window_line_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawLinePlot)
@@ -152,6 +154,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             title = self.window_line_plot_ui.lineEdit_Title_Plot.text()
             label_x = self.window_line_plot_ui.lineEdit_Label_X.text()
             label_y = self.window_line_plot_ui.lineEdit_Label_Y.text()
+            estimator = self.window_line_plot_ui.comboBox_Estimator.currentText()
+            ci = self.window_line_plot_ui.spinBox_CI.value()
 
             # data
             data = DataStorageModel.get(data)
@@ -175,8 +179,11 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             if legend == "Brak":
                 legend = "false"
 
+            if ci == -1:
+                ci = None
+
             sns.lineplot(data=data, x=x, y=y, ax=self.ax, hue=hue, size=size, palette=style if style else None,
-                         legend=legend,
+                         legend=legend, errorbar=('ci', ci) if ci else None, estimator=estimator,
                          marker=markers if markers else None, seed=0)
 
             if title:
@@ -207,6 +214,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.lineEdit_Title_Plot.clear()
         self.window_line_plot_ui.lineEdit_Label_X.clear()
         self.window_line_plot_ui.lineEdit_Label_Y.clear()
+        self.window_line_plot_ui.spinBox_CI.setValue(95)
+        self.window_line_plot_ui.comboBox_Estimator.setCurrentIndex(0)
 
         self.window_line_plot_ui.widget_Plot.deleteLater()
         self.window_line_plot_ui.widget_Plot = QWidget()
