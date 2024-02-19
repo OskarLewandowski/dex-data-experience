@@ -242,61 +242,13 @@
               </layout>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>Rozmiar punktów:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Size">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_Size">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Wybierz dane według, których ustalić rozmiar punktów...</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
               <layout class="QVBoxLayout" name="verticalLayout_15">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_8">
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Styl punktów:</string>
+                    <string>Styl słupków:</string>
                    </property>
                   </widget>
                  </item>
@@ -334,7 +286,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl punktów...</string>
+                  <string>Wybierz styl słupków...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -420,7 +372,7 @@
                    <item>
                     <widget class="QLabel" name="label_7">
                      <property name="text">
-                      <string>Kształt punktów:</string>
+                      <string>Estymator:</string>
                      </property>
                     </widget>
                    </item>
@@ -438,7 +390,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QToolButton" name="toolButton_Markers">
+                    <widget class="QToolButton" name="toolButton_Estimator">
                      <property name="text">
                       <string>X</string>
                      </property>
@@ -447,7 +399,7 @@
                   </layout>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_Markers">
+                  <widget class="QComboBox" name="comboBox_Estimator">
                    <property name="minimumSize">
                     <size>
                      <width>250</width>
@@ -455,104 +407,106 @@
                     </size>
                    </property>
                    <property name="currentIndex">
-                    <number>-1</number>
+                    <number>0</number>
                    </property>
                    <property name="placeholderText">
-                    <string>Wybierz kształt punktów...</string>
+                    <string>Wybierz estymator...</string>
                    </property>
                    <item>
                     <property name="text">
-                     <string>.</string>
+                     <string>mean</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>,</string>
+                     <string>sum</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>o</string>
+                     <string>median</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>v</string>
+                     <string>std</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>^</string>
+                     <string>min</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>&gt;</string>
+                     <string>max</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>&lt;</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>+</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>x</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>s</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>D</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>--</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>|</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>:</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>*</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>H</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>X</string>
+                     <string>var</string>
                     </property>
                    </item>
                   </widget>
                  </item>
                 </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>Przedział ufności:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_7">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolButton_CI">
+                   <property name="text">
+                    <string>X</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBox_CI">
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="suffix">
+                  <string> %</string>
+                 </property>
+                 <property name="prefix">
+                  <string/>
+                 </property>
+                 <property name="minimum">
+                  <number>-1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                 <property name="value">
+                  <number>95</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -971,25 +925,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_Size</sender>
+   <sender>toolButton_Estimator</sender>
    <signal>clicked()</signal>
-   <receiver>comboBox_Size</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>348</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_Markers</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Markers</receiver>
+   <receiver>comboBox_Estimator</receiver>
    <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1047,6 +985,22 @@
     <hint type="destinationlabel">
      <x>184</x>
      <y>708</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_CI</sender>
+   <signal>clicked()</signal>
+   <receiver>spinBox_CI</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>439</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>148</x>
+     <y>468</y>
     </hint>
    </hints>
   </connection>
