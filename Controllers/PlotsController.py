@@ -135,15 +135,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             label_y = self.window_scatter_plot_ui.lineEdit_Label_Y.text()
 
             # data
-            data = DataStorageModel.get(data)
+            data = DataStorageModel.get(data) if data else None
 
             # x
             result = self.splitText(x)
-            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if x else None
 
             # y
             result = self.splitText(y)
-            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if y else None
 
             # hue
             result = self.splitText(hue)
@@ -257,15 +257,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             ci = self.window_line_plot_ui.spinBox_CI.value()
 
             # data
-            data = DataStorageModel.get(data)
+            data = DataStorageModel.get(data) if data else None
 
             # x
             result = self.splitText(x)
-            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if x else None
 
             # y
             result = self.splitText(y)
-            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if y else None
 
             # hue
             result = self.splitText(hue)
@@ -379,15 +379,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             label_y = self.window_bar_plot_ui.lineEdit_Label_Y.text()
 
             # data
-            data = DataStorageModel.get(data)
+            data = DataStorageModel.get(data) if data else None
 
             # x
             result = self.splitText(x)
-            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if x else None
 
             # y
             result = self.splitText(y)
-            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if y else None
 
             # hue
             result = self.splitText(hue)
@@ -496,15 +496,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             label_y = self.window_hist_plot_ui.lineEdit_Label_Y.text()
 
             # data
-            data = DataStorageModel.get(data)
+            data = DataStorageModel.get(data) if data else None
 
             # x
             result = self.splitText(x)
-            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if x else None
 
             # y
             result = self.splitText(y)
-            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1])
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if y else None
 
             # hue
             result = self.splitText(hue)
