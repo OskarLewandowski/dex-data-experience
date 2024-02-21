@@ -50,61 +50,13 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_13">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_3">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                 <item>
-                  <widget class="QLabel" name="label">
-                   <property name="text">
-                    <string>Zbiór danych:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Data">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_Data">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Wybierz zbiór danych...</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
               <layout class="QVBoxLayout" name="verticalLayout">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
                   <widget class="QLabel" name="label_2">
                    <property name="text">
-                    <string>Oś X:</string>
+                    <string>Dane x:</string>
                    </property>
                   </widget>
                  </item>
@@ -139,7 +91,7 @@
                   </size>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz dane na osi x...</string>
+                  <string>Wybierz dane...</string>
                  </property>
                 </widget>
                </item>
@@ -152,7 +104,7 @@
                  <item>
                   <widget class="QLabel" name="label_3">
                    <property name="text">
-                    <string>Oś Y:</string>
+                    <string>Etykiety:</string>
                    </property>
                   </widget>
                  </item>
@@ -187,103 +139,7 @@
                   </size>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz dane na osi y...</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_6">
-                 <item>
-                  <widget class="QLabel" name="label_4">
-                   <property name="text">
-                    <string>Grupowanie:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_6">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Hue">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_Hue">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Wybierz dane według, których grupować...</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>Rozmiar punktów:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Size">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_Size">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Wybierz dane według, których ustalić rozmiar punktów...</string>
+                  <string>Wybierz etykiety...</string>
                  </property>
                 </widget>
                </item>
@@ -296,7 +152,7 @@
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Styl punktów:</string>
+                    <string>Styl wykresu:</string>
                    </property>
                   </widget>
                  </item>
@@ -334,7 +190,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl punktów...</string>
+                  <string>Wybierz styl wykresu...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -409,218 +265,6 @@
                  <item>
                   <property name="text">
                    <string>Set3</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_8">
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_9">
-                   <item>
-                    <widget class="QLabel" name="label_7">
-                     <property name="text">
-                      <string>Kształt punktów:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer_9">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item>
-                    <widget class="QToolButton" name="toolButton_Markers">
-                     <property name="text">
-                      <string>X</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBox_Markers">
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="currentIndex">
-                    <number>-1</number>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Wybierz kształt punktów...</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>.</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>,</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>o</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>v</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>^</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>&gt;</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>&lt;</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>+</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>x</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>s</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>D</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>--</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>|</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>:</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>*</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>H</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>X</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_4">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_10">
-                 <item>
-                  <widget class="QLabel" name="label_8">
-                   <property name="text">
-                    <string>Legenda:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_10">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Legend">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_Legend">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Wybierz opcje wyświetlania legendy...</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>auto</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>brief</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>full</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Brak</string>
                   </property>
                  </item>
                 </widget>
@@ -875,22 +519,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_Data</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Data</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>79</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>108</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>toolButton_X</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_X</receiver>
@@ -919,22 +547,6 @@
     <hint type="destinationlabel">
      <x>184</x>
      <y>228</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_Hue</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Hue</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>259</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>288</y>
     </hint>
    </hints>
   </connection>
@@ -971,38 +583,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_Size</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Size</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>348</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_Markers</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Markers</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>334</x>
-     <y>438</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>467</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>toolButton_Label_X</sender>
    <signal>clicked()</signal>
    <receiver>lineEdit_Label_X</receiver>
@@ -1015,22 +595,6 @@
     <hint type="destinationlabel">
      <x>184</x>
      <y>648</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_Legend</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Legend</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>499</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>528</y>
     </hint>
    </hints>
   </connection>

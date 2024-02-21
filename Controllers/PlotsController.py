@@ -666,8 +666,96 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_box_plot_ui.widget_Plot = QWidget()
         self.window_box_plot_ui.frame.layout().addWidget(self.window_box_plot_ui.widget_Plot)
 
+    # Pie Plot
     def createPiePlotWindow(self):
         self.window_pie_plot = QMainWindow()
         self.window_pie_plot_ui = Ui_MainWindow_Pie_Plot()
         self.window_pie_plot_ui.setupUi(self.window_pie_plot)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_pie_plot_ui.comboBox_X.addItems(dataAll)
+        self.window_pie_plot_ui.comboBox_Y.addItems(dataAll)
+
+        self.window_pie_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetPiePlot)
+        self.window_pie_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_pie_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_pie_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawPiePlot)
+
+        self.window_pie_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawPiePlot)
+
+        self.window_pie_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawPiePlot)
+
         self.window_pie_plot.show()
+
+    def drawPiePlot(self):
+        try:
+            # This 3 lines fix the problem with freezed plot
+            self.window_pie_plot_ui.widget_Plot.deleteLater()
+            self.window_pie_plot_ui.widget_Plot = QWidget()
+            self.window_pie_plot_ui.frame.layout().addWidget(self.window_pie_plot_ui.widget_Plot)
+
+            self.figure, self.ax = plt.subplots()
+            self.canvas = FigureCanvas(self.figure)
+            self.layout = QVBoxLayout(self.window_pie_plot_ui.widget_Plot)
+            self.layout.addWidget(self.canvas)
+
+            x = self.window_pie_plot_ui.comboBox_X.currentText()
+            y = self.window_pie_plot_ui.comboBox_Y.currentText()
+            style = self.window_pie_plot_ui.comboBox_Style.currentText()
+            title = self.window_pie_plot_ui.lineEdit_Title_Plot.text()
+            label_x = self.window_pie_plot_ui.lineEdit_Label_X.text()
+            label_y = self.window_pie_plot_ui.lineEdit_Label_Y.text()
+
+            # x
+            result = self.splitText(x)
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if x else None
+
+            # y
+            result = self.splitText(y)
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if y else None
+
+            if style:
+                palette_color = sns.color_palette(style)
+            else:
+                palette_color = sns.color_palette('bright')
+
+            wedges, texts, autotexts = self.ax.pie(x=x, labels=y, colors=palette_color, autopct='%1.1f%%',
+                                                   textprops=dict(color="black"))
+
+            self.ax.legend(wedges, y,
+                           title="Kategorie",
+                           loc="center left",
+                           bbox_to_anchor=(1, 0, 0.5, 1))
+
+            if title:
+                self.ax.set_title(title)
+
+            if label_x:
+                self.ax.set_xlabel(label_x)
+
+            if label_y:
+                self.ax.set_ylabel(label_y)
+
+            self.canvas.draw()
+
+            plt.close(self.figure)
+
+        except Exception as e:
+            pass
+
+    def resetPiePlot(self):
+        self.window_pie_plot_ui.comboBox_X.setCurrentIndex(-1)
+        self.window_pie_plot_ui.comboBox_Y.setCurrentIndex(-1)
+        self.window_pie_plot_ui.comboBox_Style.setCurrentIndex(-1)
+        self.window_pie_plot_ui.lineEdit_Title_Plot.clear()
+        self.window_pie_plot_ui.lineEdit_Label_X.clear()
+        self.window_pie_plot_ui.lineEdit_Label_Y.clear()
+
+        self.window_pie_plot_ui.widget_Plot.deleteLater()
+        self.window_pie_plot_ui.widget_Plot = QWidget()
+        self.window_pie_plot_ui.frame.layout().addWidget(self.window_pie_plot_ui.widget_Plot)
