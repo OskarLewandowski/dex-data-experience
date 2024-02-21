@@ -90,43 +90,31 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             nanValueIs = self.ui.checkBox_Value_Nan.isChecked()
             nullValueIs = self.ui.checkBox_Value_Null.isChecked()
 
+            try:
+                valueToReplace = float(valueToReplace)
+                newValue = float(newValue)
+            except ValueError:
+                pass
+
             if valueToReplace != "" and newValue != "" and (allColumnsIs is True or columnIs != ""):
                 self.ui.label_Info.clear()
+                replace_dict = {valueToReplace: newValue}
+                if nanValueIs:
+                    replace_dict[np.NaN] = newValue
+                if nullValueIs:
+                    replace_dict[""] = newValue
+
                 if allColumnsIs:
-                    allColumnsList = df.columns.tolist()
-
-                    for column in allColumnsList:
-                        if not nanValueIs and not nullValueIs:
-                            df[column] = df[column].replace({valueToReplace: newValue})
-
-                        elif nanValueIs and nullValueIs:
-                            df[column] = df[column].replace({valueToReplace: newValue, np.NaN: newValue, "": newValue})
-
-                        elif nanValueIs:
-                            df[column] = df[column].replace({valueToReplace: newValue, np.NaN: newValue})
-
-                        elif nullValueIs:
-                            df[column] = df[column].replace({valueToReplace: newValue, "": newValue})
-
-                        self.ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
-                        self.displayData(df)
-                        self.currentDataFrameGlobal = df
+                    columns = df.columns.tolist()
                 else:
-                    if not nanValueIs and not nullValueIs:
-                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue})
+                    columns = [columnIs]
 
-                    elif nanValueIs and nullValueIs:
-                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue, np.NaN: newValue, "": newValue})
+                for column in columns:
+                    df[column] = df[column].replace(replace_dict)
 
-                    elif nanValueIs:
-                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue, np.NaN: newValue})
-
-                    elif nullValueIs:
-                        df[columnIs] = df[columnIs].replace({valueToReplace: newValue, "": newValue})
-
-                    self.ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
-                    self.displayData(df)
-                    self.currentDataFrameGlobal = df
+                self.ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
+                self.displayData(df)
+                self.currentDataFrameGlobal = df
             else:
                 self.ui.label_Info.setText("Uzupełnij puste pola!")
         except Exception as e:
@@ -176,12 +164,16 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 df = pd.DataFrame(self.currentDataFrameGlobal)
                 nameColumn = self.ui.comboBox_Column_List_Select.currentText()
 
-                suggestions = df[nameColumn].unique().tolist()
-                suggestions = [str(item) for item in suggestions]
+                if nameColumn in df.columns:
+                    suggestions = df[nameColumn].unique().tolist()
+                    suggestions = [str(item) for item in suggestions]
 
-                completer = QCompleter(suggestions)
-
-                self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
+                    completer = QCompleter(suggestions)
+                    self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
+                else:
+                    pass
+            else:
+                pass
         except Exception as e:
             MessageModel.error("0024", str(e))
 
