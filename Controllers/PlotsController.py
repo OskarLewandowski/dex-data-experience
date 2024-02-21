@@ -3,15 +3,15 @@ from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow, QFileDialog, QVBoxLayout, QWidget
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-from Views.Main.box_plot_window import Ui_MainWindow_Box_Plot
-from Views.Main.line_plot_window import Ui_MainWindow_Line_Plot
-from Views.Main.pie_plot_window import Ui_MainWindow_Pie_Plot
-from Views.Main.bar_plot_window import Ui_MainWindow_Bar_Plot
-from Views.Main.hist_plot_window import Ui_MainWindow_Hist_Plot
+from Views.Plots.box_plot_window import Ui_MainWindow_Box_Plot
+from Views.Plots.line_plot_window import Ui_MainWindow_Line_Plot
+from Views.Plots.pie_plot_window import Ui_MainWindow_Pie_Plot
+from Views.Plots.bar_plot_window import Ui_MainWindow_Bar_Plot
+from Views.Plots.hist_plot_window import Ui_MainWindow_Hist_Plot
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from Views.Main.main_window import Ui_MainWindow_Main
-from Views.Main.scatter_plot_window import Ui_MainWindow_Scatter_Plot
+from Views.Plots.scatter_plot_window import Ui_MainWindow_Scatter_Plot
 import os
 import io
 import seaborn as sns

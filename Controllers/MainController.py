@@ -1,30 +1,17 @@
-import base64
-import sys
 from Views.Main.about_app import Ui_Dialog_About_App
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QMessageBox, \
-    QToolButton, QFontDialog, QColorDialog, QApplication, QVBoxLayout, QWidget
-from matplotlib import pyplot as plt
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-from Views.Main.box_plot_window import Ui_MainWindow_Box_Plot
-from Views.Main.line_plot_window import Ui_MainWindow_Line_Plot
-from Views.Main.pie_plot_window import Ui_MainWindow_Pie_Plot
+from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, QFontDialog, QColorDialog
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
-from Views.Main.bar_plot_window import Ui_MainWindow_Bar_Plot
-from Views.Main.hist_plot_window import Ui_MainWindow_Hist_Plot
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from io import StringIO
 from Views.Main.main_window import Ui_MainWindow_Main
-from Views.Main.scatter_plot_window import Ui_MainWindow_Scatter_Plot
 import pandas as pd
 import json
 import os
-import io
-import seaborn as sns
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
