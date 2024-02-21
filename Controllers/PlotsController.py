@@ -29,41 +29,6 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Line_Plot.triggered.connect(self.createLinePlotWindow)
         self.main.action_Pie_Chart.triggered.connect(self.createPiePlotWindow)
 
-    # Scatter Plot
-    def createScatterPlotWindow(self):
-        self.window_scatter_plot = QMainWindow()
-        self.window_scatter_plot_ui = Ui_MainWindow_Scatter_Plot()
-        self.window_scatter_plot_ui.setupUi(self.window_scatter_plot)
-
-        dataKeys = DataStorageModel.get_all_keys()
-        dataAll = DataStorageModel.get_all_keys_and_columns()
-
-        self.window_scatter_plot_ui.comboBox_Data.addItems(dataKeys)
-        self.window_scatter_plot_ui.comboBox_X.addItems(dataAll)
-        self.window_scatter_plot_ui.comboBox_Y.addItems(dataAll)
-        self.window_scatter_plot_ui.comboBox_Hue.addItems(dataAll)
-        self.window_scatter_plot_ui.comboBox_Size.addItems(dataAll)
-
-        self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
-        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
-        self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
-
-        self.window_scatter_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_Hue.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_Markers.currentIndexChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.comboBox_Size.currentIndexChanged.connect(self.drawScatterPlot)
-
-        self.window_scatter_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawScatterPlot)
-
-        self.window_scatter_plot.show()
-
     def exportAsPng(self):
         try:
             fileFilter = ('Plik PNG (*.png)')
@@ -109,6 +74,41 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
                 # cursor.insertText("\n")
         except Exception as e:
             pass
+
+    # Scatter Plot
+    def createScatterPlotWindow(self):
+        self.window_scatter_plot = QMainWindow()
+        self.window_scatter_plot_ui = Ui_MainWindow_Scatter_Plot()
+        self.window_scatter_plot_ui.setupUi(self.window_scatter_plot)
+
+        dataKeys = DataStorageModel.get_all_keys()
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_scatter_plot_ui.comboBox_Data.addItems(dataKeys)
+        self.window_scatter_plot_ui.comboBox_X.addItems(dataAll)
+        self.window_scatter_plot_ui.comboBox_Y.addItems(dataAll)
+        self.window_scatter_plot_ui.comboBox_Hue.addItems(dataAll)
+        self.window_scatter_plot_ui.comboBox_Size.addItems(dataAll)
+
+        self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
+        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
+
+        self.window_scatter_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Hue.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Markers.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Size.currentIndexChanged.connect(self.drawScatterPlot)
+
+        self.window_scatter_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawScatterPlot)
+
+        self.window_scatter_plot.show()
 
     def drawScatterPlot(self):
         try:
@@ -550,11 +550,121 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_hist_plot_ui.widget_Plot = QWidget()
         self.window_hist_plot_ui.frame.layout().addWidget(self.window_hist_plot_ui.widget_Plot)
 
+    # Box Plot
     def createBoxPlotWindow(self):
         self.window_box_plot = QMainWindow()
         self.window_box_plot_ui = Ui_MainWindow_Box_Plot()
         self.window_box_plot_ui.setupUi(self.window_box_plot)
+
+        dataKeys = DataStorageModel.get_all_keys()
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_box_plot_ui.comboBox_Data.addItems(dataKeys)
+        self.window_box_plot_ui.comboBox_X.addItems(dataAll)
+        self.window_box_plot_ui.comboBox_Y.addItems(dataAll)
+        self.window_box_plot_ui.comboBox_Hue.addItems(dataAll)
+
+        self.window_box_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetBoxPlot)
+        self.window_box_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_box_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_box_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBoxPlot)
+
+        self.window_box_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_Hue.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_Orient.currentIndexChanged.connect(self.drawBoxPlot)
+
+        self.window_box_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawBoxPlot)
+
         self.window_box_plot.show()
+
+    def drawBoxPlot(self):
+        try:
+            # This 3 lines fix the problem with freezed plot
+            self.window_box_plot_ui.widget_Plot.deleteLater()
+            self.window_box_plot_ui.widget_Plot = QWidget()
+            self.window_box_plot_ui.frame.layout().addWidget(self.window_box_plot_ui.widget_Plot)
+
+            self.figure, self.ax = plt.subplots()
+            self.canvas = FigureCanvas(self.figure)
+            self.layout = QVBoxLayout(self.window_box_plot_ui.widget_Plot)
+            self.layout.addWidget(self.canvas)
+
+            data = self.window_box_plot_ui.comboBox_Data.currentText()
+            x = self.window_box_plot_ui.comboBox_X.currentText()
+            y = self.window_box_plot_ui.comboBox_Y.currentText()
+            hue = self.window_box_plot_ui.comboBox_Hue.currentText()
+            style = self.window_box_plot_ui.comboBox_Style.currentText()
+            orient = self.window_box_plot_ui.comboBox_Orient.currentText()
+            legend = self.window_box_plot_ui.comboBox_Legend.currentText()
+            title = self.window_box_plot_ui.lineEdit_Title_Plot.text()
+            label_x = self.window_box_plot_ui.lineEdit_Label_X.text()
+            label_y = self.window_box_plot_ui.lineEdit_Label_Y.text()
+
+            # data
+            data = DataStorageModel.get(data) if data else None
+
+            # x
+            result = self.splitText(x)
+            x = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if x else None
+
+            # y
+            result = self.splitText(y)
+            y = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if y else None
+
+            # hue
+            result = self.splitText(hue)
+            hue = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if hue else None
+
+            if legend == "Brak":
+                legend = "false"
+
+            if orient == "wertykalna":
+                orient = "v"
+            elif orient == "horyzontalna":
+                orient = "h"
+            else:
+                orient = None
+
+            sns.boxplot(data=data, x=x, y=y, ax=self.ax, hue=hue, palette=style if style else None,
+                        legend=legend, orient=orient)
+
+            if title:
+                self.ax.set_title(title)
+
+            if label_x:
+                self.ax.set_xlabel(label_x)
+
+            if label_y:
+                self.ax.set_ylabel(label_y)
+
+            self.canvas.draw()
+
+            plt.close(self.figure)
+
+        except Exception as e:
+            pass
+
+    def resetBoxPlot(self):
+        self.window_box_plot_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_box_plot_ui.comboBox_X.setCurrentIndex(-1)
+        self.window_box_plot_ui.comboBox_Y.setCurrentIndex(-1)
+        self.window_box_plot_ui.comboBox_Hue.setCurrentIndex(-1)
+        self.window_box_plot_ui.comboBox_Orient.setCurrentIndex(-1)
+        self.window_box_plot_ui.comboBox_Legend.setCurrentIndex(-1)
+        self.window_box_plot_ui.comboBox_Style.setCurrentIndex(-1)
+        self.window_box_plot_ui.lineEdit_Title_Plot.clear()
+        self.window_box_plot_ui.lineEdit_Label_X.clear()
+        self.window_box_plot_ui.lineEdit_Label_Y.clear()
+
+        self.window_box_plot_ui.widget_Plot.deleteLater()
+        self.window_box_plot_ui.widget_Plot = QWidget()
+        self.window_box_plot_ui.frame.layout().addWidget(self.window_box_plot_ui.widget_Plot)
 
     def createPiePlotWindow(self):
         self.window_pie_plot = QMainWindow()

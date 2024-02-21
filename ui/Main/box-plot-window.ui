@@ -242,61 +242,13 @@
               </layout>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QLabel" name="label_5">
-                   <property name="text">
-                    <string>Rozmiar punktów:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Size">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_Size">
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Wybierz dane według, których ustalić rozmiar punktów...</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
               <layout class="QVBoxLayout" name="verticalLayout_15">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_8">
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Styl punktów:</string>
+                    <string>Styl pudełek:</string>
                    </property>
                   </widget>
                  </item>
@@ -334,7 +286,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl punktów...</string>
+                  <string>Wybierz styl pudełek...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -420,7 +372,7 @@
                    <item>
                     <widget class="QLabel" name="label_7">
                      <property name="text">
-                      <string>Kształt punktów:</string>
+                      <string>Orientacja:</string>
                      </property>
                     </widget>
                    </item>
@@ -438,7 +390,7 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QToolButton" name="toolButton_Markers">
+                    <widget class="QToolButton" name="toolButton_Orient">
                      <property name="text">
                       <string>X</string>
                      </property>
@@ -447,7 +399,7 @@
                   </layout>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_Markers">
+                  <widget class="QComboBox" name="comboBox_Orient">
                    <property name="minimumSize">
                     <size>
                      <width>250</width>
@@ -458,96 +410,16 @@
                     <number>-1</number>
                    </property>
                    <property name="placeholderText">
-                    <string>Wybierz kształt punktów...</string>
+                    <string>Wybierz orientacje pudełek...</string>
                    </property>
                    <item>
                     <property name="text">
-                     <string>.</string>
+                     <string>wertykalna</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>,</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>o</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>v</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>^</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>&gt;</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>&lt;</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>+</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>x</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>s</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>D</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>--</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>|</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>:</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>*</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>H</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>X</string>
+                     <string>horyzontalna</string>
                     </property>
                    </item>
                   </widget>
@@ -971,25 +843,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_Size</sender>
+   <sender>toolButton_Orient</sender>
    <signal>clicked()</signal>
-   <receiver>comboBox_Size</receiver>
-   <slot>clearEditText()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>348</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_Markers</sender>
-   <signal>clicked()</signal>
-   <receiver>comboBox_Markers</receiver>
+   <receiver>comboBox_Orient</receiver>
    <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
