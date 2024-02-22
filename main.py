@@ -6,6 +6,7 @@ from Controllers.AddFileController import AddFileController
 from Controllers.ModifyDataController import ModifyDataController
 from Controllers.SettingsController import SettingsController
 from Controllers.PlotsController import PlotsController
+from Controllers.AnalysisController import AnalysisController
 import sys
 
 
@@ -24,6 +25,7 @@ class Main:
         self.addFileController = AddFileController()
         self.modifyDataController = ModifyDataController()
         self.plotsController = PlotsController(self.mainController)
+        self.analysisController = AnalysisController(self.mainController)
 
         # Connections
         self.mainController.action_Add_Data.triggered.connect(self.addFileController.createWindowAddFile)

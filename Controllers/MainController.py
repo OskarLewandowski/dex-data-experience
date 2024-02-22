@@ -3,7 +3,8 @@ from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, QFontDialog, QColorDialog
+from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, \
+    QFontDialog, QColorDialog
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
