@@ -6,6 +6,7 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, \
     QFontDialog, QColorDialog
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
+from Views.Main.delete_dataframe import Ui_Dialog_Delete_Dataframe
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from io import StringIO
@@ -64,8 +65,41 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.action_Export_As.triggered.connect(self.exportAs)
         self.action_Change_Data_Name.triggered.connect(self.createRenameKeyDataframeWindow)
+        self.action_Delete_Dataframe.triggered.connect(self.createDeleteDataframeWindow)
 
         self.show()
+
+    def createDeleteDataframeWindow(self):
+        self.window_delete_dataframe = QDialog()
+        self.window_delete_dataframe_ui = Ui_Dialog_Delete_Dataframe()
+        self.window_delete_dataframe_ui.setupUi(self.window_delete_dataframe)
+
+        dataKeys = DataStorageModel.get_all_keys()
+
+        self.window_delete_dataframe_ui.comboBox_Keys_List.addItems(dataKeys)
+        self.window_delete_dataframe_ui.pushButton_Apply.clicked.connect(self.deleteDataframe)
+
+        self.window_delete_dataframe.show()
+
+    def deleteDataframe(self):
+        try:
+            dfKey = self.window_delete_dataframe_ui.comboBox_Keys_List.currentText()
+
+            if dfKey:
+                DataStorageModel.remove(dfKey)
+                msg = f"Zbiór danych '{dfKey}' został pomyślnie usunięty"
+                self.window_delete_dataframe_ui.label_info_text_delete_dataframe.setText(msg)
+
+            else:
+                msg = f"Nie wybrano zbioru danych do usunięcia"
+                self.window_delete_dataframe_ui.label_info_text_delete_dataframe.setText(msg)
+
+            dataKeys = DataStorageModel.get_all_keys()
+            self.window_delete_dataframe_ui.comboBox_Keys_List.clear()
+            self.window_delete_dataframe_ui.comboBox_Keys_List.addItems(dataKeys)
+
+        except Exception as e:
+            MessageModel.error("0031", str(e))
 
     def createRenameKeyDataframeWindow(self):
         self.window_rename_key_dataframe = QDialog()

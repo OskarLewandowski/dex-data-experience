@@ -211,6 +211,8 @@ class Ui_MainWindow_Main(object):
         self.actionTest_5.setObjectName("actionTest_5")
         self.actionTest_6 = QtGui.QAction(parent=MainWindow_Main)
         self.actionTest_6.setObjectName("actionTest_6")
+        self.action_Delete_Dataframe = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Delete_Dataframe.setObjectName("action_Delete_Dataframe")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -225,6 +227,7 @@ class Ui_MainWindow_Main(object):
         self.menu_Data.addAction(self.action_Modify_Data)
         self.menu_Data.addSeparator()
         self.menu_Data.addAction(self.action_Change_Data_Name)
+        self.menu_Data.addAction(self.action_Delete_Dataframe)
         self.menu_Edit.addAction(self.action_Undo)
         self.menu_Edit.addAction(self.action_Redo)
         self.menu_Edit.addSeparator()
@@ -360,6 +363,7 @@ class Ui_MainWindow_Main(object):
         self.actionTest_4.setText(_translate("MainWindow_Main", "Test-1"))
         self.actionTest_5.setText(_translate("MainWindow_Main", "Test-2"))
         self.actionTest_6.setText(_translate("MainWindow_Main", "Test-3"))
+        self.action_Delete_Dataframe.setText(_translate("MainWindow_Main", "Usuń dane"))
 
 
 if __name__ == "__main__":

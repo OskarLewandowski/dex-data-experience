@@ -76,6 +76,7 @@ background-color: #ffffff;
     <addaction name="action_Modify_Data"/>
     <addaction name="separator"/>
     <addaction name="action_Change_Data_Name"/>
+    <addaction name="action_Delete_Dataframe"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
     <property name="title">
@@ -519,6 +520,11 @@ background-color: #ffffff;
   <action name="actionTest_6">
    <property name="text">
     <string>Test-3</string>
+   </property>
+  </action>
+  <action name="action_Delete_Dataframe">
+   <property name="text">
+    <string>Usuń dane</string>
    </property>
   </action>
  </widget>
