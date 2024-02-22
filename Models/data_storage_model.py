@@ -78,3 +78,7 @@ class DataStorageModel:
             if column in data_frame.columns:
                 return data_frame[column]
         return None
+
+    @classmethod
+    def count_dataframes(cls):
+        return len(cls._dataFrames)

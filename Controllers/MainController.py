@@ -298,6 +298,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                 data_frames = data.get("data_frames", {})
 
+                DataStorageModel.clear()
+
                 for key, jsonData in data_frames.items():
                     df = pd.read_json(StringIO(jsonData), orient="split")
                     DataStorageModel.add(key, df)
