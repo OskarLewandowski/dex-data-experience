@@ -4,7 +4,7 @@ from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, \
-    QFontDialog, QColorDialog
+    QFontDialog, QColorDialog, QLabel
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
 from Views.Main.delete_dataframe import Ui_Dialog_Delete_Dataframe
 from Models.data_storage_model import DataStorageModel
@@ -31,6 +31,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.addFontComboBoxToolBar()
         self.addSpinBoxToolBar()
         self.addColorToolButtonToolBar()
+        self.addLabelToStatusBar()
 
         # Connections
         self.fontComboBox_Text_Font.currentFontChanged['QFont'].connect(self.textEdit_Board.setCurrentFont)
@@ -69,6 +70,20 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.show()
 
+    def addLabelToStatusBar(self):
+        # dataframe count
+        self.dataframeCount = QLabel("   Brak zbiorów danych")
+        self.statusbar.setStyleSheet("QStatusBar::item { border: none; }")
+        self.statusbar.addWidget(self.dataframeCount)
+
+    def updateStatusBar(self):
+        newValue = DataStorageModel.count_dataframes()
+
+        if newValue > 0:
+            self.dataframeCount.setText(f"   Liczba zbiorów danych: {newValue}")
+        else:
+            self.dataframeCount.setText(f"   Brak zbiorów danych")
+
     def createDeleteDataframeWindow(self):
         self.window_delete_dataframe = QDialog()
         self.window_delete_dataframe_ui = Ui_Dialog_Delete_Dataframe()
@@ -89,6 +104,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                 DataStorageModel.remove(dfKey)
                 msg = f"Zbiór danych '{dfKey}' został pomyślnie usunięty"
                 self.window_delete_dataframe_ui.label_info_text_delete_dataframe.setText(msg)
+
+                self.updateStatusBar()
 
             else:
                 msg = f"Nie wybrano zbioru danych do usunięcia"
@@ -339,6 +356,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                     DataStorageModel.add(key, df)
 
                 self.setSavedFilePath(fileName[0])
+                self.updateStatusBar()
 
         except Exception as e:
             MessageModel.error("0009", str(e))

@@ -11,9 +11,10 @@ import os
 
 
 class AddFileController(QDialog, Ui_Dialog_Add_File):
-    def __init__(self):
+    def __init__(self, main_controller):
         super().__init__()
         self.setupUi(self)
+        self.main = main_controller
 
         # to keep file path
         self.filePathGlobal = None
@@ -326,11 +327,15 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             confirmed = MessageModel.saveConfirmation()
             if confirmed:
                 DataStorageModel.add(os.path.splitext(self.fileNameGlobal)[0], self.dataFrameGlobal)
+
+                self.main.updateStatusBar()
+
                 nextStep = MessageModel.statusConfirmation(self.fileNameGlobal)
 
             if nextStep:
                 self.close()
             else:
                 self.clear()
+
         except Exception as e:
             MessageModel.error("0005", str(e))

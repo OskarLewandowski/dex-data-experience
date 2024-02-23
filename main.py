@@ -22,7 +22,7 @@ class Main:
         # Controllers
         self.mainController = MainController()
         self.settingsController = SettingsController(app, translator)
-        self.addFileController = AddFileController()
+        self.addFileController = AddFileController(self.mainController)
         self.modifyDataController = ModifyDataController()
         self.plotsController = PlotsController(self.mainController)
         self.analysisController = AnalysisController(self.mainController)
