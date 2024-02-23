@@ -93,31 +93,33 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
 
             # first data load by default settings
             if filePath.endswith(".csv"):
-                print("CSV_1")
+                # print("CSV_1")
                 self.radioButton_A_Comma.setChecked(True)
                 self.radioButton_B_Comma.setChecked(True)
                 self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
             elif filePath.endswith(".tsv"):
-                print("TSV_1")
+                # print("TSV_1")
                 self.radioButton_A_Tab.setChecked(True)
                 self.radioButton_B_Comma.setChecked(True)
                 self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
             elif filePath.endswith(".txt"):
-                print("TXT_1")
+                # print("TXT_1")
                 self.radioButton_A_Tab.setChecked(True)
                 self.radioButton_B_Comma.setChecked(True)
                 self.loadDataCsvTsvTxt()
                 self.enableGroupBoxLoadDataSettings()
             elif filePath.endswith(".json"):
-                print("JSON_1")
+                # print("JSON_1")
                 self.loadDataJson()
+                self.disableGroupBoxLoadDataSettings()
             elif filePath.endswith(tuple(excelExt)):
-                print("EXCEL_1")
+                # print("EXCEL_1")
                 self.loadDataExcel()
+                self.disableGroupBoxLoadDataSettings()
             elif filePath.endswith(".RData"):
-                print("RDATA_1")
+                # print("RDATA_1")
                 self.loadDataRData()
                 self.disableGroupBoxLoadDataSettings()
         except:
@@ -129,22 +131,22 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             excelExt = ['.xlsx', '.xls']
 
             if filePath.endswith(".csv"):
-                print("CSV_2")
+                # print("CSV_2")
                 self.loadDataCsvTsvTxt()
             elif filePath.endswith(".tsv"):
-                print("TSV_2")
+                # print("TSV_2")
                 self.loadDataCsvTsvTxt()
             elif filePath.endswith(".txt"):
-                print("TXT_2")
+                # print("TXT_2")
                 self.loadDataCsvTsvTxt()
             elif filePath.endswith(".json"):
-                print("JSON_2")
+                # print("JSON_2")
                 self.loadDataJson()
             elif filePath.endswith(tuple(excelExt)):
-                print("EXCEL_2")
+                # print("EXCEL_2")
                 self.loadDataExcel()
             elif filePath.endswith(".RData"):
-                print("RDATA_2")
+                # print("RDATA_2")
                 self.loadDataRData()
 
         except Exception as e:
