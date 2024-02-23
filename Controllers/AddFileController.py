@@ -119,6 +119,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             elif filePath.endswith(".RData"):
                 print("RDATA_1")
                 self.loadDataRData()
+                self.disableGroupBoxLoadDataSettings()
         except:
             self.clear()
 
