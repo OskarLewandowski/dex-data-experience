@@ -188,7 +188,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             with open(SettingsController.SETTINGS_FILE, 'r') as file:
                 settings = json.load(file)
                 language_index = settings.get("language_index", 0)
-                theme_index = settings.get("theme_index", 0)
+                theme_index = settings.get("theme_index", 1)
                 custom_theme_enabled = settings.get("custom_theme_enabled", False)
                 secondary_colors_enabled = settings.get("secondary_colors_enabled", False)
 
@@ -201,7 +201,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         else:
             default_settings = {
                 "language_index": 0,
-                "theme_index": 5,
+                "theme_index": 1,
                 "custom_theme_enabled": False,
                 "secondary_colors_enabled": False
             }
