@@ -28,7 +28,7 @@ developed tool, provides a graphical environment built using PyQt6, a robust Pyt
    the following command:
 
     ```bash
-    pip install PyQt6
+    pip install -r requirements.txt
     ```
 
 3. **Run the Application:** Execute the main script to launch Dex.
