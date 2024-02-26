@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtWidgets import QDialog, QMessageBox, QFileDialog
-from Views.AddFile.add_file_main_window import Ui_Dialog_Add_File
+from Views.AddFile.add_file_main_window_v2 import Ui_Dialog_Add_File
 from Models.data_frame_model import DataFrameModel
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
@@ -58,11 +58,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         Show add file window
         """
         self.clear()
-        icon = QIcon()
-        icon.addPixmap(QPixmap("images/app-icon/dex-icon-512x512.png"), QIcon.Mode.Normal,
-                       QIcon.State.Off)
         self.setWindowFlags(Qt.WindowType.WindowMinMaxButtonsHint | Qt.WindowType.WindowCloseButtonHint)
-        self.setWindowIcon(icon)
         self.show()
 
     def chooseFile(self):

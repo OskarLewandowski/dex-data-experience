@@ -155,7 +155,8 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
     def populateThemes(self):
         themes_path = "Themes"
         themes = [entry.replace(".xml", "") for entry in QDir(themes_path).entryList(['*.xml'])]
-        themes.remove("my_custom")
+        if "my_custom" in themes:
+            themes.remove("my_custom")
 
         self.comboBox_Theme.clear()
         self.comboBox_Theme.addItems(themes)

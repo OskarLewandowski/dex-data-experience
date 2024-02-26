@@ -1,3 +1,5 @@
+import os
+
 from PyQt6 import QtGui
 from PyQt6.QtCore import QTranslator
 from PyQt6.QtWidgets import QApplication
@@ -12,10 +14,13 @@ import sys
 
 class Main:
     def __init__(self):
-        # Window Icon
+        # Windows Icon
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        image_path = "images/app-icon/dex-icon-512x512.png"
+        icon_path = os.path.join(base_path, image_path)
+
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
 
         app.setWindowIcon(icon)
 

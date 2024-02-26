@@ -12,11 +12,6 @@ class MessageModel:
         msg.setText(message)
         msg.setWindowTitle('Dex')
 
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
-
         msg.setStandardButtons(QMessageBox.StandardButton.Close)
         msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
         reply = msg.exec()
@@ -31,11 +26,6 @@ class MessageModel:
             msg.setIcon(QMessageBox.Icon.Question)
             msg.setText(message)
             msg.setWindowTitle('Dex')
-
-            icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                           QtGui.QIcon.State.Off)
-            msg.setWindowIcon(icon)
 
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Abort | QMessageBox.StandardButton.Close)
@@ -56,11 +46,6 @@ class MessageModel:
             msg.setText(text)
             msg.setWindowTitle('Dex')
 
-            icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                           QtGui.QIcon.State.Off)
-            msg.setWindowIcon(icon)
-
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Abort)
             msg.button(QMessageBox.StandardButton.Yes).setText(bntYesText)
@@ -78,11 +63,6 @@ class MessageModel:
         msg.setIcon(QMessageBox.Icon.Question)
         msg.setText('Czy chcesz zapisać zmiany w pliku?')
         msg.setWindowTitle('Dex')
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
 
         msg.setStandardButtons(
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
@@ -105,11 +85,6 @@ class MessageModel:
         msg.setIcon(QMessageBox.Icon.Question)
         msg.setText('Czy chcesz zapisać zmiany w obecnym projekcie?')
         msg.setWindowTitle('Dex')
-
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/app-icon/dex-icon-512x512.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
-        msg.setWindowIcon(icon)
 
         msg.setStandardButtons(
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Abort)
