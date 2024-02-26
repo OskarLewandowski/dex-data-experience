@@ -109,18 +109,7 @@ background-color: #ffffff;
     <property name="title">
      <string>Analiza</string>
     </property>
-    <widget class="QMenu" name="menuTesty">
-     <property name="title">
-      <string>Testy</string>
-     </property>
-     <addaction name="actionTest_4"/>
-     <addaction name="actionTest_5"/>
-     <addaction name="actionTest_6"/>
-    </widget>
-    <addaction name="actionTest_1"/>
-    <addaction name="actionTest_2"/>
-    <addaction name="actionTest_3"/>
-    <addaction name="menuTesty"/>
+    <addaction name="action_Basic_Stats"/>
    </widget>
    <widget class="QMenu" name="menu_Charts">
     <property name="title">
@@ -525,6 +514,11 @@ background-color: #ffffff;
   <action name="action_Delete_Dataframe">
    <property name="text">
     <string>Usuń dane</string>
+   </property>
+  </action>
+  <action name="action_Basic_Stats">
+   <property name="text">
+    <string>Podstawowe statystyki</string>
    </property>
   </action>
  </widget>
