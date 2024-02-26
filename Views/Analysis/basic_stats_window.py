@@ -65,11 +65,9 @@ class Ui_MainWindow_Basic_Stats(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_15.addItem(spacerItem2)
-        self.toolButton_Board_Is_Enabled = QtWidgets.QToolButton(parent=self.groupBox)
-        self.toolButton_Board_Is_Enabled.setObjectName("toolButton_Board_Is_Enabled")
-        self.horizontalLayout_15.addWidget(self.toolButton_Board_Is_Enabled)
         self.verticalLayout_16.addLayout(self.horizontalLayout_15)
         self.checkBox_Board_Is_Enabled = QtWidgets.QCheckBox(parent=self.groupBox)
+        self.checkBox_Board_Is_Enabled.setChecked(False)
         self.checkBox_Board_Is_Enabled.setObjectName("checkBox_Board_Is_Enabled")
         self.verticalLayout_16.addWidget(self.checkBox_Board_Is_Enabled)
         self.verticalLayout_13.addLayout(self.verticalLayout_16)
@@ -90,6 +88,7 @@ class Ui_MainWindow_Basic_Stats(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.textEdit_Preview_Board.setFont(font)
+        self.textEdit_Preview_Board.setReadOnly(True)
         self.textEdit_Preview_Board.setObjectName("textEdit_Preview_Board")
         self.verticalLayout_14.addWidget(self.textEdit_Preview_Board)
         self.horizontalLayout_2.addWidget(self.frame)
@@ -99,9 +98,6 @@ class Ui_MainWindow_Basic_Stats(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        self.pushButton_Generate_Result = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.pushButton_Generate_Result.setObjectName("pushButton_Generate_Result")
-        self.horizontalLayout_11.addWidget(self.pushButton_Generate_Result)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem4)
@@ -118,9 +114,11 @@ class Ui_MainWindow_Basic_Stats(object):
         MainWindow_Basic_Stats.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Basic_Stats)
+        self.toolButton_Data_Column.clicked.connect(
+            lambda: self.comboBox_Data_Column.setCurrentIndex(-1))  # type: ignore
         self.pushButton_Close.clicked.connect(MainWindow_Basic_Stats.close)  # type: ignore
-        self.toolButton_Data_Column.clicked.connect(self.comboBox_Data_Column.clearEditText)  # type: ignore
-        self.checkBox_Board_Is_Enabled.clicked['bool'].connect(self.textEdit_Preview_Board.setDisabled)  # type: ignore
+        self.checkBox_Board_Is_Enabled.clicked['bool'].connect(
+            lambda checked: self.textEdit_Preview_Board.setReadOnly(not checked))
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Basic_Stats)
 
     def retranslateUi(self, MainWindow_Basic_Stats):
@@ -131,8 +129,7 @@ class Ui_MainWindow_Basic_Stats(object):
         self.toolButton_Data_Column.setText(_translate("MainWindow_Basic_Stats", "X"))
         self.comboBox_Data_Column.setPlaceholderText(_translate("MainWindow_Basic_Stats", "Wybierz kolumne danych..."))
         self.label_12.setText(_translate("MainWindow_Basic_Stats", "Edycja podglądu:"))
-        self.toolButton_Board_Is_Enabled.setText(_translate("MainWindow_Basic_Stats", "X"))
-        self.checkBox_Board_Is_Enabled.setText(_translate("MainWindow_Basic_Stats", "Zablokuj edycje tablicy"))
+        self.checkBox_Board_Is_Enabled.setText(_translate("MainWindow_Basic_Stats", "Odblokuj edycje tablicy"))
         self.textEdit_Preview_Board.setHtml(_translate("MainWindow_Basic_Stats",
                                                        "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                                        "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -143,7 +140,6 @@ class Ui_MainWindow_Basic_Stats(object):
                                                        "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
                                                        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Reset_Options.setText(_translate("MainWindow_Basic_Stats", "Resetuj"))
-        self.pushButton_Generate_Result.setText(_translate("MainWindow_Basic_Stats", "Generuj wynik"))
         self.pushButton_Add_To_Board.setText(_translate("MainWindow_Basic_Stats", "Dodaj do tablicy"))
         self.pushButton_Close.setText(_translate("MainWindow_Basic_Stats", "Zamknij"))
 

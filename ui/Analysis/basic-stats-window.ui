@@ -121,19 +121,15 @@
                    </property>
                   </spacer>
                  </item>
-                 <item>
-                  <widget class="QToolButton" name="toolButton_Board_Is_Enabled">
-                   <property name="text">
-                    <string>X</string>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </item>
                <item>
                 <widget class="QCheckBox" name="checkBox_Board_Is_Enabled">
                  <property name="text">
-                  <string>Zablokuj edycje tablicy</string>
+                  <string>Odblokuj edycje tablicy</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
                  </property>
                 </widget>
                </item>
@@ -178,6 +174,9 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
            <property name="html">
             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -201,13 +200,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <widget class="QPushButton" name="pushButton_Reset_Options">
         <property name="text">
          <string>Resetuj</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_Generate_Result">
-        <property name="text">
-         <string>Generuj wynik</string>
         </property>
        </widget>
       </item>
@@ -262,22 +254,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_Close</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow_Basic_Stats</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1094</x>
-     <y>782</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>570</x>
-     <y>402</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>toolButton_Data_Column</sender>
    <signal>clicked()</signal>
    <receiver>comboBox_Data_Column</receiver>
@@ -290,6 +266,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <hint type="destinationlabel">
      <x>184</x>
      <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_Close</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow_Basic_Stats</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1094</x>
+     <y>782</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>570</x>
+     <y>402</y>
     </hint>
    </hints>
   </connection>
