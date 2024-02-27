@@ -324,6 +324,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             self.setWindowTitle("Dex")
             self.textEdit_Board.clear()
             DataStorageModel.clear()
+            self.updateStatusBar()
         else:
             pass
 
