@@ -1,3 +1,5 @@
+import sys
+
 from Views.Main.about_app import Ui_Dialog_About_App
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
@@ -28,6 +30,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.pathCurrentFileGlobal = None
 
         # View
+        self.addIconsToActions()
         self.addFontComboBoxToolBar()
         self.addSpinBoxToolBar()
         self.addColorToolButtonToolBar()
@@ -69,6 +72,41 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Delete_Dataframe.triggered.connect(self.createDeleteDataframeWindow)
 
         self.show()
+
+    def addIconsToActions(self):
+        self.action_New_File.setIcon(self.resourceIcon("images/main-window/new-file.svg"))
+        self.action_Open_File.setIcon(self.resourceIcon("images/main-window/open-file.svg"))
+        self.action_Save.setIcon(self.resourceIcon("images/main-window/save-file.svg"))
+        self.action_Print.setIcon(self.resourceIcon("images/main-window/print.svg"))
+        self.action_Export_As.setIcon(self.resourceIcon("images/main-window/export-pdf.svg"))
+        self.action_Exit.setIcon(self.resourceIcon("images/main-window/exit-red.svg"))
+        self.action_Undo.setIcon(self.resourceIcon("images/main-window/undo-transparent.svg"))
+        self.action_Redo.setIcon(self.resourceIcon("images/main-window/redo-transparent.svg"))
+        self.action_Add_Data.setIcon(self.resourceIcon("images/main-window/add-data.svg"))
+        self.action_Modify_Data.setIcon(self.resourceIcon("images/main-window/data-processing-1.svg"))
+        self.action_Bold.setIcon(self.resourceIcon("images/main-window/bold.svg"))
+        self.action_Italic.setIcon(self.resourceIcon("images/main-window/italic.svg"))
+        self.action_Underline.setIcon(self.resourceIcon("images/main-window/underline.svg"))
+        self.action_Left.setIcon(self.resourceIcon("images/main-window/text-left.svg"))
+        self.action_Right.setIcon(self.resourceIcon("images/main-window/text-right.svg"))
+        self.action_Center.setIcon(self.resourceIcon("images/main-window/text-center.svg"))
+        self.action_Justify.setIcon(self.resourceIcon("images/main-window/text-justify.svg"))
+        self.action_About_Application.setIcon(self.resourceIcon("images/main-window/mw-help.svg"))
+        self.action_Settings.setIcon(self.resourceIcon("images/main-window/mw-settings.svg"))
+
+    def resourceIcon(self, path):
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.resourcePath(path)), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        return icon
+
+    def resourcePath(self, relative_path):
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+            print(os.path.join(base_path, relative_path))
+        return os.path.join(base_path, relative_path)
 
     def addLabelToStatusBar(self):
         # dataframe count
