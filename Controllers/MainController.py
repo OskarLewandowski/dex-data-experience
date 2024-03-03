@@ -105,7 +105,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             base_path = sys._MEIPASS
         except Exception:
             base_path = os.path.abspath(".")
-            print(os.path.join(base_path, relative_path))
         return os.path.join(base_path, relative_path)
 
     def addLabelToStatusBar(self):
