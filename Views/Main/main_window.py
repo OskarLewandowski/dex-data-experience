@@ -198,6 +198,8 @@ class Ui_MainWindow_Main(object):
         self.action_Delete_Dataframe.setObjectName("action_Delete_Dataframe")
         self.action_Basic_Stats = QtGui.QAction(parent=MainWindow_Main)
         self.action_Basic_Stats.setObjectName("action_Basic_Stats")
+        self.action_Correlation = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Correlation.setObjectName("action_Correlation")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -231,6 +233,7 @@ class Ui_MainWindow_Main(object):
         self.menu_Format.addAction(self.action_Color)
         self.menu_Format.addAction(self.action_Font)
         self.menu_Analysis.addAction(self.action_Basic_Stats)
+        self.menu_Analysis.addAction(self.action_Correlation)
         self.menu_Charts.addAction(self.action_Scatter_Plot)
         self.menu_Charts.addAction(self.action_Line_Plot)
         self.menu_Charts.addAction(self.action_Bar_Plot)
@@ -343,6 +346,7 @@ class Ui_MainWindow_Main(object):
         self.actionTest_6.setText(_translate("MainWindow_Main", "Test-3"))
         self.action_Delete_Dataframe.setText(_translate("MainWindow_Main", "Usuń dane"))
         self.action_Basic_Stats.setText(_translate("MainWindow_Main", "Podstawowe statystyki"))
+        self.action_Correlation.setText(_translate("MainWindow_Main", "Korelacja"))
 
 
 if __name__ == "__main__":

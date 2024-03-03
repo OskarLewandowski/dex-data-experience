@@ -110,6 +110,7 @@ background-color: #ffffff;
      <string>Analiza</string>
     </property>
     <addaction name="action_Basic_Stats"/>
+    <addaction name="action_Correlation"/>
    </widget>
    <widget class="QMenu" name="menu_Charts">
     <property name="title">
@@ -519,6 +520,11 @@ background-color: #ffffff;
   <action name="action_Basic_Stats">
    <property name="text">
     <string>Podstawowe statystyki</string>
+   </property>
+  </action>
+  <action name="action_Correlation">
+   <property name="text">
+    <string>Korelacja</string>
    </property>
   </action>
  </widget>

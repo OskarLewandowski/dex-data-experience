@@ -5,10 +5,13 @@ import numpy as np
 import pandas as pd
 from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow
+from matplotlib import pyplot as plt
+import seaborn as sns
 
 from Models.data_storage_model import DataStorageModel
 from Views.Main.main_window import Ui_MainWindow_Main
 from Views.Analysis.basic_stats_window import Ui_MainWindow_Basic_Stats
+from Views.Analysis.correlation_window import Ui_MainWindow_Correlation
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -17,6 +20,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main = main_controller
 
         self.main.action_Basic_Stats.triggered.connect(self.createBasicStatsWindow)
+        self.main.action_Correlation.triggered.connect(self.createCorrelationWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -25,7 +29,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         else:
             return None
 
-    def writeResultsInBoard(self):
+    def writeBasicStatsInBoard(self):
         try:
             data = self.window_basic_stats_ui.textEdit_Preview_Board.toHtml()
             if data:
@@ -64,7 +68,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_basic_stats_ui.comboBox_Data_Column.addItems(dataAll)
 
         self.window_basic_stats_ui.pushButton_Reset_Options.clicked.connect(self.resetBasicStats)
-        self.window_basic_stats_ui.pushButton_Add_To_Board.clicked.connect(self.writeResultsInBoard)
+        self.window_basic_stats_ui.pushButton_Add_To_Board.clicked.connect(self.writeBasicStatsInBoard)
 
         self.window_basic_stats_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeBasicStats)
 
@@ -118,3 +122,62 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_basic_stats_ui.checkBox_Board_Is_Enabled.setChecked(False)
         self.window_basic_stats_ui.textEdit_Preview_Board.clear()
         self.window_basic_stats_ui.textEdit_Preview_Board.setReadOnly(True)
+
+    # Correlation
+    def createCorrelationWindow(self):
+        self.window_correlation = QMainWindow()
+        self.window_correlation_ui = Ui_MainWindow_Correlation()
+        self.window_correlation_ui.setupUi(self.window_correlation)
+
+        dataAll = DataStorageModel.get_all_keys()
+
+        self.window_correlation_ui.comboBox_Data.addItems(dataAll)
+
+        self.window_correlation_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelation)
+        self.window_correlation_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationInBoard)
+
+        self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.writeCorrelation)
+
+        self.window_correlation.show()
+
+    def writeCorrelation(self):
+        try:
+            data = self.window_correlation_ui.comboBox_Data.currentText()
+            result = None
+            self.window_correlation_ui.textEdit_Preview_Board.clear()
+
+            data_frame = DataStorageModel.get(data)
+
+            if data_frame is not None:
+                correlation_matrix = data_frame.corr()
+                result = correlation_matrix
+
+            df = pd.DataFrame(result)
+            html_table = df.to_html(classes='table', border=0, index=True, justify='center')
+            html_table = html_table.replace('<table',
+                                            '<table style="border: 1px solid black; border-collapse: collapse; padding: 10px;"')
+            html_table = html_table.replace('<th>', '<th style="border: 1px solid black; padding: 5px;">')
+            html_table = html_table.replace('<td>', '<td style="border: 1px solid black; padding: 5px;">')
+
+            self.window_correlation_ui.textEdit_Preview_Board.setHtml(html_table)
+
+
+        except Exception as e:
+            print(str(e))
+
+    def resetCorrelation(self):
+        self.window_correlation_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_correlation_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_correlation_ui.textEdit_Preview_Board.clear()
+        self.window_correlation_ui.textEdit_Preview_Board.setReadOnly(True)
+
+    def writeCorrelationInBoard(self):
+        try:
+            data = self.window_correlation_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
