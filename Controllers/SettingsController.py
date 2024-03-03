@@ -14,10 +14,11 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
     SETTINGS_FILE = "settings.json"
     CUSTOM_THEM_FILE = "Themes/my_custom.xml"
 
-    def __init__(self, app, translator):
+    def __init__(self, app, translator, main):
         super().__init__()
         self.app = app
         self.translator = translator
+        self.main = main
         self.setWindowFlags(
             Qt.WindowType.CustomizeWindowHint | Qt.WindowType.WindowCloseButtonHint)
 
@@ -54,17 +55,10 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.pushButton_Secondary_Text_Color.clicked.connect(
             lambda: self.changeColor('secondaryTextColor', 'pushButton_Secondary_Text_Color'))
 
-    def resourcePath(self, relative_path):
-        try:
-            base_path = sys._MEIPASS
-        except Exception:
-            base_path = os.path.abspath(".")
-        return os.path.join(base_path, relative_path)
-
     def loadLanguage(self):
         language_files = {
-            0: self.resourcePath("Translations/PL/qtbase_pl.qm"),
-            1: self.resourcePath("Translations/EN/qtbase_en.qm"),
+            0: self.main.resourcePath("Translations/PL/qtbase_pl.qm"),
+            1: self.main.resourcePath("Translations/EN/qtbase_en.qm"),
         }
 
         selected_language = self.comboBox_Language.currentIndex()
@@ -74,7 +68,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             if self.translator.load(selected_language_file):
                 self.app.installTranslator(self.translator)
         else:
-            default_language_file = self.resourcePath("Translations/EN/qtbase_en.qm")
+            default_language_file = self.main.resourcePath("Translations/EN/qtbase_en.qm")
             if self.translator.load(default_language_file):
                 self.app.installTranslator(self.translator)
 
@@ -90,10 +84,10 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 if color.isValid():
                     button.setStyleSheet(f"{current_style}background-color: {color.name()};")
 
-                    custom_colors = self.loadCustomColors(self.resourcePath(SettingsController.CUSTOM_THEM_FILE))
+                    custom_colors = self.loadCustomColors(self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE))
                     custom_colors[field_name] = color.name()
 
-                    self.saveCustomColors(custom_colors, self.resourcePath(SettingsController.CUSTOM_THEM_FILE))
+                    self.saveCustomColors(custom_colors, self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE))
                     self.loadThem()
                 else:
                     button.setStyleSheet(current_style)
@@ -147,7 +141,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             f"background-color: {custom_stylesheet.get('secondaryTextColor', '#ffffff')};")
 
     def loadAndApplyCustomStylesheet(self):
-        file_path = self.resourcePath(SettingsController.CUSTOM_THEM_FILE)
+        file_path = self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE)
         custom_colors = self.loadCustomColors(file_path)
         self.applyCustomStylesheet(custom_colors)
 
@@ -161,7 +155,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.comboBox_Language.addItems(languages)
 
     def populateThemes(self):
-        themes_path = self.resourcePath("Themes")
+        themes_path = self.main.resourcePath("Themes")
         themes = [entry.replace(".xml", "") for entry in QDir(themes_path).entryList(['*.xml'])]
         if "my_custom" in themes:
             themes.remove("my_custom")
@@ -172,11 +166,11 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
     def loadThem(self):
         if self.checkBox_Use_Custom_Theme.isChecked():
             if self.checkBox_Use_Secondary_Colors.isChecked():
-                self.apply_stylesheet(self.app, self.resourcePath(SettingsController.CUSTOM_THEM_FILE))
+                self.apply_stylesheet(self.app, self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE))
             else:
-                self.apply_stylesheet(self.app, self.resourcePath(SettingsController.CUSTOM_THEM_FILE))
+                self.apply_stylesheet(self.app, self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE))
         else:
-            themes_path = self.resourcePath("Themes/")
+            themes_path = self.main.resourcePath("Themes/")
             extension = ".xml"
             them_name = self.comboBox_Theme.currentText()
             filename = themes_path + them_name + extension
@@ -193,8 +187,8 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 self.apply_stylesheet(self.app, filename)
 
     def loadSettings(self):
-        if QFile.exists(self.resourcePath(SettingsController.SETTINGS_FILE)):
-            with open(self.resourcePath(SettingsController.SETTINGS_FILE), 'r') as file:
+        if QFile.exists(self.main.resourcePath(SettingsController.SETTINGS_FILE)):
+            with open(self.main.resourcePath(SettingsController.SETTINGS_FILE), 'r') as file:
                 settings = json.load(file)
                 language_index = settings.get("language_index", 0)
                 theme_index = settings.get("theme_index", 1)
@@ -215,7 +209,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 "secondary_colors_enabled": False
             }
 
-            with open(self.resourcePath(SettingsController.SETTINGS_FILE), 'w') as file:
+            with open(self.main.resourcePath(SettingsController.SETTINGS_FILE), 'w') as file:
                 json.dump(default_settings, file, indent=2)
             self.loadSettings()
 
@@ -232,5 +226,5 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             "secondary_colors_enabled": secondary_colors_enabled
         }
 
-        with open(self.resourcePath(SettingsController.SETTINGS_FILE), 'w') as file:
+        with open(self.main.resourcePath(SettingsController.SETTINGS_FILE), 'w') as file:
             json.dump(settings, file, indent=2)
