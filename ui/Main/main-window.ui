@@ -524,7 +524,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Correlation">
    <property name="text">
-    <string>Korelacja</string>
+    <string>Współczynnik korelacji Pearsona</string>
    </property>
   </action>
  </widget>

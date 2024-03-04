@@ -165,7 +165,7 @@ class Ui_MainWindow_Correlation(object):
 
     def retranslateUi(self, MainWindow_Correlation):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow_Correlation.setWindowTitle(_translate("MainWindow_Correlation", "Korelacja liniowa Pearsona"))
+        MainWindow_Correlation.setWindowTitle(_translate("MainWindow_Correlation", "Współczynnik korelacji Pearsona"))
         self.groupBox.setTitle(_translate("MainWindow_Correlation", "Parametry:"))
         self.label.setText(_translate("MainWindow_Correlation", "Zbiór danych:"))
         self.toolButton_Data.setText(_translate("MainWindow_Correlation", "X"))
