@@ -77,7 +77,12 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                           f"Odchylenie standardowe: <b>{round(selectedColumn.std(), 2)}</b><br>"
                           f"Wariancja: <b>{round(selectedColumn.var(), 2)}</b><br>"
                           f"Minimum: <b>{round(selectedColumn.min(), 2)}</b><br>"
-                          f"Maksimum: <b>{round(selectedColumn.max(), 2)}</b>")
+                          f"Maksimum: <b>{round(selectedColumn.max(), 2)}</b><br>"
+                          f"Pierwszy kwantyl: <b>{round(selectedColumn.quantile(0.25), 2)}</b><br>"
+                          f"Trzeci kwantyl: <b>{round(selectedColumn.quantile(0.75), 2)}</b><br>"
+                          f"Rozstęp: <b>{round(selectedColumn.max() - selectedColumn.min(), 2)}</b><br>"
+                          f"Skośność: <b>{round(selectedColumn.skew(), 2)}</b><br>"
+                          f"Kurtoza: <b>{round(selectedColumn.kurt(), 2)}</b>")
 
             elif dataType == 1:
                 result = (f"<b>Podstawowe statystyki</b><br>"
@@ -87,6 +92,12 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                           f"Liczba unikalnych wartości: <b>{selectedColumn.nunique()}</b><br>"
                           f"Najczęstsza wartość: <b>{selectedColumn.mode().iloc[0]}</b><br>"
                           f"Liczba wystąpień najczęstszej wartości: <b>{selectedColumn.value_counts().max()}</b><br>"
+                          f"Procent najczęstszej wartości: <b>{round((selectedColumn.value_counts().max() / len(selectedColumn)) * 100, 2)}%</b><br>"
+                          f"Najrzadsza wartość: <b>{selectedColumn.value_counts().idxmin()}</b><br>"
+                          f"Liczba wystąpień najrzadszej wartości: <b>{selectedColumn.value_counts().min()}</b><br>"
+                          f"Procent najrzadszej wartości: <b>{round((selectedColumn.value_counts().min() / len(selectedColumn)) * 100, 2)}%</b><br>"
+                          f"Procent wartości unikalnych: <b>{round((selectedColumn.nunique() / selectedColumn.count()) * 100, 2)}%</b><br>"
+                          f"Miara różnorodności Gini-Simpson Index: <b>{round(1 - sum(selectedColumn.value_counts(normalize=True) ** 2), 2)}</b><br>"
                           f"Entropia: <b>{round(-sum((selectedColumn.value_counts(normalize=True) * np.log2(selectedColumn.value_counts(normalize=True)))), 2)}</b>")
             else:
                 result = (f"<b>Podstawowe statystyki</b><br>"
