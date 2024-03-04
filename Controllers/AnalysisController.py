@@ -1,13 +1,7 @@
-import base64
-import io
-
 import numpy as np
 import pandas as pd
 from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow
-from matplotlib import pyplot as plt
-import seaborn as sns
-
 from Models.data_storage_model import DataStorageModel
 from Views.Main.main_window import Ui_MainWindow_Main
 from Views.Analysis.basic_stats_window import Ui_MainWindow_Basic_Stats
@@ -28,17 +22,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             return textParts
         else:
             return None
-
-    def writeBasicStatsInBoard(self):
-        try:
-            data = self.window_basic_stats_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
 
     def checkColumnType(self, selected_data):
         try:
@@ -117,6 +100,17 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         except Exception as e:
             print(str(e))
 
+    def writeBasicStatsInBoard(self):
+        try:
+            data = self.window_basic_stats_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
     def resetBasicStats(self):
         self.window_basic_stats_ui.comboBox_Data_Column.setCurrentIndex(-1)
         self.window_basic_stats_ui.checkBox_Board_Is_Enabled.setChecked(False)
@@ -137,8 +131,25 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationInBoard)
 
         self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.writeCorrelation)
+        self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumns)
+
+        self.window_correlation_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeCorrelation)
+        self.window_correlation_ui.checkBox_Description_Of_Results.clicked.connect(self.writeCorrelation)
 
         self.window_correlation.show()
+
+    def fillDataColumns(self):
+        data = self.window_correlation_ui.comboBox_Data.currentText()
+        if data:
+            df = pd.DataFrame(DataStorageModel.get(data))
+            df = df.columns.tolist()
+            self.window_correlation_ui.listWidget_Data_Columns.clear()
+            self.window_correlation_ui.listWidget_Data_Columns.addItems(df)
+            self.window_correlation_ui.listWidget_Data_Columns.setEnabled(True)
+        else:
+            self.window_correlation_ui.listWidget_Data_Columns.setEnabled(False)
+            self.window_correlation_ui.listWidget_Data_Columns.clear()
+            self.window_correlation_ui.textEdit_Preview_Board.clear()
 
     def writeCorrelation(self):
         try:
@@ -146,11 +157,33 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             result = None
             self.window_correlation_ui.textEdit_Preview_Board.clear()
 
-            data_frame = DataStorageModel.get(data)
+            selectedItems = self.window_correlation_ui.listWidget_Data_Columns.selectedItems()
+            title = f"<b>Korelacja Pearsona - liniowa zależność między dwoma zmiennymi</b><br>"
 
-            if data_frame is not None:
-                correlation_matrix = data_frame.corr()
-                result = correlation_matrix
+            description = ("<br><br><b>Interpretacja wyników:</b>"
+                           "<ul>"
+                           "<li>Liczba w każdej komórce pokazuje siłę i kierunek korelacji.</li>"
+                           "<li>Dodatnie liczby wskazują na dodatnią korelację, podczas gdy ujemne liczby wskazują na ujemną korelację.</li>"
+                           "<li>Im bliżej liczby do 1 (lub -1), tym silniejsza jest korelacja.</li>"
+                           "<li>Liczba 0 oznacza brak korelacji między dwoma zmiennymi.</li>"
+                           "</ul>")
+
+            if selectedItems:
+                column_names = [item.text() for item in selectedItems]
+
+                data_frame = DataStorageModel.get(data)
+                data_frame = data_frame[column_names]
+
+            else:
+                data_frame = DataStorageModel.get(data)
+
+            try:
+                if data_frame is not None:
+                    correlation_matrix = data_frame.corr()
+                    result = correlation_matrix
+            except:
+                result = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
+                self.window_correlation_ui.textEdit_Preview_Board.setHtml(result)
 
             df = pd.DataFrame(result)
             html_table = df.to_html(classes='table', border=0, index=True, justify='center')
@@ -159,17 +192,23 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             html_table = html_table.replace('<th>', '<th style="border: 1px solid black; padding: 5px;">')
             html_table = html_table.replace('<td>', '<td style="border: 1px solid black; padding: 5px;">')
 
-            self.window_correlation_ui.textEdit_Preview_Board.setHtml(html_table)
+            if self.window_correlation_ui.checkBox_Description_Of_Results.isChecked():
+                result = title + html_table + description
+            else:
+                result = title + html_table
 
+            if data:
+                self.window_correlation_ui.textEdit_Preview_Board.setHtml(result)
 
         except Exception as e:
-            print(str(e))
+            pass
 
     def resetCorrelation(self):
         self.window_correlation_ui.comboBox_Data.setCurrentIndex(-1)
         self.window_correlation_ui.checkBox_Board_Is_Enabled.setChecked(False)
         self.window_correlation_ui.textEdit_Preview_Board.clear()
         self.window_correlation_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_correlation_ui.checkBox_Description_Of_Results.setChecked(False)
 
     def writeCorrelationInBoard(self):
         try:

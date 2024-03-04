@@ -24,7 +24,8 @@ class Ui_MainWindow_Correlation(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem)
         self.groupBox = QtWidgets.QGroupBox(parent=self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -42,7 +43,8 @@ class Ui_MainWindow_Correlation(object):
         self.label = QtWidgets.QLabel(parent=self.groupBox)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
         self.toolButton_Data = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Data.setObjectName("toolButton_Data")
@@ -53,6 +55,42 @@ class Ui_MainWindow_Correlation(object):
         self.comboBox_Data.setObjectName("comboBox_Data")
         self.verticalLayout_3.addWidget(self.comboBox_Data)
         self.verticalLayout_13.addLayout(self.verticalLayout_3)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.label_2 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_4.addWidget(self.label_2)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem2)
+        self.toolButton_Data_Columns = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Data_Columns.setObjectName("toolButton_Data_Columns")
+        self.horizontalLayout_4.addWidget(self.toolButton_Data_Columns)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.listWidget_Data_Columns = QtWidgets.QListWidget(parent=self.groupBox)
+        self.listWidget_Data_Columns.setEnabled(False)
+        self.listWidget_Data_Columns.setAlternatingRowColors(True)
+        self.listWidget_Data_Columns.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
+        self.listWidget_Data_Columns.setObjectName("listWidget_Data_Columns")
+        self.verticalLayout.addWidget(self.listWidget_Data_Columns)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.label_3 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_5.addWidget(self.label_3)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem3)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_5)
+        self.checkBox_Description_Of_Results = QtWidgets.QCheckBox(parent=self.groupBox)
+        self.checkBox_Description_Of_Results.setObjectName("checkBox_Description_Of_Results")
+        self.verticalLayout_4.addWidget(self.checkBox_Description_Of_Results)
+        self.verticalLayout.addLayout(self.verticalLayout_4)
+        self.verticalLayout_13.addLayout(self.verticalLayout)
         self.verticalLayout_16 = QtWidgets.QVBoxLayout()
         self.verticalLayout_16.setObjectName("verticalLayout_16")
         self.horizontalLayout_15 = QtWidgets.QHBoxLayout()
@@ -60,8 +98,9 @@ class Ui_MainWindow_Correlation(object):
         self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_15.addWidget(self.label_12)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_15.addItem(spacerItem2)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_15.addItem(spacerItem4)
         self.verticalLayout_16.addLayout(self.horizontalLayout_15)
         self.checkBox_Board_Is_Enabled = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Board_Is_Enabled.setChecked(False)
@@ -69,8 +108,9 @@ class Ui_MainWindow_Correlation(object):
         self.verticalLayout_16.addWidget(self.checkBox_Board_Is_Enabled)
         self.verticalLayout_13.addLayout(self.verticalLayout_16)
         self.verticalLayout_2.addWidget(self.groupBox)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem3)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+                                            QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem5)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
@@ -81,6 +121,12 @@ class Ui_MainWindow_Correlation(object):
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.textEdit_Preview_Board = QtWidgets.QTextEdit(parent=self.frame)
         self.textEdit_Preview_Board.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.textEdit_Preview_Board.sizePolicy().hasHeightForWidth())
+        self.textEdit_Preview_Board.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.textEdit_Preview_Board.setFont(font)
@@ -94,13 +140,15 @@ class Ui_MainWindow_Correlation(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem4)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem6)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem5)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem7)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -108,28 +156,36 @@ class Ui_MainWindow_Correlation(object):
         MainWindow_Correlation.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Correlation)
-        self.toolButton_Data.clicked.connect(self.comboBox_Data.clearEditText) # type: ignore
-        self.pushButton_Close.clicked.connect(MainWindow_Correlation.close) # type: ignore
-        self.checkBox_Board_Is_Enabled.clicked['bool'].connect(self.textEdit_Preview_Board.setDisabled) # type: ignore
+        self.toolButton_Data.clicked.connect(lambda: self.comboBox_Data.setCurrentIndex(-1))  # type: ignore
+        self.pushButton_Close.clicked.connect(MainWindow_Correlation.close)  # type: ignore
+        self.checkBox_Board_Is_Enabled.clicked['bool'].connect(
+            lambda checked: self.textEdit_Preview_Board.setReadOnly(not checked))
+        self.toolButton_Data_Columns.clicked.connect(self.listWidget_Data_Columns.clearSelection)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Correlation)
 
     def retranslateUi(self, MainWindow_Correlation):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow_Correlation.setWindowTitle(_translate("MainWindow_Correlation", "Korelacja"))
+        MainWindow_Correlation.setWindowTitle(_translate("MainWindow_Correlation", "Korelacja liniowa Pearsona"))
         self.groupBox.setTitle(_translate("MainWindow_Correlation", "Parametry:"))
         self.label.setText(_translate("MainWindow_Correlation", "Zbiór danych:"))
         self.toolButton_Data.setText(_translate("MainWindow_Correlation", "X"))
         self.comboBox_Data.setPlaceholderText(_translate("MainWindow_Correlation", "Wybierz zbiór danych..."))
+        self.label_2.setText(_translate("MainWindow_Correlation", "Wybrane kolumny:"))
+        self.toolButton_Data_Columns.setText(_translate("MainWindow_Correlation", "X"))
+        self.label_3.setText(_translate("MainWindow_Correlation", "Opis wyników:"))
+        self.checkBox_Description_Of_Results.setText(
+            _translate("MainWindow_Correlation", "Dodaj opis do interpretacji wyników"))
         self.label_12.setText(_translate("MainWindow_Correlation", "Edycja podglądu:"))
         self.checkBox_Board_Is_Enabled.setText(_translate("MainWindow_Correlation", "Odblokuj edycje tablicy"))
-        self.textEdit_Preview_Board.setHtml(_translate("MainWindow_Correlation", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_Preview_Board.setHtml(_translate("MainWindow_Correlation",
+                                                       "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                       "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                                       "p, li { white-space: pre-wrap; }\n"
+                                                       "hr { height: 1px; border-width: 0; }\n"
+                                                       "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                                       "li.checked::marker { content: \"\\2612\"; }\n"
+                                                       "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Reset_Options.setText(_translate("MainWindow_Correlation", "Resetuj"))
         self.pushButton_Add_To_Board.setText(_translate("MainWindow_Correlation", "Dodaj do tablicy"))
         self.pushButton_Close.setText(_translate("MainWindow_Correlation", "Zamknij"))
@@ -137,6 +193,7 @@ class Ui_MainWindow_Correlation(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow_Correlation = QtWidgets.QMainWindow()
     ui = Ui_MainWindow_Correlation()
