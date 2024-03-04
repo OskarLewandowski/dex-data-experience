@@ -111,6 +111,12 @@ background-color: #ffffff;
     </property>
     <addaction name="action_Basic_Stats"/>
     <addaction name="action_Correlation"/>
+    <addaction name="action_Test_Shapiro_Wilka"/>
+    <addaction name="action_Test_t_Studenta"/>
+    <addaction name="action_Test_ANOVA"/>
+    <addaction name="action_Test_Chi_Square"/>
+    <addaction name="action_Test_Kruskala_Wallisa"/>
+    <addaction name="action_Linear_Regression"/>
    </widget>
    <widget class="QMenu" name="menu_Charts">
     <property name="title">
@@ -525,6 +531,41 @@ background-color: #ffffff;
   <action name="action_Correlation">
    <property name="text">
     <string>Współczynnik korelacji Pearsona</string>
+   </property>
+  </action>
+  <action name="action_Test_Shapiro_Wilka">
+   <property name="text">
+    <string>Test Shapiro-Wilka</string>
+   </property>
+  </action>
+  <action name="action_Test_t_Studenta">
+   <property name="text">
+    <string>Test t-Studenta</string>
+   </property>
+  </action>
+  <action name="action_Test_ANOVA">
+   <property name="text">
+    <string>Test ANOVA</string>
+   </property>
+  </action>
+  <action name="action_Test_Chi_Square">
+   <property name="text">
+    <string>Test Chi-kwadrat</string>
+   </property>
+  </action>
+  <action name="action_Test_Kruskala_Wallisa">
+   <property name="text">
+    <string>Test Kruskala-Wallisa</string>
+   </property>
+  </action>
+  <action name="action_Linear_Regression">
+   <property name="text">
+    <string>Regresji Liniowej</string>
+   </property>
+  </action>
+  <action name="actionKategorii_Krzy_owych">
+   <property name="text">
+    <string>Kategorii Krzyżowych</string>
    </property>
   </action>
  </widget>
