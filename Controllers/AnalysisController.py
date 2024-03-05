@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
+from scipy import stats
 from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow
 from Models.data_storage_model import DataStorageModel
 from Views.Main.main_window import Ui_MainWindow_Main
 from Views.Analysis.basic_stats_window import Ui_MainWindow_Basic_Stats
 from Views.Analysis.correlation_window import Ui_MainWindow_Correlation
+from Views.Analysis.test_shapiro_wilka_window import Ui_MainWindow_Test_Shapiro_Wilka
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -15,6 +17,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.main.action_Basic_Stats.triggered.connect(self.createBasicStatsWindow)
         self.main.action_Correlation.triggered.connect(self.createCorrelationWindow)
+        self.main.action_Test_Shapiro_Wilka.triggered.connect(self.createTestShapiroWilkaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -224,6 +227,69 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeCorrelationInBoard(self):
         try:
             data = self.window_correlation_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test Shapiro-Wilka
+    def createTestShapiroWilkaWindow(self):
+        self.window_test_shapiro_wilka = QMainWindow()
+        self.window_test_shapiro_wilka_ui = Ui_MainWindow_Test_Shapiro_Wilka()
+        self.window_test_shapiro_wilka_ui.setupUi(self.window_test_shapiro_wilka)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_test_shapiro_wilka_ui.comboBox_Data_Column.addItems(dataAll)
+
+        self.window_test_shapiro_wilka_ui.pushButton_Reset_Options.clicked.connect(self.resetTestShapiroWilka)
+        self.window_test_shapiro_wilka_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestShapiroWilkaInBoard)
+
+        self.window_test_shapiro_wilka_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestShapiroWilka)
+
+        self.window_test_shapiro_wilka_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestShapiroWilka)
+
+        self.window_test_shapiro_wilka.show()
+
+    def writeTestShapiroWilka(self):
+        try:
+            data = self.window_test_shapiro_wilka_ui.comboBox_Data_Column.currentText()
+            result = None
+
+            if data:
+                result = self.splitText(data)
+                dataType = self.checkColumnType(data)
+                selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+
+                self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.clear()
+
+                if dataType == 0:
+                    statistic, p_value = stats.shapiro(selectedColumn)
+
+                    print(f"Column: {result[1]}, Statistic: {statistic}, P-value: {p_value}")
+                    result = ("TEST")
+                else:
+                    result = (f"Nieprawidłowe dane w kolumnie '{result[1]}', wymagane są dane numeryczne!<br>"
+                              f"Wybierz kolumne zawierające dane ilościowe.")
+
+                self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.setHtml(result)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestShapiroWilka(self):
+        self.window_test_shapiro_wilka_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_shapiro_wilka_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.clear()
+        self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_shapiro_wilka_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestShapiroWilkaInBoard(self):
+        try:
+            data = self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
