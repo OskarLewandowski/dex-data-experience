@@ -1,0 +1,29 @@
+<RCC>
+  <qresource prefix="images/main-window">
+    <file>add-data.svg</file>
+    <file>bold.svg</file>
+    <file>data-processing-1.svg</file>
+    <file>data-processing-2.svg</file>
+    <file>data-processing-3.svg</file>
+    <file>exit-red.svg</file>
+    <file>export-pdf.svg</file>
+    <file>italic.svg</file>
+    <file>mw-add-file.svg</file>
+    <file>mw-data-analysis.svg</file>
+    <file>mw-exit.svg</file>
+    <file>mw-help.svg</file>
+    <file>mw-modify-data.svg</file>
+    <file>mw-settings.svg</file>
+    <file>new-file.svg</file>
+    <file>open-file.svg</file>
+    <file>print.svg</file>
+    <file>redo-transparent.svg</file>
+    <file>save-file.svg</file>
+    <file>text-center.svg</file>
+    <file>text-justify.svg</file>
+    <file>text-left.svg</file>
+    <file>text-right.svg</file>
+    <file>underline.svg</file>
+    <file>undo-transparent.svg</file>
+  </qresource>
+</RCC>

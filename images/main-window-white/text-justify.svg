@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   shape-rendering="geometricPrecision"
+   text-rendering="geometricPrecision"
+   image-rendering="optimizeQuality"
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   viewBox="0 0 512 419.74"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="text-justify.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.9369134"
+     inkscape:cx="256.07753"
+     inkscape:cy="333.77848"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     fill-rule="nonzero"
+     d="M512 366.43v53.31H0v-53.31h512zM510.82 0v53.21H0V0h510.82zM512 122.07v53.32H0v-53.32h512zm0 122.18v53.31H0v-53.31h512z"
+     id="path1" />
+  <path
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.516285"
+     d="M 0.25814268,393.15129 V 366.5626 H 256.07753 511.89693 v 26.58869 26.5887 H 256.07753 0.25814268 Z"
+     id="path2" />
+  <path
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.516285"
+     d="M 0.25814268,271.04981 V 244.71926 H 256.07753 511.89693 v 26.33055 26.33055 H 256.07753 0.25814268 Z"
+     id="path3" />
+  <path
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.516285"
+     d="M 0.25814268,148.69018 V 122.35963 H 256.07753 511.89693 v 26.33055 26.33055 H 256.07753 0.25814268 Z"
+     id="path4" />
+  <path
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.516285"
+     d="M 0.25814268,26.588696 V 0 H 255.30311 510.34807 V 26.588696 53.177391 H 255.30311 0.25814268 Z"
+     id="path5" />
+</svg>
