@@ -258,24 +258,42 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         try:
             data = self.window_test_shapiro_wilka_ui.comboBox_Data_Column.currentText()
             result = None
+            summary = ""
 
             if data:
                 result = self.splitText(data)
                 dataType = self.checkColumnType(data)
                 selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+                title = f"<b>Test Shapiro Wilka - test normalności danych</b><br>"
+
+                description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu:</b> Ta wartość powinna być bliska 1 dla próbki o rozkładzie normalnym. Im bardziej wartość ta odbiega od 1, tym bardziej dane odbiegają od rozkładu normalnego."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu Shapiro-Wilka, hipoteza zerowa zakłada, że dane mają rozkład normalny."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
+                               "</ul>")
 
                 self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.clear()
 
                 if dataType == 0:
                     statistic, p_value = stats.shapiro(selectedColumn)
 
-                    print(f"Column: {result[1]}, Statistic: {statistic}, P-value: {p_value}")
-                    result = ("TEST")
-                else:
-                    result = (f"Nieprawidłowe dane w kolumnie '{result[1]}', wymagane są dane numeryczne!<br>"
-                              f"Wybierz kolumne zawierające dane ilościowe.")
+                    testResult = (f"Zbiór: <b>{result[0]}</b><br>"
+                                  f"Kolumna: <b>{result[1]}</b><br><br>"
+                                  f"Statystyka testu: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
 
-                self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.setHtml(result)
+                    summary = title + testResult
+
+                    if self.window_test_shapiro_wilka_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    summary = (f"Nieprawidłowe dane w kolumnie <b>'{result[1]}'</b>, wymagane są dane numeryczne!<br>"
+                               f"Wybierz kolumne zawierające dane ilościowe.")
+
+            self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.setHtml(summary)
 
         except Exception as e:
             print(str(e))
