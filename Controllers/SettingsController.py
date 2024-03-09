@@ -177,16 +177,25 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
 
             if them_name == "Basic_light":
                 qdarktheme.setup_theme("light")
-
+                self.main.addIconsToActions("black")
             elif them_name == "Basic_dark":
                 qdarktheme.setup_theme("dark")
+                self.main.addIconsToActions("white")
             elif them_name == "Basic_default":
                 self.app = QCoreApplication.instance()
+                self.main.addIconsToActions("black")
                 self.app.setStyleSheet(""" * {
                                                 color: black;
                                              }
                                        """)
             else:
+                if 'dark' in filename:
+                    self.main.addIconsToActions("white")
+                elif 'light' in filename:
+                    self.main.addIconsToActions("black")
+                else:
+                    self.main.addIconsToActions("black")
+
                 self.apply_stylesheet(self.app, filename)
 
     def loadSettings(self):

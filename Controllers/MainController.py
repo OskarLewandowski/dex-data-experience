@@ -30,7 +30,6 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.pathCurrentFileGlobal = None
 
         # View
-        self.addIconsToActions()
         self.addFontComboBoxToolBar()
         self.addSpinBoxToolBar()
         self.addColorToolButtonToolBar()
