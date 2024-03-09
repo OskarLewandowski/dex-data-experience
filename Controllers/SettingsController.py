@@ -182,7 +182,10 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 qdarktheme.setup_theme("dark")
             elif them_name == "Basic_default":
                 self.app = QCoreApplication.instance()
-                self.app.setStyleSheet("")
+                self.app.setStyleSheet(""" * {
+                                                color: black;
+                                             }
+                                       """)
             else:
                 self.apply_stylesheet(self.app, filename)
 
