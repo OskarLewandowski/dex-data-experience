@@ -109,9 +109,19 @@ background-color: #ffffff;
     <property name="title">
      <string>Analiza</string>
     </property>
+    <widget class="QMenu" name="menu_Normality_Tests">
+     <property name="title">
+      <string>Testy normalności</string>
+     </property>
+     <addaction name="action_Test_Shapiro_Wilka"/>
+     <addaction name="action_Test_Andersona_Darlinga"/>
+     <addaction name="action_Test_Kolmogorova_Smirnova"/>
+     <addaction name="action_Test_Lillieforsa"/>
+     <addaction name="action_Test_Jarque_Bera"/>
+    </widget>
     <addaction name="action_Basic_Stats"/>
     <addaction name="action_Correlation"/>
-    <addaction name="action_Test_Shapiro_Wilka"/>
+    <addaction name="menu_Normality_Tests"/>
     <addaction name="action_Test_t_Studenta"/>
     <addaction name="action_Test_ANOVA"/>
     <addaction name="action_Test_Chi_Square"/>
@@ -189,7 +199,7 @@ background-color: #ffffff;
   </widget>
   <action name="action_New_File">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/new-file.svg</normaloff>:/images/main-window/new-file.svg</iconset>
    </property>
    <property name="text">
@@ -201,7 +211,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Open_File">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/open-file.svg</normaloff>:/images/main-window/open-file.svg</iconset>
    </property>
    <property name="text">
@@ -213,7 +223,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Save">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/save-file.svg</normaloff>:/images/main-window/save-file.svg</iconset>
    </property>
    <property name="text">
@@ -225,7 +235,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Print">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/print.svg</normaloff>:/images/main-window/print.svg</iconset>
    </property>
    <property name="text">
@@ -237,7 +247,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Export_As">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/export-pdf.svg</normaloff>:/images/main-window/export-pdf.svg</iconset>
    </property>
    <property name="text">
@@ -246,7 +256,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Exit">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/exit-red.svg</normaloff>:/images/main-window/exit-red.svg</iconset>
    </property>
    <property name="text">
@@ -258,7 +268,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Undo">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/undo-transparent.svg</normaloff>:/images/main-window/undo-transparent.svg</iconset>
    </property>
    <property name="text">
@@ -270,7 +280,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Redo">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/redo-transparent.svg</normaloff>:/images/main-window/redo-transparent.svg</iconset>
    </property>
    <property name="text">
@@ -306,7 +316,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Add_Data">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/add-data.svg</normaloff>:/images/main-window/add-data.svg</iconset>
    </property>
    <property name="text">
@@ -315,7 +325,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Modify_Data">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/data-processing-1.svg</normaloff>:/images/main-window/data-processing-1.svg</iconset>
    </property>
    <property name="text">
@@ -324,7 +334,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Bold">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/bold.svg</normaloff>:/images/main-window/bold.svg</iconset>
    </property>
    <property name="text">
@@ -336,7 +346,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Italic">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/italic.svg</normaloff>:/images/main-window/italic.svg</iconset>
    </property>
    <property name="text">
@@ -348,7 +358,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Underline">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/underline.svg</normaloff>:/images/main-window/underline.svg</iconset>
    </property>
    <property name="text">
@@ -360,7 +370,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Left">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/text-left.svg</normaloff>:/images/main-window/text-left.svg</iconset>
    </property>
    <property name="text">
@@ -372,7 +382,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Right">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/text-right.svg</normaloff>:/images/main-window/text-right.svg</iconset>
    </property>
    <property name="text">
@@ -384,7 +394,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Center">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/text-center.svg</normaloff>:/images/main-window/text-center.svg</iconset>
    </property>
    <property name="text">
@@ -396,7 +406,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Justify">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/text-justify.svg</normaloff>:/images/main-window/text-justify.svg</iconset>
    </property>
    <property name="text">
@@ -408,7 +418,7 @@ background-color: #ffffff;
   </action>
   <action name="action_About_Application">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/mw-help.svg</normaloff>:/images/main-window/mw-help.svg</iconset>
    </property>
    <property name="text">
@@ -420,7 +430,7 @@ background-color: #ffffff;
   </action>
   <action name="action_Settings">
    <property name="icon">
-    <iconset resource="../../images/main-window/main-window.qrc">
+    <iconset resource="../../images/main-window-black/main-window.qrc">
      <normaloff>:/images/main-window/mw-settings.svg</normaloff>:/images/main-window/mw-settings.svg</iconset>
    </property>
    <property name="text">
@@ -533,9 +543,9 @@ background-color: #ffffff;
     <string>Współczynnik korelacji Pearsona</string>
    </property>
   </action>
-  <action name="action_Test_Shapiro_Wilka">
+  <action name="dd">
    <property name="text">
-    <string>Test Shapiro-Wilka</string>
+    <string>df</string>
    </property>
   </action>
   <action name="action_Test_t_Studenta">
@@ -568,9 +578,34 @@ background-color: #ffffff;
     <string>Kategorii Krzyżowych</string>
    </property>
   </action>
+  <action name="action_Test_Shapiro_Wilka">
+   <property name="text">
+    <string>Test Shapiro-Wilka</string>
+   </property>
+  </action>
+  <action name="action_Test_Andersona_Darlinga">
+   <property name="text">
+    <string>Test Andersona-Darlinga</string>
+   </property>
+  </action>
+  <action name="action_Test_Kolmogorova_Smirnova">
+   <property name="text">
+    <string>Test Kołmogorova-Smirnova</string>
+   </property>
+  </action>
+  <action name="action_Test_Lillieforsa">
+   <property name="text">
+    <string>Test Lillieforsa</string>
+   </property>
+  </action>
+  <action name="action_Test_Jarque_Bera">
+   <property name="text">
+    <string>Test Jarque-Bera</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="../../images/main-window/main-window.qrc"/>
+  <include location="../../images/main-window-black/main-window.qrc"/>
   <include location="../../images/app-icon/app-icon.qrc"/>
  </resources>
  <connections/>
