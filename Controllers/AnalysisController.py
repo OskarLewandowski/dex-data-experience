@@ -8,6 +8,7 @@ from Views.Main.main_window import Ui_MainWindow_Main
 from Views.Analysis.basic_stats_window import Ui_MainWindow_Basic_Stats
 from Views.Analysis.correlation_window import Ui_MainWindow_Correlation
 from Views.Analysis.test_shapiro_wilka_window import Ui_MainWindow_Test_Shapiro_Wilka
+from Views.Analysis.test_andersona_darlinga_window import Ui_MainWindow_Test_Andersona_Darlinga
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -18,6 +19,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Basic_Stats.triggered.connect(self.createBasicStatsWindow)
         self.main.action_Correlation.triggered.connect(self.createCorrelationWindow)
         self.main.action_Test_Shapiro_Wilka.triggered.connect(self.createTestShapiroWilkaWindow)
+        self.main.action_Test_Andersona_Darlinga.triggered.connect(self.createTestAndersonaDarlingaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -308,6 +310,97 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeTestShapiroWilkaInBoard(self):
         try:
             data = self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test Andersona-Darlinga
+    def createTestAndersonaDarlingaWindow(self):
+        self.window_test_andersona_darlinga = QMainWindow()
+        self.window_test_andersona_darlinga_ui = Ui_MainWindow_Test_Andersona_Darlinga()
+        self.window_test_andersona_darlinga_ui.setupUi(self.window_test_andersona_darlinga)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_test_andersona_darlinga_ui.comboBox_Data_Column.addItems(dataAll)
+
+        self.window_test_andersona_darlinga_ui.pushButton_Reset_Options.clicked.connect(self.resetTestAndersonaDarlinga)
+        self.window_test_andersona_darlinga_ui.pushButton_Add_To_Board.clicked.connect(
+            self.writeTestAndersonaDarlingaInBoard)
+
+        self.window_test_andersona_darlinga_ui.comboBox_Data_Column.currentIndexChanged.connect(
+            self.writeTestAndersonaDarlinga)
+
+        self.window_test_andersona_darlinga_ui.checkBox_Description_Of_Results.clicked.connect(
+            self.writeTestAndersonaDarlinga)
+
+        self.window_test_andersona_darlinga.show()
+
+    def writeTestAndersonaDarlinga(self):
+        try:
+            data = self.window_test_andersona_darlinga_ui.comboBox_Data_Column.currentText()
+            result = None
+            summary = ""
+
+            if data:
+                result = self.splitText(data)
+                dataType = self.checkColumnType(data)
+                selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+                title = f"<b>Test Andersona Darlinga - test normalności danych</b><br>"
+
+                description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testowa:</b> Reprezentuje wartość testu. Im większa statystyka, tym bardziej dane różnią się od teoretycznego rozkładu."
+                               "<br><b>Wartości krytyczne:</b> Są to punkty odcięcia, poza którymi statystyka testowa jest na tyle ekstremalna, że odrzucamy hipotezę zerową. Im większa wartość krytyczna, tym bardziej ekstremalna musi być statystyka testowa, aby odrzucić hipotezę zerową."
+                               "<br><b>Poziomy istotności:</b> Określają poziomy ryzyka, przy których odrzucamy hipotezę zerową. Powszechnie stosowane poziomy istotności to 15%, 10%, 5%, 2.5% i 1%."
+                               "<ul>"
+                               "<li>Jeżeli <b>statystyka testowa jest mniejsza</b> od wartości krytycznej na danym poziomie istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
+                               "<li>Jeżeli <b>statystyka testowa jest większa</b> od wartości krytycznej na danym poziomie istotności, odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
+                               "</ul>"
+                               )
+
+                self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.clear()
+
+                if dataType == 0:
+                    statistic, critical_values, significance_level = stats.anderson(selectedColumn)
+
+                    testResult = (
+                        f"Zbiór: <b>{result[0]}</b><br>"
+                        f"Kolumna: <b>{result[1]}</b><br>"
+                        "<table>"
+                        f"<tr><td>Statystyka testowa:&nbsp;&nbsp;</td><td><b>{round(statistic, 2)}</b></td></tr>"
+                        f"<tr><td>Wartości krytyczne:&nbsp;&nbsp;</td><td><b>{'</b></td><td><b> &nbsp;&nbsp;'.join(map(lambda x: f'{x:.2f}', critical_values))}</b></td></tr>"
+                        f"<tr><td>Poziomy istotności:&nbsp;&nbsp;</td><td><b>{'</b></td><td><b> &nbsp;&nbsp;'.join(map(lambda x: f'{x:.2f}', significance_level))}</b></td></tr>"
+                        "</table>"
+                    )
+
+                    summary = title + testResult
+
+                    if self.window_test_andersona_darlinga_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    summary = (f"Nieprawidłowe dane w kolumnie <b>'{result[1]}'</b>, wymagane są dane numeryczne!<br>"
+                               f"Wybierz kolumne zawierające dane ilościowe.")
+
+            self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestAndersonaDarlinga(self):
+        self.window_test_andersona_darlinga_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_andersona_darlinga_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.clear()
+        self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_andersona_darlinga_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestAndersonaDarlingaInBoard(self):
+        try:
+            data = self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
