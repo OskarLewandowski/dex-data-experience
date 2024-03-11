@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from statsmodels.stats.diagnostic import lilliefors
 from scipy import stats
 from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow
@@ -10,6 +11,7 @@ from Views.Analysis.correlation_window import Ui_MainWindow_Correlation
 from Views.Analysis.test_shapiro_wilka_window import Ui_MainWindow_Test_Shapiro_Wilka
 from Views.Analysis.test_andersona_darlinga_window import Ui_MainWindow_Test_Andersona_Darlinga
 from Views.Analysis.test_kolmogorova_smirnova_window import Ui_MainWindow_Test_Kolomogorova_Smirnova
+from Views.Analysis.test_lillieforsa_window import Ui_MainWindow_Test_Lillieforsa
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -22,6 +24,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Shapiro_Wilka.triggered.connect(self.createTestShapiroWilkaWindow)
         self.main.action_Test_Andersona_Darlinga.triggered.connect(self.createTestAndersonaDarlingaWindow)
         self.main.action_Test_Kolmogorova_Smirnova.triggered.connect(self.createTestKolmogorovaSmirnovaWindow)
+        self.main.action_Test_Lillieforsa.triggered.connect(self.createTestLillieforsaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -488,6 +491,87 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeTestKolmogorovaSmirnovaInBoard(self):
         try:
             data = self.window_test_kolmogorova_smirnova_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test Lillieforsa
+    def createTestLillieforsaWindow(self):
+        self.window_test_lillieforsa = QMainWindow()
+        self.window_test_lillieforsa_ui = Ui_MainWindow_Test_Lillieforsa()
+        self.window_test_lillieforsa_ui.setupUi(self.window_test_lillieforsa)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_test_lillieforsa_ui.comboBox_Data_Column.addItems(dataAll)
+
+        self.window_test_lillieforsa_ui.pushButton_Reset_Options.clicked.connect(self.resetTestLillieforsa)
+        self.window_test_lillieforsa_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestLillieforsaInBoard)
+
+        self.window_test_lillieforsa_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestLillieforsa)
+
+        self.window_test_lillieforsa_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestLillieforsa)
+
+        self.window_test_lillieforsa.show()
+
+    def writeTestLillieforsa(self):
+        try:
+            data = self.window_test_lillieforsa_ui.comboBox_Data_Column.currentText()
+            result = None
+            summary = ""
+
+            if data:
+                result = self.splitText(data)
+                dataType = self.checkColumnType(data)
+                selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+                title = f"<b>Test Lillieforsa - test normalności danych</b><br>"
+
+                description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu:</b> Jest to maksymalna różnica między dystrybuantą empiryczną a teoretyczną dystrybuantą rozkładu normalnego."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu Lillieforsa, hipoteza zerowa zakłada, że dane mają rozkład normalny."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
+                               "</ul>")
+
+                self.window_test_lillieforsa_ui.textEdit_Preview_Board.clear()
+
+                if dataType == 0:
+                    statistic, p_value = lilliefors(selectedColumn)
+
+                    testResult = (f"Zbiór: <b>{result[0]}</b><br>"
+                                  f"Kolumna: <b>{result[1]}</b><br><br>"
+                                  f"Statystyka testu: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
+
+                    summary = title + testResult
+
+                    if self.window_test_lillieforsa_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    summary = (f"Nieprawidłowe dane w kolumnie <b>'{result[1]}'</b>, wymagane są dane numeryczne!<br>"
+                               f"Wybierz kolumne zawierające dane ilościowe.")
+
+            self.window_test_lillieforsa_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestLillieforsa(self):
+        self.window_test_lillieforsa_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_lillieforsa_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_lillieforsa_ui.textEdit_Preview_Board.clear()
+        self.window_test_lillieforsa_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_lillieforsa_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestLillieforsaInBoard(self):
+        try:
+            data = self.window_test_lillieforsa_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
