@@ -48,11 +48,6 @@
       </item>
       <item>
        <property name="text">
-        <string>Tablica</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
         <string>Inne</string>
        </property>
       </item>
@@ -61,7 +56,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget_Content">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="General">
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -415,10 +410,59 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>631</width>
+             <height>530</height>
             </rect>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_12">
+            <item>
+             <widget class="QGroupBox" name="groupBox_4">
+              <property name="title">
+               <string>Powiadomienie przy zamykaniu aplikacji</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <item>
+                  <widget class="QLabel" name="label_9">
+                   <property name="text">
+                    <string>Wyświetl przypomnienie o zapisie projektu</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_Window_Reminding_To_Save">
+                   <item>
+                    <property name="text">
+                     <string>Zawsze</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Nigdy</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>443</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -473,8 +517,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>631</width>
+             <height>530</height>
             </rect>
            </property>
           </widget>
