@@ -165,6 +165,18 @@ class Ui_MainWindow_Settings(object):
         self.pushButton_Secondary_Text_Color.setObjectName("pushButton_Secondary_Text_Color")
         self.horizontalLayout_9.addWidget(self.pushButton_Secondary_Text_Color)
         self.verticalLayout_3.addLayout(self.horizontalLayout_9)
+        self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
+        self.label_8 = QtWidgets.QLabel(parent=self.groupBox_3)
+        self.label_8.setObjectName("label_8")
+        self.horizontalLayout_14.addWidget(self.label_8)
+        self.comboBox_Icon_Color = QtWidgets.QComboBox(parent=self.groupBox_3)
+        self.comboBox_Icon_Color.setEnabled(False)
+        self.comboBox_Icon_Color.setObjectName("comboBox_Icon_Color")
+        self.comboBox_Icon_Color.addItem("")
+        self.comboBox_Icon_Color.addItem("")
+        self.horizontalLayout_14.addWidget(self.comboBox_Icon_Color)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_14)
         self.verticalLayout_4.addWidget(self.groupBox_3)
         self.verticalLayout_5.addLayout(self.verticalLayout_4)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -193,7 +205,7 @@ class Ui_MainWindow_Settings(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 631, 530))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 98, 28))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_4)
         self.verticalLayout_10.addWidget(self.scrollArea_2)
@@ -216,7 +228,7 @@ class Ui_MainWindow_Settings(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollArea_3.setObjectName("scrollArea_3")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 631, 530))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 98, 28))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.scrollArea_3.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.addWidget(self.scrollArea_3)
@@ -235,7 +247,7 @@ class Ui_MainWindow_Settings(object):
         MainWindow_Settings.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Settings)
-        self.stackedWidget_Content.setCurrentIndex(2)
+        self.stackedWidget_Content.setCurrentIndex(0)
         self.pushButton_Close_Other.clicked.connect(MainWindow_Settings.close) # type: ignore
         self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.pushButton_Primary_Text_Color.setEnabled) # type: ignore
         self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.pushButton_Secondary_Color.setEnabled) # type: ignore
@@ -249,6 +261,7 @@ class Ui_MainWindow_Settings(object):
         self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.comboBox_Theme.setDisabled) # type: ignore
         self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.pushButton_Secondary_Text_Color.setEnabled) # type: ignore
         self.pushButton_Close_Board.clicked.connect(MainWindow_Settings.close) # type: ignore
+        self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.comboBox_Icon_Color.setEnabled) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Settings)
 
     def retranslateUi(self, MainWindow_Settings):
@@ -275,6 +288,9 @@ class Ui_MainWindow_Settings(object):
         self.label_5.setText(_translate("MainWindow_Settings", "Dodatkowy ciemny kolor"))
         self.label_6.setText(_translate("MainWindow_Settings", "Podstawowy kolor tekstu"))
         self.label_7.setText(_translate("MainWindow_Settings", "Dodatkowy kolor tekstu"))
+        self.label_8.setText(_translate("MainWindow_Settings", "Kolor ikon"))
+        self.comboBox_Icon_Color.setItemText(0, _translate("MainWindow_Settings", "Ciemny"))
+        self.comboBox_Icon_Color.setItemText(1, _translate("MainWindow_Settings", "Jasny"))
         self.pushButton_Close_General.setText(_translate("MainWindow_Settings", "Zamknij"))
         self.pushButton_Close_Board.setText(_translate("MainWindow_Settings", "Zamknij"))
         self.pushButton_Close_Other.setText(_translate("MainWindow_Settings", "Zamknij"))

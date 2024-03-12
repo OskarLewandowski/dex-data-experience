@@ -39,6 +39,8 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.comboBox_Language.currentIndexChanged.connect(self.loadLanguage)
         self.checkBox_Use_Custom_Theme.clicked.connect(self.saveSettings)
         self.checkBox_Use_Secondary_Colors.clicked.connect(self.saveSettings)
+        self.comboBox_Icon_Color.currentIndexChanged.connect(self.loadThem)
+        self.comboBox_Icon_Color.currentIndexChanged.connect(self.saveSettings)
 
         self.pushButton_Primary_Color.clicked.connect(
             lambda: self.changeColor('primaryColor', 'pushButton_Primary_Color'))
@@ -163,12 +165,26 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.comboBox_Theme.clear()
         self.comboBox_Theme.addItems(themes)
 
+    def customThemIconColor(self, colorIconIndex=0):
+        if colorIconIndex == 0:
+            self.main.addIconsToActions("black")
+        elif colorIconIndex == 1:
+            self.main.addIconsToActions("white")
+        else:
+            self.main.addIconsToActions("black")
+
     def loadThem(self):
         if self.checkBox_Use_Custom_Theme.isChecked():
+            colorIconIndex = self.comboBox_Icon_Color.currentIndex()
             if self.checkBox_Use_Secondary_Colors.isChecked():
-                self.apply_stylesheet(self.app, self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE))
+                self.apply_stylesheet(self.app, self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE),
+                                      invert_secondary=True)
+                self.customThemIconColor(colorIconIndex)
+
             else:
                 self.apply_stylesheet(self.app, self.main.resourcePath(SettingsController.CUSTOM_THEM_FILE))
+                self.customThemIconColor(colorIconIndex)
+
         else:
             themes_path = self.main.resourcePath("Themes/")
             extension = ".xml"
@@ -206,11 +222,13 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 theme_index = settings.get("theme_index", 1)
                 custom_theme_enabled = settings.get("custom_theme_enabled", False)
                 secondary_colors_enabled = settings.get("secondary_colors_enabled", False)
+                custom_theme_icon_color = settings.get("custom_theme_icon_color", 0)
 
                 self.checkBox_Use_Custom_Theme.setChecked(custom_theme_enabled)
                 self.checkBox_Use_Secondary_Colors.setChecked(secondary_colors_enabled)
                 self.comboBox_Language.setCurrentIndex(language_index)
                 self.comboBox_Theme.setCurrentIndex(theme_index)
+                self.comboBox_Icon_Color.setCurrentIndex(custom_theme_icon_color)
 
                 self.loadThem()
         else:
@@ -218,7 +236,8 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 "language_index": 0,
                 "theme_index": 1,
                 "custom_theme_enabled": False,
-                "secondary_colors_enabled": False
+                "secondary_colors_enabled": False,
+                "custom_theme_icon_color": 0
             }
 
             with open(self.main.resourcePath(SettingsController.SETTINGS_FILE), 'w') as file:
@@ -230,12 +249,14 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         theme_index = self.comboBox_Theme.currentIndex()
         custom_theme_enabled = self.checkBox_Use_Custom_Theme.isChecked()
         secondary_colors_enabled = self.checkBox_Use_Secondary_Colors.isChecked()
+        custom_theme_icon_color = self.comboBox_Icon_Color.currentIndex()
 
         settings = {
             "language_index": language_index,
             "theme_index": theme_index,
             "custom_theme_enabled": custom_theme_enabled,
-            "secondary_colors_enabled": secondary_colors_enabled
+            "secondary_colors_enabled": secondary_colors_enabled,
+            "custom_theme_icon_color": custom_theme_icon_color
         }
 
         with open(self.main.resourcePath(SettingsController.SETTINGS_FILE), 'w') as file:
