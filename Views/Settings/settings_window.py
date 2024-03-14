@@ -220,6 +220,7 @@ class Ui_MainWindow_Settings(object):
         self.comboBox_Window_Reminding_To_Save.setObjectName("comboBox_Window_Reminding_To_Save")
         self.comboBox_Window_Reminding_To_Save.addItem("")
         self.comboBox_Window_Reminding_To_Save.addItem("")
+        self.comboBox_Window_Reminding_To_Save.addItem("")
         self.horizontalLayout_15.addWidget(self.comboBox_Window_Reminding_To_Save)
         self.verticalLayout_11.addLayout(self.horizontalLayout_15)
         self.verticalLayout_12.addWidget(self.groupBox_4)
@@ -265,7 +266,7 @@ class Ui_MainWindow_Settings(object):
         MainWindow_Settings.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Settings)
-        self.stackedWidget_Content.setCurrentIndex(1)
+        self.stackedWidget_Content.setCurrentIndex(0)
         self.pushButton_Close_Other.clicked.connect(MainWindow_Settings.close) # type: ignore
         self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.pushButton_Primary_Text_Color.setEnabled) # type: ignore
         self.checkBox_Use_Custom_Theme.toggled['bool'].connect(self.pushButton_Secondary_Color.setEnabled) # type: ignore
@@ -312,6 +313,7 @@ class Ui_MainWindow_Settings(object):
         self.label_9.setText(_translate("MainWindow_Settings", "Wyświetl przypomnienie o zapisie projektu"))
         self.comboBox_Window_Reminding_To_Save.setItemText(0, _translate("MainWindow_Settings", "Zawsze"))
         self.comboBox_Window_Reminding_To_Save.setItemText(1, _translate("MainWindow_Settings", "Nigdy"))
+        self.comboBox_Window_Reminding_To_Save.setItemText(2, _translate("MainWindow_Settings", "Nigdy - zapis automatyczny (wymagany zapisany projekt)"))
         self.pushButton_Close_Board.setText(_translate("MainWindow_Settings", "Zamknij"))
         self.pushButton_Close_Other.setText(_translate("MainWindow_Settings", "Zamknij"))
 

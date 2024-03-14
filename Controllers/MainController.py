@@ -335,6 +335,10 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                         a0.accept()
                     else:
                         a0.ignore()
+                elif show_save_reminder_window == 2:
+                    if self.pathCurrentFileGlobal:
+                        self.save(self.pathCurrentFileGlobal)
+                    a0.accept()
                 else:
                     a0.accept()
         else:
