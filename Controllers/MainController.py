@@ -3,7 +3,7 @@ import sys
 from Views.Main.about_app import Ui_Dialog_About_App
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QFile
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, \
     QFontDialog, QColorDialog, QLabel
@@ -320,15 +320,26 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.textEdit_Board.setTextCursor(cursor)
 
     def closeEvent(self, a0):
-        result = MessageModel.exitApp()
+        if QFile.exists(self.resourcePath("settings.json")):
+            with open(self.resourcePath("settings.json"), 'r') as file:
+                settings = json.load(file)
+                show_save_reminder_window = settings.get("show_save_reminder_window", 0)
 
-        if result == 1:
+                if show_save_reminder_window == 0:
+                    result = MessageModel.exitApp()
+
+                    if result == 1:
+                        self.saveChanges()
+                        a0.accept()
+                    elif result == 2:
+                        a0.accept()
+                    else:
+                        a0.ignore()
+                else:
+                    a0.accept()
+        else:
             self.saveChanges()
             a0.accept()
-        elif result == 2:
-            a0.accept()
-        else:
-            a0.ignore()
 
     def printPreviewBoard(self):
         try:
