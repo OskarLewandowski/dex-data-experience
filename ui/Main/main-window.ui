@@ -28,13 +28,16 @@
      <widget class="QTextEdit" name="textEdit_Board">
       <property name="font">
        <font>
-        <family>Calibri</family>
-        <pointsize>12</pointsize>
+        <family>Segoe UI</family>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QTextEdit{
 background-color: #ffffff;
+color: #000000;
+font-size: 14pt;
+font-family: &quot;Segoe UI&quot;;
 }</string>
       </property>
      </widget>
@@ -126,7 +129,6 @@ background-color: #ffffff;
     <addaction name="action_Test_ANOVA"/>
     <addaction name="action_Test_Chi_Square"/>
     <addaction name="action_Test_Kruskala_Wallisa"/>
-    <addaction name="action_Linear_Regression"/>
    </widget>
    <widget class="QMenu" name="menu_Charts">
     <property name="title">
@@ -498,36 +500,6 @@ background-color: #ffffff;
     <string>Zmień nazwę zbioru</string>
    </property>
   </action>
-  <action name="actionTest_1">
-   <property name="text">
-    <string>Test-1</string>
-   </property>
-  </action>
-  <action name="actionTest_2">
-   <property name="text">
-    <string>Test-2</string>
-   </property>
-  </action>
-  <action name="actionTest_3">
-   <property name="text">
-    <string>Test-3</string>
-   </property>
-  </action>
-  <action name="actionTest_4">
-   <property name="text">
-    <string>Test-1</string>
-   </property>
-  </action>
-  <action name="actionTest_5">
-   <property name="text">
-    <string>Test-2</string>
-   </property>
-  </action>
-  <action name="actionTest_6">
-   <property name="text">
-    <string>Test-3</string>
-   </property>
-  </action>
   <action name="action_Delete_Dataframe">
    <property name="text">
     <string>Usuń dane</string>
@@ -541,11 +513,6 @@ background-color: #ffffff;
   <action name="action_Correlation">
    <property name="text">
     <string>Współczynnik korelacji Pearsona</string>
-   </property>
-  </action>
-  <action name="dd">
-   <property name="text">
-    <string>df</string>
    </property>
   </action>
   <action name="action_Test_t_Studenta">
@@ -566,16 +533,6 @@ background-color: #ffffff;
   <action name="action_Test_Kruskala_Wallisa">
    <property name="text">
     <string>Test Kruskala-Wallisa</string>
-   </property>
-  </action>
-  <action name="action_Linear_Regression">
-   <property name="text">
-    <string>Regresji Liniowej</string>
-   </property>
-  </action>
-  <action name="actionKategorii_Krzy_owych">
-   <property name="text">
-    <string>Kategorii Krzyżowych</string>
    </property>
   </action>
   <action name="action_Test_Shapiro_Wilka">

@@ -474,8 +474,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.fontComboBox_Text_Font = QFontComboBox()
         self.fontComboBox_Text_Font.setEditable(False)
         font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(12)
+        font.setFamily("Segoe UI")
+        font.setPointSize(14)
         self.fontComboBox_Text_Font.setCurrentFont(font)
         self.toolBar.addWidget(self.fontComboBox_Text_Font)
 
@@ -487,7 +487,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.spinBox_Text_Size.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.UpDownArrows)
         self.spinBox_Text_Size.setMinimum(8)
         self.spinBox_Text_Size.setMaximum(72)
-        self.spinBox_Text_Size.setProperty("value", 12)
+        self.spinBox_Text_Size.setProperty("value", 14)
         self.spinBox_Text_Size.setDisplayIntegerBase(10)
         self.toolBar.addWidget(self.spinBox_Text_Size)
 
