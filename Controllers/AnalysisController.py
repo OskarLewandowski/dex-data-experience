@@ -13,6 +13,7 @@ from Views.Analysis.test_andersona_darlinga_window import Ui_MainWindow_Test_And
 from Views.Analysis.test_kolmogorova_smirnova_window import Ui_MainWindow_Test_Kolomogorova_Smirnova
 from Views.Analysis.test_lillieforsa_window import Ui_MainWindow_Test_Lillieforsa
 from Views.Analysis.test_jarque_bera_window import Ui_MainWindow_Test_Jarque_Bera
+from Views.Analysis.test_t_studenta_window import Ui_MainWindow_Test_T_Studenta
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -27,6 +28,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Kolmogorova_Smirnova.triggered.connect(self.createTestKolmogorovaSmirnovaWindow)
         self.main.action_Test_Lillieforsa.triggered.connect(self.createTestLillieforsaWindow)
         self.main.action_Test_Jarque_Bera.triggered.connect(self.createTestJarqueBeraWindow)
+        self.main.action_Test_t_Studenta.triggered.connect(self.createTestTStudentaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -653,6 +655,112 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeTestJarqueBeraInBoard(self):
         try:
             data = self.window_test_jarque_bera_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test t-Studenta
+    def createTestTStudentaWindow(self):
+        self.window_test_t_studenta = QMainWindow()
+        self.window_test_t_studenta_ui = Ui_MainWindow_Test_T_Studenta()
+        self.window_test_t_studenta_ui.setupUi(self.window_test_t_studenta)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_test_t_studenta_ui.comboBox_Data_Column.addItems(dataAll)
+        self.window_test_t_studenta_ui.comboBox_Data_Column_2.addItems(dataAll)
+
+        self.window_test_t_studenta_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudenta)
+        self.window_test_t_studenta_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTStudentaInBoard)
+
+        self.window_test_t_studenta_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestTStudenta)
+        self.window_test_t_studenta_ui.comboBox_Data_Column_2.currentIndexChanged.connect(self.writeTestTStudenta)
+
+        self.window_test_t_studenta_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestTStudenta)
+
+        self.window_test_t_studenta.show()
+
+    def writeTestTStudenta(self):
+        try:
+            data1 = self.window_test_t_studenta_ui.comboBox_Data_Column.currentText()
+            data2 = self.window_test_t_studenta_ui.comboBox_Data_Column_2.currentText()
+
+            result1 = None
+            result2 = None
+
+            summary = ""
+
+            if data1 and data2:
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
+
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
+
+                selectedColumn1 = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                selectedColumn2 = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
+
+                title = f"<b>Test t-Studenta - test różnicy między średnimi dwóch grup</b><br>"
+
+                description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch grup w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę między grupami."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta, hipoteza zerowa zakłada, że średnie obu grup są równe."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnie obu grup są różne i różnica ta jest statystycznie istotna.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnimi obu grup.</li>"
+                               "</ul>")
+
+                self.window_test_t_studenta_ui.textEdit_Preview_Board.clear()
+
+                if dataType1 == 0 and dataType2 == 0:
+                    statistic, p_value = stats.ttest_ind(selectedColumn1, selectedColumn2)
+
+                    testResult = (f"Grupa 1: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Grupa 2: <b>{result2[0]} : {result2[1]}</b><br><br>"
+                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
+
+                    summary = title + testResult
+
+                    if self.window_test_t_studenta_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    if dataType1 == 1 and dataType2 == 0:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnie <b>'{result1[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
+                    elif dataType1 == 0 and dataType2 == 1:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnie <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
+                    else:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnach <b>'{result1[1]}' </b> oraz <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumny zawierające dane ilościowe.")
+            else:
+                summary = ("Wybierz obie grupy danych do przeprowadzenia testu")
+
+            self.window_test_t_studenta_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestTStudenta(self):
+        self.window_test_t_studenta_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_t_studenta_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_t_studenta_ui.textEdit_Preview_Board.clear()
+        self.window_test_t_studenta_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_t_studenta_ui.checkBox_Description_Of_Results.setChecked(False)
+        self.window_test_t_studenta_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
+
+    def writeTestTStudentaInBoard(self):
+        try:
+            data = self.window_test_t_studenta_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
