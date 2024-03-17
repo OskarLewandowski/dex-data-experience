@@ -15,6 +15,7 @@ from Views.Analysis.test_lillieforsa_window import Ui_MainWindow_Test_Lilliefors
 from Views.Analysis.test_jarque_bera_window import Ui_MainWindow_Test_Jarque_Bera
 from Views.Analysis.test_t_studenta_window import Ui_MainWindow_Test_T_Studenta
 from Views.Analysis.test_anova_window import Ui_MainWindow_Test_ANOVA
+from Views.Analysis.test_chi_square_window import Ui_MainWindow_Test_Chi_Square
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -31,6 +32,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Jarque_Bera.triggered.connect(self.createTestJarqueBeraWindow)
         self.main.action_Test_t_Studenta.triggered.connect(self.createTestTStudentaWindow)
         self.main.action_Test_ANOVA.triggered.connect(self.createTestAnovaWindow)
+        self.main.action_Test_Chi_Square.triggered.connect(self.createTestChiSquareWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -193,7 +195,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                            "<li>Dodatnie liczby wskazują na dodatnią korelację, podczas gdy ujemne liczby wskazują na ujemną korelację.</li>"
                            "<li>Im bliżej liczby do 1 (lub -1), tym silniejsza jest korelacja.</li>"
                            "<li>Liczba 0 oznacza brak korelacji między dwoma zmiennymi.</li>"
-                           "</ul>")
+                           "</ul><br>")
 
             if selectedItems:
                 column_names = [item.text() for item in selectedItems]
@@ -285,7 +287,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
-                               "</ul>")
+                               "</ul><br>")
 
                 self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.clear()
 
@@ -370,7 +372,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<ul>"
                                "<li>Jeżeli <b>statystyka testowa jest mniejsza</b> od wartości krytycznej na danym poziomie istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
                                "<li>Jeżeli <b>statystyka testowa jest większa</b> od wartości krytycznej na danym poziomie istotności, odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
-                               "</ul>"
+                               "</ul><br>"
                                )
 
                 self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.clear()
@@ -461,7 +463,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
-                               "</ul>")
+                               "</ul><br>")
 
                 self.window_test_kolmogorova_smirnova_ui.textEdit_Preview_Board.clear()
 
@@ -542,7 +544,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mają rozkład normalny.</li>"
-                               "</ul>")
+                               "</ul><br>")
 
                 self.window_test_lillieforsa_ui.textEdit_Preview_Board.clear()
 
@@ -622,7 +624,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że dane nie mają rozkładu normalnego.</li>"
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że dane mogą pochodzić z rozkładu normalnego. Pamiętaj jednak, że nie jest to to samo co potwierdzenie, że dane pochodzą z rozkładu normalnego.</li>"
-                               "</ul>")
+                               "</ul><br>")
 
                 self.window_test_jarque_bera_ui.textEdit_Preview_Board.clear()
 
@@ -714,7 +716,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnie obu grup są różne i różnica ta jest statystycznie istotna.</li>"
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnimi obu grup.</li>"
-                               "</ul>")
+                               "</ul><br>")
 
                 self.window_test_t_studenta_ui.textEdit_Preview_Board.clear()
 
@@ -812,7 +814,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                            "<ul>"
                            "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że przynajmniej jedna z grup ma inną średnią.</li>"
                            "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że wszystkie grupy mają takie same średnie populacji.</li>"
-                           "</ul>")
+                           "</ul><br>")
 
             if selectedItems:
                 column_names = [item.text() for item in selectedItems]
@@ -893,3 +895,112 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             self.window_test_anova_ui.listWidget_Data_Columns.setEnabled(False)
             self.window_test_anova_ui.listWidget_Data_Columns.clear()
             self.window_test_anova_ui.textEdit_Preview_Board.clear()
+
+    # Test Chi-square
+    def createTestChiSquareWindow(self):
+        self.window_test_chi_square = QMainWindow()
+        self.window_test_chi_square_ui = Ui_MainWindow_Test_Chi_Square()
+        self.window_test_chi_square_ui.setupUi(self.window_test_chi_square)
+
+        dataAll = DataStorageModel.get_all_keys()
+
+        self.window_test_chi_square_ui.comboBox_Data.addItems(dataAll)
+
+        self.window_test_chi_square_ui.pushButton_Reset_Options.clicked.connect(self.resetTestChiSquare)
+        self.window_test_chi_square_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestChiSquareInBoard)
+
+        self.window_test_chi_square_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestChiSquare)
+        self.window_test_chi_square_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsTestChiSquare)
+
+        self.window_test_chi_square_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeTestChiSquare)
+        self.window_test_chi_square_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestChiSquare)
+
+        self.window_test_chi_square.show()
+
+    def fillDataColumnsTestChiSquare(self):
+        data = self.window_test_chi_square_ui.comboBox_Data.currentText()
+        if data:
+            df = pd.DataFrame(DataStorageModel.get(data))
+            df = df.columns.tolist()
+            self.window_test_chi_square_ui.listWidget_Data_Columns.clear()
+            self.window_test_chi_square_ui.listWidget_Data_Columns.addItems(df)
+            self.window_test_chi_square_ui.listWidget_Data_Columns.setEnabled(True)
+        else:
+            self.window_test_chi_square_ui.listWidget_Data_Columns.setEnabled(False)
+            self.window_test_chi_square_ui.listWidget_Data_Columns.clear()
+            self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
+
+    def writeTestChiSquare(self):
+        try:
+            data = self.window_test_chi_square_ui.comboBox_Data.currentText()
+
+            result = None
+            testResult = None
+
+            self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
+
+            selectedItems = self.window_test_chi_square_ui.listWidget_Data_Columns.selectedItems()
+            title = "<b>Test Chi-square - test zależności między grupami</b><br>"
+
+            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                           "<b>Statystyka testu:</b> Wartość statystyki testu Chi-kwadrat mierzy różnicę między obserwowanymi danymi a danymi oczekiwanymi. Im większa wartość Chi-kwadrat, tym większa różnica między danymi. Statystyka ta jest obliczana na podstawie kwadratu różnicy między obserwowanymi a oczekiwanymi liczbami przypadków, podzielonym przez wartość oczekiwaną dla każdej kategorii."
+                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak zależności między zmiennymi. Odrzucenie hipotezy zerowej sugeruje istnienie zależności między zmiennymi."
+                           "<ul>"
+                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieje zależność między zmiennymi.</li>"
+                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na zależność między zmiennymi.</li>"
+                           "</ul><br>")
+
+            if selectedItems:
+                column_names = [item.text() for item in selectedItems]
+
+                data_frame = DataStorageModel.get(data)
+                data_frame = data_frame[column_names]
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+            else:
+                data_frame = DataStorageModel.get(data)
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+            try:
+                if data_frame is not None:
+                    statistic, p_value, dof, expected = stats.chi2_contingency(data_frame)
+
+                    testResult = (f"Zbiór: <b>{data}</b><br>"
+                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
+                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b>")
+            except:
+                result = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
+                self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(result)
+
+            if self.window_test_chi_square_ui.checkBox_Description_Of_Results.isChecked():
+                result = title + testResult + description
+            else:
+                result = title + testResult
+
+            if data:
+                self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(result)
+
+
+        except Exception as e:
+            pass
+
+    def resetTestChiSquare(self):
+        self.window_test_chi_square_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_test_chi_square_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
+        self.window_test_chi_square_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_chi_square_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestChiSquareInBoard(self):
+        try:
+            data = self.window_test_chi_square_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
