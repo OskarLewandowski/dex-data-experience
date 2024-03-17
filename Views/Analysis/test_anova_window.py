@@ -36,6 +36,25 @@ class Ui_MainWindow_Test_ANOVA(object):
         self.groupBox.setObjectName("groupBox")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.groupBox)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label = QtWidgets.QLabel(parent=self.groupBox)
+        self.label.setObjectName("label")
+        self.horizontalLayout_3.addWidget(self.label)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem1)
+        self.toolButton_Data = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Data.setObjectName("toolButton_Data")
+        self.horizontalLayout_3.addWidget(self.toolButton_Data)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
+        self.comboBox_Data = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Data.setMinimumSize(QtCore.QSize(250, 0))
+        self.comboBox_Data.setObjectName("comboBox_Data")
+        self.verticalLayout_3.addWidget(self.comboBox_Data)
+        self.verticalLayout_13.addLayout(self.verticalLayout_3)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
@@ -43,16 +62,16 @@ class Ui_MainWindow_Test_ANOVA(object):
         self.label_2 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_4.addWidget(self.label_2)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem1)
+        self.horizontalLayout_4.addItem(spacerItem2)
         self.toolButton_Data_Columns = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Data_Columns.setObjectName("toolButton_Data_Columns")
         self.horizontalLayout_4.addWidget(self.toolButton_Data_Columns)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
         self.listWidget_Data_Columns = QtWidgets.QListWidget(parent=self.groupBox)
-        self.listWidget_Data_Columns.setEnabled(True)
-        self.listWidget_Data_Columns.setAlternatingRowColors(True)
+        self.listWidget_Data_Columns.setEnabled(False)
+        self.listWidget_Data_Columns.setAlternatingRowColors(False)
         self.listWidget_Data_Columns.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
         self.listWidget_Data_Columns.setObjectName("listWidget_Data_Columns")
         self.verticalLayout.addWidget(self.listWidget_Data_Columns)
@@ -63,9 +82,9 @@ class Ui_MainWindow_Test_ANOVA(object):
         self.label_3 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_5.addWidget(self.label_3)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem2)
+        self.horizontalLayout_5.addItem(spacerItem3)
         self.verticalLayout_4.addLayout(self.horizontalLayout_5)
         self.checkBox_Description_Of_Results = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Description_Of_Results.setObjectName("checkBox_Description_Of_Results")
@@ -79,9 +98,9 @@ class Ui_MainWindow_Test_ANOVA(object):
         self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_15.addWidget(self.label_12)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_15.addItem(spacerItem3)
+        self.horizontalLayout_15.addItem(spacerItem4)
         self.verticalLayout_16.addLayout(self.horizontalLayout_15)
         self.checkBox_Board_Is_Enabled = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Board_Is_Enabled.setChecked(False)
@@ -89,9 +108,9 @@ class Ui_MainWindow_Test_ANOVA(object):
         self.verticalLayout_16.addWidget(self.checkBox_Board_Is_Enabled)
         self.verticalLayout_13.addLayout(self.verticalLayout_16)
         self.verticalLayout_2.addWidget(self.groupBox)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                             QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
+        self.verticalLayout_2.addItem(spacerItem5)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
@@ -128,15 +147,15 @@ class Ui_MainWindow_Test_ANOVA(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem5)
+        self.horizontalLayout_11.addItem(spacerItem6)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem6)
+        self.horizontalLayout_11.addItem(spacerItem7)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -144,6 +163,7 @@ class Ui_MainWindow_Test_ANOVA(object):
         MainWindow_Test_ANOVA.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Test_ANOVA)
+        self.toolButton_Data.clicked.connect(lambda: self.comboBox_Data.setCurrentIndex(-1))  # type: ignore
         self.pushButton_Close.clicked.connect(MainWindow_Test_ANOVA.close)  # type: ignore
         self.checkBox_Board_Is_Enabled.clicked['bool'].connect(
             lambda checked: self.textEdit_Preview_Board.setReadOnly(not checked))
@@ -154,7 +174,10 @@ class Ui_MainWindow_Test_ANOVA(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow_Test_ANOVA.setWindowTitle(_translate("MainWindow_Test_ANOVA", "Test ANOVA"))
         self.groupBox.setTitle(_translate("MainWindow_Test_ANOVA", "Parametry:"))
-        self.label_2.setText(_translate("MainWindow_Test_ANOVA", "Zbiory danych:"))
+        self.label.setText(_translate("MainWindow_Test_ANOVA", "Zbiór danych:"))
+        self.toolButton_Data.setText(_translate("MainWindow_Test_ANOVA", "X"))
+        self.comboBox_Data.setPlaceholderText(_translate("MainWindow_Test_ANOVA", "Wybierz zbiór danych..."))
+        self.label_2.setText(_translate("MainWindow_Test_ANOVA", "Wybrane kolumny:"))
         self.toolButton_Data_Columns.setText(_translate("MainWindow_Test_ANOVA", "X"))
         self.label_3.setText(_translate("MainWindow_Test_ANOVA", "Opis wyników:"))
         self.checkBox_Description_Of_Results.setText(

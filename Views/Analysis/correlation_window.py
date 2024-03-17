@@ -71,7 +71,7 @@ class Ui_MainWindow_Correlation(object):
         self.verticalLayout.addLayout(self.horizontalLayout_4)
         self.listWidget_Data_Columns = QtWidgets.QListWidget(parent=self.groupBox)
         self.listWidget_Data_Columns.setEnabled(False)
-        self.listWidget_Data_Columns.setAlternatingRowColors(True)
+        self.listWidget_Data_Columns.setAlternatingRowColors(False)
         self.listWidget_Data_Columns.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
         self.listWidget_Data_Columns.setObjectName("listWidget_Data_Columns")
         self.verticalLayout.addWidget(self.listWidget_Data_Columns)
@@ -128,8 +128,15 @@ class Ui_MainWindow_Correlation(object):
         sizePolicy.setHeightForWidth(self.textEdit_Preview_Board.sizePolicy().hasHeightForWidth())
         self.textEdit_Preview_Board.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
+        font.setFamily("Segoe UI")
         font.setPointSize(14)
         self.textEdit_Preview_Board.setFont(font)
+        self.textEdit_Preview_Board.setStyleSheet("QTextEdit{\n"
+                                                  "background-color: #ffffff;\n"
+                                                  "color: #000000;\n"
+                                                  "font-size: 14pt;\n"
+                                                  "font-family: \"Segoe UI\";\n"
+                                                  "}")
         self.textEdit_Preview_Board.setReadOnly(True)
         self.textEdit_Preview_Board.setObjectName("textEdit_Preview_Board")
         self.verticalLayout_14.addWidget(self.textEdit_Preview_Board)

@@ -14,6 +14,7 @@ from Views.Analysis.test_kolmogorova_smirnova_window import Ui_MainWindow_Test_K
 from Views.Analysis.test_lillieforsa_window import Ui_MainWindow_Test_Lillieforsa
 from Views.Analysis.test_jarque_bera_window import Ui_MainWindow_Test_Jarque_Bera
 from Views.Analysis.test_t_studenta_window import Ui_MainWindow_Test_T_Studenta
+from Views.Analysis.test_anova_window import Ui_MainWindow_Test_ANOVA
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -29,6 +30,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Lillieforsa.triggered.connect(self.createTestLillieforsaWindow)
         self.main.action_Test_Jarque_Bera.triggered.connect(self.createTestJarqueBeraWindow)
         self.main.action_Test_t_Studenta.triggered.connect(self.createTestTStudentaWindow)
+        self.main.action_Test_ANOVA.triggered.connect(self.createTestAnovaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -156,14 +158,14 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationInBoard)
 
         self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.writeCorrelation)
-        self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumns)
+        self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsCorrelation)
 
         self.window_correlation_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeCorrelation)
         self.window_correlation_ui.checkBox_Description_Of_Results.clicked.connect(self.writeCorrelation)
 
         self.window_correlation.show()
 
-    def fillDataColumns(self):
+    def fillDataColumnsCorrelation(self):
         data = self.window_correlation_ui.comboBox_Data.currentText()
         if data:
             df = pd.DataFrame(DataStorageModel.get(data))
@@ -768,3 +770,126 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 cursor.insertHtml(data)
         except Exception as e:
             pass
+
+    # Test ANOVA
+    def createTestAnovaWindow(self):
+        self.window_test_anova = QMainWindow()
+        self.window_test_anova_ui = Ui_MainWindow_Test_ANOVA()
+        self.window_test_anova_ui.setupUi(self.window_test_anova)
+
+        dataAll = DataStorageModel.get_all_keys()
+
+        self.window_test_anova_ui.comboBox_Data.addItems(dataAll)
+
+        self.window_test_anova_ui.pushButton_Reset_Options.clicked.connect(self.resetTestAnova)
+        self.window_test_anova_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestAnovaInBoard)
+
+        self.window_test_anova_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestAnova)
+        self.window_test_anova_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsTestAnova)
+
+        self.window_test_anova_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeTestAnova)
+        self.window_test_anova_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestAnova)
+
+        self.window_test_anova.show()
+
+    def writeTestAnova(self):
+        try:
+            self.window_test_anova_ui.textEdit_Preview_Board.clear()
+            data = self.window_test_anova_ui.comboBox_Data.currentText()
+
+            result = None
+            groups = None
+
+            dataError = False
+            testResult = ""
+            selectedItems = self.window_test_anova_ui.listWidget_Data_Columns.selectedItems()
+
+            title = f"<b>Test ANOVA - test różnicy między średnimi wielu grup </b><br>"
+
+            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                           "<b>Statystyka testu F:</b> Ta wartość reprezentuje stosunek wariancji między grupami do wariancji wewnątrz grup. Większa wartość F sugeruje, że różnice między grupami są większe niż różnice wewnątrz grup. Wysoka wartość F sugeruje, że przynajmniej jedna z grup jest statystycznie różna od innych."
+                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu ANOVA, hipoteza zerowa zakłada, że wszystkie grupy mają takie same średnie populacji."
+                           "<ul>"
+                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że przynajmniej jedna z grup ma inną średnią.</li>"
+                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że wszystkie grupy mają takie same średnie populacji.</li>"
+                           "</ul>")
+
+            if selectedItems:
+                column_names = [item.text() for item in selectedItems]
+
+                data_frame = DataStorageModel.get(data)
+                data_frame = data_frame[column_names]
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+                groups = [data_frame[column].values for column in data_frame.columns]
+
+            else:
+                data_frame = DataStorageModel.get(data)
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+                groups = [data_frame[column].values for column in data_frame.columns]
+
+            try:
+                if groups and len(data_frame_columns_names) > 1:
+                    statistic, p_value = stats.f_oneway(*groups)
+
+                    testResult = (f"Zbiór: <b>{data}</b><br>"
+                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
+                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b>")
+
+            except:
+                dataError = True
+                testResult = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
+                self.window_test_anova_ui.textEdit_Preview_Board.setHtml(testResult)
+
+            if self.window_test_anova_ui.checkBox_Description_Of_Results.isChecked() and dataError == False:
+                result = title + testResult + description
+            elif dataError == False:
+                result = title + testResult
+            else:
+                result = testResult
+
+            if data and len(data_frame_columns_names) > 1:
+                self.window_test_anova_ui.textEdit_Preview_Board.setHtml(result)
+            elif len(data_frame_columns_names) < 2:
+                summary = ("Wybierz co najmniej dwie grupy danych do przeprowadzenia testu")
+                self.window_test_anova_ui.textEdit_Preview_Board.setHtml(summary)
+
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestAnova(self):
+        self.window_test_anova_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_test_anova_ui.listWidget_Data_Columns.clearSelection()
+        self.window_test_anova_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_anova_ui.textEdit_Preview_Board.clear()
+        self.window_test_anova_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_anova_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestAnovaInBoard(self):
+        try:
+            data = self.window_test_anova_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    def fillDataColumnsTestAnova(self):
+        data = self.window_test_anova_ui.comboBox_Data.currentText()
+        if data:
+            df = pd.DataFrame(DataStorageModel.get(data))
+            df = df.columns.tolist()
+            self.window_test_anova_ui.listWidget_Data_Columns.clear()
+            self.window_test_anova_ui.listWidget_Data_Columns.addItems(df)
+            self.window_test_anova_ui.listWidget_Data_Columns.setEnabled(True)
+        else:
+            self.window_test_anova_ui.listWidget_Data_Columns.setEnabled(False)
+            self.window_test_anova_ui.listWidget_Data_Columns.clear()
+            self.window_test_anova_ui.textEdit_Preview_Board.clear()
