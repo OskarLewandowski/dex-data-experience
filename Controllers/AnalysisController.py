@@ -16,6 +16,7 @@ from Views.Analysis.test_jarque_bera_window import Ui_MainWindow_Test_Jarque_Ber
 from Views.Analysis.test_t_studenta_window import Ui_MainWindow_Test_T_Studenta
 from Views.Analysis.test_anova_window import Ui_MainWindow_Test_ANOVA
 from Views.Analysis.test_chi_square_window import Ui_MainWindow_Test_Chi_Square
+from Views.Analysis.test_kruskal_wallis_window import Ui_MainWindow_Test_Kruskal_Wallis
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -33,6 +34,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_t_Studenta.triggered.connect(self.createTestTStudentaWindow)
         self.main.action_Test_ANOVA.triggered.connect(self.createTestAnovaWindow)
         self.main.action_Test_Chi_Square.triggered.connect(self.createTestChiSquareWindow)
+        self.main.action_Test_Kruskala_Wallisa.triggered.connect(self.createTestKruskalaWallisaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -997,6 +999,126 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeTestChiSquareInBoard(self):
         try:
             data = self.window_test_chi_square_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test Kruskala-Wallisa
+    def createTestKruskalaWallisaWindow(self):
+        self.window_test_kruskala_wallisa = QMainWindow()
+        self.window_test_kruskala_wallisa_ui = Ui_MainWindow_Test_Kruskal_Wallis()
+        self.window_test_kruskala_wallisa_ui.setupUi(self.window_test_kruskala_wallisa)
+
+        dataAll = DataStorageModel.get_all_keys()
+
+        self.window_test_kruskala_wallisa_ui.comboBox_Data.addItems(dataAll)
+
+        self.window_test_kruskala_wallisa_ui.pushButton_Reset_Options.clicked.connect(self.resetTestKruskalaWallisa)
+        self.window_test_kruskala_wallisa_ui.pushButton_Add_To_Board.clicked.connect(
+            self.writeTestKruskalaWallisaInBoard)
+
+        self.window_test_kruskala_wallisa_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestKruskalaWallisa)
+        self.window_test_kruskala_wallisa_ui.comboBox_Data.currentIndexChanged.connect(
+            self.fillDataColumnsTestKruskalaWallisa)
+
+        self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.itemSelectionChanged.connect(
+            self.writeTestKruskalaWallisa)
+        self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.clicked.connect(
+            self.writeTestKruskalaWallisa)
+
+        self.window_test_kruskala_wallisa.show()
+
+    def fillDataColumnsTestKruskalaWallisa(self):
+        data = self.window_test_kruskala_wallisa_ui.comboBox_Data.currentText()
+        if data:
+            df = pd.DataFrame(DataStorageModel.get(data))
+            df = df.columns.tolist()
+            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.clear()
+            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.addItems(df)
+            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.setEnabled(True)
+        else:
+            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.setEnabled(False)
+            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.clear()
+            self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
+
+    def writeTestKruskalaWallisa(self):
+        try:
+            self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
+            data = self.window_test_kruskala_wallisa_ui.comboBox_Data.currentText()
+
+            result = None
+            dataError = False
+            testResult = ""
+
+            selectedItems = self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.selectedItems()
+
+            title = "<b>Test Kruskala-Wallisa - test różnic między niezależnymi grupami</b><br>"
+
+            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                           "<b>Statystyka testu:</b> Wartość statystyki testu Kruskala-Wallisa mierzy różnicę między grupami danych. Im większa wartość statystyki, tym większa różnica między grupami. Statystyka ta jest obliczana na podstawie rang przypisanych poszczególnym obserwacjom."
+                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak różnic między grupami. Odrzucenie hipotezy zerowej sugeruje istnienie różnic między grupami."
+                           "<ul>"
+                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieją istotne różnice między grupami.</li>"
+                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na istotne różnice między grupami.</li>"
+                           "</ul><br>")
+
+            if selectedItems:
+                column_names = [item.text() for item in selectedItems]
+
+                data_frame = DataStorageModel.get(data)
+                data_frame = data_frame[column_names]
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+                groups = [data_frame[column].values for column in data_frame.columns]
+            else:
+                data_frame = DataStorageModel.get(data)
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+                groups = [data_frame[column].values for column in data_frame.columns]
+            try:
+                if groups and len(data_frame_columns_names) > 1:
+                    statistic, p_value = stats.kruskal(*groups)
+
+                    testResult = (f"Zbiór: <b>{data}</b><br>"
+                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
+                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b>")
+            except:
+                dataError = True
+                testResult = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
+                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(testResult)
+
+            if self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.isChecked() and dataError == False:
+                result = title + testResult + description
+            elif dataError == False:
+                result = title + testResult
+            else:
+                result = testResult
+
+            if data and len(data_frame_columns_names) > 1:
+                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(result)
+            elif len(data_frame_columns_names) < 2:
+                summary = ("Wybierz co najmniej dwie grupy danych do przeprowadzenia testu")
+                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(summary)
+        except Exception as e:
+            pass
+
+    def resetTestKruskalaWallisa(self):
+        self.window_test_kruskala_wallisa_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_test_kruskala_wallisa_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
+        self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestKruskalaWallisaInBoard(self):
+        try:
+            data = self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
