@@ -107,8 +107,15 @@ class Ui_MainWindow_Test_Shapiro_Wilka(object):
         sizePolicy.setHeightForWidth(self.textEdit_Preview_Board.sizePolicy().hasHeightForWidth())
         self.textEdit_Preview_Board.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
+        font.setFamily("Segoe UI")
         font.setPointSize(14)
         self.textEdit_Preview_Board.setFont(font)
+        self.textEdit_Preview_Board.setStyleSheet("QTextEdit{\n"
+                                                  "background-color: #ffffff;\n"
+                                                  "color: #000000;\n"
+                                                  "font-size: 14pt;\n"
+                                                  "font-family: \"Segoe UI\";\n"
+                                                  "}")
         self.textEdit_Preview_Board.setReadOnly(True)
         self.textEdit_Preview_Board.setObjectName("textEdit_Preview_Board")
         self.verticalLayout_14.addWidget(self.textEdit_Preview_Board)
