@@ -17,6 +17,7 @@ from Views.Analysis.test_t_studenta_window import Ui_MainWindow_Test_T_Studenta
 from Views.Analysis.test_anova_window import Ui_MainWindow_Test_ANOVA
 from Views.Analysis.test_chi_square_window import Ui_MainWindow_Test_Chi_Square
 from Views.Analysis.test_kruskal_wallis_window import Ui_MainWindow_Test_Kruskal_Wallis
+from Views.Analysis.test_tukeya_window import Ui_MainWindow_Test_Tukeya
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -35,6 +36,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_ANOVA.triggered.connect(self.createTestAnovaWindow)
         self.main.action_Test_Chi_Square.triggered.connect(self.createTestChiSquareWindow)
         self.main.action_Test_Kruskala_Wallisa.triggered.connect(self.createTestKruskalaWallisaWindow)
+        self.main.action_Test_Tukeya.triggered.connect(self.createTestTukeyaWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -1119,6 +1121,144 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeTestKruskalaWallisaInBoard(self):
         try:
             data = self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test Tukeya
+    def createTestTukeyaWindow(self):
+        self.window_test_tukeya = QMainWindow()
+        self.window_test_tukeya_ui = Ui_MainWindow_Test_Tukeya()
+        self.window_test_tukeya_ui.setupUi(self.window_test_tukeya)
+
+        dataAll = DataStorageModel.get_all_keys()
+
+        self.window_test_tukeya_ui.comboBox_Data.addItems(dataAll)
+
+        self.window_test_tukeya_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTukeya)
+        self.window_test_tukeya_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTukeyaInBoard)
+
+        self.window_test_tukeya_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestTukeya)
+        self.window_test_tukeya_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsTestTukeya)
+
+        self.window_test_tukeya_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeTestTukeya)
+        self.window_test_tukeya_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestTukeya)
+
+        self.window_test_tukeya.show()
+
+    def fillDataColumnsTestTukeya(self):
+        data = self.window_test_tukeya_ui.comboBox_Data.currentText()
+        if data:
+            df = pd.DataFrame(DataStorageModel.get(data))
+            df = df.columns.tolist()
+            self.window_test_tukeya_ui.listWidget_Data_Columns.clear()
+            self.window_test_tukeya_ui.listWidget_Data_Columns.addItems(df)
+            self.window_test_tukeya_ui.listWidget_Data_Columns.setEnabled(True)
+        else:
+            self.window_test_tukeya_ui.listWidget_Data_Columns.setEnabled(False)
+            self.window_test_tukeya_ui.listWidget_Data_Columns.clear()
+            self.window_test_tukeya_ui.textEdit_Preview_Board.clear()
+
+    def writeTestTukeya(self):
+        try:
+            self.window_test_tukeya_ui.textEdit_Preview_Board.clear()
+            data = self.window_test_tukeya_ui.comboBox_Data.currentText()
+
+            result = None
+            dataError = False
+            testResult = ""
+
+            selectedItems = self.window_test_tukeya_ui.listWidget_Data_Columns.selectedItems()
+
+            title = "<b>Test Tukeya - porównywanie średnich między grupami</b><br>"
+
+            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                           "<b>Statystyka testu:</b> W teście Tukeya HSD, statystyka testu mierzy różnicę między średnimi grup. Im większa wartość statystyki, tym większa różnica między grupami. Statystyka ta jest obliczana na podstawie różnic między średnimi grupami."
+                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak różnic między grupami. Odrzucenie hipotezy zerowej sugeruje istnienie różnic między grupami."
+                           "<ul>"
+                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieją istotne różnice między grupami.</li>"
+                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na istotne różnice między grupami.</li>"
+                           "</ul><br>")
+
+            if selectedItems:
+                column_names = [item.text() for item in selectedItems]
+
+                data_frame = DataStorageModel.get(data)
+                data_frame = data_frame[column_names]
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+                groups = [data_frame[column].values for column in data_frame.columns]
+            else:
+                data_frame = DataStorageModel.get(data)
+                data_frame_columns_names = data_frame.columns.tolist()
+                columns_names = ', '.join(data_frame_columns_names)
+
+                groups = [data_frame[column].values for column in data_frame.columns]
+            try:
+                if groups and len(data_frame_columns_names) > 1:
+                    result = stats.tukey_hsd(*groups)
+
+                    comparisons = []
+                    statistics = []
+                    p_values = []
+
+                    for i in range(len(groups)):
+                        for j in range(i + 1, len(groups)):
+                            comparisons.append(f"{data_frame_columns_names[i]} - {data_frame_columns_names[j]}")
+                            statistics.append(round(result.statistic[i, j], 4))
+                            p_values.append(round(result.pvalue[i, j], 4))
+
+                    df = pd.DataFrame({
+                        'Porównanie': comparisons,
+                        'Statystyka testu': statistics,
+                        'Wartość p': p_values
+                    })
+
+                    html_table = df.to_html(classes='table', border=0, index=True, justify='center')
+                    html_table = html_table.replace('<table',
+                                                    '<table style="border: 1px solid black; border-collapse: collapse; padding: 10px;"')
+                    html_table = html_table.replace('<th>', '<th style="border: 1px solid black; padding: 5px;">')
+                    html_table = html_table.replace('<td>', '<td style="border: 1px solid black; padding: 5px;">')
+
+                    testResult = (f"Zbiór: <b>{data}</b><br>"
+                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
+                                  f"Wyniki:<br>{html_table}")
+
+            except:
+                dataError = True
+                testResult = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
+                self.window_test_tukeya_ui.textEdit_Preview_Board.setHtml(testResult)
+
+            if self.window_test_tukeya_ui.checkBox_Description_Of_Results.isChecked() and dataError == False:
+                result = title + testResult + description
+            elif dataError == False:
+                result = title + testResult
+            else:
+                result = testResult
+
+            if data and len(data_frame_columns_names) > 1:
+                self.window_test_tukeya_ui.textEdit_Preview_Board.setHtml(result)
+            elif len(data_frame_columns_names) < 2:
+                summary = ("Wybierz co najmniej dwie grupy danych do przeprowadzenia testu")
+                self.window_test_tukeya_ui.textEdit_Preview_Board.setHtml(summary)
+        except Exception as e:
+            pass
+
+    def resetTestTukeya(self):
+        self.window_test_tukeya_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_test_tukeya_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_tukeya_ui.textEdit_Preview_Board.clear()
+        self.window_test_tukeya_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_tukeya_ui.checkBox_Description_Of_Results.setChecked(False)
+
+    def writeTestTukeyaInBoard(self):
+        try:
+            data = self.window_test_tukeya_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
