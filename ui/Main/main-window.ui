@@ -129,6 +129,7 @@ font-family: &quot;Segoe UI&quot;;
     <addaction name="action_Test_ANOVA"/>
     <addaction name="action_Test_Chi_Square"/>
     <addaction name="action_Test_Kruskala_Wallisa"/>
+    <addaction name="action_Test_Tukeya"/>
    </widget>
    <widget class="QMenu" name="menu_Charts">
     <property name="title">
@@ -558,6 +559,11 @@ font-family: &quot;Segoe UI&quot;;
   <action name="action_Test_Jarque_Bera">
    <property name="text">
     <string>Test Jarque-Bera</string>
+   </property>
+  </action>
+  <action name="action_Test_Tukeya">
+   <property name="text">
+    <string>Test Tukeya</string>
    </property>
   </action>
  </widget>

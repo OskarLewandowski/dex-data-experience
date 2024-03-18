@@ -211,6 +211,8 @@ class Ui_MainWindow_Main(object):
         self.action_Test_Lillieforsa.setObjectName("action_Test_Lillieforsa")
         self.action_Test_Jarque_Bera = QtGui.QAction(parent=MainWindow_Main)
         self.action_Test_Jarque_Bera.setObjectName("action_Test_Jarque_Bera")
+        self.action_Test_Tukeya = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Test_Tukeya.setObjectName("action_Test_Tukeya")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -255,6 +257,7 @@ class Ui_MainWindow_Main(object):
         self.menu_Analysis.addAction(self.action_Test_ANOVA)
         self.menu_Analysis.addAction(self.action_Test_Chi_Square)
         self.menu_Analysis.addAction(self.action_Test_Kruskala_Wallisa)
+        self.menu_Analysis.addAction(self.action_Test_Tukeya)
         self.menu_Charts.addAction(self.action_Scatter_Plot)
         self.menu_Charts.addAction(self.action_Line_Plot)
         self.menu_Charts.addAction(self.action_Bar_Plot)
@@ -372,6 +375,7 @@ class Ui_MainWindow_Main(object):
         self.action_Test_Kolmogorova_Smirnova.setText(_translate("MainWindow_Main", "Test Kołmogorova-Smirnova"))
         self.action_Test_Lillieforsa.setText(_translate("MainWindow_Main", "Test Lillieforsa"))
         self.action_Test_Jarque_Bera.setText(_translate("MainWindow_Main", "Test Jarque-Bera"))
+        self.action_Test_Tukeya.setText(_translate("MainWindow_Main", "Test Tukeya"))
 
 
 if __name__ == "__main__":
