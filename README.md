@@ -37,11 +37,11 @@ developed tool, provides a graphical environment built using PyQt6, a robust Pyt
     python main.py
     ```
 
-## Contributing
+## Releases 
+Check actual releases [Here](https://github.com/OskarLewandowski/dex-data-experience/releases)
 
-Contributions to the project are welcome! If you have ideas for enhancements, bug fixes, or new features, feel free to
-submit a pull request.
+# Download
+### Dex stable version:
+- Download Dex for [Linux v0.1.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.1.1/Dex-Linux-v0.1.1.tar.gz)
+- Download Dex for [Windows v0.1.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.1.1/Dex-Windows-v0.1.1.zip)
 
-## Acknowledgments
-
-Special thanks to the contributors and supporters who have played a role in the development of Dex.
