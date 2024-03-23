@@ -18,6 +18,8 @@ from Views.Analysis.test_anova_window import Ui_MainWindow_Test_ANOVA
 from Views.Analysis.test_chi_square_window import Ui_MainWindow_Test_Chi_Square
 from Views.Analysis.test_kruskal_wallis_window import Ui_MainWindow_Test_Kruskal_Wallis
 from Views.Analysis.test_tukeya_window import Ui_MainWindow_Test_Tukeya
+from Views.Analysis.distribution_series_window import Ui_MainWindow_Distribution_Series
+from Models.message_model import MessageModel
 
 
 class AnalysisController(QMainWindow, Ui_MainWindow_Main):
@@ -37,6 +39,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Chi_Square.triggered.connect(self.createTestChiSquareWindow)
         self.main.action_Test_Kruskala_Wallisa.triggered.connect(self.createTestKruskalaWallisaWindow)
         self.main.action_Test_Tukeya.triggered.connect(self.createTestTukeyaWindow)
+        self.main.action_Distribution_Series.triggered.connect(self.createDistributionSeriesWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -1266,3 +1269,118 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 cursor.insertHtml(data)
         except Exception as e:
             pass
+
+    # Distribution Series
+    def createDistributionSeriesWindow(self):
+        self.window_distribution_series = QMainWindow()
+        self.window_distribution_series_ui = Ui_MainWindow_Distribution_Series()
+        self.window_distribution_series_ui.setupUi(self.window_distribution_series)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_distribution_series_ui.comboBox_Data_Column.addItems(dataAll)
+
+        self.dataframe_distribution_series = None
+
+        self.window_distribution_series_ui.pushButton_Reset_Options.clicked.connect(self.resetDistributionSeries)
+        self.window_distribution_series_ui.pushButton_Add_To_Board.clicked.connect(self.writeDistributionSeriesInBoard)
+
+        self.window_distribution_series_ui.pushButton_Save_As_Data_Frame.clicked.connect(
+            self.saveDataFrameDistributionSeries)
+
+        self.window_distribution_series_ui.comboBox_Data_Column.currentIndexChanged.connect(
+            self.writeDistributionSeries)
+
+        self.window_distribution_series.show()
+
+    def writeDistributionSeries(self):
+        try:
+            data = self.window_distribution_series_ui.comboBox_Data_Column.currentText()
+
+            if data:
+                result = self.splitText(data)
+                selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+
+                filename = "SR_" + result[0] + "_" + result[1]
+                self.window_distribution_series_ui.lineEdit_Data_Frame_Name.setText(filename)
+
+                distribution_series = selectedColumn.value_counts()
+                percentages = (distribution_series / len(selectedColumn) * 100).round(2)
+
+                df = pd.DataFrame({'Liczebność': distribution_series, 'Procent': percentages})
+                df.index.name = 'Wartość'
+                df = df.reset_index()
+
+                self.dataframe_distribution_series = df
+
+                self.window_distribution_series_ui.textEdit_Preview_Board.clear()
+                html_table = df.to_html(classes='table', border=0, index=True, justify='center')
+                html_table = html_table.replace('<table',
+                                                '<table style="border: 1px solid black; border-collapse: collapse; padding: 10px;"')
+                html_table = html_table.replace('<th>', '<th style="border: 1px solid black; padding: 5px;">')
+                html_table = html_table.replace('<td>', '<td style="border: 1px solid black; padding: 5px;">')
+
+                result = (f"<b>Szereg rozdzielczy</b><br>"
+                          f"Zbiór: <b>{result[0]}</b><br>"
+                          f"Kolumna: <b>{result[1]}</b><br>"
+                          f"{html_table}<br>")
+
+                self.window_distribution_series_ui.textEdit_Preview_Board.setText(str(result))
+            else:
+                self.dataframe_distribution_series = None
+                self.window_distribution_series_ui.textEdit_Preview_Board.clear()
+
+        except Exception as e:
+            print(str(e))
+
+    def writeDistributionSeriesInBoard(self):
+        try:
+            data = self.window_distribution_series_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    def resetDistributionSeries(self):
+        self.window_distribution_series_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_distribution_series_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_distribution_series_ui.textEdit_Preview_Board.clear()
+        self.window_distribution_series_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_distribution_series_ui.lineEdit_Data_Frame_Name.clear()
+        self.dataframe_distribution_series = None
+
+    def saveDataFrameDistributionSeries(self):
+        try:
+            if self.dataframe_distribution_series is not None:
+                key = self.window_distribution_series_ui.lineEdit_Data_Frame_Name.text()
+                keyLenght = len(key)
+                dfName = ""
+
+                if keyLenght > 20:
+                    dfName = key[:20] + "..."
+                else:
+                    dfName = key
+
+                if key and keyLenght <= 40:
+                    if DataStorageModel.is_exists(key) == False:
+
+                        df = self.dataframe_distribution_series
+                        DataStorageModel.add(key, df)
+                        self.main.updateStatusBar()
+
+                        msg = f"Szereg rozdzielczy został zapisany jako zbiór\ndanych '{dfName}'!"
+                        self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+                    else:
+                        msg = f"Zbiór o nazwie '{dfName}'\njuż istnieje!"
+                        self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+                else:
+                    msg = f"Podaj nazwę zbioru (max 40 znaków)"
+                    self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+            else:
+                msg = "Brak danych do zapisania!"
+                self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+        except Exception as e:
+            MessageModel.error("0032", str(e))
