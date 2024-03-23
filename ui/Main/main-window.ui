@@ -78,6 +78,7 @@ font-family: &quot;Segoe UI&quot;;
     <addaction name="action_Add_Data"/>
     <addaction name="action_Modify_Data"/>
     <addaction name="separator"/>
+    <addaction name="action_Data_Preview"/>
     <addaction name="action_Change_Data_Name"/>
     <addaction name="action_Delete_Dataframe"/>
    </widget>
@@ -122,9 +123,19 @@ font-family: &quot;Segoe UI&quot;;
      <addaction name="action_Test_Lillieforsa"/>
      <addaction name="action_Test_Jarque_Bera"/>
     </widget>
+    <widget class="QMenu" name="menu_Correlation">
+     <property name="title">
+      <string>Korelacja</string>
+     </property>
+     <addaction name="action_Pearson_Correlation"/>
+     <addaction name="action_Spearman_Correlation"/>
+     <addaction name="action_Kendall_Correlation"/>
+     <addaction name="action_Correlation"/>
+    </widget>
     <addaction name="action_Basic_Stats"/>
-    <addaction name="action_Correlation"/>
+    <addaction name="action_Distribution_Series"/>
     <addaction name="menu_Normality_Tests"/>
+    <addaction name="menu_Correlation"/>
     <addaction name="action_Test_t_Studenta"/>
     <addaction name="action_Test_ANOVA"/>
     <addaction name="action_Test_Chi_Square"/>
@@ -564,6 +575,31 @@ font-family: &quot;Segoe UI&quot;;
   <action name="action_Test_Tukeya">
    <property name="text">
     <string>Test Tukeya</string>
+   </property>
+  </action>
+  <action name="action_Pearson_Correlation">
+   <property name="text">
+    <string>Korelacja Pearsona</string>
+   </property>
+  </action>
+  <action name="action_Spearman_Correlation">
+   <property name="text">
+    <string>Korelacja Spearmana</string>
+   </property>
+  </action>
+  <action name="action_Kendall_Correlation">
+   <property name="text">
+    <string>Korelacja Kendalla</string>
+   </property>
+  </action>
+  <action name="action_Distribution_Series">
+   <property name="text">
+    <string>Szereg rozdzielczy</string>
+   </property>
+  </action>
+  <action name="action_Data_Preview">
+   <property name="text">
+    <string>Podgląd danych</string>
    </property>
   </action>
  </widget>
