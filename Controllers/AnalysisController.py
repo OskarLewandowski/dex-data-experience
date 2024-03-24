@@ -19,6 +19,7 @@ from Views.Analysis.test_chi_square_window import Ui_MainWindow_Test_Chi_Square
 from Views.Analysis.test_kruskal_wallis_window import Ui_MainWindow_Test_Kruskal_Wallis
 from Views.Analysis.test_tukeya_window import Ui_MainWindow_Test_Tukeya
 from Views.Analysis.distribution_series_window import Ui_MainWindow_Distribution_Series
+from Views.Analysis.correlation_pearson_window import Ui_MainWindow_Correlation_Pearson
 from Models.message_model import MessageModel
 
 
@@ -40,6 +41,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Kruskala_Wallisa.triggered.connect(self.createTestKruskalaWallisaWindow)
         self.main.action_Test_Tukeya.triggered.connect(self.createTestTukeyaWindow)
         self.main.action_Distribution_Series.triggered.connect(self.createDistributionSeriesWindow)
+        self.main.action_Pearson_Correlation.triggered.connect(self.createCorrelationPearsonWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -1384,3 +1386,132 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
         except Exception as e:
             MessageModel.error("0032", str(e))
+
+    # Correlation Pearsona
+    def createCorrelationPearsonWindow(self):
+        self.window_correlation_pearson = QMainWindow()
+        self.window_correlation_pearson_ui = Ui_MainWindow_Correlation_Pearson()
+        self.window_correlation_pearson_ui.setupUi(self.window_correlation_pearson)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_correlation_pearson_ui.comboBox_Data_Column.addItems(dataAll)
+        self.window_correlation_pearson_ui.comboBox_Data_Column_2.addItems(dataAll)
+
+        self.window_correlation_pearson_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelationPearson)
+        self.window_correlation_pearson_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationPearsonInBoard)
+
+        self.window_correlation_pearson_ui.comboBox_Data_Column.currentIndexChanged.connect(
+            self.writeCorrelationPearson)
+        self.window_correlation_pearson_ui.comboBox_Data_Column_2.currentIndexChanged.connect(
+            self.writeCorrelationPearson)
+
+        self.window_correlation_pearson_ui.checkBox_Description_Of_Results.clicked.connect(self.writeCorrelationPearson)
+        self.window_correlation_pearson_ui.spinBox_Confidence_Interval_Value.valueChanged.connect(
+            self.writeCorrelationPearson)
+        self.window_correlation_pearson_ui.comboBox_Alternative.currentIndexChanged.connect(
+            self.writeCorrelationPearson)
+
+        self.window_correlation_pearson.show()
+
+    def writeCorrelationPearson(self):
+        try:
+            data1 = self.window_correlation_pearson_ui.comboBox_Data_Column.currentText()
+            data2 = self.window_correlation_pearson_ui.comboBox_Data_Column_2.currentText()
+
+            result1 = None
+            result2 = None
+
+            summary = ""
+
+            if data1 and data2:
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
+
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
+
+                selectedColumn1 = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                selectedColumn2 = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
+
+                confidenceLevelValue = self.window_correlation_pearson_ui.spinBox_Confidence_Interval_Value.value()
+                alternativeValue = self.window_correlation_pearson_ui.comboBox_Alternative.currentText()
+
+                title = f"<b>Korelacja Pearsona - liniowa zależność między dwoma zmiennymi</b><br>"
+
+                description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Współczynnik korelacji:</b> Wartość ta reprezentuje siłę i kierunek związku między dwoma zmiennymi. Współczynnik korelacji Pearsona może przyjmować wartości od -1 do 1. Wartość -1 oznacza doskonałą korelację ujemną, wartość 1 oznacza doskonałą korelację dodatnią, a wartość 0 oznacza brak korelacji.<br>"
+                               "<b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu korelacji Pearsona, hipoteza zerowa zakłada, że nie ma korelacji między zmiennymi."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieje statystycznie istotna korelacja między zmiennymi.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej korelacji między zmiennymi.</li>"
+                               "</ul>"
+                               "<br><b>Przedział ufności:</b> Przedział ufności daje nam zakres wartości, w którym możemy oczekiwać, że prawdziwy współczynnik korelacji leży z określonym poziomem ufności. Przedział ufności składa się z dwóch granic:"
+                               "<ul>"
+                               "<li><b>Dolna granica:</b> Jest to najniższa wartość, którą prawdziwy współczynnik korelacji może przyjąć z określonym poziomem ufności.</li>"
+                               "<li><b>Górna granica:</b> Jest to najwyższa wartość, którą prawdziwy współczynnik korelacji może przyjąć z określonym poziomem ufności.</li>"
+                               "</ul><br>")
+
+                self.window_correlation_pearson_ui.textEdit_Preview_Board.clear()
+
+                if dataType1 == 0 and dataType2 == 0:
+
+                    statistic, p_value = stats.pearsonr(selectedColumn1, selectedColumn2, alternative=alternativeValue)
+                    confidence_interval = stats.pearsonr(selectedColumn1, selectedColumn2).confidence_interval(
+                        confidence_level=(confidenceLevelValue / 100))
+
+                    testResult = (f"Zbiór danych 1: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Zbiór danych 2: <b>{result2[0]} : {result2[1]}</b><br><br>"
+                                  f"Współczynnik korelacji: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>"
+                                  f"Przedział ufności <b>{confidenceLevelValue}%</b>:"
+                                  f"<ul>"
+                                  f"<li>Dolna granica: <b>{round(confidence_interval[0], 4)}</b>"
+                                  f"</li><li>Górna granica: <b>{round(confidence_interval[1], 4)}</b></li>"
+                                  f"</ul><br>")
+
+                    summary = title + testResult
+
+                    if self.window_correlation_pearson_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    if dataType1 == 1 and dataType2 == 0:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnie <b>'{result1[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
+                    elif dataType1 == 0 and dataType2 == 1:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnie <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
+                    else:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnach <b>'{result1[1]}' </b> oraz <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumny zawierające dane ilościowe.")
+            else:
+                summary = ("Wybierz oba zbiory danych do przeprowadzenia testu")
+
+            self.window_correlation_pearson_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetCorrelationPearson(self):
+        self.window_correlation_pearson_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_correlation_pearson_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_correlation_pearson_ui.textEdit_Preview_Board.clear()
+        self.window_correlation_pearson_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_correlation_pearson_ui.checkBox_Description_Of_Results.setChecked(False)
+        self.window_correlation_pearson_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
+        self.window_correlation_pearson_ui.comboBox_Alternative.setCurrentIndex(0)
+
+    def writeCorrelationPearsonInBoard(self):
+        try:
+            data = self.window_correlation_pearson_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass

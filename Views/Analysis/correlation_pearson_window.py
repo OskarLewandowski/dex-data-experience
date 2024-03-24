@@ -97,14 +97,36 @@ class Ui_MainWindow_Correlation_Pearson(object):
         self.comboBox_Alternative.addItem("")
         self.verticalLayout.addWidget(self.comboBox_Alternative)
         self.verticalLayout_4.addLayout(self.verticalLayout)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.label_5 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_7.addWidget(self.label_5)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_7.addItem(spacerItem4)
+        self.toolButton_Confidence_Interval_Value = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Confidence_Interval_Value.setObjectName("toolButton_Confidence_Interval_Value")
+        self.horizontalLayout_7.addWidget(self.toolButton_Confidence_Interval_Value)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_7)
+        self.spinBox_Confidence_Interval_Value = QtWidgets.QSpinBox(parent=self.groupBox)
+        self.spinBox_Confidence_Interval_Value.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.spinBox_Confidence_Interval_Value.setPrefix("")
+        self.spinBox_Confidence_Interval_Value.setMaximum(100)
+        self.spinBox_Confidence_Interval_Value.setProperty("value", 95)
+        self.spinBox_Confidence_Interval_Value.setObjectName("spinBox_Confidence_Interval_Value")
+        self.verticalLayout_6.addWidget(self.spinBox_Confidence_Interval_Value)
+        self.verticalLayout_4.addLayout(self.verticalLayout_6)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.label_3 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_5.addWidget(self.label_3)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem4)
+        self.horizontalLayout_5.addItem(spacerItem5)
         self.verticalLayout_4.addLayout(self.horizontalLayout_5)
         self.checkBox_Description_Of_Results = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Description_Of_Results.setObjectName("checkBox_Description_Of_Results")
@@ -117,9 +139,9 @@ class Ui_MainWindow_Correlation_Pearson(object):
         self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_15.addWidget(self.label_12)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_15.addItem(spacerItem5)
+        self.horizontalLayout_15.addItem(spacerItem6)
         self.verticalLayout_16.addLayout(self.horizontalLayout_15)
         self.checkBox_Board_Is_Enabled = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Board_Is_Enabled.setChecked(False)
@@ -127,9 +149,9 @@ class Ui_MainWindow_Correlation_Pearson(object):
         self.verticalLayout_16.addWidget(self.checkBox_Board_Is_Enabled)
         self.verticalLayout_13.addLayout(self.verticalLayout_16)
         self.verticalLayout_2.addWidget(self.groupBox)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                             QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem6)
+        self.verticalLayout_2.addItem(spacerItem7)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
@@ -164,21 +186,21 @@ class Ui_MainWindow_Correlation_Pearson(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem7)
+        self.horizontalLayout_11.addItem(spacerItem8)
         self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
         self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem8)
+        self.horizontalLayout_11.addItem(spacerItem9)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem9)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem10)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -195,6 +217,8 @@ class Ui_MainWindow_Correlation_Pearson(object):
             lambda: self.comboBox_Data_Column_2.setCurrentIndex(-1))  # type: ignore
         self.toolButton_Alternative.clicked.connect(
             lambda: self.comboBox_Alternative.setCurrentIndex(0))  # type: ignore
+        self.toolButton_Confidence_Interval_Value.clicked.connect(
+            lambda: self.spinBox_Confidence_Interval_Value.setValue(95))  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Correlation_Pearson)
 
     def retranslateUi(self, MainWindow_Correlation_Pearson):
@@ -215,6 +239,9 @@ class Ui_MainWindow_Correlation_Pearson(object):
         self.comboBox_Alternative.setItemText(0, _translate("MainWindow_Correlation_Pearson", "two-sided"))
         self.comboBox_Alternative.setItemText(1, _translate("MainWindow_Correlation_Pearson", "greater"))
         self.comboBox_Alternative.setItemText(2, _translate("MainWindow_Correlation_Pearson", "less"))
+        self.label_5.setText(_translate("MainWindow_Correlation_Pearson", "Przedział ufności:"))
+        self.toolButton_Confidence_Interval_Value.setText(_translate("MainWindow_Correlation_Pearson", "X"))
+        self.spinBox_Confidence_Interval_Value.setSuffix(_translate("MainWindow_Correlation_Pearson", "%"))
         self.label_3.setText(_translate("MainWindow_Correlation_Pearson", "Opis wyników:"))
         self.checkBox_Description_Of_Results.setText(
             _translate("MainWindow_Correlation_Pearson", "Dodaj opis do interpretacji wyników"))
