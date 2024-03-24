@@ -60,6 +60,16 @@ class DataStorageModel:
         return result
 
     @classmethod
+    def get_all_keys_and_columns_with_keys(cls):
+        result = []
+        for key, data_frame in cls._dataFrames.items():
+            result.append(key)
+            columns = data_frame.columns
+            for column in columns:
+                result.append(f"{key} : {column}")
+        return result
+
+    @classmethod
     def rename_key(cls, old_key, new_key):
         if not cls.is_exists(new_key):
             if old_key in cls._dataFrames:
