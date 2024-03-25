@@ -25,8 +25,6 @@ class Ui_MainWindow_Main(object):
         font.setPointSize(14)
         self.textEdit_Board.setFont(font)
         self.textEdit_Board.setStyleSheet("QTextEdit{\n"
-                                          "background-color: #ffffff;\n"
-                                          "color: #000000;\n"
                                           "font-size: 14pt;\n"
                                           "font-family: \"Segoe UI\";\n"
                                           "}")
