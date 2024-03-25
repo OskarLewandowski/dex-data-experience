@@ -108,6 +108,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawScatterPlot)
         self.window_scatter_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawScatterPlot)
 
+        self.window_scatter_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
         self.window_scatter_plot.show()
 
     def drawScatterPlot(self):
@@ -227,6 +229,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawLinePlot)
+
+        self.window_line_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
         self.window_line_plot.show()
 
@@ -352,6 +356,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_bar_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawBarPlot)
         self.window_bar_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawBarPlot)
 
+        self.window_bar_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
         self.window_bar_plot.show()
 
     def drawBarPlot(self):
@@ -468,6 +474,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_hist_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawHistPlot)
         self.window_hist_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawHistPlot)
 
+        self.window_hist_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
         self.window_hist_plot.show()
 
     def drawHistPlot(self):
@@ -581,6 +589,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_box_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawBoxPlot)
         self.window_box_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawBoxPlot)
 
+        self.window_box_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
         self.window_box_plot.show()
 
     def drawBoxPlot(self):
@@ -689,6 +699,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_pie_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawPiePlot)
         self.window_pie_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawPiePlot)
         self.window_pie_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawPiePlot)
+
+        self.window_pie_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
         self.window_pie_plot.show()
 
