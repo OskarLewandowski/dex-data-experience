@@ -16,6 +16,8 @@ from Views.Main.main_window import Ui_MainWindow_Main
 import pandas as pd
 import json
 import os
+from Views.Main.data_preview import Ui_MainWindow_Data_Preview
+from Models.data_frame_model import DataFrameModel
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -28,6 +30,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         # Variable
         self.pathCurrentFileGlobal = None
+        self.selectedDataNameForDataPreviewGlobal = None
 
         # View
         self.addFontComboBoxToolBar()
@@ -69,6 +72,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Export_As.triggered.connect(self.exportAs)
         self.action_Change_Data_Name.triggered.connect(self.createRenameKeyDataframeWindow)
         self.action_Delete_Dataframe.triggered.connect(self.createDeleteDataframeWindow)
+        self.action_Data_Preview.triggered.connect(self.createDataPreviewWindow)
 
         self.show()
 
@@ -496,3 +500,28 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_about_app_ui = Ui_Dialog_About_App()
         self.window_about_app_ui.setupUi(self.window_about_app)
         self.window_about_app.show()
+
+    def createDataPreviewWindow(self):
+        self.window_data_preview = QMainWindow()
+        self.window_data_preview_ui = Ui_MainWindow_Data_Preview()
+        self.window_data_preview_ui.setupUi(self.window_data_preview)
+
+        dataAll = DataStorageModel.get_all_keys()
+
+        self.window_data_preview_ui.comboBox_Select_Data.addItems(dataAll)
+
+        self.window_data_preview_ui.comboBox_Select_Data.currentIndexChanged.connect(self.loadDataInPreviewData)
+
+        if self.selectedDataNameForDataPreviewGlobal:
+            self.window_data_preview_ui.comboBox_Select_Data.setCurrentText(self.selectedDataNameForDataPreviewGlobal)
+
+        self.window_data_preview.show()
+
+    def loadDataInPreviewData(self):
+        selectedData = self.window_data_preview_ui.comboBox_Select_Data.currentText()
+
+        if selectedData:
+            self.selectedDataNameForDataPreviewGlobal = selectedData
+            data = DataStorageModel.get(selectedData)
+            model = DataFrameModel(data)
+            self.window_data_preview_ui.tableView_Data_Frame.setModel(model)
