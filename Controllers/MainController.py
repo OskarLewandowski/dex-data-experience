@@ -6,7 +6,7 @@ from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import Qt, QFile
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QDialog, QMainWindow, QFontComboBox, QSpinBox, QAbstractSpinBox, QFileDialog, QToolButton, \
-    QFontDialog, QColorDialog, QLabel
+    QFontDialog, QColorDialog, QLabel, QApplication
 from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
 from Views.Main.delete_dataframe import Ui_Dialog_Delete_Dataframe
 from Models.data_storage_model import DataStorageModel
@@ -334,20 +334,31 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                     if result == 1:
                         self.saveChanges()
+                        self.closeChildWindows()
                         a0.accept()
                     elif result == 2:
+                        self.closeChildWindows()
                         a0.accept()
                     else:
                         a0.ignore()
                 elif show_save_reminder_window == 2:
                     if self.pathCurrentFileGlobal:
                         self.save(self.pathCurrentFileGlobal)
+
+                    self.closeChildWindows()
                     a0.accept()
                 else:
+                    self.closeChildWindows()
                     a0.accept()
         else:
             self.saveChanges()
+            self.closeChildWindows()
             a0.accept()
+
+    def closeChildWindows(self):
+        for widget in QApplication.topLevelWidgets():
+            if widget != self:
+                widget.close()
 
     def printPreviewBoard(self):
         try:
