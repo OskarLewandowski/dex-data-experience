@@ -21,6 +21,7 @@ from Views.Analysis.test_tukeya_window import Ui_MainWindow_Test_Tukeya
 from Views.Analysis.distribution_series_window import Ui_MainWindow_Distribution_Series
 from Views.Analysis.correlation_pearson_window import Ui_MainWindow_Correlation_Pearson
 from Views.Analysis.correlation_kendall_window import Ui_MainWindow_Correlation_Kendall
+from Views.Analysis.correlation_spearman_window import Ui_MainWindow_Correlation_Spearman
 from Models.message_model import MessageModel
 
 
@@ -44,6 +45,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Distribution_Series.triggered.connect(self.createDistributionSeriesWindow)
         self.main.action_Pearson_Correlation.triggered.connect(self.createCorrelationPearsonWindow)
         self.main.action_Kendall_Correlation.triggered.connect(self.createCorrelationKendallWindow)
+        self.main.action_Spearman_Correlation.triggered.connect(self.createCorrelationSpearmanWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -1510,6 +1512,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_pearson_ui.checkBox_Description_Of_Results.setChecked(False)
         self.window_correlation_pearson_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
         self.window_correlation_pearson_ui.comboBox_Alternative.setCurrentIndex(0)
+        self.window_correlation_pearson_ui.spinBox_Confidence_Interval_Value.setValue(95)
 
     def writeCorrelationPearsonInBoard(self):
         try:
@@ -1629,6 +1632,110 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeCorrelationKendallInBoard(self):
         try:
             data = self.window_correlation_kendall_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Correlation Spearman
+    def createCorrelationSpearmanWindow(self):
+        self.window_correlation_spearman = QMainWindow()
+        self.window_correlation_spearman_ui = Ui_MainWindow_Correlation_Spearman()
+        self.window_correlation_spearman_ui.setupUi(self.window_correlation_spearman)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_correlation_spearman_ui.comboBox_Data_Column.addItems(dataAll)
+        self.window_correlation_spearman_ui.comboBox_Data_Column_2.addItems(dataAll)
+
+        self.window_correlation_spearman_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelationSpearman)
+        self.window_correlation_spearman_ui.pushButton_Add_To_Board.clicked.connect(
+            self.writeCorrelationSpearmanInBoard)
+
+        self.window_correlation_spearman_ui.comboBox_Data_Column.currentIndexChanged.connect(
+            self.writeCorrelationSpearman)
+        self.window_correlation_spearman_ui.comboBox_Data_Column_2.currentIndexChanged.connect(
+            self.writeCorrelationSpearman)
+
+        self.window_correlation_spearman_ui.checkBox_Description_Of_Results.clicked.connect(
+            self.writeCorrelationSpearman)
+        self.window_correlation_spearman_ui.comboBox_Alternative.currentIndexChanged.connect(
+            self.writeCorrelationSpearman)
+
+        self.window_correlation_spearman.show()
+
+    def writeCorrelationSpearman(self):
+        try:
+            data1 = self.window_correlation_spearman_ui.comboBox_Data_Column.currentText()
+            data2 = self.window_correlation_spearman_ui.comboBox_Data_Column_2.currentText()
+
+            result1 = None
+            result2 = None
+
+            summary = ""
+
+            if data1 and data2:
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
+
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
+
+                selectedColumn1 = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                selectedColumn2 = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
+
+                alternativeValue = self.window_correlation_spearman_ui.comboBox_Alternative.currentText()
+
+                title = f"<b>Korelacja Spearmana - miara zależności rangowej między dwoma zmiennymi</b><br>"
+
+                description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Współczynnik korelacji:</b> Wartość ta reprezentuje siłę i kierunek związku między dwoma zmiennymi. Współczynnik korelacji Spearmana może przyjmować wartości od -1 do 1. Wartość -1 oznacza doskonałą korelację ujemną, wartość 1 oznacza doskonałą korelację dodatnią, a wartość 0 oznacza brak korelacji.<br>"
+                               "<b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu korelacji Spearmana, hipoteza zerowa zakłada, że nie ma korelacji między zmiennymi."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieje statystycznie istotna korelacja między zmiennymi.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej korelacji między zmiennymi.</li>"
+                               "</ul><br>")
+
+                self.window_correlation_spearman_ui.textEdit_Preview_Board.clear()
+
+                if dataType1 == 0 and dataType2 == 0 or dataType1 == 1 and dataType2 == 1:
+
+                    statistic, p_value = stats.spearmanr(selectedColumn1, selectedColumn2, alternative=alternativeValue)
+
+                    testResult = (f"Zbiór danych 1: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Zbiór danych 2: <b>{result2[0]} : {result2[1]}</b><br><br>"
+                                  f"Współczynnik korelacji: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
+
+                    summary = title + testResult
+
+                    if self.window_correlation_spearman_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+                else:
+                    summary = ("Oba zbiory danych muszą być tego samego typu (jakościowe lub dyskretne).")
+            else:
+                summary = ("Wybierz oba zbiory danych do przeprowadzenia testu.")
+
+            self.window_correlation_spearman_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetCorrelationSpearman(self):
+        self.window_correlation_spearman_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_correlation_spearman_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_correlation_spearman_ui.textEdit_Preview_Board.clear()
+        self.window_correlation_spearman_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_correlation_spearman_ui.checkBox_Description_Of_Results.setChecked(False)
+        self.window_correlation_spearman_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
+        self.window_correlation_spearman_ui.comboBox_Alternative.setCurrentIndex(0)
+
+    def writeCorrelationSpearmanInBoard(self):
+        try:
+            data = self.window_correlation_spearman_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
