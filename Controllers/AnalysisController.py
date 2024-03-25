@@ -1363,26 +1363,30 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 keyLenght = len(key)
                 dfName = ""
 
-                if keyLenght > 20:
-                    dfName = key[:20] + "..."
+                if ":" in key:
+                    self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(
+                        "Nazwa nie może zawierać znaku ':'")
                 else:
-                    dfName = key
-
-                if key and keyLenght <= 40:
-                    if DataStorageModel.is_exists(key) == False:
-
-                        df = self.dataframe_distribution_series
-                        DataStorageModel.add(key, df)
-                        self.main.updateStatusBar()
-
-                        msg = f"Szereg rozdzielczy został zapisany jako zbiór\ndanych '{dfName}'!"
-                        self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+                    if keyLenght > 20:
+                        dfName = key[:20] + "..."
                     else:
-                        msg = f"Zbiór o nazwie '{dfName}'\njuż istnieje!"
+                        dfName = key
+
+                    if key and keyLenght <= 40:
+                        if DataStorageModel.is_exists(key) == False:
+
+                            df = self.dataframe_distribution_series
+                            DataStorageModel.add(key, df)
+                            self.main.updateStatusBar()
+
+                            msg = f"Szereg rozdzielczy został zapisany jako zbiór\ndanych '{dfName}'!"
+                            self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+                        else:
+                            msg = f"Zbiór o nazwie '{dfName}'\njuż istnieje!"
+                            self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
+                    else:
+                        msg = f"Podaj nazwę zbioru (max 40 znaków)"
                         self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
-                else:
-                    msg = f"Podaj nazwę zbioru (max 40 znaków)"
-                    self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
             else:
                 msg = "Brak danych do zapisania!"
                 self.window_distribution_series_ui.label_Data_Frame_Save_Error_Message.setText(msg)
