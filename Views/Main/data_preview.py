@@ -42,6 +42,9 @@ class Ui_MainWindow_Data_Preview(object):
         self.verticalLayout.addWidget(self.tableView_Data_Frame)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.pushButton_Refresh = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton_Refresh.setObjectName("pushButton_Refresh")
+        self.horizontalLayout_2.addWidget(self.pushButton_Refresh)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
@@ -60,6 +63,7 @@ class Ui_MainWindow_Data_Preview(object):
         MainWindow_Data_Preview.setWindowTitle(_translate("MainWindow_Data_Preview", "Podgląd danych"))
         self.comboBox_Select_Data.setPlaceholderText(
             _translate("MainWindow_Data_Preview", "Wybierz zbiór danych do wyświetlenia"))
+        self.pushButton_Refresh.setText(_translate("MainWindow_Data_Preview", "Odśwież listę"))
         self.pushButton_Close.setText(_translate("MainWindow_Data_Preview", "Zamknij"))
 
 

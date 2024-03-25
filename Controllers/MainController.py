@@ -523,6 +523,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_data_preview_ui.comboBox_Select_Data.currentIndexChanged.connect(self.loadDataInPreviewData)
 
+        self.window_data_preview_ui.pushButton_Refresh.clicked.connect(self.refreshDataListPreviewData)
+
         if self.selectedDataNameForDataPreviewGlobal:
             self.window_data_preview_ui.comboBox_Select_Data.setCurrentText(self.selectedDataNameForDataPreviewGlobal)
 
@@ -536,3 +538,11 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             data = DataStorageModel.get(selectedData)
             model = DataFrameModel(data)
             self.window_data_preview_ui.tableView_Data_Frame.setModel(model)
+
+    def refreshDataListPreviewData(self):
+        dataAll = DataStorageModel.get_all_keys()
+        self.window_data_preview_ui.comboBox_Select_Data.clear()
+        self.window_data_preview_ui.comboBox_Select_Data.addItems(dataAll)
+
+        if self.selectedDataNameForDataPreviewGlobal:
+            self.window_data_preview_ui.comboBox_Select_Data.setCurrentText(self.selectedDataNameForDataPreviewGlobal)
