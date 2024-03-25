@@ -58,6 +58,13 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.pushButton_Secondary_Text_Color.clicked.connect(
             lambda: self.changeColor('secondaryTextColor', 'pushButton_Secondary_Text_Color'))
 
+    def isDarkModeOn(self):
+        backgroundColor = self.main.palette().color(self.main.backgroundRole())
+        brightness = (backgroundColor.red() + backgroundColor.green() + backgroundColor.blue()) / 3
+        isDark = brightness < 128
+
+        return isDark
+
     def loadLanguage(self):
         language_files = {
             0: self.main.resourcePath("Translations/PL/qtbase_pl.qm"),
@@ -175,6 +182,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             self.main.addIconsToActions("black")
 
     def loadThem(self):
+        them_name = ""
         if self.checkBox_Use_Custom_Theme.isChecked():
             colorIconIndex = self.comboBox_Icon_Color.currentIndex()
             if self.checkBox_Use_Secondary_Colors.isChecked():
@@ -201,10 +209,7 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             elif them_name == "Basic_default":
                 self.app = QCoreApplication.instance()
                 self.main.addIconsToActions("black")
-                self.app.setStyleSheet(""" * {
-                                                color: black;
-                                             }
-                                       """)
+                self.app.setStyleSheet("")
             else:
                 if 'dark' in filename:
                     self.main.addIconsToActions("white")
@@ -214,6 +219,20 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                     self.main.addIconsToActions("black")
 
                 self.apply_stylesheet(self.app, filename)
+
+        if them_name == "Basic_default":
+            if self.isDarkModeOn():
+                self.main.addIconsToActions("white")
+                self.app.setStyleSheet(""" * {
+                                                color: white;
+                                             }
+                                       """)
+            else:
+                self.main.addIconsToActions("black")
+                self.app.setStyleSheet(""" * {
+                                                color: black;
+                                             }
+                                       """)
 
     def loadSettings(self):
         if QFile.exists(self.main.resourcePath(SettingsController.SETTINGS_FILE)):
