@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Test_Jarque_Bera(object):
     def setupUi(self, MainWindow_Test_Jarque_Bera):
         MainWindow_Test_Jarque_Bera.setObjectName("MainWindow_Test_Jarque_Bera")
-        MainWindow_Test_Jarque_Bera.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        MainWindow_Test_Jarque_Bera.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         MainWindow_Test_Jarque_Bera.resize(1142, 878)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Test_Jarque_Bera)
         self.centralwidget.setObjectName("centralwidget")
@@ -111,8 +111,6 @@ class Ui_MainWindow_Test_Jarque_Bera(object):
         font.setPointSize(14)
         self.textEdit_Preview_Board.setFont(font)
         self.textEdit_Preview_Board.setStyleSheet("QTextEdit{\n"
-                                                  "background-color: #ffffff;\n"
-                                                  "color: #000000;\n"
                                                   "font-size: 14pt;\n"
                                                   "font-family: \"Segoe UI\";\n"
                                                   "}")
@@ -126,15 +124,21 @@ class Ui_MainWindow_Test_Jarque_Bera(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem5)
+        self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
+        self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem6)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem6)
+        self.horizontalLayout_11.addItem(spacerItem7)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -172,6 +176,7 @@ class Ui_MainWindow_Test_Jarque_Bera(object):
                                                        "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
                                                        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Reset_Options.setText(_translate("MainWindow_Test_Jarque_Bera", "Resetuj"))
+        self.pushButton_Data_Preview.setText(_translate("MainWindow_Test_Jarque_Bera", "Podgląd danych"))
         self.pushButton_Add_To_Board.setText(_translate("MainWindow_Test_Jarque_Bera", "Dodaj do tablicy"))
         self.pushButton_Close.setText(_translate("MainWindow_Test_Jarque_Bera", "Zamknij"))
 

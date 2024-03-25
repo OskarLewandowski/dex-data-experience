@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Correlation_Kendall(object):
     def setupUi(self, MainWindow_Correlation_Kendall):
         MainWindow_Correlation_Kendall.setObjectName("MainWindow_Correlation_Kendall")
-        MainWindow_Correlation_Kendall.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        MainWindow_Correlation_Kendall.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         MainWindow_Correlation_Kendall.resize(1142, 878)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Correlation_Kendall)
         self.centralwidget.setObjectName("centralwidget")

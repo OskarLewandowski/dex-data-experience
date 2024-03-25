@@ -3,7 +3,7 @@
  <class>MainWindow_Distribution_Series</class>
  <widget class="QMainWindow" name="MainWindow_Distribution_Series">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>

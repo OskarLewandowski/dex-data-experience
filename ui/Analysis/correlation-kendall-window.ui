@@ -3,7 +3,7 @@
  <class>MainWindow_Correlation_Kendall</class>
  <widget class="QMainWindow" name="MainWindow_Correlation_Kendall">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>

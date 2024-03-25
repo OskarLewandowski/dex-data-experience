@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Correlation_Pearson(object):
     def setupUi(self, MainWindow_Correlation_Pearson):
         MainWindow_Correlation_Pearson.setObjectName("MainWindow_Correlation_Pearson")
-        MainWindow_Correlation_Pearson.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        MainWindow_Correlation_Pearson.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         MainWindow_Correlation_Pearson.resize(1142, 878)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Correlation_Pearson)
         self.centralwidget.setObjectName("centralwidget")

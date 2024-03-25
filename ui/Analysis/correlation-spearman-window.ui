@@ -3,7 +3,7 @@
  <class>MainWindow_Correlation_Spearman</class>
  <widget class="QMainWindow" name="MainWindow_Correlation_Spearman">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>

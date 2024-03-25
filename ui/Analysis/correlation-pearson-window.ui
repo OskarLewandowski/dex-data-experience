@@ -3,7 +3,7 @@
  <class>MainWindow_Correlation_Pearson</class>
  <widget class="QMainWindow" name="MainWindow_Correlation_Pearson">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>

@@ -3,7 +3,7 @@
  <class>MainWindow_Test_ANOVA</class>
  <widget class="QMainWindow" name="MainWindow_Test_ANOVA">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -266,8 +266,6 @@
            </property>
            <property name="styleSheet">
             <string notr="true">QTextEdit{
-background-color: #ffffff;
-color: #000000;
 font-size: 14pt;
 font-family: &quot;Segoe UI&quot;;
 }</string>
@@ -298,6 +296,29 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <widget class="QPushButton" name="pushButton_Reset_Options">
         <property name="text">
          <string>Resetuj</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Data_Preview">
+        <property name="text">
+         <string>Podgląd danych</string>
         </property>
        </widget>
       </item>

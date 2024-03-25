@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Correlation_Spearman(object):
     def setupUi(self, MainWindow_Correlation_Spearman):
         MainWindow_Correlation_Spearman.setObjectName("MainWindow_Correlation_Spearman")
-        MainWindow_Correlation_Spearman.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        MainWindow_Correlation_Spearman.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         MainWindow_Correlation_Spearman.resize(1142, 878)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Correlation_Spearman)
         self.centralwidget.setObjectName("centralwidget")
