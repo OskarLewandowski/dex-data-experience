@@ -1584,7 +1584,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
                 self.window_correlation_kendall_ui.textEdit_Preview_Board.clear()
 
-                if dataType1 == 0 and dataType2 == 0:
+                if dataType1 == 0 and dataType2 == 0 or dataType1 == 1 and dataType2 == 1:
 
                     statistic, p_value = stats.kendalltau(selectedColumn1, selectedColumn2,
                                                           alternative=alternativeValue)
@@ -1600,18 +1600,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                         summary = summary + description
 
                 else:
-                    if dataType1 == 1 and dataType2 == 0:
-                        summary = (
-                            f"Nieprawidłowe dane w kolumnie <b>'{result1[1]}'</b>, wymagane są dane numeryczne!<br>"
-                            f"Wybierz kolumne zawierające dane ilościowe.")
-                    elif dataType1 == 0 and dataType2 == 1:
-                        summary = (
-                            f"Nieprawidłowe dane w kolumnie <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
-                            f"Wybierz kolumne zawierające dane ilościowe.")
-                    else:
-                        summary = (
-                            f"Nieprawidłowe dane w kolumnach <b>'{result1[1]}' </b> oraz <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
-                            f"Wybierz kolumny zawierające dane ilościowe.")
+                    summary = ("Oba zbiory danych muszą być tego samego typu (jakościowe lub dyskretne).")
             else:
                 summary = ("Wybierz oba zbiory danych do przeprowadzenia testu")
 
