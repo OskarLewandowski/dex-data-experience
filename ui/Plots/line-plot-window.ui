@@ -3,14 +3,14 @@
  <class>MainWindow_Line_Plot</class>
  <widget class="QMainWindow" name="MainWindow_Line_Plot">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1142</width>
-    <height>805</height>
+    <height>878</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -296,7 +296,7 @@
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Styl linii:</string>
+                    <string>Odcień linii:</string>
                    </property>
                   </widget>
                  </item>
@@ -334,7 +334,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl linii...</string>
+                  <string>Wybierz odcień linii...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -923,6 +923,29 @@
        <widget class="QPushButton" name="pushButton_Generate_Plot">
         <property name="text">
          <string>Generuj wykres</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_16">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Data_Preview">
+        <property name="text">
+         <string>Podgląd danych</string>
         </property>
        </widget>
       </item>

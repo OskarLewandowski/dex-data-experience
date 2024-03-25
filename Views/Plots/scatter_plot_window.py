@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Scatter_Plot(object):
     def setupUi(self, MainWindow_Scatter_Plot):
         MainWindow_Scatter_Plot.setObjectName("MainWindow_Scatter_Plot")
-        MainWindow_Scatter_Plot.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        MainWindow_Scatter_Plot.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         MainWindow_Scatter_Plot.resize(1142, 805)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Scatter_Plot)
         self.centralwidget.setObjectName("centralwidget")
@@ -307,18 +307,24 @@ class Ui_MainWindow_Scatter_Plot(object):
         self.pushButton_Generate_Plot = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Generate_Plot.setObjectName("pushButton_Generate_Plot")
         self.horizontalLayout_11.addWidget(self.pushButton_Generate_Plot)
-        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem13)
+        self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
+        self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem14)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
         self.pushButton_Export = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Export.setObjectName("pushButton_Export")
         self.horizontalLayout_11.addWidget(self.pushButton_Export)
-        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem14)
+        self.horizontalLayout_11.addItem(spacerItem15)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -364,10 +370,9 @@ class Ui_MainWindow_Scatter_Plot(object):
         self.toolButton_Size.setText(_translate("MainWindow_Scatter_Plot", "X"))
         self.comboBox_Size.setPlaceholderText(
             _translate("MainWindow_Scatter_Plot", "Wybierz dane według, których ustalić rozmiar punktów..."))
-        self.label_6.setText(_translate("MainWindow_Scatter_Plot", "Styl punktów:"))
+        self.label_6.setText(_translate("MainWindow_Scatter_Plot", "Odcień punktów:"))
         self.toolButton_Style.setText(_translate("MainWindow_Scatter_Plot", "X"))
-        self.comboBox_Style.setPlaceholderText(
-            _translate("MainWindow_Scatter_Plot", "Wybierz styl dla zgrupowanych punktów..."))
+        self.comboBox_Style.setPlaceholderText(_translate("MainWindow_Scatter_Plot", "Wybierz odcień punktów..."))
         self.comboBox_Style.setItemText(0, _translate("MainWindow_Scatter_Plot", "deep"))
         self.comboBox_Style.setItemText(1, _translate("MainWindow_Scatter_Plot", "muted"))
         self.comboBox_Style.setItemText(2, _translate("MainWindow_Scatter_Plot", "bright"))
@@ -417,6 +422,7 @@ class Ui_MainWindow_Scatter_Plot(object):
         self.toolButton_Label_Y.setText(_translate("MainWindow_Scatter_Plot", "X"))
         self.pushButton_Reset_Options.setText(_translate("MainWindow_Scatter_Plot", "Resetuj"))
         self.pushButton_Generate_Plot.setText(_translate("MainWindow_Scatter_Plot", "Generuj wykres"))
+        self.pushButton_Data_Preview.setText(_translate("MainWindow_Scatter_Plot", "Podgląd danych"))
         self.pushButton_Add_To_Board.setText(_translate("MainWindow_Scatter_Plot", "Dodaj do tablicy"))
         self.pushButton_Export.setText(_translate("MainWindow_Scatter_Plot", "Eksportuj"))
         self.pushButton_Close.setText(_translate("MainWindow_Scatter_Plot", "Zamknij"))

@@ -12,8 +12,8 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Line_Plot(object):
     def setupUi(self, MainWindow_Line_Plot):
         MainWindow_Line_Plot.setObjectName("MainWindow_Line_Plot")
-        MainWindow_Line_Plot.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
-        MainWindow_Line_Plot.resize(1142, 805)
+        MainWindow_Line_Plot.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
+        MainWindow_Line_Plot.resize(1142, 878)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Line_Plot)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -356,18 +356,24 @@ class Ui_MainWindow_Line_Plot(object):
         self.pushButton_Generate_Plot = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Generate_Plot.setObjectName("pushButton_Generate_Plot")
         self.horizontalLayout_11.addWidget(self.pushButton_Generate_Plot)
-        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem15)
+        self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
+        self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
+        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem16)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
         self.pushButton_Export = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Export.setObjectName("pushButton_Export")
         self.horizontalLayout_11.addWidget(self.pushButton_Export)
-        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem16)
+        self.horizontalLayout_11.addItem(spacerItem17)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -379,7 +385,6 @@ class Ui_MainWindow_Line_Plot(object):
         self.comboBox_Markers.setCurrentIndex(-1)
         self.comboBox_Legend.setCurrentIndex(-1)
         self.pushButton_Close.clicked.connect(MainWindow_Line_Plot.close)  # type: ignore
-
         self.toolButton_Data.clicked.connect(lambda: self.comboBox_Data.setCurrentIndex(-1))  # type: ignore
         self.toolButton_X.clicked.connect(lambda: self.comboBox_X.setCurrentIndex(-1))  # type: ignore
         self.toolButton_Y.clicked.connect(lambda: self.comboBox_Y.setCurrentIndex(-1))  # type: ignore
@@ -393,7 +398,6 @@ class Ui_MainWindow_Line_Plot(object):
         self.toolButton_Label_Y.clicked.connect(self.lineEdit_Label_Y.clear)  # type: ignore
         self.toolButton_Estimator.clicked.connect(lambda: self.comboBox_Estimator.setCurrentIndex(0))  # type: ignore
         self.toolButton_CI.clicked.connect(lambda: self.spinBox_CI.setValue(95))  # type: ignore
-
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Line_Plot)
 
     def retranslateUi(self, MainWindow_Line_Plot):
@@ -417,9 +421,9 @@ class Ui_MainWindow_Line_Plot(object):
         self.toolButton_Size.setText(_translate("MainWindow_Line_Plot", "X"))
         self.comboBox_Size.setPlaceholderText(
             _translate("MainWindow_Line_Plot", "Wybierz dane według, których ustalić rozmiar punktów..."))
-        self.label_6.setText(_translate("MainWindow_Line_Plot", "Styl linii:"))
+        self.label_6.setText(_translate("MainWindow_Line_Plot", "Odcień linii:"))
         self.toolButton_Style.setText(_translate("MainWindow_Line_Plot", "X"))
-        self.comboBox_Style.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz styl linii..."))
+        self.comboBox_Style.setPlaceholderText(_translate("MainWindow_Line_Plot", "Wybierz odcień linii..."))
         self.comboBox_Style.setItemText(0, _translate("MainWindow_Line_Plot", "deep"))
         self.comboBox_Style.setItemText(1, _translate("MainWindow_Line_Plot", "muted"))
         self.comboBox_Style.setItemText(2, _translate("MainWindow_Line_Plot", "bright"))
@@ -484,6 +488,7 @@ class Ui_MainWindow_Line_Plot(object):
         self.toolButton_Label_Y.setText(_translate("MainWindow_Line_Plot", "X"))
         self.pushButton_Reset_Options.setText(_translate("MainWindow_Line_Plot", "Resetuj"))
         self.pushButton_Generate_Plot.setText(_translate("MainWindow_Line_Plot", "Generuj wykres"))
+        self.pushButton_Data_Preview.setText(_translate("MainWindow_Line_Plot", "Podgląd danych"))
         self.pushButton_Add_To_Board.setText(_translate("MainWindow_Line_Plot", "Dodaj do tablicy"))
         self.pushButton_Export.setText(_translate("MainWindow_Line_Plot", "Eksportuj"))
         self.pushButton_Close.setText(_translate("MainWindow_Line_Plot", "Zamknij"))

@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow_Box_Plot(object):
     def setupUi(self, MainWindow_Box_Plot):
         MainWindow_Box_Plot.setObjectName("MainWindow_Box_Plot")
-        MainWindow_Box_Plot.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        MainWindow_Box_Plot.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         MainWindow_Box_Plot.resize(1142, 805)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Box_Plot)
         self.centralwidget.setObjectName("centralwidget")
@@ -275,18 +275,24 @@ class Ui_MainWindow_Box_Plot(object):
         self.pushButton_Generate_Plot = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Generate_Plot.setObjectName("pushButton_Generate_Plot")
         self.horizontalLayout_11.addWidget(self.pushButton_Generate_Plot)
-        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_11.addItem(spacerItem12)
+        self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
+        self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem13)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
         self.pushButton_Export = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Export.setObjectName("pushButton_Export")
         self.horizontalLayout_11.addWidget(self.pushButton_Export)
-        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem13)
+        self.horizontalLayout_11.addItem(spacerItem14)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -327,9 +333,9 @@ class Ui_MainWindow_Box_Plot(object):
         self.toolButton_Hue.setText(_translate("MainWindow_Box_Plot", "X"))
         self.comboBox_Hue.setPlaceholderText(
             _translate("MainWindow_Box_Plot", "Wybierz dane według, których grupować..."))
-        self.label_6.setText(_translate("MainWindow_Box_Plot", "Styl pudełek:"))
+        self.label_6.setText(_translate("MainWindow_Box_Plot", "Odcień pudełek:"))
         self.toolButton_Style.setText(_translate("MainWindow_Box_Plot", "X"))
-        self.comboBox_Style.setPlaceholderText(_translate("MainWindow_Box_Plot", "Wybierz styl pudełek..."))
+        self.comboBox_Style.setPlaceholderText(_translate("MainWindow_Box_Plot", "Wybierz odcień pudełek..."))
         self.comboBox_Style.setItemText(0, _translate("MainWindow_Box_Plot", "deep"))
         self.comboBox_Style.setItemText(1, _translate("MainWindow_Box_Plot", "muted"))
         self.comboBox_Style.setItemText(2, _translate("MainWindow_Box_Plot", "bright"))
@@ -366,6 +372,7 @@ class Ui_MainWindow_Box_Plot(object):
         self.toolButton_Label_Y.setText(_translate("MainWindow_Box_Plot", "X"))
         self.pushButton_Reset_Options.setText(_translate("MainWindow_Box_Plot", "Resetuj"))
         self.pushButton_Generate_Plot.setText(_translate("MainWindow_Box_Plot", "Generuj wykres"))
+        self.pushButton_Data_Preview.setText(_translate("MainWindow_Box_Plot", "Podgląd danych"))
         self.pushButton_Add_To_Board.setText(_translate("MainWindow_Box_Plot", "Dodaj do tablicy"))
         self.pushButton_Export.setText(_translate("MainWindow_Box_Plot", "Eksportuj"))
         self.pushButton_Close.setText(_translate("MainWindow_Box_Plot", "Zamknij"))

@@ -3,7 +3,7 @@
  <class>MainWindow_Scatter_Plot</class>
  <widget class="QMainWindow" name="MainWindow_Scatter_Plot">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -296,7 +296,7 @@
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Styl punktów:</string>
+                    <string>Odcień punktów:</string>
                    </property>
                   </widget>
                  </item>
@@ -334,7 +334,7 @@
                   <number>-1</number>
                  </property>
                  <property name="placeholderText">
-                  <string>Wybierz styl dla zgrupowanych punktów...</string>
+                  <string>Wybierz odcień punktów...</string>
                  </property>
                  <item>
                   <property name="text">
@@ -783,6 +783,29 @@
        <widget class="QPushButton" name="pushButton_Generate_Plot">
         <property name="text">
          <string>Generuj wykres</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_14">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Data_Preview">
+        <property name="text">
+         <string>Podgląd danych</string>
         </property>
        </widget>
       </item>
