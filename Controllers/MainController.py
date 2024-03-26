@@ -18,6 +18,7 @@ import json
 import os
 from Views.Main.data_preview import Ui_MainWindow_Data_Preview
 from Models.data_frame_model import DataFrameModel
+from Views.Main.guide_window import Ui_MainWindow_Guide
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
@@ -73,6 +74,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.action_Change_Data_Name.triggered.connect(self.createRenameKeyDataframeWindow)
         self.action_Delete_Dataframe.triggered.connect(self.createDeleteDataframeWindow)
         self.action_Data_Preview.triggered.connect(self.createDataPreviewWindow)
+
+        self.action_Guide.triggered.connect(self.createGuideWindow)
 
         self.show()
 
@@ -546,3 +549,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         if self.selectedDataNameForDataPreviewGlobal:
             self.window_data_preview_ui.comboBox_Select_Data.setCurrentText(self.selectedDataNameForDataPreviewGlobal)
+
+    def createGuideWindow(self):
+        self.window_guide = QMainWindow()
+        self.window_guide_ui = Ui_MainWindow_Guide()
+        self.window_guide_ui.setupUi(self.window_guide)
+        self.window_guide.show()
