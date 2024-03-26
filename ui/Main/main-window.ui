@@ -163,6 +163,7 @@ font-family: &quot;Segoe UI&quot;;
      <string>?</string>
     </property>
     <addaction name="action_About_Application"/>
+    <addaction name="action_Guide"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Edit"/>
@@ -522,7 +523,7 @@ font-family: &quot;Segoe UI&quot;;
   </action>
   <action name="action_Correlation">
    <property name="text">
-    <string>Współczynnik korelacji Pearsona</string>
+    <string>Test istotności dla korelacji Pearsona</string>
    </property>
   </action>
   <action name="action_Test_t_Studenta">
@@ -598,6 +599,11 @@ font-family: &quot;Segoe UI&quot;;
   <action name="action_Data_Preview">
    <property name="text">
     <string>Podgląd danych</string>
+   </property>
+  </action>
+  <action name="action_Guide">
+   <property name="text">
+    <string>Przewodnik</string>
    </property>
   </action>
  </widget>

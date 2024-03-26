@@ -240,6 +240,8 @@ class Ui_MainWindow_Main(object):
         self.action_Distribution_Series.setObjectName("action_Distribution_Series")
         self.action_Data_Preview = QtGui.QAction(parent=MainWindow_Main)
         self.action_Data_Preview.setObjectName("action_Data_Preview")
+        self.action_Guide = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Guide.setObjectName("action_Guide")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -300,6 +302,7 @@ class Ui_MainWindow_Main(object):
         self.menu_Charts.addSeparator()
         self.menu_Settings.addAction(self.action_Settings)
         self.menu_Help.addAction(self.action_About_Application)
+        self.menu_Help.addAction(self.action_Guide)
         self.menubar_Menu.addAction(self.menu_File.menuAction())
         self.menubar_Menu.addAction(self.menu_Edit.menuAction())
         self.menubar_Menu.addAction(self.menu_Data.menuAction())
@@ -399,7 +402,7 @@ class Ui_MainWindow_Main(object):
         self.action_Change_Data_Name.setText(_translate("MainWindow_Main", "Zmień nazwę zbioru"))
         self.action_Delete_Dataframe.setText(_translate("MainWindow_Main", "Usuń dane"))
         self.action_Basic_Stats.setText(_translate("MainWindow_Main", "Podstawowe statystyki"))
-        self.action_Correlation.setText(_translate("MainWindow_Main", "Współczynnik korelacji Pearsona"))
+        self.action_Correlation.setText(_translate("MainWindow_Main", "Test istotności dla korelacji Pearsona"))
         self.action_Test_t_Studenta.setText(_translate("MainWindow_Main", "Test t-Studenta"))
         self.action_Test_ANOVA.setText(_translate("MainWindow_Main", "Test ANOVA"))
         self.action_Test_Chi_Square.setText(_translate("MainWindow_Main", "Test Chi-kwadrat"))
@@ -415,6 +418,7 @@ class Ui_MainWindow_Main(object):
         self.action_Kendall_Correlation.setText(_translate("MainWindow_Main", "Korelacja Kendalla"))
         self.action_Distribution_Series.setText(_translate("MainWindow_Main", "Szereg rozdzielczy"))
         self.action_Data_Preview.setText(_translate("MainWindow_Main", "Podgląd danych"))
+        self.action_Guide.setText(_translate("MainWindow_Main", "Przewodnik"))
 
 
 if __name__ == "__main__":
