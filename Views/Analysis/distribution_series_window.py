@@ -55,6 +55,33 @@ class Ui_MainWindow_Distribution_Series(object):
         self.comboBox_Data_Column.setObjectName("comboBox_Data_Column")
         self.verticalLayout_3.addWidget(self.comboBox_Data_Column)
         self.verticalLayout_13.addLayout(self.verticalLayout_3)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.label_2 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_5.addWidget(self.label_2)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem2)
+        self.toolButton_Bins = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Bins.setObjectName("toolButton_Bins")
+        self.horizontalLayout_5.addWidget(self.toolButton_Bins)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_5)
+        self.spinBox_Bins = QtWidgets.QSpinBox(parent=self.groupBox)
+        self.spinBox_Bins.setMaximum(99)
+        self.spinBox_Bins.setObjectName("spinBox_Bins")
+        self.verticalLayout_4.addWidget(self.spinBox_Bins)
+        self.lineEdit_Custom_Bins = QtWidgets.QLineEdit(parent=self.groupBox)
+        self.lineEdit_Custom_Bins.setInputMethodHints(QtCore.Qt.InputMethodHint.ImhNone)
+        self.lineEdit_Custom_Bins.setClearButtonEnabled(False)
+        self.lineEdit_Custom_Bins.setObjectName("lineEdit_Custom_Bins")
+        self.verticalLayout_4.addWidget(self.lineEdit_Custom_Bins)
+        self.checkBox_Use_Custom_Bins = QtWidgets.QCheckBox(parent=self.groupBox)
+        self.checkBox_Use_Custom_Bins.setObjectName("checkBox_Use_Custom_Bins")
+        self.verticalLayout_4.addWidget(self.checkBox_Use_Custom_Bins)
+        self.verticalLayout_13.addLayout(self.verticalLayout_4)
         self.verticalLayout_16 = QtWidgets.QVBoxLayout()
         self.verticalLayout_16.setObjectName("verticalLayout_16")
         self.horizontalLayout_15 = QtWidgets.QHBoxLayout()
@@ -62,9 +89,9 @@ class Ui_MainWindow_Distribution_Series(object):
         self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_15.addWidget(self.label_12)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_15.addItem(spacerItem2)
+        self.horizontalLayout_15.addItem(spacerItem3)
         self.verticalLayout_16.addLayout(self.horizontalLayout_15)
         self.checkBox_Board_Is_Enabled = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Board_Is_Enabled.setChecked(False)
@@ -91,20 +118,20 @@ class Ui_MainWindow_Distribution_Series(object):
         self.verticalLayout.addWidget(self.label_Data_Frame_Save_Error_Message)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem3)
-        self.pushButton_Save_As_Data_Frame = QtWidgets.QPushButton(parent=self.groupBox_2)
-        self.pushButton_Save_As_Data_Frame.setObjectName("pushButton_Save_As_Data_Frame")
-        self.horizontalLayout_4.addWidget(self.pushButton_Save_As_Data_Frame)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem4)
+        self.pushButton_Save_As_Data_Frame = QtWidgets.QPushButton(parent=self.groupBox_2)
+        self.pushButton_Save_As_Data_Frame.setObjectName("pushButton_Save_As_Data_Frame")
+        self.horizontalLayout_4.addWidget(self.pushButton_Save_As_Data_Frame)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem5)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
         self.verticalLayout_2.addWidget(self.groupBox_2)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                             QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem5)
+        self.verticalLayout_2.addItem(spacerItem6)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
@@ -139,21 +166,21 @@ class Ui_MainWindow_Distribution_Series(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem6)
+        self.horizontalLayout_11.addItem(spacerItem7)
         self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
         self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem7)
+        self.horizontalLayout_11.addItem(spacerItem8)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem8)
+        self.horizontalLayout_11.addItem(spacerItem9)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -166,6 +193,8 @@ class Ui_MainWindow_Distribution_Series(object):
         self.pushButton_Close.clicked.connect(MainWindow_Distribution_Series.close)  # type: ignore
         self.checkBox_Board_Is_Enabled.clicked['bool'].connect(
             lambda checked: self.textEdit_Preview_Board.setReadOnly(not checked))
+        self.toolButton_Bins.clicked.connect(lambda: self.spinBox_Bins.setValue(0))  # type: ignore
+        self.toolButton_Bins.clicked.connect(self.lineEdit_Custom_Bins.clear)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Distribution_Series)
 
     def retranslateUi(self, MainWindow_Distribution_Series):
@@ -177,6 +206,12 @@ class Ui_MainWindow_Distribution_Series(object):
         self.toolButton_Data_Column.setText(_translate("MainWindow_Distribution_Series", "X"))
         self.comboBox_Data_Column.setPlaceholderText(
             _translate("MainWindow_Distribution_Series", "Wybierz kolumne danych..."))
+        self.label_2.setText(_translate("MainWindow_Distribution_Series", "Przedziały:"))
+        self.toolButton_Bins.setText(_translate("MainWindow_Distribution_Series", "X"))
+        self.spinBox_Bins.setPrefix(_translate("MainWindow_Distribution_Series", "Ilość przedziałów: "))
+        self.lineEdit_Custom_Bins.setPlaceholderText(
+            _translate("MainWindow_Distribution_Series", "Podaj przedziały..."))
+        self.checkBox_Use_Custom_Bins.setText(_translate("MainWindow_Distribution_Series", "Własne przedziały"))
         self.label_12.setText(_translate("MainWindow_Distribution_Series", "Edycja podglądu:"))
         self.checkBox_Board_Is_Enabled.setText(_translate("MainWindow_Distribution_Series", "Odblokuj edycje tablicy"))
         self.groupBox_2.setTitle(_translate("MainWindow_Distribution_Series", "Zapisz szereg rozdzielczy:"))

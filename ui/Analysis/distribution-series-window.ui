@@ -98,6 +98,71 @@
               </layout>
              </item>
              <item>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Przedziały:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_7">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolButton_Bins">
+                   <property name="text">
+                    <string>X</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="spinBox_Bins">
+                 <property name="prefix">
+                  <string>Ilość przedziałów: </string>
+                 </property>
+                 <property name="maximum">
+                  <number>99</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_Custom_Bins">
+                 <property name="inputMethodHints">
+                  <set>Qt::ImhNone</set>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Podaj przedziały...</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_Use_Custom_Bins">
+                 <property name="text">
+                  <string>Własne przedziały</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
               <layout class="QVBoxLayout" name="verticalLayout_16">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -406,6 +471,38 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <hint type="destinationlabel">
      <x>711</x>
      <y>422</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_Bins</sender>
+   <signal>clicked()</signal>
+   <receiver>spinBox_Bins</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>261</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_Bins</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEdit_Custom_Bins</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>261</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>389</y>
     </hint>
    </hints>
   </connection>
