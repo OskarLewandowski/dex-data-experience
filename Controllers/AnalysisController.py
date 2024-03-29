@@ -1305,6 +1305,9 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_distribution_series_ui = Ui_MainWindow_Distribution_Series()
         self.window_distribution_series_ui.setupUi(self.window_distribution_series)
 
+        self.window_distribution_series_ui.lineEdit_Custom_Bins.hide()
+        self.window_distribution_series_ui.checkBox_Use_Custom_Bins.toggled.connect(self.showCustomBins)
+
         dataAll = DataStorageModel.get_all_keys_and_columns()
 
         self.window_distribution_series_ui.comboBox_Data_Column.addItems(dataAll)
@@ -1321,8 +1324,20 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             self.writeDistributionSeries)
 
         self.window_distribution_series_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+        self.window_distribution_series_ui.spinBox_Bins.valueChanged.connect(self.writeDistributionSeries)
+        self.window_distribution_series_ui.lineEdit_Custom_Bins.textEdited.connect(self.writeDistributionSeries)
 
         self.window_distribution_series.show()
+
+    def showCustomBins(self):
+        if self.window_distribution_series_ui.checkBox_Use_Custom_Bins.isChecked():
+            self.window_distribution_series_ui.spinBox_Bins.setValue(0)
+            self.window_distribution_series_ui.spinBox_Bins.hide()
+            self.window_distribution_series_ui.lineEdit_Custom_Bins.show()
+        else:
+            self.window_distribution_series_ui.spinBox_Bins.show()
+            self.window_distribution_series_ui.lineEdit_Custom_Bins.clear()
+            self.window_distribution_series_ui.lineEdit_Custom_Bins.hide()
 
     def writeDistributionSeries(self):
         try:
@@ -1331,15 +1346,48 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             if data:
                 result = self.splitText(data)
                 selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+                dataType = self.checkColumnType(data)
+                indexName = 'Wartość'
 
                 filename = "SR_" + result[0] + "_" + result[1]
                 self.window_distribution_series_ui.lineEdit_Data_Frame_Name.setText(filename)
 
-                distribution_series = selectedColumn.value_counts()
+                binsValue = self.window_distribution_series_ui.spinBox_Bins.value()
+                customBinsValues = self.window_distribution_series_ui.lineEdit_Custom_Bins.text()
+
+                if dataType == 1:
+                    self.window_distribution_series_ui.spinBox_Bins.setDisabled(True)
+                    self.window_distribution_series_ui.lineEdit_Custom_Bins.setDisabled(True)
+                    self.window_distribution_series_ui.checkBox_Use_Custom_Bins.setDisabled(True)
+                else:
+                    self.window_distribution_series_ui.spinBox_Bins.setEnabled(True)
+                    self.window_distribution_series_ui.lineEdit_Custom_Bins.setEnabled(True)
+                    self.window_distribution_series_ui.checkBox_Use_Custom_Bins.setEnabled(True)
+
+                try:
+                    if binsValue != 0 and dataType == 0:
+                        selectedColumn = pd.cut(selectedColumn, binsValue)
+                        indexName = "Przedział"
+                    elif customBinsValues and dataType == 0:
+                        customBinsValues = [float(bin) for bin in customBinsValues.split(',')]
+                        selectedColumn = pd.cut(selectedColumn, customBinsValues)
+                        indexName = "Przedział"
+                except:
+                    msg = ("Błędny przedział, zastosuj się do nastepujących wymagań:"
+                           "<ul>"
+                           "<li>Wartości przedziałów powinny być podane jako ciąg liczb, w którym poszczególne granice przedziałów są oddzielone przecinkami. <b>Na przykład: '10, 20, 30, 40, 50'</b>.</li>"
+                           "<li>Wartości granic przedziałów powinny być podane w rosnącej kolejności. <b>Na przykład, '10,20,30,40,50' jest poprawne </b>, ale <b>'50,40,30,20,10' jest niepoprawne.</b></li>"
+                           "<li>Każda granica przedziału powinna być liczbą zmiennoprzecinkową lub całkowitą. <b>Na przykład: '10.5,20.5,30.5,40.5,50'.</b></li>"
+                           "</ul>"
+                           )
+                    self.window_distribution_series_ui.textEdit_Preview_Board.setText(msg)
+                    return
+
+                distribution_series = selectedColumn.value_counts().sort_index()
                 percentages = (distribution_series / len(selectedColumn) * 100).round(2)
 
                 df = pd.DataFrame({'Liczebność': distribution_series, 'Procent': percentages})
-                df.index.name = 'Wartość'
+                df.index.name = indexName
                 df = df.reset_index()
 
                 self.dataframe_distribution_series = df
