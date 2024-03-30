@@ -13,7 +13,7 @@ from Views.Analysis.test_andersona_darlinga_window import Ui_MainWindow_Test_And
 from Views.Analysis.test_kolmogorova_smirnova_window import Ui_MainWindow_Test_Kolomogorova_Smirnova
 from Views.Analysis.test_lillieforsa_window import Ui_MainWindow_Test_Lillieforsa
 from Views.Analysis.test_jarque_bera_window import Ui_MainWindow_Test_Jarque_Bera
-from Views.Analysis.test_t_studenta_window import Ui_MainWindow_Test_T_Studenta
+from Views.Analysis.test_t_studenta_ind_window import Ui_MainWindow_Test_T_Student_Ind
 from Views.Analysis.test_anova_window import Ui_MainWindow_Test_ANOVA
 from Views.Analysis.test_chi_square_window import Ui_MainWindow_Test_Chi_Square
 from Views.Analysis.test_kruskal_wallis_window import Ui_MainWindow_Test_Kruskal_Wallis
@@ -37,7 +37,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Kolmogorova_Smirnova.triggered.connect(self.createTestKolmogorovaSmirnovaWindow)
         self.main.action_Test_Lillieforsa.triggered.connect(self.createTestLillieforsaWindow)
         self.main.action_Test_Jarque_Bera.triggered.connect(self.createTestJarqueBeraWindow)
-        self.main.action_Test_T_Student_For_Two_Independent_Samples.triggered.connect(self.createTestTStudentaWindow)
+        self.main.action_Test_T_Student_For_Two_Independent_Samples.triggered.connect(self.createTestTStudentaIndWindow)
         self.main.action_Test_ANOVA.triggered.connect(self.createTestAnovaWindow)
         self.main.action_Test_Chi_Square.triggered.connect(self.createTestChiSquareWindow)
         self.main.action_Test_Kruskala_Wallisa.triggered.connect(self.createTestKruskalaWallisaWindow)
@@ -694,32 +694,35 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             pass
 
     # Test t-Studenta
-    def createTestTStudentaWindow(self):
-        self.window_test_t_studenta = QMainWindow()
-        self.window_test_t_studenta_ui = Ui_MainWindow_Test_T_Studenta()
-        self.window_test_t_studenta_ui.setupUi(self.window_test_t_studenta)
+    def createTestTStudentaIndWindow(self):
+        self.window_test_t_studenta_ind = QMainWindow()
+        self.window_test_t_studenta_ind_ui = Ui_MainWindow_Test_T_Student_Ind()
+        self.window_test_t_studenta_ind_ui.setupUi(self.window_test_t_studenta_ind)
 
         dataAll = DataStorageModel.get_all_keys_and_columns()
 
-        self.window_test_t_studenta_ui.comboBox_Data_Column.addItems(dataAll)
-        self.window_test_t_studenta_ui.comboBox_Data_Column_2.addItems(dataAll)
+        self.window_test_t_studenta_ind_ui.comboBox_Data_Column.addItems(dataAll)
+        self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.addItems(dataAll)
 
-        self.window_test_t_studenta_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudenta)
-        self.window_test_t_studenta_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTStudentaInBoard)
+        self.window_test_t_studenta_ind_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudentaInd)
+        self.window_test_t_studenta_ind_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTStudentaIndInBoard)
 
-        self.window_test_t_studenta_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestTStudenta)
-        self.window_test_t_studenta_ui.comboBox_Data_Column_2.currentIndexChanged.connect(self.writeTestTStudenta)
+        self.window_test_t_studenta_ind_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestTStudentaInd)
+        self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.currentIndexChanged.connect(
+            self.writeTestTStudentaInd)
 
-        self.window_test_t_studenta_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestTStudenta)
+        self.window_test_t_studenta_ind_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestTStudentaInd)
 
-        self.window_test_t_studenta_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+        self.window_test_t_studenta_ind_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
-        self.window_test_t_studenta.show()
+        self.window_test_t_studenta_ind_ui.comboBox_Alternative.currentIndexChanged.connect(self.writeTestTStudentaInd)
 
-    def writeTestTStudenta(self):
+        self.window_test_t_studenta_ind.show()
+
+    def writeTestTStudentaInd(self):
         try:
-            data1 = self.window_test_t_studenta_ui.comboBox_Data_Column.currentText()
-            data2 = self.window_test_t_studenta_ui.comboBox_Data_Column_2.currentText()
+            data1 = self.window_test_t_studenta_ind_ui.comboBox_Data_Column.currentText()
+            data2 = self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.currentText()
 
             result1 = None
             result2 = None
@@ -736,7 +739,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 selectedColumn1 = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
                 selectedColumn2 = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
 
-                title = f"<b>Test t-Studenta - test różnicy między średnimi dwóch grup</b><br>"
+                title = f"<b>Test t-Studenta dla dwóch prób niezależnych - test różnicy między średnimi dwóch grup</b><br>"
 
                 description = ("<br><b>Interpretacja wyników:</b><br><br>"
                                "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch grup w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę między grupami."
@@ -746,10 +749,12 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnimi obu grup.</li>"
                                "</ul><br>")
 
-                self.window_test_t_studenta_ui.textEdit_Preview_Board.clear()
+                self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.clear()
+
+                alternativeValue = self.window_test_t_studenta_ind_ui.comboBox_Alternative.currentText()
 
                 if dataType1 == 0 and dataType2 == 0:
-                    statistic, p_value = stats.ttest_ind(selectedColumn1, selectedColumn2)
+                    statistic, p_value = stats.ttest_ind(selectedColumn1, selectedColumn2, alternative=alternativeValue)
 
                     testResult = (f"Grupa 1: <b>{result1[0]} : {result1[1]}</b><br>"
                                   f"Grupa 2: <b>{result2[0]} : {result2[1]}</b><br><br>"
@@ -758,7 +763,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
                     summary = title + testResult
 
-                    if self.window_test_t_studenta_ui.checkBox_Description_Of_Results.isChecked():
+                    if self.window_test_t_studenta_ind_ui.checkBox_Description_Of_Results.isChecked():
                         summary = summary + description
 
                 else:
@@ -777,22 +782,22 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
             else:
                 summary = ("Wybierz obie grupy danych do przeprowadzenia testu")
 
-            self.window_test_t_studenta_ui.textEdit_Preview_Board.setHtml(summary)
+            self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.setHtml(summary)
 
         except Exception as e:
             print(str(e))
 
-    def resetTestTStudenta(self):
-        self.window_test_t_studenta_ui.comboBox_Data_Column.setCurrentIndex(-1)
-        self.window_test_t_studenta_ui.checkBox_Board_Is_Enabled.setChecked(False)
-        self.window_test_t_studenta_ui.textEdit_Preview_Board.clear()
-        self.window_test_t_studenta_ui.textEdit_Preview_Board.setReadOnly(True)
-        self.window_test_t_studenta_ui.checkBox_Description_Of_Results.setChecked(False)
-        self.window_test_t_studenta_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
+    def resetTestTStudentaInd(self):
+        self.window_test_t_studenta_ind_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_t_studenta_ind_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.clear()
+        self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_t_studenta_ind_ui.checkBox_Description_Of_Results.setChecked(False)
+        self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
 
-    def writeTestTStudentaInBoard(self):
+    def writeTestTStudentaIndInBoard(self):
         try:
-            data = self.window_test_t_studenta_ui.textEdit_Preview_Board.toHtml()
+            data = self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)

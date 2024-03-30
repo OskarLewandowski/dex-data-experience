@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '.\test-t-studenta-window.ui'
+# Form implementation generated from reading ui file '.\test-t-studenta-ind-window.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -9,12 +9,12 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow_Test_T_Studenta(object):
-    def setupUi(self, MainWindow_Test_T_Studenta):
-        MainWindow_Test_T_Studenta.setObjectName("MainWindow_Test_T_Studenta")
-        MainWindow_Test_T_Studenta.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
-        MainWindow_Test_T_Studenta.resize(1142, 878)
-        self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Test_T_Studenta)
+class Ui_MainWindow_Test_T_Student_Ind(object):
+    def setupUi(self, MainWindow_Test_T_Student_Ind):
+        MainWindow_Test_T_Student_Ind.setObjectName("MainWindow_Test_T_Student_Ind")
+        MainWindow_Test_T_Student_Ind.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
+        MainWindow_Test_T_Student_Ind.resize(1142, 878)
+        self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Test_T_Student_Ind)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
@@ -76,14 +76,35 @@ class Ui_MainWindow_Test_T_Studenta(object):
         self.comboBox_Data_Column_2.setObjectName("comboBox_Data_Column_2")
         self.verticalLayout_5.addWidget(self.comboBox_Data_Column_2)
         self.verticalLayout_4.addLayout(self.verticalLayout_5)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.label_4 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_6.addWidget(self.label_4)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem3)
+        self.toolButton_Alternative = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Alternative.setObjectName("toolButton_Alternative")
+        self.horizontalLayout_6.addWidget(self.toolButton_Alternative)
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
+        self.comboBox_Alternative = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Alternative.setObjectName("comboBox_Alternative")
+        self.comboBox_Alternative.addItem("")
+        self.comboBox_Alternative.addItem("")
+        self.comboBox_Alternative.addItem("")
+        self.verticalLayout.addWidget(self.comboBox_Alternative)
+        self.verticalLayout_4.addLayout(self.verticalLayout)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.label_3 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_5.addWidget(self.label_3)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem3)
+        self.horizontalLayout_5.addItem(spacerItem4)
         self.verticalLayout_4.addLayout(self.horizontalLayout_5)
         self.checkBox_Description_Of_Results = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Description_Of_Results.setObjectName("checkBox_Description_Of_Results")
@@ -96,9 +117,9 @@ class Ui_MainWindow_Test_T_Studenta(object):
         self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_15.addWidget(self.label_12)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_15.addItem(spacerItem4)
+        self.horizontalLayout_15.addItem(spacerItem5)
         self.verticalLayout_16.addLayout(self.horizontalLayout_15)
         self.checkBox_Board_Is_Enabled = QtWidgets.QCheckBox(parent=self.groupBox)
         self.checkBox_Board_Is_Enabled.setChecked(False)
@@ -106,9 +127,9 @@ class Ui_MainWindow_Test_T_Studenta(object):
         self.verticalLayout_16.addWidget(self.checkBox_Board_Is_Enabled)
         self.verticalLayout_13.addLayout(self.verticalLayout_16)
         self.verticalLayout_2.addWidget(self.groupBox)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                             QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem5)
+        self.verticalLayout_2.addItem(spacerItem6)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
@@ -143,55 +164,63 @@ class Ui_MainWindow_Test_T_Studenta(object):
         self.pushButton_Reset_Options = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Reset_Options.setObjectName("pushButton_Reset_Options")
         self.horizontalLayout_11.addWidget(self.pushButton_Reset_Options)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem6)
+        self.horizontalLayout_11.addItem(spacerItem7)
         self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
         self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem7)
+        self.horizontalLayout_11.addItem(spacerItem8)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem8)
+        self.horizontalLayout_11.addItem(spacerItem9)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
         self.verticalLayout_12.addLayout(self.horizontalLayout_11)
-        MainWindow_Test_T_Studenta.setCentralWidget(self.centralwidget)
+        MainWindow_Test_T_Student_Ind.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow_Test_T_Studenta)
+        self.retranslateUi(MainWindow_Test_T_Student_Ind)
         self.toolButton_Data_Column.clicked.connect(
             lambda: self.comboBox_Data_Column.setCurrentIndex(-1))  # type: ignore
-        self.pushButton_Close.clicked.connect(MainWindow_Test_T_Studenta.close)  # type: ignore
+        self.pushButton_Close.clicked.connect(MainWindow_Test_T_Student_Ind.close)  # type: ignore
         self.checkBox_Board_Is_Enabled.clicked['bool'].connect(
             lambda checked: self.textEdit_Preview_Board.setReadOnly(not checked))
         self.toolButton_Data_Column_2.clicked.connect(
             lambda: self.comboBox_Data_Column_2.setCurrentIndex(-1))  # type: ignore
-        QtCore.QMetaObject.connectSlotsByName(MainWindow_Test_T_Studenta)
+        self.toolButton_Alternative.clicked.connect(
+            lambda: self.comboBox_Alternative.setCurrentIndex(0))  # type: ignore
+        QtCore.QMetaObject.connectSlotsByName(MainWindow_Test_T_Student_Ind)
 
-    def retranslateUi(self, MainWindow_Test_T_Studenta):
+    def retranslateUi(self, MainWindow_Test_T_Student_Ind):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow_Test_T_Studenta.setWindowTitle(_translate("MainWindow_Test_T_Studenta", "Test t-Studenta"))
-        self.groupBox.setTitle(_translate("MainWindow_Test_T_Studenta", "Parametry:"))
-        self.label.setText(_translate("MainWindow_Test_T_Studenta", "Zbiór danych 1:"))
-        self.toolButton_Data_Column.setText(_translate("MainWindow_Test_T_Studenta", "X"))
+        MainWindow_Test_T_Student_Ind.setWindowTitle(
+            _translate("MainWindow_Test_T_Student_Ind", "Test t-Studenta dla dwóch prób niezależnych"))
+        self.groupBox.setTitle(_translate("MainWindow_Test_T_Student_Ind", "Parametry:"))
+        self.label.setText(_translate("MainWindow_Test_T_Student_Ind", "Zbiór danych 1:"))
+        self.toolButton_Data_Column.setText(_translate("MainWindow_Test_T_Student_Ind", "X"))
         self.comboBox_Data_Column.setPlaceholderText(
-            _translate("MainWindow_Test_T_Studenta", "Wybierz kolumne danych..."))
-        self.label_2.setText(_translate("MainWindow_Test_T_Studenta", "Zbiór danych 2:"))
-        self.toolButton_Data_Column_2.setText(_translate("MainWindow_Test_T_Studenta", "X"))
+            _translate("MainWindow_Test_T_Student_Ind", "Wybierz kolumne danych..."))
+        self.label_2.setText(_translate("MainWindow_Test_T_Student_Ind", "Zbiór danych 2:"))
+        self.toolButton_Data_Column_2.setText(_translate("MainWindow_Test_T_Student_Ind", "X"))
         self.comboBox_Data_Column_2.setPlaceholderText(
-            _translate("MainWindow_Test_T_Studenta", "Wybierz kolumne danych..."))
-        self.label_3.setText(_translate("MainWindow_Test_T_Studenta", "Opis wyników:"))
+            _translate("MainWindow_Test_T_Student_Ind", "Wybierz kolumne danych..."))
+        self.label_4.setText(_translate("MainWindow_Test_T_Student_Ind", "Alternatywa:"))
+        self.toolButton_Alternative.setText(_translate("MainWindow_Test_T_Student_Ind", "X"))
+        self.comboBox_Alternative.setItemText(0, _translate("MainWindow_Test_T_Student_Ind", "two-sided"))
+        self.comboBox_Alternative.setItemText(1, _translate("MainWindow_Test_T_Student_Ind", "greater"))
+        self.comboBox_Alternative.setItemText(2, _translate("MainWindow_Test_T_Student_Ind", "less"))
+        self.label_3.setText(_translate("MainWindow_Test_T_Student_Ind", "Opis wyników:"))
         self.checkBox_Description_Of_Results.setText(
-            _translate("MainWindow_Test_T_Studenta", "Dodaj opis do interpretacji wyników"))
-        self.label_12.setText(_translate("MainWindow_Test_T_Studenta", "Edycja podglądu:"))
-        self.checkBox_Board_Is_Enabled.setText(_translate("MainWindow_Test_T_Studenta", "Odblokuj edycje tablicy"))
-        self.textEdit_Preview_Board.setHtml(_translate("MainWindow_Test_T_Studenta",
+            _translate("MainWindow_Test_T_Student_Ind", "Dodaj opis do interpretacji wyników"))
+        self.label_12.setText(_translate("MainWindow_Test_T_Student_Ind", "Edycja podglądu:"))
+        self.checkBox_Board_Is_Enabled.setText(_translate("MainWindow_Test_T_Student_Ind", "Odblokuj edycje tablicy"))
+        self.textEdit_Preview_Board.setHtml(_translate("MainWindow_Test_T_Student_Ind",
                                                        "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                                        "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
                                                        "p, li { white-space: pre-wrap; }\n"
@@ -200,18 +229,18 @@ class Ui_MainWindow_Test_T_Studenta(object):
                                                        "li.checked::marker { content: \"\\2612\"; }\n"
                                                        "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
                                                        "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.pushButton_Reset_Options.setText(_translate("MainWindow_Test_T_Studenta", "Resetuj"))
-        self.pushButton_Data_Preview.setText(_translate("MainWindow_Test_T_Studenta", "Podgląd danych"))
-        self.pushButton_Add_To_Board.setText(_translate("MainWindow_Test_T_Studenta", "Dodaj do tablicy"))
-        self.pushButton_Close.setText(_translate("MainWindow_Test_T_Studenta", "Zamknij"))
+        self.pushButton_Reset_Options.setText(_translate("MainWindow_Test_T_Student_Ind", "Resetuj"))
+        self.pushButton_Data_Preview.setText(_translate("MainWindow_Test_T_Student_Ind", "Podgląd danych"))
+        self.pushButton_Add_To_Board.setText(_translate("MainWindow_Test_T_Student_Ind", "Dodaj do tablicy"))
+        self.pushButton_Close.setText(_translate("MainWindow_Test_T_Student_Ind", "Zamknij"))
 
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow_Test_T_Studenta = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow_Test_T_Studenta()
-    ui.setupUi(MainWindow_Test_T_Studenta)
-    MainWindow_Test_T_Studenta.show()
+    MainWindow_Test_T_Student_Ind = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow_Test_T_Student_Ind()
+    ui.setupUi(MainWindow_Test_T_Student_Ind)
+    MainWindow_Test_T_Student_Ind.show()
     sys.exit(app.exec())
