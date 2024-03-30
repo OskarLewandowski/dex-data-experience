@@ -247,6 +247,9 @@ class Ui_MainWindow_Main(object):
         self.action_Guide.setObjectName("action_Guide")
         self.action_Test_T_Student_For_One_Sample = QtGui.QAction(parent=MainWindow_Main)
         self.action_Test_T_Student_For_One_Sample.setObjectName("action_Test_T_Student_For_One_Sample")
+        self.action_Test_T_Student_For_Two_Dependent_Samples = QtGui.QAction(parent=MainWindow_Main)
+        self.action_Test_T_Student_For_Two_Dependent_Samples.setObjectName(
+            "action_Test_T_Student_For_Two_Dependent_Samples")
         self.menu_File.addAction(self.action_New_File)
         self.menu_File.addAction(self.action_Open_File)
         self.menu_File.addAction(self.action_Save)
@@ -291,6 +294,7 @@ class Ui_MainWindow_Main(object):
         self.menu_Correlation.addAction(self.action_Correlation)
         self.menu_Tests_T_Student.addAction(self.action_Test_T_Student_For_One_Sample)
         self.menu_Tests_T_Student.addAction(self.action_Test_T_Student_For_Two_Independent_Samples)
+        self.menu_Tests_T_Student.addAction(self.action_Test_T_Student_For_Two_Dependent_Samples)
         self.menu_Analysis.addAction(self.action_Basic_Stats)
         self.menu_Analysis.addAction(self.action_Distribution_Series)
         self.menu_Analysis.addAction(self.menu_Normality_Tests.menuAction())
@@ -430,6 +434,8 @@ class Ui_MainWindow_Main(object):
         self.action_Guide.setText(_translate("MainWindow_Main", "Przewodnik"))
         self.action_Test_T_Student_For_One_Sample.setText(
             _translate("MainWindow_Main", "Test t-Studenta dla jednej próby"))
+        self.action_Test_T_Student_For_Two_Dependent_Samples.setText(
+            _translate("MainWindow_Main", "Test t-Studenta dla dwóch prób zależnych"))
 
 
 if __name__ == "__main__":

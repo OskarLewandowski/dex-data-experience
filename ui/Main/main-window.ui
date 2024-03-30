@@ -136,6 +136,7 @@ font-family: &quot;Segoe UI&quot;;
      </property>
      <addaction name="action_Test_T_Student_For_One_Sample"/>
      <addaction name="action_Test_T_Student_For_Two_Independent_Samples"/>
+     <addaction name="action_Test_T_Student_For_Two_Dependent_Samples"/>
     </widget>
     <addaction name="action_Basic_Stats"/>
     <addaction name="action_Distribution_Series"/>
@@ -616,6 +617,11 @@ font-family: &quot;Segoe UI&quot;;
   <action name="action_Test_T_Student_For_One_Sample">
    <property name="text">
     <string>Test t-Studenta dla jednej próby</string>
+   </property>
+  </action>
+  <action name="action_Test_T_Student_For_Two_Dependent_Samples">
+   <property name="text">
+    <string>Test t-Studenta dla dwóch prób zależnych</string>
    </property>
   </action>
  </widget>
