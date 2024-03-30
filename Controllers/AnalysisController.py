@@ -37,7 +37,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Test_Kolmogorova_Smirnova.triggered.connect(self.createTestKolmogorovaSmirnovaWindow)
         self.main.action_Test_Lillieforsa.triggered.connect(self.createTestLillieforsaWindow)
         self.main.action_Test_Jarque_Bera.triggered.connect(self.createTestJarqueBeraWindow)
-        self.main.action_Test_t_Studenta.triggered.connect(self.createTestTStudentaWindow)
+        self.main.action_Test_T_Student_For_Two_Independent_Samples.triggered.connect(self.createTestTStudentaWindow)
         self.main.action_Test_ANOVA.triggered.connect(self.createTestAnovaWindow)
         self.main.action_Test_Chi_Square.triggered.connect(self.createTestChiSquareWindow)
         self.main.action_Test_Kruskala_Wallisa.triggered.connect(self.createTestKruskalaWallisaWindow)

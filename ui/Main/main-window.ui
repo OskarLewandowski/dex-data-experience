@@ -130,11 +130,18 @@ font-family: &quot;Segoe UI&quot;;
      <addaction name="action_Kendall_Correlation"/>
      <addaction name="action_Correlation"/>
     </widget>
+    <widget class="QMenu" name="menu_Tests_T_Student">
+     <property name="title">
+      <string>Testy t-Studenta</string>
+     </property>
+     <addaction name="action_Test_T_Student_For_One_Sample"/>
+     <addaction name="action_Test_T_Student_For_Two_Independent_Samples"/>
+    </widget>
     <addaction name="action_Basic_Stats"/>
     <addaction name="action_Distribution_Series"/>
     <addaction name="menu_Normality_Tests"/>
     <addaction name="menu_Correlation"/>
-    <addaction name="action_Test_t_Studenta"/>
+    <addaction name="menu_Tests_T_Student"/>
     <addaction name="action_Test_ANOVA"/>
     <addaction name="action_Test_Chi_Square"/>
     <addaction name="action_Test_Kruskala_Wallisa"/>
@@ -526,9 +533,9 @@ font-family: &quot;Segoe UI&quot;;
     <string>Test istotności dla korelacji Pearsona</string>
    </property>
   </action>
-  <action name="action_Test_t_Studenta">
+  <action name="action_Test_T_Student_For_Two_Independent_Samples">
    <property name="text">
-    <string>Test t-Studenta</string>
+    <string>Test t-Studenta dla dwóch prób niezależnych</string>
    </property>
   </action>
   <action name="action_Test_ANOVA">
@@ -604,6 +611,11 @@ font-family: &quot;Segoe UI&quot;;
   <action name="action_Guide">
    <property name="text">
     <string>Przewodnik</string>
+   </property>
+  </action>
+  <action name="action_Test_T_Student_For_One_Sample">
+   <property name="text">
+    <string>Test t-Studenta dla jednej próby</string>
    </property>
   </action>
  </widget>
