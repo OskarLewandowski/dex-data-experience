@@ -22,6 +22,7 @@ from Views.Analysis.distribution_series_window import Ui_MainWindow_Distribution
 from Views.Analysis.correlation_pearson_window import Ui_MainWindow_Correlation_Pearson
 from Views.Analysis.correlation_kendall_window import Ui_MainWindow_Correlation_Kendall
 from Views.Analysis.correlation_spearman_window import Ui_MainWindow_Correlation_Spearman
+from Views.Analysis.test_t_studenta_rel_window import Ui_MainWindow_Test_T_Student_Rel
 from Models.message_model import MessageModel
 
 
@@ -46,6 +47,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Pearson_Correlation.triggered.connect(self.createCorrelationPearsonWindow)
         self.main.action_Kendall_Correlation.triggered.connect(self.createCorrelationKendallWindow)
         self.main.action_Spearman_Correlation.triggered.connect(self.createCorrelationSpearmanWindow)
+        self.main.action_Test_T_Student_For_Two_Dependent_Samples.triggered.connect(self.createTestTStudentaRelWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -693,7 +695,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         except Exception as e:
             pass
 
-    # Test t-Studenta
+    # Test t-Studenta Ind
     def createTestTStudentaIndWindow(self):
         self.window_test_t_studenta_ind = QMainWindow()
         self.window_test_t_studenta_ind_ui = Ui_MainWindow_Test_T_Student_Ind()
@@ -794,6 +796,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_t_studenta_ind_ui.checkBox_Description_Of_Results.setChecked(False)
         self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
+        self.window_test_t_studenta_ind_ui.comboBox_Alternative.setCurrentIndex(0)
 
     def writeTestTStudentaIndInBoard(self):
         try:
@@ -1809,6 +1812,120 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
     def writeCorrelationSpearmanInBoard(self):
         try:
             data = self.window_correlation_spearman_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    # Test t-Studenta Rel
+    def createTestTStudentaRelWindow(self):
+        self.window_test_t_studenta_rel = QMainWindow()
+        self.window_test_t_studenta_rel_ui = Ui_MainWindow_Test_T_Student_Rel()
+        self.window_test_t_studenta_rel_ui.setupUi(self.window_test_t_studenta_rel)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_test_t_studenta_rel_ui.comboBox_Data_Column.addItems(dataAll)
+        self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.addItems(dataAll)
+
+        self.window_test_t_studenta_rel_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudentaRel)
+        self.window_test_t_studenta_rel_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTStudentaRelInBoard)
+
+        self.window_test_t_studenta_rel_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestTStudentaRel)
+        self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.currentIndexChanged.connect(
+            self.writeTestTStudentaRel)
+
+        self.window_test_t_studenta_rel_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestTStudentaRel)
+
+        self.window_test_t_studenta_rel_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.window_test_t_studenta_rel_ui.comboBox_Alternative.currentIndexChanged.connect(self.writeTestTStudentaRel)
+
+        self.window_test_t_studenta_rel.show()
+
+    def writeTestTStudentaRel(self):
+        try:
+            data1 = self.window_test_t_studenta_rel_ui.comboBox_Data_Column.currentText()
+            data2 = self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.currentText()
+
+            result1 = None
+            result2 = None
+
+            summary = ""
+
+            if data1 and data2:
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
+
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
+
+                selectedColumn1 = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                selectedColumn2 = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
+
+                title = f"<b>Test t-Studenta dla dwóch prób zależnych - test różnicy między średnimi dwóch powiązanych grup</b><br>"
+
+                description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch powiązanych grup w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę między grupami."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta dla dwóch prób zależnych, hipoteza zerowa zakłada, że średnie różnice między grupami są równe zero."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnia różnica między grupami jest różna od zera i różnica ta jest statystycznie istotna.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnimi różnicami obu grup.</li>"
+                               "</ul><br>")
+
+                self.window_test_t_studenta_rel_ui.textEdit_Preview_Board.clear()
+
+                alternativeValue = self.window_test_t_studenta_rel_ui.comboBox_Alternative.currentText()
+
+                if dataType1 == 0 and dataType2 == 0:
+                    statistic, p_value = stats.ttest_rel(selectedColumn1, selectedColumn2, alternative=alternativeValue)
+
+                    testResult = (f"Grupa 1: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Grupa 2: <b>{result2[0]} : {result2[1]}</b><br><br>"
+                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
+
+                    summary = title + testResult
+
+                    if self.window_test_t_studenta_rel_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    if dataType1 == 1 and dataType2 == 0:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnie <b>'{result1[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
+                    elif dataType1 == 0 and dataType2 == 1:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnie <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
+                    else:
+                        summary = (
+                            f"Nieprawidłowe dane w kolumnach <b>'{result1[1]}' </b> oraz <b>'{result2[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumny zawierające dane ilościowe.")
+            else:
+                summary = ("Wybierz obie grupy danych do przeprowadzenia testu")
+
+            self.window_test_t_studenta_rel_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestTStudentaRel(self):
+        self.window_test_t_studenta_rel_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_t_studenta_rel_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_t_studenta_rel_ui.textEdit_Preview_Board.clear()
+        self.window_test_t_studenta_rel_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_t_studenta_rel_ui.checkBox_Description_Of_Results.setChecked(False)
+        self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
+        self.window_test_t_studenta_rel_ui.comboBox_Alternative.setCurrentIndex(0)
+
+    def writeTestTStudentaRelInBoard(self):
+        try:
+            data = self.window_test_t_studenta_rel_ui.textEdit_Preview_Board.toHtml()
             if data:
                 cursor = self.main.textEdit_Board.textCursor()
                 cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
