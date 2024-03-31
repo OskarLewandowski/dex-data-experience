@@ -23,6 +23,7 @@ from Views.Analysis.correlation_pearson_window import Ui_MainWindow_Correlation_
 from Views.Analysis.correlation_kendall_window import Ui_MainWindow_Correlation_Kendall
 from Views.Analysis.correlation_spearman_window import Ui_MainWindow_Correlation_Spearman
 from Views.Analysis.test_t_studenta_rel_window import Ui_MainWindow_Test_T_Student_Rel
+from Views.Analysis.test_t_studenta_1samp_window import Ui_MainWindow_Test_T_Student_1samp
 from Models.message_model import MessageModel
 
 
@@ -48,6 +49,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Kendall_Correlation.triggered.connect(self.createCorrelationKendallWindow)
         self.main.action_Spearman_Correlation.triggered.connect(self.createCorrelationSpearmanWindow)
         self.main.action_Test_T_Student_For_Two_Dependent_Samples.triggered.connect(self.createTestTStudentaRelWindow)
+        self.main.action_Test_T_Student_For_One_Sample.triggered.connect(self.createTestTStudenta1sampWindow)
 
     def splitText(self, text, seperator=" : "):
         if seperator in str(text):
@@ -1933,3 +1935,133 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 cursor.insertHtml(data)
         except Exception as e:
             pass
+
+    # Test t-Studenta 1samp
+    def createTestTStudenta1sampWindow(self):
+        self.window_test_t_studenta_1samp = QMainWindow()
+        self.window_test_t_studenta_1samp_ui = Ui_MainWindow_Test_T_Student_1samp()
+        self.window_test_t_studenta_1samp_ui.setupUi(self.window_test_t_studenta_1samp)
+
+        dataAll = DataStorageModel.get_all_keys_and_columns()
+
+        self.window_test_t_studenta_1samp_ui.comboBox_Data_Column.addItems(dataAll)
+
+        self.window_test_t_studenta_1samp_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudenta1samp)
+        self.window_test_t_studenta_1samp_ui.pushButton_Add_To_Board.clicked.connect(
+            self.writeTestTStudenta1sampInBoard)
+
+        self.window_test_t_studenta_1samp_ui.comboBox_Data_Column.currentIndexChanged.connect(
+            self.writeTestTStudenta1samp)
+
+        self.window_test_t_studenta_1samp_ui.checkBox_Description_Of_Results.clicked.connect(
+            self.writeTestTStudenta1samp)
+
+        self.window_test_t_studenta_1samp_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.window_test_t_studenta_1samp_ui.comboBox_Alternative.currentIndexChanged.connect(
+            self.writeTestTStudenta1samp)
+
+        self.window_test_t_studenta_1samp_ui.doubleSpinBox_Popmean.valueChanged.connect(self.writeTestTStudenta1samp)
+
+        self.window_test_t_studenta_1samp_ui.pushButton_Add_As_Param_Popmean.clicked.connect(
+            self.addResultPopmeanToParam)
+
+        self.window_test_t_studenta_1samp.show()
+
+    def writeTestTStudenta1samp(self):
+        try:
+            data = self.window_test_t_studenta_1samp_ui.comboBox_Data_Column.currentText()
+
+            result = None
+
+            summary = ""
+
+            if data:
+                result = self.splitText(data)
+
+                dataType = self.checkColumnType(data)
+
+                if dataType == 0:
+
+                    selectedColumn = DataStorageModel.get_data_by_key_and_column(result[0], result[1]) if data else None
+
+                    title = f"<b>Test t-Studenta dla jednej próby - test różnicy między średnią próby a znaną wartością</b><br>"
+
+                    description = ("<br><b>Interpretacja wyników:</b><br><br>"
+                                   "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnią próby a znaną wartością w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę."
+                                   "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta dla jednej próby, hipoteza zerowa zakłada, że średnia próby jest równa znanej wartości."
+                                   "<ul>"
+                                   "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnia próby jest różna od znanej wartości i różnica ta jest statystycznie istotna.</li>"
+                                   "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnią próby a znaną wartością.</li>"
+                                   "</ul><br>")
+
+                    self.window_test_t_studenta_1samp_ui.textEdit_Preview_Board.clear()
+
+                    alternativeValue = self.window_test_t_studenta_1samp_ui.comboBox_Alternative.currentText()
+                    popmeanValue = self.window_test_t_studenta_1samp_ui.doubleSpinBox_Popmean.value()
+
+                    sumValue = sum(selectedColumn)
+                    self.window_test_t_studenta_1samp_ui.lineEdit_Sum.setText(str(sumValue))
+
+                    countValue = len(selectedColumn)
+                    self.window_test_t_studenta_1samp_ui.lineEdit_Count.setText(str(countValue))
+
+                    mu_est = round(sumValue / countValue, 2)
+                    self.window_test_t_studenta_1samp_ui.lineEdit_Result_Expected_Value.setText(str(mu_est))
+
+                    statistic, p_value = stats.ttest_1samp(selectedColumn, popmean=popmeanValue,
+                                                           alternative=alternativeValue)
+
+                    testResult = (f"Zbiór danych: <b>{result[0]} : {result[1]}</b><br>"
+                                  f"Wartość oczekiwana populacji: <b>{popmeanValue}</b><br><br>"
+                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
+
+                    summary = title + testResult
+
+                    if self.window_test_t_studenta_1samp_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    summary = (
+                        f"Nieprawidłowe dane w kolumnie <b>'{result[1]}'</b>, wymagane są dane numeryczne!<br>"
+                        f"Wybierz kolumne zawierające dane ilościowe.")
+                    self.resetPopmeanFields()
+
+            self.window_test_t_studenta_1samp_ui.textEdit_Preview_Board.setHtml(summary)
+
+        except Exception as e:
+            print(str(e))
+
+    def resetTestTStudenta1samp(self):
+        self.window_test_t_studenta_1samp_ui.comboBox_Data_Column.setCurrentIndex(-1)
+        self.window_test_t_studenta_1samp_ui.checkBox_Board_Is_Enabled.setChecked(False)
+        self.window_test_t_studenta_1samp_ui.textEdit_Preview_Board.clear()
+        self.window_test_t_studenta_1samp_ui.textEdit_Preview_Board.setReadOnly(True)
+        self.window_test_t_studenta_1samp_ui.checkBox_Description_Of_Results.setChecked(False)
+        self.window_test_t_studenta_1samp_ui.comboBox_Alternative.setCurrentIndex(0)
+        self.window_test_t_studenta_1samp_ui.doubleSpinBox_Popmean.setValue(0)
+        self.resetPopmeanFields()
+
+    def writeTestTStudenta1sampInBoard(self):
+        try:
+            data = self.window_test_t_studenta_1samp_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+        except Exception as e:
+            pass
+
+    def addResultPopmeanToParam(self):
+        value = self.window_test_t_studenta_1samp_ui.lineEdit_Result_Expected_Value.text()
+        if value:
+            self.window_test_t_studenta_1samp_ui.doubleSpinBox_Popmean.setValue(float(value))
+        else:
+            self.window_test_t_studenta_1samp_ui.doubleSpinBox_Popmean.setValue(0)
+
+    def resetPopmeanFields(self):
+        self.window_test_t_studenta_1samp_ui.lineEdit_Sum.clear()
+        self.window_test_t_studenta_1samp_ui.lineEdit_Count.clear()
+        self.window_test_t_studenta_1samp_ui.lineEdit_Result_Expected_Value.clear()
