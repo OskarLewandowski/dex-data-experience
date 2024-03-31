@@ -746,8 +746,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 title = f"<b>Test t-Studenta dla dwóch prób niezależnych - test różnicy między średnimi dwóch grup</b><br>"
 
                 description = ("<br><b>Interpretacja wyników:</b><br><br>"
-                               "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch grup w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę między grupami."
-                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta, hipoteza zerowa zakłada, że średnie obu grup są równe."
+                               "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch grup w odniesieniu do rozproszenia danych. Im większa wartość t, tym większa jest różnica między grupami."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta dla dwóch prób niezależnych, hipoteza zerowa zakłada, że średnie obu grup są równe."
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnie obu grup są różne i różnica ta jest statystycznie istotna.</li>"
                                "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnimi obu grup.</li>"
@@ -879,7 +879,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
                     testResult = (f"Zbiór: <b>{data}</b><br>"
                                   f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
-                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Statystyka testu F: <b>{round(statistic, 2)}</b><br>"
                                   f"Wartość p: <b>{round(p_value, 2)}</b>")
 
             except:
@@ -1011,7 +1011,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
                     testResult = (f"Zbiór: <b>{data}</b><br>"
                                   f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
-                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Statystyka testu: <b>{round(statistic, 2)}</b><br>"
                                   f"Wartość p: <b>{round(p_value, 2)}</b>")
             except:
                 result = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
@@ -1129,7 +1129,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
                     testResult = (f"Zbiór: <b>{data}</b><br>"
                                   f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
-                                  f"Statystyka testu t: <b>{round(statistic, 2)}</b><br>"
+                                  f"Statystyka testu: <b>{round(statistic, 2)}</b><br>"
                                   f"Wartość p: <b>{round(p_value, 2)}</b>")
             except:
                 dataError = True
@@ -1871,7 +1871,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 title = f"<b>Test t-Studenta dla dwóch prób zależnych - test różnicy między średnimi dwóch powiązanych grup</b><br>"
 
                 description = ("<br><b>Interpretacja wyników:</b><br><br>"
-                               "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch powiązanych grup w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę między grupami."
+                               "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnimi dwóch powiązanych grup w odniesieniu do rozproszenia danych. Im większa wartość t, tym większa jest różnica między grupami."
                                "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta dla dwóch prób zależnych, hipoteza zerowa zakłada, że średnie różnice między grupami są równe zero."
                                "<ul>"
                                "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnia różnica między grupami jest różna od zera i różnica ta jest statystycznie istotna.</li>"
@@ -1988,7 +1988,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                     title = f"<b>Test t-Studenta dla jednej próby - test różnicy między średnią próby a znaną wartością</b><br>"
 
                     description = ("<br><b>Interpretacja wyników:</b><br><br>"
-                                   "<b>Statystyka testu:</b> Ta wartość reprezentuje różnicę między średnią próby a znaną wartością w odniesieniu do rozproszenia danych. Większa wartość t wskazuje na większą różnicę."
+                                   "<b>Statystyka testu t:</b> Ta wartość reprezentuje różnicę między średnią próby a znaną wartością w odniesieniu do rozproszenia danych. Im większa wartość t, tym większa jest różnica między średnią próby a wartością oczekiwaną."
                                    "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu t-Studenta dla jednej próby, hipoteza zerowa zakłada, że średnia próby jest równa znanej wartości."
                                    "<ul>"
                                    "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że średnia próby jest różna od znanej wartości i różnica ta jest statystycznie istotna.</li>"
