@@ -541,7 +541,7 @@ font-family: &quot;Segoe UI&quot;;
   </action>
   <action name="action_Test_ANOVA">
    <property name="text">
-    <string>Test ANOVA</string>
+    <string>Jednoczynnikowa ANOVA</string>
    </property>
   </action>
   <action name="action_Test_Chi_Square">

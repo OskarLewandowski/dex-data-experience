@@ -417,7 +417,7 @@ class Ui_MainWindow_Main(object):
         self.action_Correlation.setText(_translate("MainWindow_Main", "Test istotności dla korelacji Pearsona"))
         self.action_Test_T_Student_For_Two_Independent_Samples.setText(
             _translate("MainWindow_Main", "Test t-Studenta dla dwóch prób niezależnych"))
-        self.action_Test_ANOVA.setText(_translate("MainWindow_Main", "Test ANOVA"))
+        self.action_Test_ANOVA.setText(_translate("MainWindow_Main", "Jednoczynnikowa ANOVA"))
         self.action_Test_Chi_Square.setText(_translate("MainWindow_Main", "Test Chi-kwadrat"))
         self.action_Test_Kruskala_Wallisa.setText(_translate("MainWindow_Main", "Test Kruskala-Wallisa"))
         self.action_Test_Shapiro_Wilka.setText(_translate("MainWindow_Main", "Test Shapiro-Wilka"))
