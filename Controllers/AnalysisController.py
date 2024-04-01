@@ -817,96 +817,108 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_anova_ui = Ui_MainWindow_Test_ANOVA()
         self.window_test_anova_ui.setupUi(self.window_test_anova)
 
-        dataAll = DataStorageModel.get_all_keys()
+        dataAll = DataStorageModel.get_all_keys_and_columns()
 
-        self.window_test_anova_ui.comboBox_Data.addItems(dataAll)
+        self.window_test_anova_ui.comboBox_Data_Column1.addItems(dataAll)
+        self.window_test_anova_ui.comboBox_Data_Column2.addItems(dataAll)
 
         self.window_test_anova_ui.pushButton_Reset_Options.clicked.connect(self.resetTestAnova)
         self.window_test_anova_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestAnovaInBoard)
 
-        self.window_test_anova_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestAnova)
-        self.window_test_anova_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsTestAnova)
+        self.window_test_anova_ui.comboBox_Data_Column1.currentIndexChanged.connect(self.writeTestAnova)
+        self.window_test_anova_ui.comboBox_Data_Column2.currentIndexChanged.connect(self.writeTestAnova)
 
-        self.window_test_anova_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeTestAnova)
         self.window_test_anova_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestAnova)
 
         self.window_test_anova_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
         self.window_test_anova.show()
 
+        self.writeTestAnova()
+
     def writeTestAnova(self):
         try:
-            self.window_test_anova_ui.textEdit_Preview_Board.clear()
-            data = self.window_test_anova_ui.comboBox_Data.currentText()
+            data1 = self.window_test_anova_ui.comboBox_Data_Column1.currentText()
+            data2 = self.window_test_anova_ui.comboBox_Data_Column2.currentText()
 
-            result = None
-            groups = None
+            result1 = None
+            result2 = None
 
-            dataError = False
-            testResult = ""
-            selectedItems = self.window_test_anova_ui.listWidget_Data_Columns.selectedItems()
+            summary = ""
 
-            title = f"<b>Test ANOVA - test różnicy między średnimi wielu grup </b><br>"
+            if data1 and data2:
 
-            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
-                           "<b>Statystyka testu F:</b> Ta wartość reprezentuje stosunek wariancji między grupami do wariancji wewnątrz grup. Większa wartość F sugeruje, że różnice między grupami są większe niż różnice wewnątrz grup. Wysoka wartość F sugeruje, że przynajmniej jedna z grup jest statystycznie różna od innych."
-                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu ANOVA, hipoteza zerowa zakłada, że wszystkie grupy mają takie same średnie populacji."
-                           "<ul>"
-                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że przynajmniej jedna z grup ma inną średnią.</li>"
-                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że wszystkie grupy mają takie same średnie populacji.</li>"
-                           "</ul><br>")
+                if data1 == data2:
+                    summary = (
+                        "Wygląda na to, że próbujesz użyć tego samego zbioru danych jako zmiennej zależnej i niezależnej.<br><br>W analizie statystycznej, <b>zmienna zależna</b> to ta, którą chcemy przewidzieć lub wyjaśnić, natomiast <b>zmienna niezależna</b> to ta, którą używamy do przewidywania lub wyjaśnienia zmiennej zależnej.<br><br>Te dwie zmienne powinny pochodzić z różnych zbiorów danych.<br><br>Proszę wybrać różne kolumny dla zmiennej zależnej i niezależnej.")
+                    self.window_test_anova_ui.textEdit_Preview_Board.setHtml(summary)
+                    return
 
-            if selectedItems:
-                column_names = [item.text() for item in selectedItems]
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
 
-                data_frame = DataStorageModel.get(data)
-                data_frame = data_frame[column_names]
-                data_frame_columns_names = data_frame.columns.tolist()
-                columns_names = ', '.join(data_frame_columns_names)
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
 
-                groups = [data_frame[column].values for column in data_frame.columns]
+                dependentDf = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                independentDf = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
 
-            else:
-                data_frame = DataStorageModel.get(data)
-                data_frame_columns_names = data_frame.columns.tolist()
-                columns_names = ', '.join(data_frame_columns_names)
+                try:
+                    unique_values = independentDf.unique()
 
-                groups = [data_frame[column].values for column in data_frame.columns]
+                    groups = [dependentDf[independentDf == value] for value in unique_values]
 
-            try:
-                if groups and len(data_frame_columns_names) > 1:
+                except Exception as e:
+                    # print(str(e))
+                    summary = (
+                        "<b>Wystąpił błąd podczas przeprowadzania analizy statystycznej.</b><br><br>Upewnij się, że wybrane dane są odpowiednie dla tego testu.<br><br>Dane dla <b>zmiennej zależnej</b> powinny być numeryczne, a dane dla <b>zmiennej niezależnej</b> powinny definiować grupy (na przykład, kategorie).")
+                    self.window_test_anova_ui.textEdit_Preview_Board.setHtml(summary)
+
+                    return
+
+                title = f"<b>Jednoczynnikowa ANOVA - test różnicy między średnimi wielu grup</b><br>"
+
+                description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu F:</b> Ta wartość reprezentuje stosunek wariancji między grupami do wariancji wewnątrz grup. Większa wartość F sugeruje, że różnice między średnimi grup są większe niż różnice wewnątrz grup. Wysoka wartość F sugeruje, że przynajmniej jedna z grup jest statystycznie różna od pozostałych."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. W kontekście testu ANOVA, hipoteza zerowa zakłada, że wszystkie grupy mają takie same średnie."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że przynajmniej jedna z grup ma średnią statystycznie różną od pozostałych grup.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności (np. 0.05), nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma statystycznie istotnej różnicy między średnimi wszystkich grup.</li>"
+                               "</ul><br>")
+
+                self.window_test_anova_ui.textEdit_Preview_Board.clear()
+
+                if dataType1 == 0 and (dataType2 == 0 or dataType2 == 1):
                     statistic, p_value = stats.f_oneway(*groups)
 
-                    testResult = (f"Zbiór: <b>{data}</b><br>"
-                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
+                    testResult = (f"Zmienna zależna: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Zmienna niezależna: <b>{result2[0]} : {result2[1]}</b><br><br>"
                                   f"Statystyka testu F: <b>{round(statistic, 2)}</b><br>"
-                                  f"Wartość p: <b>{round(p_value, 2)}</b>")
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
 
-            except:
-                dataError = True
-                testResult = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
-                self.window_test_anova_ui.textEdit_Preview_Board.setHtml(testResult)
+                    summary = title + testResult
 
-            if self.window_test_anova_ui.checkBox_Description_Of_Results.isChecked() and dataError == False:
-                result = title + testResult + description
-            elif dataError == False:
-                result = title + testResult
+                    if self.window_test_anova_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    if dataType1 == 1:
+                        summary = (
+                            f"Nieprawidłowe dane w zmiennej zależnej <b>'{result1[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
             else:
-                result = testResult
+                summary = ("<b>Wybierz obie zmienne do przeprowadzenia testu</b><br><br>"
+                           "<b>Zmienna zależna:</b> Powinna być zmienną ciągłą, czyli przyjmować dane numeryczne. Zmienna zależna to ta, którą chcemy zbadać w kontekście wpływu jednej lub więcej zmiennych niezależnych.<br>"
+                           "<b>Zmienna niezależna:</b> Może być kategoryczna lub ciągła. Jeśli jest kategoryczna, to może przyjmować wartości dyskretne lub jakościowe. Jeśli jest ciągła, to również przyjmuje wartości numeryczne.")
 
-            if data and len(data_frame_columns_names) > 1:
-                self.window_test_anova_ui.textEdit_Preview_Board.setHtml(result)
-            elif len(data_frame_columns_names) < 2:
-                summary = ("Wybierz co najmniej dwie grupy danych do przeprowadzenia testu")
-                self.window_test_anova_ui.textEdit_Preview_Board.setHtml(summary)
-
+            self.window_test_anova_ui.textEdit_Preview_Board.setHtml(summary)
 
         except Exception as e:
             print(str(e))
 
     def resetTestAnova(self):
-        self.window_test_anova_ui.comboBox_Data.setCurrentIndex(-1)
-        self.window_test_anova_ui.listWidget_Data_Columns.clearSelection()
+        self.window_test_anova_ui.comboBox_Data_Column1.setCurrentIndex(-1)
+        self.window_test_anova_ui.comboBox_Data_Column2.setCurrentIndex(-1)
         self.window_test_anova_ui.checkBox_Board_Is_Enabled.setChecked(False)
         self.window_test_anova_ui.textEdit_Preview_Board.clear()
         self.window_test_anova_ui.textEdit_Preview_Board.setReadOnly(True)
@@ -922,19 +934,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 cursor.insertHtml(data)
         except Exception as e:
             pass
-
-    def fillDataColumnsTestAnova(self):
-        data = self.window_test_anova_ui.comboBox_Data.currentText()
-        if data:
-            df = pd.DataFrame(DataStorageModel.get(data))
-            df = df.columns.tolist()
-            self.window_test_anova_ui.listWidget_Data_Columns.clear()
-            self.window_test_anova_ui.listWidget_Data_Columns.addItems(df)
-            self.window_test_anova_ui.listWidget_Data_Columns.setEnabled(True)
-        else:
-            self.window_test_anova_ui.listWidget_Data_Columns.setEnabled(False)
-            self.window_test_anova_ui.listWidget_Data_Columns.clear()
-            self.window_test_anova_ui.textEdit_Preview_Board.clear()
 
     # Test Chi-square
     def createTestChiSquareWindow(self):
