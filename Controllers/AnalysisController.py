@@ -1052,20 +1052,20 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_kruskala_wallisa_ui = Ui_MainWindow_Test_Kruskal_Wallis()
         self.window_test_kruskala_wallisa_ui.setupUi(self.window_test_kruskala_wallisa)
 
-        dataAll = DataStorageModel.get_all_keys()
+        dataAll = DataStorageModel.get_all_keys_and_columns()
 
-        self.window_test_kruskala_wallisa_ui.comboBox_Data.addItems(dataAll)
+        self.window_test_kruskala_wallisa_ui.comboBox_Data_Column1.addItems(dataAll)
+        self.window_test_kruskala_wallisa_ui.comboBox_Data_Column2.addItems(dataAll)
 
         self.window_test_kruskala_wallisa_ui.pushButton_Reset_Options.clicked.connect(self.resetTestKruskalaWallisa)
         self.window_test_kruskala_wallisa_ui.pushButton_Add_To_Board.clicked.connect(
             self.writeTestKruskalaWallisaInBoard)
 
-        self.window_test_kruskala_wallisa_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestKruskalaWallisa)
-        self.window_test_kruskala_wallisa_ui.comboBox_Data.currentIndexChanged.connect(
-            self.fillDataColumnsTestKruskalaWallisa)
-
-        self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.itemSelectionChanged.connect(
+        self.window_test_kruskala_wallisa_ui.comboBox_Data_Column1.currentIndexChanged.connect(
             self.writeTestKruskalaWallisa)
+        self.window_test_kruskala_wallisa_ui.comboBox_Data_Column2.currentIndexChanged.connect(
+            self.writeTestKruskalaWallisa)
+
         self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.clicked.connect(
             self.writeTestKruskalaWallisa)
 
@@ -1073,85 +1073,91 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_kruskala_wallisa.show()
 
-    def fillDataColumnsTestKruskalaWallisa(self):
-        data = self.window_test_kruskala_wallisa_ui.comboBox_Data.currentText()
-        if data:
-            df = pd.DataFrame(DataStorageModel.get(data))
-            df = df.columns.tolist()
-            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.clear()
-            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.addItems(df)
-            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.setEnabled(True)
-        else:
-            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.setEnabled(False)
-            self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.clear()
-            self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
+        self.writeTestKruskalaWallisa()
 
     def writeTestKruskalaWallisa(self):
         try:
-            self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
-            data = self.window_test_kruskala_wallisa_ui.comboBox_Data.currentText()
+            data1 = self.window_test_kruskala_wallisa_ui.comboBox_Data_Column1.currentText()
+            data2 = self.window_test_kruskala_wallisa_ui.comboBox_Data_Column2.currentText()
 
-            result = None
-            dataError = False
-            testResult = ""
+            result1 = None
+            result2 = None
 
-            selectedItems = self.window_test_kruskala_wallisa_ui.listWidget_Data_Columns.selectedItems()
+            summary = ""
 
-            title = "<b>Test Kruskala-Wallisa - test różnic między niezależnymi grupami</b><br>"
+            if data1 and data2:
 
-            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
-                           "<b>Statystyka testu:</b> Wartość statystyki testu Kruskala-Wallisa mierzy różnicę między grupami danych. Im większa wartość statystyki, tym większa różnica między grupami. Statystyka ta jest obliczana na podstawie rang przypisanych poszczególnym obserwacjom."
-                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak różnic między grupami. Odrzucenie hipotezy zerowej sugeruje istnienie różnic między grupami."
-                           "<ul>"
-                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieją istotne różnice między grupami.</li>"
-                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na istotne różnice między grupami.</li>"
-                           "</ul><br>")
+                if data1 == data2:
+                    summary = (
+                        "Wygląda na to, że próbujesz użyć tego samego zbioru danych jako zmiennej zależnej i niezależnej.<br><br>W analizie statystycznej, <b>zmienna zależna</b> to ta, którą chcemy przewidzieć lub wyjaśnić, natomiast <b>zmienna niezależna</b> to ta, którą używamy do przewidywania lub wyjaśnienia zmiennej zależnej.<br><br>Te dwie zmienne powinny pochodzić z różnych zbiorów danych.<br><br>Proszę wybrać różne kolumny dla zmiennej zależnej i niezależnej.")
+                    self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(summary)
+                    return
 
-            if selectedItems:
-                column_names = [item.text() for item in selectedItems]
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
 
-                data_frame = DataStorageModel.get(data)
-                data_frame = data_frame[column_names]
-                data_frame_columns_names = data_frame.columns.tolist()
-                columns_names = ', '.join(data_frame_columns_names)
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
 
-                groups = [data_frame[column].values for column in data_frame.columns]
-            else:
-                data_frame = DataStorageModel.get(data)
-                data_frame_columns_names = data_frame.columns.tolist()
-                columns_names = ', '.join(data_frame_columns_names)
+                dependentDf = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                independentDf = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
 
-                groups = [data_frame[column].values for column in data_frame.columns]
-            try:
-                if groups and len(data_frame_columns_names) > 1:
+                try:
+                    unique_values = independentDf.unique()
+
+                    groups = [dependentDf[independentDf == value] for value in unique_values]
+
+                except Exception as e:
+                    # print(str(e))
+                    summary = (
+                        "<b>Wystąpił błąd podczas przeprowadzania analizy statystycznej.</b><br><br>Upewnij się, że wybrane dane są odpowiednie dla tego testu.<br><br>Dane dla <b>zmiennej zależnej</b> powinny być numeryczne, a dane dla <b>zmiennej niezależnej</b> powinny definiować grupy (na przykład, kategorie).")
+                    self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(summary)
+
+                    return
+
+                title = "<b>Test Kruskala-Wallisa - test różnic między niezależnymi grupami</b><br>"
+
+                description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu H:</b> Wartość statystyki testu Kruskala-Wallisa mierzy różnicę między grupami danych. Im większa wartość statystyki, tym większa różnica między grupami. Statystyka ta jest obliczana na podstawie rang przypisanych poszczególnym obserwacjom."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak różnic między grupami. Odrzucenie hipotezy zerowej sugeruje istnienie różnic między grupami."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieją istotne różnice między grupami.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na istotne różnice między grupami.</li>"
+                               "</ul><br>")
+
+                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
+
+                if dataType1 == 0 and (dataType2 == 0 or dataType2 == 1):
                     statistic, p_value = stats.kruskal(*groups)
 
-                    testResult = (f"Zbiór: <b>{data}</b><br>"
-                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
-                                  f"Statystyka testu: <b>{round(statistic, 2)}</b><br>"
-                                  f"Wartość p: <b>{round(p_value, 2)}</b>")
-            except:
-                dataError = True
-                testResult = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
-                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(testResult)
+                    testResult = (f"Zmienna zależna: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Zmienna niezależna: <b>{result2[0]} : {result2[1]}</b><br><br>"
+                                  f"Statystyka testu H: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>")
 
-            if self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.isChecked() and dataError == False:
-                result = title + testResult + description
-            elif dataError == False:
-                result = title + testResult
+                    summary = title + testResult
+
+                    if self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    if dataType1 == 1:
+                        summary = (
+                            f"Nieprawidłowe dane w zmiennej zależnej <b>'{result1[1]}'</b>, wymagane są dane numeryczne!<br>"
+                            f"Wybierz kolumne zawierające dane ilościowe.")
             else:
-                result = testResult
+                summary = ("<b>Wybierz obie zmienne do przeprowadzenia testu</b><br><br>"
+                           "<b>Zmienna zależna:</b> Powinna być zmienną ciągłą, czyli przyjmować dane numeryczne. Zmienna zależna to ta, którą chcemy zbadać w kontekście wpływu jednej lub więcej zmiennych niezależnych.<br>"
+                           "<b>Zmienna niezależna:</b> Może być kategoryczna lub ciągła. Jeśli jest kategoryczna, to może przyjmować wartości dyskretne lub jakościowe. Jeśli jest ciągła, to również przyjmuje wartości numeryczne.")
 
-            if data and len(data_frame_columns_names) > 1:
-                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(result)
-            elif len(data_frame_columns_names) < 2:
-                summary = ("Wybierz co najmniej dwie grupy danych do przeprowadzenia testu")
-                self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(summary)
+            self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setHtml(summary)
+
         except Exception as e:
-            pass
+            print(str(e))
 
     def resetTestKruskalaWallisa(self):
-        self.window_test_kruskala_wallisa_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_test_kruskala_wallisa_ui.comboBox_Data_Column1.setCurrentIndex(-1)
+        self.window_test_kruskala_wallisa_ui.comboBox_Data_Column2.setCurrentIndex(-1)
         self.window_test_kruskala_wallisa_ui.checkBox_Board_Is_Enabled.setChecked(False)
         self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.clear()
         self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setReadOnly(True)
