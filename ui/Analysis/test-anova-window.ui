@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Test ANOVA</string>
+   <string>Jednoczynnikowa ANOVA</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -56,7 +56,7 @@
                  <item>
                   <widget class="QLabel" name="label">
                    <property name="text">
-                    <string>Zbiór danych:</string>
+                    <string>Zmienna zależna:</string>
                    </property>
                   </widget>
                  </item>
@@ -74,7 +74,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QToolButton" name="toolButton_Data">
+                  <widget class="QToolButton" name="toolButton_Data_Column1">
                    <property name="text">
                     <string>X</string>
                    </property>
@@ -83,7 +83,7 @@
                 </layout>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_Data">
+                <widget class="QComboBox" name="comboBox_Data_Column1">
                  <property name="minimumSize">
                   <size>
                    <width>250</width>
@@ -104,7 +104,7 @@
                  <item>
                   <widget class="QLabel" name="label_2">
                    <property name="text">
-                    <string>Wybrane kolumny:</string>
+                    <string>Zmienna niezależna:</string>
                    </property>
                   </widget>
                  </item>
@@ -122,7 +122,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QToolButton" name="toolButton_Data_Columns">
+                  <widget class="QToolButton" name="toolButton_Data_Column2">
                    <property name="text">
                     <string>X</string>
                    </property>
@@ -131,15 +131,9 @@
                 </layout>
                </item>
                <item>
-                <widget class="QListWidget" name="listWidget_Data_Columns">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="alternatingRowColors">
-                  <bool>false</bool>
-                 </property>
-                 <property name="selectionMode">
-                  <enum>QAbstractItemView::MultiSelection</enum>
+                <widget class="QComboBox" name="comboBox_Data_Column2">
+                 <property name="placeholderText">
+                  <string>Wybierz zbiór danych...</string>
                  </property>
                 </widget>
                </item>
@@ -373,9 +367,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
  <resources/>
  <connections>
   <connection>
-   <sender>toolButton_Data</sender>
+   <sender>toolButton_Data_Column1</sender>
    <signal>clicked()</signal>
-   <receiver>comboBox_Data</receiver>
+   <receiver>comboBox_Data_Column1</receiver>
    <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -421,18 +415,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_Data_Columns</sender>
+   <sender>toolButton_Data_Column2</sender>
    <signal>clicked()</signal>
-   <receiver>listWidget_Data_Columns</receiver>
-   <slot>clearSelection()</slot>
+   <receiver>comboBox_Data_Column2</receiver>
+   <slot>clearEditText()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>267</x>
-     <y>333</y>
+     <x>261</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
-     <x>150</x>
-     <y>447</y>
+     <x>147</x>
+     <y>419</y>
     </hint>
    </hints>
   </connection>

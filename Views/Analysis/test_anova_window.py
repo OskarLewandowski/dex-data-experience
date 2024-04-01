@@ -46,14 +46,14 @@ class Ui_MainWindow_Test_ANOVA(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
-        self.toolButton_Data = QtWidgets.QToolButton(parent=self.groupBox)
-        self.toolButton_Data.setObjectName("toolButton_Data")
-        self.horizontalLayout_3.addWidget(self.toolButton_Data)
+        self.toolButton_Data_Column1 = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Data_Column1.setObjectName("toolButton_Data_Column1")
+        self.horizontalLayout_3.addWidget(self.toolButton_Data_Column1)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
-        self.comboBox_Data = QtWidgets.QComboBox(parent=self.groupBox)
-        self.comboBox_Data.setMinimumSize(QtCore.QSize(250, 0))
-        self.comboBox_Data.setObjectName("comboBox_Data")
-        self.verticalLayout_3.addWidget(self.comboBox_Data)
+        self.comboBox_Data_Column1 = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Data_Column1.setMinimumSize(QtCore.QSize(250, 0))
+        self.comboBox_Data_Column1.setObjectName("comboBox_Data_Column1")
+        self.verticalLayout_3.addWidget(self.comboBox_Data_Column1)
         self.verticalLayout_13.addLayout(self.verticalLayout_3)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -65,16 +65,13 @@ class Ui_MainWindow_Test_ANOVA(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem2)
-        self.toolButton_Data_Columns = QtWidgets.QToolButton(parent=self.groupBox)
-        self.toolButton_Data_Columns.setObjectName("toolButton_Data_Columns")
-        self.horizontalLayout_4.addWidget(self.toolButton_Data_Columns)
+        self.toolButton_Data_Column2 = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Data_Column2.setObjectName("toolButton_Data_Column2")
+        self.horizontalLayout_4.addWidget(self.toolButton_Data_Column2)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
-        self.listWidget_Data_Columns = QtWidgets.QListWidget(parent=self.groupBox)
-        self.listWidget_Data_Columns.setEnabled(False)
-        self.listWidget_Data_Columns.setAlternatingRowColors(False)
-        self.listWidget_Data_Columns.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
-        self.listWidget_Data_Columns.setObjectName("listWidget_Data_Columns")
-        self.verticalLayout.addWidget(self.listWidget_Data_Columns)
+        self.comboBox_Data_Column2 = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Data_Column2.setObjectName("comboBox_Data_Column2")
+        self.verticalLayout.addWidget(self.comboBox_Data_Column2)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
@@ -167,22 +164,25 @@ class Ui_MainWindow_Test_ANOVA(object):
         MainWindow_Test_ANOVA.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Test_ANOVA)
-        self.toolButton_Data.clicked.connect(lambda: self.comboBox_Data.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Data_Column1.clicked.connect(
+            lambda: self.comboBox_Data_Column1.setCurrentIndex(-1))  # type: ignore
         self.pushButton_Close.clicked.connect(MainWindow_Test_ANOVA.close)  # type: ignore
         self.checkBox_Board_Is_Enabled.clicked['bool'].connect(
             lambda checked: self.textEdit_Preview_Board.setReadOnly(not checked))
-        self.toolButton_Data_Columns.clicked.connect(self.listWidget_Data_Columns.clearSelection)  # type: ignore
+        self.toolButton_Data_Column2.clicked.connect(
+            lambda: self.comboBox_Data_Column2.setCurrentIndex(-1))  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Test_ANOVA)
 
     def retranslateUi(self, MainWindow_Test_ANOVA):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow_Test_ANOVA.setWindowTitle(_translate("MainWindow_Test_ANOVA", "Test ANOVA"))
+        MainWindow_Test_ANOVA.setWindowTitle(_translate("MainWindow_Test_ANOVA", "Jednoczynnikowa ANOVA"))
         self.groupBox.setTitle(_translate("MainWindow_Test_ANOVA", "Parametry:"))
-        self.label.setText(_translate("MainWindow_Test_ANOVA", "Zbiór danych:"))
-        self.toolButton_Data.setText(_translate("MainWindow_Test_ANOVA", "X"))
-        self.comboBox_Data.setPlaceholderText(_translate("MainWindow_Test_ANOVA", "Wybierz zbiór danych..."))
-        self.label_2.setText(_translate("MainWindow_Test_ANOVA", "Wybrane kolumny:"))
-        self.toolButton_Data_Columns.setText(_translate("MainWindow_Test_ANOVA", "X"))
+        self.label.setText(_translate("MainWindow_Test_ANOVA", "Zmienna zależna:"))
+        self.toolButton_Data_Column1.setText(_translate("MainWindow_Test_ANOVA", "X"))
+        self.comboBox_Data_Column1.setPlaceholderText(_translate("MainWindow_Test_ANOVA", "Wybierz zbiór danych..."))
+        self.label_2.setText(_translate("MainWindow_Test_ANOVA", "Zmienna niezależna:"))
+        self.toolButton_Data_Column2.setText(_translate("MainWindow_Test_ANOVA", "X"))
+        self.comboBox_Data_Column2.setPlaceholderText(_translate("MainWindow_Test_ANOVA", "Wybierz zbiór danych..."))
         self.label_3.setText(_translate("MainWindow_Test_ANOVA", "Opis wyników:"))
         self.checkBox_Description_Of_Results.setText(
             _translate("MainWindow_Test_ANOVA", "Dodaj opis do interpretacji wyników"))
