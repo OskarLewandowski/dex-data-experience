@@ -941,95 +941,127 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_chi_square_ui = Ui_MainWindow_Test_Chi_Square()
         self.window_test_chi_square_ui.setupUi(self.window_test_chi_square)
 
-        dataAll = DataStorageModel.get_all_keys()
+        dataAll = DataStorageModel.get_all_keys_and_columns()
 
-        self.window_test_chi_square_ui.comboBox_Data.addItems(dataAll)
+        self.window_test_chi_square_ui.comboBox_Data_Column1.addItems(dataAll)
+        self.window_test_chi_square_ui.comboBox_Data_Column2.addItems(dataAll)
 
         self.window_test_chi_square_ui.pushButton_Reset_Options.clicked.connect(self.resetTestChiSquare)
         self.window_test_chi_square_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestChiSquareInBoard)
 
-        self.window_test_chi_square_ui.comboBox_Data.currentIndexChanged.connect(self.writeTestChiSquare)
-        self.window_test_chi_square_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsTestChiSquare)
+        self.window_test_chi_square_ui.comboBox_Data_Column1.currentIndexChanged.connect(self.writeTestChiSquare)
+        self.window_test_chi_square_ui.comboBox_Data_Column2.currentIndexChanged.connect(self.writeTestChiSquare)
 
-        self.window_test_chi_square_ui.listWidget_Data_Columns.itemSelectionChanged.connect(self.writeTestChiSquare)
         self.window_test_chi_square_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestChiSquare)
 
         self.window_test_chi_square_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
         self.window_test_chi_square.show()
 
-    def fillDataColumnsTestChiSquare(self):
-        data = self.window_test_chi_square_ui.comboBox_Data.currentText()
-        if data:
-            df = pd.DataFrame(DataStorageModel.get(data))
-            df = df.columns.tolist()
-            self.window_test_chi_square_ui.listWidget_Data_Columns.clear()
-            self.window_test_chi_square_ui.listWidget_Data_Columns.addItems(df)
-            self.window_test_chi_square_ui.listWidget_Data_Columns.setEnabled(True)
-        else:
-            self.window_test_chi_square_ui.listWidget_Data_Columns.setEnabled(False)
-            self.window_test_chi_square_ui.listWidget_Data_Columns.clear()
-            self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
+        self.writeTestChiSquare()
 
     def writeTestChiSquare(self):
         try:
-            data = self.window_test_chi_square_ui.comboBox_Data.currentText()
+            data1 = self.window_test_chi_square_ui.comboBox_Data_Column1.currentText()
+            data2 = self.window_test_chi_square_ui.comboBox_Data_Column2.currentText()
 
-            result = None
-            testResult = None
+            result1 = None
+            result2 = None
 
-            self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
+            summary = ""
 
-            selectedItems = self.window_test_chi_square_ui.listWidget_Data_Columns.selectedItems()
-            title = "<b>Test Chi-square - test zależności między grupami</b><br>"
+            if data1 and data2:
 
-            description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
-                           "<b>Statystyka testu:</b> Wartość statystyki testu Chi-kwadrat mierzy różnicę między obserwowanymi danymi a danymi oczekiwanymi. Im większa wartość Chi-kwadrat, tym większa różnica między danymi. Statystyka ta jest obliczana na podstawie kwadratu różnicy między obserwowanymi a oczekiwanymi liczbami przypadków, podzielonym przez wartość oczekiwaną dla każdej kategorii."
-                           "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak zależności między zmiennymi. Odrzucenie hipotezy zerowej sugeruje istnienie zależności między zmiennymi."
-                           "<ul>"
-                           "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieje zależność między zmiennymi.</li>"
-                           "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na zależność między zmiennymi.</li>"
-                           "</ul><br>")
+                if data1 == data2:
+                    summary = (
+                        "Wygląda na to, że próbujesz użyć tego samego zbioru danych jako zmiennej zależnej i niezależnej.<br><br>W analizie statystycznej, <b>zmienna zależna</b> to ta, którą chcemy przewidzieć lub wyjaśnić, natomiast <b>zmienna niezależna</b> to ta, którą używamy do przewidywania lub wyjaśnienia zmiennej zależnej.<br><br>Te dwie zmienne powinny pochodzić z różnych zbiorów danych.<br><br>Proszę wybrać różne kolumny dla zmiennej zależnej i niezależnej.")
+                    self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(summary)
+                    return
 
-            if selectedItems:
-                column_names = [item.text() for item in selectedItems]
+                result1 = self.splitText(data1)
+                result2 = self.splitText(data2)
 
-                data_frame = DataStorageModel.get(data)
-                data_frame = data_frame[column_names]
-                data_frame_columns_names = data_frame.columns.tolist()
-                columns_names = ', '.join(data_frame_columns_names)
+                dataType1 = self.checkColumnType(data1)
+                dataType2 = self.checkColumnType(data2)
+
+                dependentDf = DataStorageModel.get_data_by_key_and_column(result1[0], result1[1]) if data1 else None
+                independentDf = DataStorageModel.get_data_by_key_and_column(result2[0], result2[1]) if data2 else None
+
+                try:
+                    crossTable = pd.crosstab(dependentDf, independentDf)
+
+                except Exception as e:
+                    # print(str(e))
+                    summary = ("<b>Wystąpił błąd podczas przeprowadzania analizy statystycznej.</b><br><br>"
+                               "Upewnij się, że wybrane dane są odpowiednie dla tego testu.<br><br>"
+                               "Dane dla <b>zmiennej zależnej</b> oraz <b>zmiennej niezależnej</b> powinny być jakościowe lub dyskretne.")
+
+                    self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(summary)
+
+                    return
+
+                title = "<b>Test Chi-square - test zależności między grupami</b><br>"
+
+                description = ("<br><br><b>Interpretacja wyników:</b><br><br>"
+                               "<b>Statystyka testu Chi-kwadrat:</b> Wartość statystyki testu Chi-kwadrat mierzy różnicę między obserwowanymi danymi a danymi oczekiwanymi. Im większa wartość Chi-kwadrat, tym większa różnica między danymi. Statystyka ta jest obliczana na podstawie kwadratu różnicy między obserwowanymi a oczekiwanymi liczbami przypadków, podzielonym przez wartość oczekiwaną dla każdej kategorii."
+                               "<br><b>Wartość p:</b> Jest to prawdopodobieństwo, że obserwujemy dane tak ekstremalne jak te, które mamy, zakładając, że hipoteza zerowa jest prawdziwa. Hipoteza zerowa sugeruje brak zależności między zmiennymi. Odrzucenie hipotezy zerowej sugeruje istnienie zależności między zmiennymi."
+                               "<ul>"
+                               "<li>Jeżeli <b>wartość p jest mniejsza</b> od wybranego poziomu istotności (np. 0.05), odrzucamy hipotezę zerową. To sugeruje, że istnieje zależność między zmiennymi.</li>"
+                               "<li>Jeżeli <b>wartość p jest większa</b> od wybranego poziomu istotności, nie ma podstaw do odrzucenia hipotezy zerowej. To sugeruje, że nie ma dowodów na zależność między zmiennymi.</li>"
+                               "</ul>"
+                               "<b>Stopnie swobody:</b> Stopnie swobody to liczba wartości w zestawie danych, które mogą swobodnie zmieniać się po ustaleniu pewnych ograniczeń. W kontekście testu chi-kwadrat, stopnie swobody są zazwyczaj równe (liczba wierszy - 1) * (liczba kolumn - 1)."
+                               "<br><b>Wartości oczekiwane:</b> Wartości oczekiwane to wartości, które oczekujemy uzyskać, jeśli hipoteza zerowa jest prawdziwa. Są one obliczane na podstawie rozkładu danych i wielkości próby."
+                               )
+
+                self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
+
+                if (dataType1 == 0 and dataType2 == 0) or (dataType2 == 1 and dataType2 == 1):
+                    statistic, p_value, dof, expected_freq = stats.chi2_contingency(crossTable)
+
+                    df = pd.DataFrame(expected_freq)
+
+                    columnCount = df.shape[1]
+
+                    if columnCount > 24:
+                        df = pd.concat([df.iloc[:, :10], df.iloc[:, -10:]], axis=1)
+
+                    html_table = df.to_html(classes='table', border=0, index=True, justify='center')
+                    html_table = html_table.replace('<table',
+                                                    '<table style="border: 1px solid black; border-collapse: collapse; padding: 10px;"')
+                    html_table = html_table.replace('<th>', '<th style="border: 1px solid black; padding: 5px;">')
+                    html_table = html_table.replace('<td>',
+                                                    '<td style="border: 1px solid black; padding: 5px; text-align: center;">')
+
+                    testResult = (f"Zmienna zależna: <b>{result1[0]} : {result1[1]}</b><br>"
+                                  f"Zmienna niezależna: <b>{result2[0]} : {result2[1]}</b><br><br>"
+                                  f"Statystyka testu F: <b>{round(statistic, 2)}</b><br>"
+                                  f"Wartość p: <b>{round(p_value, 2)}</b><br>"
+                                  f"Stopnie swobody: <b>{dof}</b><br>"
+                                  f"Wartości oczekiwane:{html_table}<br>")
+
+                    summary = title + testResult
+
+                    if self.window_test_chi_square_ui.checkBox_Description_Of_Results.isChecked():
+                        summary = summary + description
+
+                else:
+                    summary = (f"Obie zmienne powinny byc tego samego typu!<br>"
+                               f"Wybierz obie zmienne zawierające dane jakościowe lub dyskretne.")
 
             else:
-                data_frame = DataStorageModel.get(data)
-                data_frame_columns_names = data_frame.columns.tolist()
-                columns_names = ', '.join(data_frame_columns_names)
+                summary = ("<b>Wybierz obie zmienne do przeprowadzenia testu</b><br><br>"
+                           "<b>Zmienna zależna:</b> Powinna być zmienną jakościową lub dyskretną. Zmienna zależna to ta, którą chcemy zbadać w kontekście wpływu jednej lub więcej zmiennych niezależnych.<br>"
+                           "<b>Zmienna niezależna:</b> Powinna być również zmienną jakościową lub dyskretną. Zmienne te mogą przyjmować wartości dyskretne lub jakościowe."
+                           "<br><b>Obie zmienne muszą być tego samego typu!</b><br>")
 
-            try:
-                if data_frame is not None:
-                    statistic, p_value, dof, expected = stats.chi2_contingency(data_frame)
-
-                    testResult = (f"Zbiór: <b>{data}</b><br>"
-                                  f"Wybrane kolumny: <b>{columns_names}</b><br><br>"
-                                  f"Statystyka testu: <b>{round(statistic, 2)}</b><br>"
-                                  f"Wartość p: <b>{round(p_value, 2)}</b>")
-            except:
-                result = f"Nieprawidłowe dane w zbiorze '{data}', wymagane są dane numeryczne!<br>Wybierz kolumny zawierające dane ilościowe."
-                self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(result)
-
-            if self.window_test_chi_square_ui.checkBox_Description_Of_Results.isChecked():
-                result = title + testResult + description
-            else:
-                result = title + testResult
-
-            if data:
-                self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(result)
-
+            self.window_test_chi_square_ui.textEdit_Preview_Board.setHtml(summary)
 
         except Exception as e:
-            pass
+            print(str(e))
 
     def resetTestChiSquare(self):
-        self.window_test_chi_square_ui.comboBox_Data.setCurrentIndex(-1)
+        self.window_test_chi_square_ui.comboBox_Data_Column1.setCurrentIndex(-1)
+        self.window_test_chi_square_ui.comboBox_Data_Column2.setCurrentIndex(-1)
         self.window_test_chi_square_ui.checkBox_Board_Is_Enabled.setChecked(False)
         self.window_test_chi_square_ui.textEdit_Preview_Board.clear()
         self.window_test_chi_square_ui.textEdit_Preview_Board.setReadOnly(True)
