@@ -1,6 +1,4 @@
-import os
-
-from PyQt6 import QtGui
+from PyQt6 import QtGui, QtWidgets
 from PyQt6.QtCore import QTranslator
 from PyQt6.QtWidgets import QApplication
 from Controllers.MainController import MainController
@@ -10,14 +8,13 @@ from Controllers.SettingsController import SettingsController
 from Controllers.PlotsController import PlotsController
 from Controllers.AnalysisController import AnalysisController
 import sys
+import os
 
 
 class Main:
     def __init__(self):
         # Windows Icon
-        base_path = os.path.dirname(os.path.abspath(__file__))
-        image_path = "images/app-icon/dex-icon-512x512.png"
-        icon_path = os.path.join(base_path, image_path)
+        icon_path = getFullPath("images/app-icon/dex-icon-512x512.png")
 
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(icon_path), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -39,7 +36,21 @@ class Main:
         self.mainController.action_Settings.triggered.connect(self.settingsController.showSettingsWindow)
 
 
+def getFullPath(relative_path):
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    full_path = os.path.join(base_path, relative_path)
+    return full_path
+
+
 translator = QTranslator()
 app = QApplication(sys.argv)
+
+splash_pix = QtGui.QPixmap(getFullPath("images/app-icon/dex-icon-192x192.png"))
+splash = QtWidgets.QSplashScreen(splash_pix)
+splash.show()
+
 window = Main()
+
+splash.finish(window.mainController)
+
 sys.exit(app.exec())
