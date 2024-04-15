@@ -1,5 +1,5 @@
 from PyQt6 import QtGui, QtWidgets
-from PyQt6.QtCore import QTranslator
+from PyQt6.QtCore import QTranslator, Qt
 from PyQt6.QtWidgets import QApplication
 from Controllers.MainController import MainController
 from Controllers.AddFileController import AddFileController
@@ -45,8 +45,17 @@ def getFullPath(relative_path):
 translator = QTranslator()
 app = QApplication(sys.argv)
 
-splash_pix = QtGui.QPixmap(getFullPath("images/app-icon/dex-icon-192x192.png"))
+splash_pix = QtGui.QPixmap(getFullPath("images/app-icon/dex_splash.png"))
 splash = QtWidgets.QSplashScreen(splash_pix)
+
+font = splash.font()
+font.setPointSize(18)
+font.setBold(True)
+splash.setFont(font)
+
+splash.showMessage("Aplikacja się uruchamia. Proszę czekać...",
+                   Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignBottom,
+                   Qt.GlobalColor.black)
 splash.show()
 
 window = Main()
