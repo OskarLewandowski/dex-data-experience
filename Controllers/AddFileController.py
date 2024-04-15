@@ -75,7 +75,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 caption="Wybierz plik",
                 directory=os.path.expanduser("~/Desktop"),
                 filter=fileFilter,
-                initialFilter='Pliki tekstowe (*.json; *.txt; *.csv; *.tsv)')
+                initialFilter='Wszystkie pliki (*.*)')
 
             if fileName[0]:
                 filePath = str(fileName[0])
