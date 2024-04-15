@@ -1,6 +1,4 @@
-import os
-import sys
-
+from Models.message_model import MessageModel
 import qdarktheme
 from PyQt6.QtWidgets import QMainWindow, QColorDialog, QPushButton
 from PyQt6.QtCore import Qt, QDir, QFile, QCoreApplication
@@ -81,6 +79,10 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
             default_language_file = self.main.resourcePath("Translations/EN/qtbase_en.qm")
             if self.translator.load(default_language_file):
                 self.app.installTranslator(self.translator)
+                selected_language = 1
+
+        if selected_language != 0:
+            MessageModel.translationError(language=self.comboBox_Language.currentText())
 
     def changeColor(self, field_name, button_name):
         try:
@@ -159,7 +161,8 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.show()
 
     def populateLanguage(self):
-        languages = ["Polski", "English"]
+        languages = ["Polski", "English", "Español", "Français", "Deutsch", "Italiano", "Português", "Русский", "中文",
+                     "日本語"]
 
         self.comboBox_Language.clear()
         self.comboBox_Language.addItems(languages)

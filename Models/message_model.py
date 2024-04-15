@@ -30,7 +30,7 @@ class MessageModel:
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Abort | QMessageBox.StandardButton.Close)
             msg.button(QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
-            msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
+            msg.button(QMessageBox.StandardButton.Close).setText('Wróc')
 
             reply = msg.exec()
 
@@ -101,3 +101,67 @@ class MessageModel:
             return True
         else:
             return False
+
+    @classmethod
+    def translationError(cls, language="English"):
+        translations = {
+            "English": {
+                "message": "Please note that not all parts of the application are translated into English yet.\nPlease choose another language.",
+                "title": "Dex - English is unsupported",
+                "close_button": "Close"
+            },
+            "Español": {
+                "message": "Tenga en cuenta que no todas las partes de la aplicación están traducidas al español todavía.\nPor favor, elija otro idioma.",
+                "title": "Dex - Español no es compatible",
+                "close_button": "Cerrar"
+            },
+            "Français": {
+                "message": "Veuillez noter que toutes les parties de l'application ne sont pas encore traduites en français.\nVeuillez choisir une autre langue.",
+                "title": "Dex - Français n'est pas pris en charge",
+                "close_button": "Fermer"
+            },
+            "Deutsch": {
+                "message": "Bitte beachten Sie, dass noch nicht alle Teile der Anwendung ins Deutsche übersetzt sind.\nBitte wählen Sie eine andere Sprache.",
+                "title": "Dex - Deutsch wird nicht unterstützt",
+                "close_button": "Schließen"
+            },
+            "Italiano": {
+                "message": "Si prega di notare che non tutte le parti dell'applicazione sono ancora tradotte in italiano.\nSi prega di scegliere un'altra lingua.",
+                "title": "Dex - Italiano non è supportato",
+                "close_button": "Chiudi"
+            },
+            "Português": {
+                "message": "Por favor, note que nem todas as partes da aplicação estão traduzidas para o português ainda.\nPor favor, escolha outro idioma.",
+                "title": "Dex - Português não é suportado",
+                "close_button": "Fechar"
+            },
+            "Русский": {
+                "message": "Обратите внимание, что не все части приложения еще переведены на русский язык.\nПожалуйста, выберите другой язык.",
+                "title": "Dex - Русский не поддерживается",
+                "close_button": "Закрыть"
+            },
+            "中文": {
+                "message": "请注意，应用程序的不是所有部分都已经翻译成中文了。\n请选择另一种语言。",
+                "title": "Dex - 中文不受支持",
+                "close_button": "关闭"
+            },
+            "日本語": {
+                "message": "すべてのアプリケーションの部分がまだ日本語に翻訳されていないことに注意してください。\n別の言語を選択してください。",
+                "title": "Dex - 日本語はサポートされていません",
+                "close_button": "閉じる"
+            }
+        }
+        translation = translations.get(language, translations["English"])
+
+        message = translation["message"]
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setText(message)
+        msg.setWindowTitle(translation['title'])
+
+        msg.setStandardButtons(QMessageBox.StandardButton.Close)
+        msg.button(QMessageBox.StandardButton.Close).setText(translation["close_button"])
+
+        reply = msg.exec()
+
+        return reply == QMessageBox.StandardButton.Close
