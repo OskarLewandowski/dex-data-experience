@@ -55,7 +55,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         else:
             return None
 
-    def drawPlotInBoard(self):
+    def drawPlotInBoard(self, window):
         try:
             if self.figure != "":
                 buf = io.BytesIO()
@@ -72,8 +72,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
                 # cursor.insertText("\n")
                 cursor.insertHtml(html)
                 # cursor.insertText("\n")
+                MessageModel.show_toast("Wykres został dodany do tablicy", 1500, window)
         except Exception as e:
-            pass
+            print(str(e))
 
     # Scatter Plot
     def createScatterPlotWindow(self):
@@ -92,7 +93,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
         self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.drawPlotInBoard(self.window_scatter_plot))
         self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
 
         self.window_scatter_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawScatterPlot)

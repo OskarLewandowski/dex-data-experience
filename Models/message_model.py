@@ -1,5 +1,5 @@
-from PyQt6 import QtGui
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtCore import QTimer, Qt
+from PyQt6.QtWidgets import QMessageBox, QApplication, QLabel, QHBoxLayout, QWidget, QStyle
 
 
 class MessageModel:
@@ -165,3 +165,44 @@ class MessageModel:
         reply = msg.exec()
 
         return reply == QMessageBox.StandardButton.Close
+
+    @classmethod
+    def show_toast(cls, message, timeout=1000, parent=None):
+        toast = QWidget(parent)
+        toast_layout = QHBoxLayout(toast)
+        toast_layout.setContentsMargins(15, 15, 15, 15)
+
+        icon_label = QLabel(toast)
+        icon = QApplication.style().standardIcon(QStyle.StandardPixmap.SP_DialogApplyButton)
+        icon_label.setPixmap(icon.pixmap(24, 24))
+        toast_layout.addWidget(icon_label)
+
+        text_label = QLabel(message)
+        toast_layout.addWidget(text_label)
+
+        toast.setStyleSheet("""  
+            QWidget {
+                font-size: 24px;
+                padding: 10px;
+                border: 3px solid green;
+            }
+            
+            QLabel {
+                border: none;
+            }
+        """)
+        toast.setWindowFlags(
+            Qt.WindowType.SplashScreen | Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint)
+
+        if parent:
+            parent_geometry = parent.geometry()
+            toast_width = toast.sizeHint().width()
+            toast.move(parent_geometry.x() + (parent_geometry.width() - toast_width) // 2, parent_geometry.y() + 40)
+        else:
+            screen_geometry = QApplication.primaryScreen().availableGeometry()
+            toast_width = toast.sizeHint().width()
+            toast.move((screen_geometry.width() - toast_width) // 2, 20)
+
+        toast.show()
+
+        QTimer.singleShot(timeout, toast.close)
