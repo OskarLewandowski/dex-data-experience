@@ -75,6 +75,20 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         except Exception as e:
             pass
 
+    def writeDataInBoard(self, window, window_ui):
+        try:
+            data = window_ui.textEdit_Preview_Board.toHtml()
+            if data:
+                cursor = self.main.textEdit_Board.textCursor()
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
+                cursor.insertText("\n")
+                cursor.insertHtml(data)
+
+                MessageModel.show_toast("Dane zostały dodane do tablicy", 1500, window)
+
+        except Exception as e:
+            pass
+
     # Basic Stats
     def createBasicStatsWindow(self):
         self.window_basic_stats = QMainWindow()
@@ -86,7 +100,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_basic_stats_ui.comboBox_Data_Column.addItems(dataAll)
 
         self.window_basic_stats_ui.pushButton_Reset_Options.clicked.connect(self.resetBasicStats)
-        self.window_basic_stats_ui.pushButton_Add_To_Board.clicked.connect(self.writeBasicStatsInBoard)
+        self.window_basic_stats_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_basic_stats, self.window_basic_stats_ui))
 
         self.window_basic_stats_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeBasicStats)
 
@@ -148,17 +163,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         except Exception as e:
             print(str(e))
 
-    def writeBasicStatsInBoard(self):
-        try:
-            data = self.window_basic_stats_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     def resetBasicStats(self):
         self.window_basic_stats_ui.comboBox_Data_Column.setCurrentIndex(-1)
         self.window_basic_stats_ui.checkBox_Board_Is_Enabled.setChecked(False)
@@ -176,7 +180,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_ui.comboBox_Data.addItems(dataAll)
 
         self.window_correlation_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelation)
-        self.window_correlation_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationInBoard)
+        self.window_correlation_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_correlation, self.window_correlation_ui))
 
         self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.writeCorrelation)
         self.window_correlation_ui.comboBox_Data.currentIndexChanged.connect(self.fillDataColumnsCorrelation)
@@ -260,17 +265,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_correlation_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeCorrelationInBoard(self):
-        try:
-            data = self.window_correlation_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Shapiro-Wilka
     def createTestShapiroWilkaWindow(self):
         self.window_test_shapiro_wilka = QMainWindow()
@@ -282,7 +276,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_shapiro_wilka_ui.comboBox_Data_Column.addItems(dataAll)
 
         self.window_test_shapiro_wilka_ui.pushButton_Reset_Options.clicked.connect(self.resetTestShapiroWilka)
-        self.window_test_shapiro_wilka_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestShapiroWilkaInBoard)
+        self.window_test_shapiro_wilka_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_shapiro_wilka, self.window_test_shapiro_wilka_ui))
 
         self.window_test_shapiro_wilka_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestShapiroWilka)
         self.window_test_shapiro_wilka_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestShapiroWilka)
@@ -342,17 +337,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_shapiro_wilka_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestShapiroWilkaInBoard(self):
-        try:
-            data = self.window_test_shapiro_wilka_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Andersona-Darlinga
     def createTestAndersonaDarlingaWindow(self):
         self.window_test_andersona_darlinga = QMainWindow()
@@ -364,8 +348,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_andersona_darlinga_ui.comboBox_Data_Column.addItems(dataAll)
 
         self.window_test_andersona_darlinga_ui.pushButton_Reset_Options.clicked.connect(self.resetTestAndersonaDarlinga)
-        self.window_test_andersona_darlinga_ui.pushButton_Add_To_Board.clicked.connect(
-            self.writeTestAndersonaDarlingaInBoard)
+        self.window_test_andersona_darlinga_ui.pushButton_Add_To_Board.clicked.connect(lambda: self.writeDataInBoard(
+            self.window_test_andersona_darlinga, self.window_test_andersona_darlinga_ui))
 
         self.window_test_andersona_darlinga_ui.comboBox_Data_Column.currentIndexChanged.connect(
             self.writeTestAndersonaDarlinga)
@@ -436,17 +420,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_andersona_darlinga_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestAndersonaDarlingaInBoard(self):
-        try:
-            data = self.window_test_andersona_darlinga_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Kołmogorova-Smirnova
     def createTestKolmogorovaSmirnovaWindow(self):
         self.window_test_kolmogorova_smirnova = QMainWindow()
@@ -459,8 +432,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_kolmogorova_smirnova_ui.pushButton_Reset_Options.clicked.connect(
             self.resetTestKolmogorovaSmirnova)
-        self.window_test_kolmogorova_smirnova_ui.pushButton_Add_To_Board.clicked.connect(
-            self.writeTestKolmogorovaSmirnovaInBoard)
+        self.window_test_kolmogorova_smirnova_ui.pushButton_Add_To_Board.clicked.connect(lambda: self.writeDataInBoard(
+            self.window_test_kolmogorova_smirnova, self.window_test_kolmogorova_smirnova_ui))
 
         self.window_test_kolmogorova_smirnova_ui.comboBox_Data_Column.currentIndexChanged.connect(
             self.writeTestKolmogorovaSmirnova)
@@ -524,17 +497,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_kolmogorova_smirnova_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_kolmogorova_smirnova_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestKolmogorovaSmirnovaInBoard(self):
-        try:
-            data = self.window_test_kolmogorova_smirnova_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Lillieforsa
     def createTestLillieforsaWindow(self):
         self.window_test_lillieforsa = QMainWindow()
@@ -546,7 +508,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_lillieforsa_ui.comboBox_Data_Column.addItems(dataAll)
 
         self.window_test_lillieforsa_ui.pushButton_Reset_Options.clicked.connect(self.resetTestLillieforsa)
-        self.window_test_lillieforsa_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestLillieforsaInBoard)
+        self.window_test_lillieforsa_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_lillieforsa, self.window_test_lillieforsa_ui))
 
         self.window_test_lillieforsa_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestLillieforsa)
         self.window_test_lillieforsa_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestLillieforsa)
@@ -606,17 +569,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_lillieforsa_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_lillieforsa_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestLillieforsaInBoard(self):
-        try:
-            data = self.window_test_lillieforsa_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Jarque-Bera
     def createTestJarqueBeraWindow(self):
         self.window_test_jarque_bera = QMainWindow()
@@ -628,7 +580,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_jarque_bera_ui.comboBox_Data_Column.addItems(dataAll)
 
         self.window_test_jarque_bera_ui.pushButton_Reset_Options.clicked.connect(self.resetTestJarqueBera)
-        self.window_test_jarque_bera_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestJarqueBeraInBoard)
+        self.window_test_jarque_bera_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_jarque_bera, self.window_test_jarque_bera_ui))
 
         self.window_test_jarque_bera_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestJarqueBera)
         self.window_test_jarque_bera_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestJarqueBera)
@@ -686,17 +639,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_jarque_bera_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_jarque_bera_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestJarqueBeraInBoard(self):
-        try:
-            data = self.window_test_jarque_bera_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test t-Studenta Ind
     def createTestTStudentaIndWindow(self):
         self.window_test_t_studenta_ind = QMainWindow()
@@ -709,7 +651,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.addItems(dataAll)
 
         self.window_test_t_studenta_ind_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudentaInd)
-        self.window_test_t_studenta_ind_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTStudentaIndInBoard)
+        self.window_test_t_studenta_ind_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_t_studenta_ind, self.window_test_t_studenta_ind_ui))
 
         self.window_test_t_studenta_ind_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestTStudentaInd)
         self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.currentIndexChanged.connect(
@@ -800,17 +743,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_ind_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
         self.window_test_t_studenta_ind_ui.comboBox_Alternative.setCurrentIndex(0)
 
-    def writeTestTStudentaIndInBoard(self):
-        try:
-            data = self.window_test_t_studenta_ind_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test ANOVA
     def createTestAnovaWindow(self):
         self.window_test_anova = QMainWindow()
@@ -823,7 +755,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_anova_ui.comboBox_Data_Column2.addItems(dataAll)
 
         self.window_test_anova_ui.pushButton_Reset_Options.clicked.connect(self.resetTestAnova)
-        self.window_test_anova_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestAnovaInBoard)
+        self.window_test_anova_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_anova, self.window_test_anova_ui))
 
         self.window_test_anova_ui.comboBox_Data_Column1.currentIndexChanged.connect(self.writeTestAnova)
         self.window_test_anova_ui.comboBox_Data_Column2.currentIndexChanged.connect(self.writeTestAnova)
@@ -924,17 +857,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_anova_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_anova_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestAnovaInBoard(self):
-        try:
-            data = self.window_test_anova_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Chi-square
     def createTestChiSquareWindow(self):
         self.window_test_chi_square = QMainWindow()
@@ -947,7 +869,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_chi_square_ui.comboBox_Data_Column2.addItems(dataAll)
 
         self.window_test_chi_square_ui.pushButton_Reset_Options.clicked.connect(self.resetTestChiSquare)
-        self.window_test_chi_square_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestChiSquareInBoard)
+        self.window_test_chi_square_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_chi_square, self.window_test_chi_square_ui))
 
         self.window_test_chi_square_ui.comboBox_Data_Column1.currentIndexChanged.connect(self.writeTestChiSquare)
         self.window_test_chi_square_ui.comboBox_Data_Column2.currentIndexChanged.connect(self.writeTestChiSquare)
@@ -1067,17 +990,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_chi_square_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_chi_square_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestChiSquareInBoard(self):
-        try:
-            data = self.window_test_chi_square_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Kruskala-Wallisa
     def createTestKruskalaWallisaWindow(self):
         self.window_test_kruskala_wallisa = QMainWindow()
@@ -1091,7 +1003,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_kruskala_wallisa_ui.pushButton_Reset_Options.clicked.connect(self.resetTestKruskalaWallisa)
         self.window_test_kruskala_wallisa_ui.pushButton_Add_To_Board.clicked.connect(
-            self.writeTestKruskalaWallisaInBoard)
+            lambda: self.writeDataInBoard(self.window_test_kruskala_wallisa, self.window_test_kruskala_wallisa_ui))
 
         self.window_test_kruskala_wallisa_ui.comboBox_Data_Column1.currentIndexChanged.connect(
             self.writeTestKruskalaWallisa)
@@ -1195,17 +1107,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_kruskala_wallisa_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestKruskalaWallisaInBoard(self):
-        try:
-            data = self.window_test_kruskala_wallisa_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test Tukeya
     def createTestTukeyaWindow(self):
         self.window_test_tukeya = QMainWindow()
@@ -1218,7 +1119,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_tukeya_ui.comboBox_Data_Column2.addItems(dataAll)
 
         self.window_test_tukeya_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTukeya)
-        self.window_test_tukeya_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTukeyaInBoard)
+        self.window_test_tukeya_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_tukeya, self.window_test_tukeya_ui))
 
         self.window_test_tukeya_ui.comboBox_Data_Column1.currentIndexChanged.connect(self.writeTestTukeya)
         self.window_test_tukeya_ui.comboBox_Data_Column2.currentIndexChanged.connect(self.writeTestTukeya)
@@ -1359,17 +1261,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_tukeya_ui.textEdit_Preview_Board.setReadOnly(True)
         self.window_test_tukeya_ui.checkBox_Description_Of_Results.setChecked(False)
 
-    def writeTestTukeyaInBoard(self):
-        try:
-            data = self.window_test_tukeya_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Distribution Series
     def createDistributionSeriesWindow(self):
         self.window_distribution_series = QMainWindow()
@@ -1386,7 +1277,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.dataframe_distribution_series = None
 
         self.window_distribution_series_ui.pushButton_Reset_Options.clicked.connect(self.resetDistributionSeries)
-        self.window_distribution_series_ui.pushButton_Add_To_Board.clicked.connect(self.writeDistributionSeriesInBoard)
+        self.window_distribution_series_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_distribution_series, self.window_distribution_series_ui))
 
         self.window_distribution_series_ui.pushButton_Save_As_Data_Frame.clicked.connect(
             self.saveDataFrameDistributionSeries)
@@ -1483,17 +1375,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         except Exception as e:
             print(str(e))
 
-    def writeDistributionSeriesInBoard(self):
-        try:
-            data = self.window_distribution_series_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     def resetDistributionSeries(self):
         self.window_distribution_series_ui.comboBox_Data_Column.setCurrentIndex(-1)
         self.window_distribution_series_ui.checkBox_Board_Is_Enabled.setChecked(False)
@@ -1551,7 +1432,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_pearson_ui.comboBox_Data_Column_2.addItems(dataAll)
 
         self.window_correlation_pearson_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelationPearson)
-        self.window_correlation_pearson_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationPearsonInBoard)
+        self.window_correlation_pearson_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_correlation_pearson, self.window_correlation_pearson_ui))
 
         self.window_correlation_pearson_ui.comboBox_Data_Column.currentIndexChanged.connect(
             self.writeCorrelationPearson)
@@ -1660,17 +1542,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_pearson_ui.comboBox_Alternative.setCurrentIndex(0)
         self.window_correlation_pearson_ui.spinBox_Confidence_Interval_Value.setValue(95)
 
-    def writeCorrelationPearsonInBoard(self):
-        try:
-            data = self.window_correlation_pearson_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Correlation Kendall
     def createCorrelationKendallWindow(self):
         self.window_correlation_kendall = QMainWindow()
@@ -1683,7 +1554,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_kendall_ui.comboBox_Data_Column_2.addItems(dataAll)
 
         self.window_correlation_kendall_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelationKendall)
-        self.window_correlation_kendall_ui.pushButton_Add_To_Board.clicked.connect(self.writeCorrelationKendallInBoard)
+        self.window_correlation_kendall_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_correlation_kendall, self.window_correlation_kendall_ui))
 
         self.window_correlation_kendall_ui.comboBox_Data_Column.currentIndexChanged.connect(
             self.writeCorrelationKendall)
@@ -1766,17 +1638,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_kendall_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
         self.window_correlation_kendall_ui.comboBox_Alternative.setCurrentIndex(0)
 
-    def writeCorrelationKendallInBoard(self):
-        try:
-            data = self.window_correlation_kendall_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Correlation Spearman
     def createCorrelationSpearmanWindow(self):
         self.window_correlation_spearman = QMainWindow()
@@ -1789,8 +1650,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_spearman_ui.comboBox_Data_Column_2.addItems(dataAll)
 
         self.window_correlation_spearman_ui.pushButton_Reset_Options.clicked.connect(self.resetCorrelationSpearman)
-        self.window_correlation_spearman_ui.pushButton_Add_To_Board.clicked.connect(
-            self.writeCorrelationSpearmanInBoard)
+        self.window_correlation_spearman_ui.pushButton_Add_To_Board.clicked.connect(lambda: self.writeDataInBoard(
+            self.window_correlation_spearman, self.window_correlation_spearman_ui))
 
         self.window_correlation_spearman_ui.comboBox_Data_Column.currentIndexChanged.connect(
             self.writeCorrelationSpearman)
@@ -1872,17 +1733,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_spearman_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
         self.window_correlation_spearman_ui.comboBox_Alternative.setCurrentIndex(0)
 
-    def writeCorrelationSpearmanInBoard(self):
-        try:
-            data = self.window_correlation_spearman_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test t-Studenta Rel
     def createTestTStudentaRelWindow(self):
         self.window_test_t_studenta_rel = QMainWindow()
@@ -1895,7 +1745,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.addItems(dataAll)
 
         self.window_test_t_studenta_rel_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudentaRel)
-        self.window_test_t_studenta_rel_ui.pushButton_Add_To_Board.clicked.connect(self.writeTestTStudentaRelInBoard)
+        self.window_test_t_studenta_rel_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.writeDataInBoard(self.window_test_t_studenta_rel, self.window_test_t_studenta_rel_ui))
 
         self.window_test_t_studenta_rel_ui.comboBox_Data_Column.currentIndexChanged.connect(self.writeTestTStudentaRel)
         self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.currentIndexChanged.connect(
@@ -1986,17 +1837,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_rel_ui.comboBox_Data_Column_2.setCurrentIndex(-1)
         self.window_test_t_studenta_rel_ui.comboBox_Alternative.setCurrentIndex(0)
 
-    def writeTestTStudentaRelInBoard(self):
-        try:
-            data = self.window_test_t_studenta_rel_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
-
     # Test t-Studenta 1samp
     def createTestTStudenta1sampWindow(self):
         self.window_test_t_studenta_1samp = QMainWindow()
@@ -2009,7 +1849,7 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_t_studenta_1samp_ui.pushButton_Reset_Options.clicked.connect(self.resetTestTStudenta1samp)
         self.window_test_t_studenta_1samp_ui.pushButton_Add_To_Board.clicked.connect(
-            self.writeTestTStudenta1sampInBoard)
+            lambda: self.writeDataInBoard(self.window_test_t_studenta_1samp, self.window_test_t_studenta_1samp_ui))
 
         self.window_test_t_studenta_1samp_ui.comboBox_Data_Column.currentIndexChanged.connect(
             self.writeTestTStudenta1samp)
@@ -2103,17 +1943,6 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_1samp_ui.comboBox_Alternative.setCurrentIndex(0)
         self.window_test_t_studenta_1samp_ui.doubleSpinBox_Popmean.setValue(0)
         self.resetPopmeanFields()
-
-    def writeTestTStudenta1sampInBoard(self):
-        try:
-            data = self.window_test_t_studenta_1samp_ui.textEdit_Preview_Board.toHtml()
-            if data:
-                cursor = self.main.textEdit_Board.textCursor()
-                cursor.movePosition(QtGui.QTextCursor.MoveOperation.End)
-                cursor.insertText("\n")
-                cursor.insertHtml(data)
-        except Exception as e:
-            pass
 
     def addResultPopmeanToParam(self):
         value = self.window_test_t_studenta_1samp_ui.lineEdit_Result_Expected_Value.text()
