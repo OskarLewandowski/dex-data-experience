@@ -214,7 +214,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_line_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetLinePlot)
         self.window_line_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_line_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_line_plot_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.drawPlotInBoard(self.window_line_plot))
         self.window_line_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawLinePlot)
 
         self.window_line_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawLinePlot)
@@ -342,7 +343,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_bar_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetBarPlot)
         self.window_bar_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_bar_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_bar_plot_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.drawPlotInBoard(self.window_bar_plot))
         self.window_bar_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBarPlot)
 
         self.window_bar_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawBarPlot)
@@ -459,7 +461,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_hist_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetHistPlot)
         self.window_hist_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_hist_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_hist_plot_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.drawPlotInBoard(self.window_hist_plot))
         self.window_hist_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawHistPlot)
 
         self.window_hist_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawHistPlot)
@@ -576,7 +579,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_box_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetBoxPlot)
         self.window_box_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_box_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_box_plot_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.drawPlotInBoard(self.window_box_plot))
         self.window_box_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBoxPlot)
 
         self.window_box_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawBoxPlot)
@@ -691,7 +695,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_pie_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetPiePlot)
         self.window_pie_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
-        self.window_pie_plot_ui.pushButton_Add_To_Board.clicked.connect(self.drawPlotInBoard)
+        self.window_pie_plot_ui.pushButton_Add_To_Board.clicked.connect(
+            lambda: self.drawPlotInBoard(self.window_pie_plot))
         self.window_pie_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawPiePlot)
 
         self.window_pie_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawPiePlot)
