@@ -39,7 +39,7 @@ class Ui_MainWindow_Bar_Plot(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 383, 708))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 383, 768))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
@@ -212,6 +212,27 @@ class Ui_MainWindow_Bar_Plot(object):
         self.spinBox_CI.setObjectName("spinBox_CI")
         self.verticalLayout_7.addWidget(self.spinBox_CI)
         self.verticalLayout_13.addLayout(self.verticalLayout_7)
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.horizontalLayout_15 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
+        self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_12.setObjectName("label_12")
+        self.horizontalLayout_15.addWidget(self.label_12)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_15.addItem(spacerItem8)
+        self.toolButton_Orient = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Orient.setObjectName("toolButton_Orient")
+        self.horizontalLayout_15.addWidget(self.toolButton_Orient)
+        self.verticalLayout_17.addLayout(self.horizontalLayout_15)
+        self.comboBox_Orient = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Orient.setMinimumSize(QtCore.QSize(250, 0))
+        self.comboBox_Orient.setObjectName("comboBox_Orient")
+        self.comboBox_Orient.addItem("")
+        self.comboBox_Orient.addItem("")
+        self.verticalLayout_17.addWidget(self.comboBox_Orient)
+        self.verticalLayout_13.addLayout(self.verticalLayout_17)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
@@ -219,9 +240,9 @@ class Ui_MainWindow_Bar_Plot(object):
         self.label_8 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_10.addWidget(self.label_8)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_10.addItem(spacerItem8)
+        self.horizontalLayout_10.addItem(spacerItem9)
         self.toolButton_Legend = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Legend.setObjectName("toolButton_Legend")
         self.horizontalLayout_10.addWidget(self.toolButton_Legend)
@@ -242,9 +263,9 @@ class Ui_MainWindow_Bar_Plot(object):
         self.label_9 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_12.addWidget(self.label_9)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_12.addItem(spacerItem9)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem10)
         self.toolButton_Title_Plot = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Title_Plot.setObjectName("toolButton_Title_Plot")
         self.horizontalLayout_12.addWidget(self.toolButton_Title_Plot)
@@ -260,9 +281,9 @@ class Ui_MainWindow_Bar_Plot(object):
         self.label_10 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_10.setObjectName("label_10")
         self.horizontalLayout_13.addWidget(self.label_10)
-        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_13.addItem(spacerItem10)
+        self.horizontalLayout_13.addItem(spacerItem11)
         self.toolButton_Label_X = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_X.setObjectName("toolButton_Label_X")
         self.horizontalLayout_13.addWidget(self.toolButton_Label_X)
@@ -278,9 +299,9 @@ class Ui_MainWindow_Bar_Plot(object):
         self.label_11 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_11.setObjectName("label_11")
         self.horizontalLayout_14.addWidget(self.label_11)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_14.addItem(spacerItem11)
+        self.horizontalLayout_14.addItem(spacerItem12)
         self.toolButton_Label_Y = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_Y.setObjectName("toolButton_Label_Y")
         self.horizontalLayout_14.addWidget(self.toolButton_Label_Y)
@@ -292,20 +313,25 @@ class Ui_MainWindow_Bar_Plot(object):
         self.verticalLayout_16.addWidget(self.groupBox)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_2.addWidget(self.scrollArea)
-        spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+        spacerItem13 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                              QtWidgets.QSizePolicy.Policy.Fixed)
-        self.verticalLayout_2.addItem(spacerItem12)
+        self.verticalLayout_2.addItem(spacerItem13)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
+        self.frame.setSizePolicy(sizePolicy)
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.frame)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.widget_Plot = QtWidgets.QWidget(parent=self.frame)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_Plot.sizePolicy().hasHeightForWidth())
@@ -322,24 +348,24 @@ class Ui_MainWindow_Bar_Plot(object):
         self.pushButton_Generate_Plot = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Generate_Plot.setObjectName("pushButton_Generate_Plot")
         self.horizontalLayout_11.addWidget(self.pushButton_Generate_Plot)
-        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem13)
+        self.horizontalLayout_11.addItem(spacerItem14)
         self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
         self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
-        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem14)
+        self.horizontalLayout_11.addItem(spacerItem15)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
         self.pushButton_Export = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Export.setObjectName("pushButton_Export")
         self.horizontalLayout_11.addWidget(self.pushButton_Export)
-        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem15)
+        self.horizontalLayout_11.addItem(spacerItem16)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -348,6 +374,7 @@ class Ui_MainWindow_Bar_Plot(object):
 
         self.retranslateUi(MainWindow_Bar_Plot)
         self.comboBox_Style.setCurrentIndex(-1)
+        self.comboBox_Orient.setCurrentIndex(-1)
         self.comboBox_Estimator.setCurrentIndex(0)
         self.comboBox_Legend.setCurrentIndex(-1)
         self.pushButton_Close.clicked.connect(MainWindow_Bar_Plot.close)  # type: ignore
@@ -362,6 +389,7 @@ class Ui_MainWindow_Bar_Plot(object):
         self.toolButton_Label_Y.clicked.connect(self.lineEdit_Label_Y.clear)  # type: ignore
         self.toolButton_Estimator.clicked.connect(lambda: self.comboBox_Estimator.setCurrentIndex(0))  # type: ignore
         self.toolButton_CI.clicked.connect(lambda: self.spinBox_CI.setValue(95))  # type: ignore
+        self.toolButton_Orient.clicked.connect(lambda: self.comboBox_Orient.setCurrentIndex(-1))  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Bar_Plot)
 
     def retranslateUi(self, MainWindow_Bar_Plot):
@@ -412,6 +440,11 @@ class Ui_MainWindow_Bar_Plot(object):
         self.label_5.setText(_translate("MainWindow_Bar_Plot", "Przedział ufności:"))
         self.toolButton_CI.setText(_translate("MainWindow_Bar_Plot", "X"))
         self.spinBox_CI.setSuffix(_translate("MainWindow_Bar_Plot", " %"))
+        self.label_12.setText(_translate("MainWindow_Bar_Plot", "Orientacja:"))
+        self.toolButton_Orient.setText(_translate("MainWindow_Bar_Plot", "X"))
+        self.comboBox_Orient.setPlaceholderText(_translate("MainWindow_Bar_Plot", "Wybierz orientacje słupków..."))
+        self.comboBox_Orient.setItemText(0, _translate("MainWindow_Bar_Plot", "wertykalna"))
+        self.comboBox_Orient.setItemText(1, _translate("MainWindow_Bar_Plot", "horyzontalna"))
         self.label_8.setText(_translate("MainWindow_Bar_Plot", "Legenda:"))
         self.toolButton_Legend.setText(_translate("MainWindow_Bar_Plot", "X"))
         self.comboBox_Legend.setPlaceholderText(

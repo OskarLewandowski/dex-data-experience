@@ -72,7 +72,7 @@
                <x>0</x>
                <y>0</y>
                <width>383</width>
-               <height>708</height>
+               <height>768</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -550,6 +550,67 @@
                   </layout>
                  </item>
                  <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_17">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_15">
+                     <item>
+                      <widget class="QLabel" name="label_12">
+                       <property name="text">
+                        <string>Orientacja:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="horizontalSpacer_15">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QToolButton" name="toolButton_Orient">
+                       <property name="text">
+                        <string>X</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBox_Orient">
+                     <property name="minimumSize">
+                      <size>
+                       <width>250</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="currentIndex">
+                      <number>-1</number>
+                     </property>
+                     <property name="placeholderText">
+                      <string>Wybierz orientacje słupków...</string>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>wertykalna</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>horyzontalna</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
                   <layout class="QVBoxLayout" name="verticalLayout_4">
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -763,6 +824,12 @@
       </item>
       <item>
        <widget class="QFrame" name="frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="frameShape">
          <enum>QFrame::Box</enum>
         </property>
@@ -773,7 +840,7 @@
          <item>
           <widget class="QWidget" name="widget_Plot" native="true">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -1070,6 +1137,22 @@
     <hint type="destinationlabel">
      <x>148</x>
      <y>468</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_Orient</sender>
+   <signal>clicked()</signal>
+   <receiver>comboBox_Orient</receiver>
+   <slot>clearEditText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>554</y>
     </hint>
    </hints>
   </connection>

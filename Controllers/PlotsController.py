@@ -359,6 +359,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_bar_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawBarPlot)
         self.window_bar_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawBarPlot)
         self.window_bar_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawBarPlot)
+        self.window_bar_plot_ui.comboBox_Orient.currentIndexChanged.connect(self.drawBarPlot)
 
         self.window_bar_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
@@ -387,6 +388,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             title = self.window_bar_plot_ui.lineEdit_Title_Plot.text()
             label_x = self.window_bar_plot_ui.lineEdit_Label_X.text()
             label_y = self.window_bar_plot_ui.lineEdit_Label_Y.text()
+            orient = self.window_bar_plot_ui.comboBox_Orient.currentText()
 
             # data
             data = DataStorageModel.get(data) if data else None
@@ -409,8 +411,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             if ci == -1:
                 ci = None
 
+            if orient == "wertykalna":
+                orient = "v"
+            elif orient == "horyzontalna":
+                orient = "h"
+            else:
+                orient = None
+
             sns.barplot(data=data, x=x, y=y, ax=self.ax, hue=hue, estimator=estimator, palette=style if style else None,
-                        legend=legend, seed=0, errorbar=('ci', ci) if ci else None)
+                        legend=legend, seed=0, orient=orient, errorbar=('ci', ci) if ci else None)
 
             if title:
                 self.ax.set_title(title)
@@ -440,6 +449,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_bar_plot_ui.lineEdit_Title_Plot.clear()
         self.window_bar_plot_ui.lineEdit_Label_X.clear()
         self.window_bar_plot_ui.lineEdit_Label_Y.clear()
+        self.window_bar_plot_ui.comboBox_Orient.setCurrentIndex(-1)
 
         self.window_bar_plot_ui.widget_Plot.deleteLater()
         self.window_bar_plot_ui.widget_Plot = QWidget()
