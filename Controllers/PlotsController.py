@@ -76,6 +76,23 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         except Exception as e:
             print(str(e))
 
+    def updateDataXY(self, window_ui):
+        dataKey = window_ui.comboBox_Data.currentText()
+        if dataKey:
+            data = DataStorageModel.get_all_keys_and_columns_with_filter_key(dataKey)
+            window_ui.comboBox_X.clear()
+            window_ui.comboBox_Y.clear()
+
+            window_ui.comboBox_X.addItems(data)
+            window_ui.comboBox_Y.addItems(data)
+        else:
+            data = DataStorageModel.get_all_keys_and_columns()
+            window_ui.comboBox_X.clear()
+            window_ui.comboBox_Y.clear()
+
+            window_ui.comboBox_X.addItems(data)
+            window_ui.comboBox_Y.addItems(data)
+
     # Scatter Plot
     def createScatterPlotWindow(self):
         self.window_scatter_plot = QMainWindow()
@@ -98,6 +115,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
 
         self.window_scatter_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.comboBox_Data.currentIndexChanged.connect(
+            lambda: self.updateDataXY(self.window_scatter_plot_ui))
+
         self.window_scatter_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawScatterPlot)
         self.window_scatter_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawScatterPlot)
         self.window_scatter_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawScatterPlot)
@@ -106,9 +126,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.comboBox_Markers.currentIndexChanged.connect(self.drawScatterPlot)
         self.window_scatter_plot_ui.comboBox_Size.currentIndexChanged.connect(self.drawScatterPlot)
 
-        self.window_scatter_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawScatterPlot)
-        self.window_scatter_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Title_Plot.editingFinished.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Label_X.editingFinished.connect(self.drawScatterPlot)
+        self.window_scatter_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawScatterPlot)
 
         self.window_scatter_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
@@ -219,6 +239,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawLinePlot)
 
         self.window_line_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawLinePlot)
+        self.window_line_plot_ui.comboBox_Data.currentIndexChanged.connect(
+            lambda: self.updateDataXY(self.window_line_plot_ui))
+
         self.window_line_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawLinePlot)
@@ -229,9 +252,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.spinBox_CI.valueChanged.connect(self.drawLinePlot)
         self.window_line_plot_ui.comboBox_Estimator.currentIndexChanged.connect(self.drawLinePlot)
 
-        self.window_line_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawLinePlot)
-        self.window_line_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawLinePlot)
-        self.window_line_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawLinePlot)
+        self.window_line_plot_ui.lineEdit_Title_Plot.editingFinished.connect(self.drawLinePlot)
+        self.window_line_plot_ui.lineEdit_Label_X.editingFinished.connect(self.drawLinePlot)
+        self.window_line_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawLinePlot)
 
         self.window_line_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
@@ -348,6 +371,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_bar_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBarPlot)
 
         self.window_bar_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawBarPlot)
+        self.window_bar_plot_ui.comboBox_Data.currentIndexChanged.connect(
+            lambda: self.updateDataXY(self.window_bar_plot_ui))
+
         self.window_bar_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawBarPlot)
         self.window_bar_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawBarPlot)
         self.window_bar_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawBarPlot)
@@ -356,9 +382,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_bar_plot_ui.comboBox_Estimator.currentIndexChanged.connect(self.drawBarPlot)
         self.window_bar_plot_ui.spinBox_CI.valueChanged.connect(self.drawBarPlot)
 
-        self.window_bar_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawBarPlot)
-        self.window_bar_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawBarPlot)
-        self.window_bar_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawBarPlot)
+        self.window_bar_plot_ui.lineEdit_Title_Plot.editingFinished.connect(self.drawBarPlot)
+        self.window_bar_plot_ui.lineEdit_Label_X.editingFinished.connect(self.drawBarPlot)
+        self.window_bar_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawBarPlot)
         self.window_bar_plot_ui.comboBox_Orient.currentIndexChanged.connect(self.drawBarPlot)
 
         self.window_bar_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
@@ -476,6 +502,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_hist_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawHistPlot)
 
         self.window_hist_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawHistPlot)
+        self.window_hist_plot_ui.comboBox_Data.currentIndexChanged.connect(
+            lambda: self.updateDataXY(self.window_hist_plot_ui))
+
         self.window_hist_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawHistPlot)
         self.window_hist_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawHistPlot)
         self.window_hist_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawHistPlot)
@@ -485,9 +514,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_hist_plot_ui.comboBox_Element.currentIndexChanged.connect(self.drawHistPlot)
         self.window_hist_plot_ui.comboBox_Multiple.currentIndexChanged.connect(self.drawHistPlot)
 
-        self.window_hist_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawHistPlot)
-        self.window_hist_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawHistPlot)
-        self.window_hist_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawHistPlot)
+        self.window_hist_plot_ui.lineEdit_Title_Plot.editingFinished.connect(self.drawHistPlot)
+        self.window_hist_plot_ui.lineEdit_Label_X.editingFinished.connect(self.drawHistPlot)
+        self.window_hist_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawHistPlot)
 
         self.window_hist_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
@@ -594,6 +623,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_box_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBoxPlot)
 
         self.window_box_plot_ui.comboBox_Data.currentIndexChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.comboBox_Data.currentIndexChanged.connect(
+            lambda: self.updateDataXY(self.window_box_plot_ui))
+
         self.window_box_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawBoxPlot)
         self.window_box_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawBoxPlot)
         self.window_box_plot_ui.comboBox_Legend.currentIndexChanged.connect(self.drawBoxPlot)
@@ -601,9 +633,9 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_box_plot_ui.comboBox_Hue.currentIndexChanged.connect(self.drawBoxPlot)
         self.window_box_plot_ui.comboBox_Orient.currentIndexChanged.connect(self.drawBoxPlot)
 
-        self.window_box_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawBoxPlot)
-        self.window_box_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawBoxPlot)
-        self.window_box_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.lineEdit_Title_Plot.editingFinished.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.lineEdit_Label_X.editingFinished.connect(self.drawBoxPlot)
+        self.window_box_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawBoxPlot)
 
         self.window_box_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
@@ -698,10 +730,12 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_pie_plot_ui = Ui_MainWindow_Pie_Plot()
         self.window_pie_plot_ui.setupUi(self.window_pie_plot)
 
+        dataKeys = DataStorageModel.get_all_keys()
         dataAll = DataStorageModel.get_all_keys_and_columns()
 
+        self.window_pie_plot_ui.comboBox_Data.addItems(dataKeys)
         self.window_pie_plot_ui.comboBox_X.addItems(dataAll)
-        self.window_pie_plot_ui.comboBox_Label_Data.addItems(dataAll)
+        self.window_pie_plot_ui.comboBox_Y.addItems(dataAll)
 
         self.window_pie_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetPiePlot)
         self.window_pie_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
@@ -709,8 +743,11 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             lambda: self.drawPlotInBoard(self.window_pie_plot))
         self.window_pie_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawPiePlot)
 
+        self.window_pie_plot_ui.comboBox_Data.currentIndexChanged.connect(
+            lambda: self.updateDataXY(self.window_pie_plot_ui))
+
         self.window_pie_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawPiePlot)
-        self.window_pie_plot_ui.comboBox_Label_Data.currentIndexChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawPiePlot)
         self.window_pie_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawPiePlot)
         self.window_pie_plot_ui.comboBox_Label_Color.currentIndexChanged.connect(self.drawPiePlot)
         self.window_pie_plot_ui.comboBox_Legend_Location.currentIndexChanged.connect(self.drawPiePlot)
@@ -739,7 +776,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             self.layout.addWidget(self.canvas)
 
             x = self.window_pie_plot_ui.comboBox_X.currentText()
-            y = self.window_pie_plot_ui.comboBox_Label_Data.currentText()
+            y = self.window_pie_plot_ui.comboBox_Y.currentText()
             style = self.window_pie_plot_ui.comboBox_Style.currentText()
             title = self.window_pie_plot_ui.lineEdit_Title_Plot.text()
             label_x = self.window_pie_plot_ui.lineEdit_Label_X.text()
@@ -790,10 +827,11 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
     def resetPiePlot(self):
         self.window_pie_plot_ui.comboBox_X.setCurrentIndex(-1)
-        self.window_pie_plot_ui.comboBox_Label_Data.setCurrentIndex(-1)
+        self.window_pie_plot_ui.comboBox_Y.setCurrentIndex(-1)
         self.window_pie_plot_ui.comboBox_Style.setCurrentIndex(2)
         self.window_pie_plot_ui.comboBox_Legend_Location.setCurrentIndex(0)
         self.window_pie_plot_ui.comboBox_Label_Color.setCurrentIndex(0)
+        self.window_pie_plot_ui.comboBox_Data.setCurrentIndex(-1)
 
         self.window_pie_plot_ui.doubleSpinBox_Radius.setValue(1.0)
 

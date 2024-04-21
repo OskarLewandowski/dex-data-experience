@@ -39,7 +39,7 @@ class Ui_MainWindow_Pie_Plot(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 400, 702))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 383, 708))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
@@ -53,6 +53,25 @@ class Ui_MainWindow_Pie_Plot(object):
         self.groupBox.setObjectName("groupBox")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.groupBox)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.label_4 = QtWidgets.QLabel(parent=self.groupBox)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_6.addWidget(self.label_4)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem1)
+        self.toolButton_Data = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Data.setObjectName("toolButton_Data")
+        self.horizontalLayout_6.addWidget(self.toolButton_Data)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_6)
+        self.comboBox_Data = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Data.setMinimumSize(QtCore.QSize(250, 0))
+        self.comboBox_Data.setObjectName("comboBox_Data")
+        self.verticalLayout_6.addWidget(self.comboBox_Data)
+        self.verticalLayout_13.addLayout(self.verticalLayout_6)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
@@ -60,9 +79,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_2 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_4.addWidget(self.label_2)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem1)
+        self.horizontalLayout_4.addItem(spacerItem2)
         self.toolButton_X = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_X.setObjectName("toolButton_X")
         self.horizontalLayout_4.addWidget(self.toolButton_X)
@@ -79,17 +98,17 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_3 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_5.addWidget(self.label_3)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem2)
-        self.toolButton_Label_Data = QtWidgets.QToolButton(parent=self.groupBox)
-        self.toolButton_Label_Data.setObjectName("toolButton_Label_Data")
-        self.horizontalLayout_5.addWidget(self.toolButton_Label_Data)
+        self.horizontalLayout_5.addItem(spacerItem3)
+        self.toolButton_Y = QtWidgets.QToolButton(parent=self.groupBox)
+        self.toolButton_Y.setObjectName("toolButton_Y")
+        self.horizontalLayout_5.addWidget(self.toolButton_Y)
         self.verticalLayout_5.addLayout(self.horizontalLayout_5)
-        self.comboBox_Label_Data = QtWidgets.QComboBox(parent=self.groupBox)
-        self.comboBox_Label_Data.setMinimumSize(QtCore.QSize(250, 0))
-        self.comboBox_Label_Data.setObjectName("comboBox_Label_Data")
-        self.verticalLayout_5.addWidget(self.comboBox_Label_Data)
+        self.comboBox_Y = QtWidgets.QComboBox(parent=self.groupBox)
+        self.comboBox_Y.setMinimumSize(QtCore.QSize(250, 0))
+        self.comboBox_Y.setObjectName("comboBox_Y")
+        self.verticalLayout_5.addWidget(self.comboBox_Y)
         self.verticalLayout_13.addLayout(self.verticalLayout_5)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -98,14 +117,15 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label = QtWidgets.QLabel(parent=self.groupBox)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem3)
+        self.horizontalLayout_3.addItem(spacerItem4)
         self.toolButton_Radius = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Radius.setObjectName("toolButton_Radius")
         self.horizontalLayout_3.addWidget(self.toolButton_Radius)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.doubleSpinBox_Radius = QtWidgets.QDoubleSpinBox(parent=self.groupBox)
+        self.doubleSpinBox_Radius.setMinimum(0.1)
         self.doubleSpinBox_Radius.setMaximum(100.0)
         self.doubleSpinBox_Radius.setSingleStep(0.1)
         self.doubleSpinBox_Radius.setProperty("value", 1.0)
@@ -119,9 +139,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_6 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_6.setObjectName("label_6")
         self.horizontalLayout_8.addWidget(self.label_6)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem4)
+        self.horizontalLayout_8.addItem(spacerItem5)
         self.toolButton_Style = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Style.setObjectName("toolButton_Style")
         self.horizontalLayout_8.addWidget(self.toolButton_Style)
@@ -153,9 +173,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_7 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_7.setObjectName("label_7")
         self.horizontalLayout_9.addWidget(self.label_7)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_9.addItem(spacerItem5)
+        self.horizontalLayout_9.addItem(spacerItem6)
         self.toolButton_Label_Color = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_Color.setObjectName("toolButton_Label_Color")
         self.horizontalLayout_9.addWidget(self.toolButton_Label_Color)
@@ -192,9 +212,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_8 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_10.addWidget(self.label_8)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_10.addItem(spacerItem6)
+        self.horizontalLayout_10.addItem(spacerItem7)
         self.toolButton_Legend_Location = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Legend_Location.setObjectName("toolButton_Legend_Location")
         self.horizontalLayout_10.addWidget(self.toolButton_Legend_Location)
@@ -222,9 +242,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_12 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_12.setObjectName("label_12")
         self.horizontalLayout_15.addWidget(self.label_12)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_15.addItem(spacerItem7)
+        self.horizontalLayout_15.addItem(spacerItem8)
         self.toolButton_Legend_Title = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Legend_Title.setObjectName("toolButton_Legend_Title")
         self.horizontalLayout_15.addWidget(self.toolButton_Legend_Title)
@@ -240,9 +260,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_9 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_9.setObjectName("label_9")
         self.horizontalLayout_12.addWidget(self.label_9)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_12.addItem(spacerItem8)
+        self.horizontalLayout_12.addItem(spacerItem9)
         self.toolButton_Title_Plot = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Title_Plot.setObjectName("toolButton_Title_Plot")
         self.horizontalLayout_12.addWidget(self.toolButton_Title_Plot)
@@ -258,9 +278,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_10 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_10.setObjectName("label_10")
         self.horizontalLayout_13.addWidget(self.label_10)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_13.addItem(spacerItem9)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_13.addItem(spacerItem10)
         self.toolButton_Label_X = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_X.setObjectName("toolButton_Label_X")
         self.horizontalLayout_13.addWidget(self.toolButton_Label_X)
@@ -276,9 +296,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.label_11 = QtWidgets.QLabel(parent=self.groupBox)
         self.label_11.setObjectName("label_11")
         self.horizontalLayout_14.addWidget(self.label_11)
-        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_14.addItem(spacerItem10)
+        self.horizontalLayout_14.addItem(spacerItem11)
         self.toolButton_Label_Y = QtWidgets.QToolButton(parent=self.groupBox)
         self.toolButton_Label_Y.setObjectName("toolButton_Label_Y")
         self.horizontalLayout_14.addWidget(self.toolButton_Label_Y)
@@ -290,9 +310,9 @@ class Ui_MainWindow_Pie_Plot(object):
         self.verticalLayout_4.addWidget(self.groupBox)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_2.addWidget(self.scrollArea)
-        spacerItem11 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
+        spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum,
                                              QtWidgets.QSizePolicy.Policy.Fixed)
-        self.verticalLayout_2.addItem(spacerItem11)
+        self.verticalLayout_2.addItem(spacerItem12)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.frame = QtWidgets.QFrame(parent=self.centralwidget)
@@ -325,24 +345,24 @@ class Ui_MainWindow_Pie_Plot(object):
         self.pushButton_Generate_Plot = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Generate_Plot.setObjectName("pushButton_Generate_Plot")
         self.horizontalLayout_11.addWidget(self.pushButton_Generate_Plot)
-        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem12)
+        self.horizontalLayout_11.addItem(spacerItem13)
         self.pushButton_Data_Preview = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Data_Preview.setObjectName("pushButton_Data_Preview")
         self.horizontalLayout_11.addWidget(self.pushButton_Data_Preview)
-        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem13)
+        self.horizontalLayout_11.addItem(spacerItem14)
         self.pushButton_Add_To_Board = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Add_To_Board.setObjectName("pushButton_Add_To_Board")
         self.horizontalLayout_11.addWidget(self.pushButton_Add_To_Board)
         self.pushButton_Export = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Export.setObjectName("pushButton_Export")
         self.horizontalLayout_11.addWidget(self.pushButton_Export)
-        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Fixed,
                                              QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem14)
+        self.horizontalLayout_11.addItem(spacerItem15)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
         self.horizontalLayout_11.addWidget(self.pushButton_Close)
@@ -355,7 +375,7 @@ class Ui_MainWindow_Pie_Plot(object):
         self.comboBox_Legend_Location.setCurrentIndex(0)
         self.pushButton_Close.clicked.connect(MainWindow_Pie_Plot.close)  # type: ignore
         self.toolButton_X.clicked.connect(lambda: self.comboBox_X.setCurrentIndex(-1))  # type: ignore
-        self.toolButton_Label_Data.clicked.connect(lambda: self.comboBox_Label_Data.setCurrentIndex(-1))  # type: ignore
+        self.toolButton_Y.clicked.connect(lambda: self.comboBox_Y.setCurrentIndex(-1))  # type: ignore
         self.toolButton_Title_Plot.clicked.connect(self.lineEdit_Title_Plot.clear)  # type: ignore
         self.toolButton_Style.clicked.connect(lambda: self.comboBox_Style.setCurrentIndex(2))  # type: ignore
         self.toolButton_Label_X.clicked.connect(self.lineEdit_Label_X.clear)  # type: ignore
@@ -366,18 +386,22 @@ class Ui_MainWindow_Pie_Plot(object):
         self.toolButton_Legend_Location.clicked.connect(
             lambda: self.comboBox_Legend_Location.setCurrentIndex(0))  # type: ignore
         self.toolButton_Legend_Title.clicked.connect(self.lineEdit_Legend_Title.clear)  # type: ignore
+        self.toolButton_Data.clicked.connect(lambda: self.comboBox_Data.setCurrentIndex(-1))  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Pie_Plot)
 
     def retranslateUi(self, MainWindow_Pie_Plot):
         _translate = QtCore.QCoreApplication.translate
         MainWindow_Pie_Plot.setWindowTitle(_translate("MainWindow_Pie_Plot", "Wykres kołowy"))
         self.groupBox.setTitle(_translate("MainWindow_Pie_Plot", "Parametry:"))
-        self.label_2.setText(_translate("MainWindow_Pie_Plot", "Dane x:"))
+        self.label_4.setText(_translate("MainWindow_Pie_Plot", "Zbiór danych:"))
+        self.toolButton_Data.setText(_translate("MainWindow_Pie_Plot", "X"))
+        self.comboBox_Data.setPlaceholderText(_translate("MainWindow_Pie_Plot", "Wybierz zbiór danych..."))
+        self.label_2.setText(_translate("MainWindow_Pie_Plot", "Dane na wykresie:"))
         self.toolButton_X.setText(_translate("MainWindow_Pie_Plot", "X"))
         self.comboBox_X.setPlaceholderText(_translate("MainWindow_Pie_Plot", "Wybierz dane..."))
         self.label_3.setText(_translate("MainWindow_Pie_Plot", "Etykiety:"))
-        self.toolButton_Label_Data.setText(_translate("MainWindow_Pie_Plot", "X"))
-        self.comboBox_Label_Data.setPlaceholderText(_translate("MainWindow_Pie_Plot", "Wybierz dane jako etykiety..."))
+        self.toolButton_Y.setText(_translate("MainWindow_Pie_Plot", "X"))
+        self.comboBox_Y.setPlaceholderText(_translate("MainWindow_Pie_Plot", "Wybierz dane jako etykiety..."))
         self.label.setText(_translate("MainWindow_Pie_Plot", "Promień wykresu kołowego:"))
         self.toolButton_Radius.setText(_translate("MainWindow_Pie_Plot", "X"))
         self.label_6.setText(_translate("MainWindow_Pie_Plot", "Odcień wykresu:"))
