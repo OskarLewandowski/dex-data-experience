@@ -30,7 +30,7 @@ class MessageModel:
             msg.setStandardButtons(
                 QMessageBox.StandardButton.Abort | QMessageBox.StandardButton.Close)
             msg.button(QMessageBox.StandardButton.Abort).setText('Dodaj kolejny plik')
-            msg.button(QMessageBox.StandardButton.Close).setText('Wróc')
+            msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
 
             reply = msg.exec()
 

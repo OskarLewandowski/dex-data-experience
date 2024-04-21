@@ -701,7 +701,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         dataAll = DataStorageModel.get_all_keys_and_columns()
 
         self.window_pie_plot_ui.comboBox_X.addItems(dataAll)
-        self.window_pie_plot_ui.comboBox_Y.addItems(dataAll)
+        self.window_pie_plot_ui.comboBox_Label_Data.addItems(dataAll)
 
         self.window_pie_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetPiePlot)
         self.window_pie_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
@@ -710,12 +710,17 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_pie_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawPiePlot)
 
         self.window_pie_plot_ui.comboBox_X.currentIndexChanged.connect(self.drawPiePlot)
-        self.window_pie_plot_ui.comboBox_Y.currentIndexChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.comboBox_Label_Data.currentIndexChanged.connect(self.drawPiePlot)
         self.window_pie_plot_ui.comboBox_Style.currentIndexChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.comboBox_Label_Color.currentIndexChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.comboBox_Legend_Location.currentIndexChanged.connect(self.drawPiePlot)
 
-        self.window_pie_plot_ui.lineEdit_Title_Plot.textChanged.connect(self.drawPiePlot)
-        self.window_pie_plot_ui.lineEdit_Label_X.textChanged.connect(self.drawPiePlot)
-        self.window_pie_plot_ui.lineEdit_Label_Y.textChanged.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.lineEdit_Title_Plot.editingFinished.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.lineEdit_Label_X.editingFinished.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawPiePlot)
+        self.window_pie_plot_ui.lineEdit_Legend_Title.editingFinished.connect(self.drawPiePlot)
+
+        self.window_pie_plot_ui.doubleSpinBox_Radius.valueChanged.connect(self.drawPiePlot)
 
         self.window_pie_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
@@ -734,11 +739,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             self.layout.addWidget(self.canvas)
 
             x = self.window_pie_plot_ui.comboBox_X.currentText()
-            y = self.window_pie_plot_ui.comboBox_Y.currentText()
+            y = self.window_pie_plot_ui.comboBox_Label_Data.currentText()
             style = self.window_pie_plot_ui.comboBox_Style.currentText()
             title = self.window_pie_plot_ui.lineEdit_Title_Plot.text()
             label_x = self.window_pie_plot_ui.lineEdit_Label_X.text()
             label_y = self.window_pie_plot_ui.lineEdit_Label_Y.text()
+            legend_title = self.window_pie_plot_ui.lineEdit_Legend_Title.text()
+            radius = self.window_pie_plot_ui.doubleSpinBox_Radius.value()
+            loc = self.window_pie_plot_ui.comboBox_Legend_Location.currentText()
+            color = self.window_pie_plot_ui.comboBox_Label_Color.currentText()
 
             # x
             result = self.splitText(x)
@@ -753,13 +762,15 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
             else:
                 palette_color = sns.color_palette('bright')
 
-            wedges, texts, autotexts = self.ax.pie(x=x, labels=y, colors=palette_color, autopct='%1.1f%%',
-                                                   textprops=dict(color="black"))
+            textprops = {'fontsize': 12, 'color': color}
+            autopct = lambda p: '{:.1f}%'.format(p) if p > 0 else ''
+
+            wedges, texts, autotexts = self.ax.pie(x=x, labels=y, radius=radius, colors=palette_color, autopct=autopct,
+                                                   textprops=textprops)
 
             self.ax.legend(wedges, y,
-                           title="Kategorie",
-                           loc="center left",
-                           bbox_to_anchor=(1, 0, 0.5, 1))
+                           title=legend_title,
+                           loc=loc)
 
             if title:
                 self.ax.set_title(title)
@@ -779,8 +790,14 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
     def resetPiePlot(self):
         self.window_pie_plot_ui.comboBox_X.setCurrentIndex(-1)
-        self.window_pie_plot_ui.comboBox_Y.setCurrentIndex(-1)
-        self.window_pie_plot_ui.comboBox_Style.setCurrentIndex(-1)
+        self.window_pie_plot_ui.comboBox_Label_Data.setCurrentIndex(-1)
+        self.window_pie_plot_ui.comboBox_Style.setCurrentIndex(2)
+        self.window_pie_plot_ui.comboBox_Legend_Location.setCurrentIndex(0)
+        self.window_pie_plot_ui.comboBox_Label_Color.setCurrentIndex(0)
+
+        self.window_pie_plot_ui.doubleSpinBox_Radius.setValue(1.0)
+
+        self.window_pie_plot_ui.lineEdit_Legend_Title.clear()
         self.window_pie_plot_ui.lineEdit_Title_Plot.clear()
         self.window_pie_plot_ui.lineEdit_Label_X.clear()
         self.window_pie_plot_ui.lineEdit_Label_Y.clear()
