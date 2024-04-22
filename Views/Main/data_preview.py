@@ -13,27 +13,25 @@ class Ui_MainWindow_Data_Preview(object):
     def setupUi(self, MainWindow_Data_Preview):
         MainWindow_Data_Preview.setObjectName("MainWindow_Data_Preview")
         MainWindow_Data_Preview.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
-        MainWindow_Data_Preview.resize(800, 600)
+        MainWindow_Data_Preview.resize(1100, 800)
+        MainWindow_Data_Preview.setMinimumSize(QtCore.QSize(800, 600))
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Data_Preview)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                           QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.comboBox_Select_Data = QtWidgets.QComboBox(parent=self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding,
-                                           QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.comboBox_Select_Data.sizePolicy().hasHeightForWidth())
         self.comboBox_Select_Data.setSizePolicy(sizePolicy)
         self.comboBox_Select_Data.setObjectName("comboBox_Select_Data")
         self.horizontalLayout.addWidget(self.comboBox_Select_Data)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableView_Data_Frame = QtWidgets.QTableView(parent=self.centralwidget)
@@ -45,8 +43,7 @@ class Ui_MainWindow_Data_Preview(object):
         self.pushButton_Refresh = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Refresh.setObjectName("pushButton_Refresh")
         self.horizontalLayout_2.addWidget(self.pushButton_Refresh)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
-                                            QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.pushButton_Close = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Close.setObjectName("pushButton_Close")
@@ -55,21 +52,19 @@ class Ui_MainWindow_Data_Preview(object):
         MainWindow_Data_Preview.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Data_Preview)
-        self.pushButton_Close.clicked.connect(MainWindow_Data_Preview.close)  # type: ignore
+        self.pushButton_Close.clicked.connect(MainWindow_Data_Preview.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Data_Preview)
 
     def retranslateUi(self, MainWindow_Data_Preview):
         _translate = QtCore.QCoreApplication.translate
         MainWindow_Data_Preview.setWindowTitle(_translate("MainWindow_Data_Preview", "Podgląd danych"))
-        self.comboBox_Select_Data.setPlaceholderText(
-            _translate("MainWindow_Data_Preview", "Wybierz zbiór danych do wyświetlenia"))
+        self.comboBox_Select_Data.setPlaceholderText(_translate("MainWindow_Data_Preview", "Wybierz zbiór danych do wyświetlenia"))
         self.pushButton_Refresh.setText(_translate("MainWindow_Data_Preview", "Odśwież listę"))
         self.pushButton_Close.setText(_translate("MainWindow_Data_Preview", "Zamknij"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow_Data_Preview = QtWidgets.QMainWindow()
     ui = Ui_MainWindow_Data_Preview()
