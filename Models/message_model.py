@@ -1,3 +1,5 @@
+import os
+
 from PyQt6.QtCore import QTimer, Qt
 from PyQt6.QtWidgets import QMessageBox, QApplication, QLabel, QHBoxLayout, QWidget, QStyle
 
@@ -206,3 +208,29 @@ class MessageModel:
         toast.show()
 
         QTimer.singleShot(timeout, toast.close)
+
+    @classmethod
+    def statusSaveAsFile(cls, filePath):
+        try:
+            fileName = os.path.basename(filePath)
+
+            message = "Plik '{}' został pomyślnie wygenerowany.".format(fileName)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Question)
+            msg.setText(message)
+            msg.setWindowTitle('Dex')
+
+            msg.setStandardButtons(
+                QMessageBox.StandardButton.Open | QMessageBox.StandardButton.Close)
+            msg.button(QMessageBox.StandardButton.Open).setText('Otwórz plik')
+            msg.button(QMessageBox.StandardButton.Close).setText('Zamknij')
+
+            reply = msg.exec()
+
+            if reply == QMessageBox.StandardButton.Open:
+                os.startfile(filePath)
+                return reply == QMessageBox.StandardButton.Close
+            else:
+                return reply == QMessageBox.StandardButton.Close
+        except Exception as e:
+            cls.error("0033", str(e))

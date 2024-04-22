@@ -210,6 +210,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
                 printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
                 printer.setOutputFileName(filePath)
                 self.textEdit_Board.document().print(printer)
+                MessageModel.statusSaveAsFile(filePath)
         except Exception as e:
             MessageModel.error("0013", str(e))
 
