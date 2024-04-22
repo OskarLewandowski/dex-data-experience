@@ -29,7 +29,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.main.action_Line_Plot.triggered.connect(self.createLinePlotWindow)
         self.main.action_Pie_Chart.triggered.connect(self.createPiePlotWindow)
 
-    def exportAsPng(self):
+    def exportAsPng(self, window):
         try:
             fileFilter = ('Plik PNG (*.png)')
 
@@ -43,7 +43,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
             if filePath.endswith(".png"):
                 self.canvas.figure.savefig(filePath, format='png')
-
+                MessageModel.show_toast("Wykres został zapisany jako plik png", 2000, window)
 
         except Exception as e:
             MessageModel.error("0030", str(e))
@@ -109,7 +109,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_scatter_plot_ui.comboBox_Size.addItems(dataAll)
 
         self.window_scatter_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetScatterPlot)
-        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_scatter_plot_ui.pushButton_Export.clicked.connect(
+            lambda: self.exportAsPng(self.window_scatter_plot))
         self.window_scatter_plot_ui.pushButton_Add_To_Board.clicked.connect(
             lambda: self.drawPlotInBoard(self.window_scatter_plot))
         self.window_scatter_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawScatterPlot)
@@ -233,7 +234,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.comboBox_Size.addItems(dataAll)
 
         self.window_line_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetLinePlot)
-        self.window_line_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_line_plot_ui.pushButton_Export.clicked.connect(lambda: self.exportAsPng(self.window_line_plot))
         self.window_line_plot_ui.pushButton_Add_To_Board.clicked.connect(
             lambda: self.drawPlotInBoard(self.window_line_plot))
         self.window_line_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawLinePlot)
@@ -365,7 +366,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_bar_plot_ui.comboBox_Hue.addItems(dataAll)
 
         self.window_bar_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetBarPlot)
-        self.window_bar_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_bar_plot_ui.pushButton_Export.clicked.connect(lambda: self.exportAsPng(self.window_bar_plot))
         self.window_bar_plot_ui.pushButton_Add_To_Board.clicked.connect(
             lambda: self.drawPlotInBoard(self.window_bar_plot))
         self.window_bar_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBarPlot)
@@ -496,7 +497,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_hist_plot_ui.comboBox_Hue.addItems(dataAll)
 
         self.window_hist_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetHistPlot)
-        self.window_hist_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_hist_plot_ui.pushButton_Export.clicked.connect(lambda: self.exportAsPng(self.window_hist_plot))
         self.window_hist_plot_ui.pushButton_Add_To_Board.clicked.connect(
             lambda: self.drawPlotInBoard(self.window_hist_plot))
         self.window_hist_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawHistPlot)
@@ -617,7 +618,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_box_plot_ui.comboBox_Hue.addItems(dataAll)
 
         self.window_box_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetBoxPlot)
-        self.window_box_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_box_plot_ui.pushButton_Export.clicked.connect(lambda: self.exportAsPng(self.window_box_plot))
         self.window_box_plot_ui.pushButton_Add_To_Board.clicked.connect(
             lambda: self.drawPlotInBoard(self.window_box_plot))
         self.window_box_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawBoxPlot)
@@ -738,7 +739,7 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_pie_plot_ui.comboBox_Y.addItems(dataAll)
 
         self.window_pie_plot_ui.pushButton_Reset_Options.clicked.connect(self.resetPiePlot)
-        self.window_pie_plot_ui.pushButton_Export.clicked.connect(self.exportAsPng)
+        self.window_pie_plot_ui.pushButton_Export.clicked.connect(lambda: self.exportAsPng(self.window_pie_plot))
         self.window_pie_plot_ui.pushButton_Add_To_Board.clicked.connect(
             lambda: self.drawPlotInBoard(self.window_pie_plot))
         self.window_pie_plot_ui.pushButton_Generate_Plot.clicked.connect(self.drawPiePlot)
