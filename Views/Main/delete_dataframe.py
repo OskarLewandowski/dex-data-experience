@@ -13,47 +13,50 @@ class Ui_Dialog_Delete_Dataframe(object):
     def setupUi(self, Dialog_Delete_Dataframe):
         Dialog_Delete_Dataframe.setObjectName("Dialog_Delete_Dataframe")
         Dialog_Delete_Dataframe.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
-        Dialog_Delete_Dataframe.resize(400, 110)
-        Dialog_Delete_Dataframe.setMinimumSize(QtCore.QSize(400, 110))
+        Dialog_Delete_Dataframe.resize(500, 140)
+        Dialog_Delete_Dataframe.setMinimumSize(QtCore.QSize(500, 140))
+        Dialog_Delete_Dataframe.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(Dialog_Delete_Dataframe)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.comboBox_Keys_List = QtWidgets.QComboBox(parent=Dialog_Delete_Dataframe)
+        self.comboBox_Keys_List.setMinimumSize(QtCore.QSize(0, 25))
         self.comboBox_Keys_List.setObjectName("comboBox_Keys_List")
         self.verticalLayout.addWidget(self.comboBox_Keys_List)
         self.label_info_text_delete_dataframe = QtWidgets.QLabel(parent=Dialog_Delete_Dataframe)
-        self.label_info_text_delete_dataframe.setText("")
+        self.label_info_text_delete_dataframe.setMinimumSize(QtCore.QSize(0, 25))
         self.label_info_text_delete_dataframe.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_info_text_delete_dataframe.setObjectName("label_info_text_delete_dataframe")
         self.verticalLayout.addWidget(self.label_info_text_delete_dataframe)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.pushButton_Apply = QtWidgets.QPushButton(parent=Dialog_Delete_Dataframe)
+        self.pushButton_Apply.setMinimumSize(QtCore.QSize(0, 25))
         self.pushButton_Apply.setObjectName("pushButton_Apply")
         self.horizontalLayout.addWidget(self.pushButton_Apply)
         self.pushButton_Cancel = QtWidgets.QPushButton(parent=Dialog_Delete_Dataframe)
+        self.pushButton_Cancel.setMinimumSize(QtCore.QSize(0, 25))
         self.pushButton_Cancel.setObjectName("pushButton_Cancel")
         self.horizontalLayout.addWidget(self.pushButton_Cancel)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.verticalLayout_2.addLayout(self.verticalLayout)
 
         self.retranslateUi(Dialog_Delete_Dataframe)
-        self.pushButton_Cancel.clicked.connect(Dialog_Delete_Dataframe.close)  # type: ignore
+        self.pushButton_Cancel.clicked.connect(Dialog_Delete_Dataframe.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog_Delete_Dataframe)
 
     def retranslateUi(self, Dialog_Delete_Dataframe):
         _translate = QtCore.QCoreApplication.translate
         Dialog_Delete_Dataframe.setWindowTitle(_translate("Dialog_Delete_Dataframe", "Usuń zbiór danych"))
-        self.comboBox_Keys_List.setPlaceholderText(
-            _translate("Dialog_Delete_Dataframe", "Wybierz zbiór do usunięcia..."))
+        self.comboBox_Keys_List.setPlaceholderText(_translate("Dialog_Delete_Dataframe", "Wybierz zbiór do usunięcia..."))
+        self.label_info_text_delete_dataframe.setText(_translate("Dialog_Delete_Dataframe", "Wybierz zbiór danych do usunięcia"))
         self.pushButton_Apply.setText(_translate("Dialog_Delete_Dataframe", "Zastosuj"))
         self.pushButton_Cancel.setText(_translate("Dialog_Delete_Dataframe", "Anuluj"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Delete_Dataframe = QtWidgets.QDialog()
     ui = Ui_Dialog_Delete_Dataframe()
