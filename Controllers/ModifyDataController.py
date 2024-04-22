@@ -574,7 +574,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 elif saveFileName[1] == "Plik R (*.RData)":
                     pyreadr.write_rdata(saveFileName[0], df)
 
-            MessageModel.statusSaveAsFile(saveFileName[0])
+                MessageModel.statusSaveAsFile(saveFileName[0])
 
 
 
