@@ -221,7 +221,7 @@
   </action>
   <action name="action_Get_Dummies">
    <property name="text">
-    <string>Rozdziel dane</string>
+    <string>Gorące kodowanie</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>

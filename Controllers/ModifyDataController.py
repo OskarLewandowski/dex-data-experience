@@ -355,33 +355,46 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
         self.comboBox_Select_Data.setEnabled(False)
 
-        self.window = QDialog()
-        self.ui = Ui_Dialog_Get_Dummies()
-        self.ui.setupUi(self.window)
-        self.ui.comboBox_Select_Data.addItems(namesList)
-        self.ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
-        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
-        self.window.closeEvent = self.closeEventGetDummies
+        self.get_dummies_window = QDialog()
+        self.get_dummies_window_ui = Ui_Dialog_Get_Dummies()
+        self.get_dummies_window_ui.setupUi(self.get_dummies_window)
 
-        self.window.show()
+        self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
+        self.get_dummies_window_ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
+        self.get_dummies_window_ui.pushButton_Cancel.clicked.connect(self.get_dummies_window.close)
+
+        self.get_dummies_window.closeEvent = self.closeEventGetDummies
+
+        self.get_dummies_window.show()
 
     def applyGetDummies(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
-        nameColumn = self.ui.comboBox_Select_Data.currentText()
-        df = pd.get_dummies(df, columns=[nameColumn])
+        nameColumn = self.get_dummies_window_ui.comboBox_Select_Data.currentText()
+
+        if nameColumn:
+            if self.get_dummies_window_ui.checkBox_Keep_Data.isChecked():
+                dummies = pd.get_dummies(df[nameColumn], prefix=nameColumn)
+                df = pd.concat([df, dummies], axis=1)
+            else:
+                df = pd.get_dummies(df, columns=[nameColumn])
+
+            self.get_dummies_window_ui.label_Info.setText("Operacja wykonana pomyślnie!")
+        else:
+            self.get_dummies_window_ui.label_Info.setText("Wybierz kolumnę!")
+
         self.currentDataFrameGlobal = df
         self.updateGetDummiesList()
 
     def closeEventGetDummies(self, event):
-        self.window.close()
+        self.get_dummies_window.close()
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
     def updateGetDummiesList(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
-        self.ui.comboBox_Select_Data.clear()
-        self.ui.comboBox_Select_Data.addItems(namesList)
+        self.get_dummies_window_ui.comboBox_Select_Data.clear()
+        self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
         self.displayData(df)
 
     def saveChanges(self):

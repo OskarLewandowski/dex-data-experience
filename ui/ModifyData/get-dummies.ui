@@ -9,24 +9,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>105</height>
+    <width>500</width>
+    <height>175</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
-    <height>105</height>
+    <width>500</width>
+    <height>175</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Rozdziel dane</string>
+   <string>Gorące kodowanie</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QComboBox" name="comboBox_Select_Data">
      <property name="placeholderText">
-      <string>Wybierz kolumnę do rozdzielenia danych...</string>
+      <string>Wybierz kolumnę do przeprowadzenia kodowania etykiet...</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkBox_Keep_Data">
+     <property name="text">
+      <string>Zachowaj orginalną kolumnę z danymi</string>
      </property>
     </widget>
    </item>
@@ -34,6 +41,9 @@
     <widget class="QLabel" name="label_Info">
      <property name="text">
       <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>

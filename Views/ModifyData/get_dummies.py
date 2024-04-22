@@ -13,15 +13,19 @@ class Ui_Dialog_Get_Dummies(object):
     def setupUi(self, Dialog_Get_Dummies):
         Dialog_Get_Dummies.setObjectName("Dialog_Get_Dummies")
         Dialog_Get_Dummies.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
-        Dialog_Get_Dummies.resize(400, 105)
-        Dialog_Get_Dummies.setMinimumSize(QtCore.QSize(400, 105))
+        Dialog_Get_Dummies.resize(500, 175)
+        Dialog_Get_Dummies.setMinimumSize(QtCore.QSize(500, 175))
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_Get_Dummies)
         self.verticalLayout.setObjectName("verticalLayout")
         self.comboBox_Select_Data = QtWidgets.QComboBox(parent=Dialog_Get_Dummies)
         self.comboBox_Select_Data.setObjectName("comboBox_Select_Data")
         self.verticalLayout.addWidget(self.comboBox_Select_Data)
+        self.checkBox_Keep_Data = QtWidgets.QCheckBox(parent=Dialog_Get_Dummies)
+        self.checkBox_Keep_Data.setObjectName("checkBox_Keep_Data")
+        self.verticalLayout.addWidget(self.checkBox_Keep_Data)
         self.label_Info = QtWidgets.QLabel(parent=Dialog_Get_Dummies)
         self.label_Info.setText("")
+        self.label_Info.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_Info.setObjectName("label_Info")
         self.verticalLayout.addWidget(self.label_Info)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -39,14 +43,17 @@ class Ui_Dialog_Get_Dummies(object):
 
     def retranslateUi(self, Dialog_Get_Dummies):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Get_Dummies.setWindowTitle(_translate("Dialog_Get_Dummies", "Rozdziel dane"))
-        self.comboBox_Select_Data.setPlaceholderText(_translate("Dialog_Get_Dummies", "Wybierz kolumnę do rozdzielenia danych..."))
+        Dialog_Get_Dummies.setWindowTitle(_translate("Dialog_Get_Dummies", "Gorące kodowanie"))
+        self.comboBox_Select_Data.setPlaceholderText(
+            _translate("Dialog_Get_Dummies", "Wybierz kolumnę do przeprowadzenia kodowania etykiet..."))
+        self.checkBox_Keep_Data.setText(_translate("Dialog_Get_Dummies", "Zachowaj orginalną kolumnę z danymi"))
         self.pushButton_Apply.setText(_translate("Dialog_Get_Dummies", "Zastosuj"))
         self.pushButton_Cancel.setText(_translate("Dialog_Get_Dummies", "Anuluj"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog_Get_Dummies = QtWidgets.QDialog()
     ui = Ui_Dialog_Get_Dummies()
