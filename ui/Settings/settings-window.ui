@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1100</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -21,8 +21,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
-    <height>600</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -72,8 +72,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>629</width>
-               <height>528</height>
+               <width>929</width>
+               <height>728</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -170,6 +170,12 @@
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
+                           </property>
                            <property name="text">
                             <string/>
                            </property>
@@ -190,6 +196,12 @@
                           <widget class="QPushButton" name="pushButton_Primary_Light_Color">
                            <property name="enabled">
                             <bool>false</bool>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
                            </property>
                            <property name="text">
                             <string/>
@@ -212,6 +224,12 @@
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
+                           </property>
                            <property name="text">
                             <string/>
                            </property>
@@ -232,6 +250,12 @@
                           <widget class="QPushButton" name="pushButton_Secondary_Light_Color">
                            <property name="enabled">
                             <bool>false</bool>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
                            </property>
                            <property name="text">
                             <string/>
@@ -254,6 +278,12 @@
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
+                           </property>
                            <property name="text">
                             <string/>
                            </property>
@@ -274,6 +304,12 @@
                           <widget class="QPushButton" name="pushButton_Primary_Text_Color">
                            <property name="enabled">
                             <bool>false</bool>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
                            </property>
                            <property name="text">
                             <string/>
@@ -296,6 +332,12 @@
                            <property name="enabled">
                             <bool>false</bool>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
+                           </property>
                            <property name="text">
                             <string/>
                            </property>
@@ -316,6 +358,12 @@
                           <widget class="QComboBox" name="comboBox_Icon_Color">
                            <property name="enabled">
                             <bool>false</bool>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
                            </property>
                            <item>
                             <property name="text">
@@ -339,12 +387,15 @@
                   <item>
                    <spacer name="horizontalSpacer_4">
                     <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
-                      <height>20</height>
+                      <width>20</width>
+                      <height>40</height>
                      </size>
                     </property>
                    </spacer>
@@ -410,8 +461,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>631</width>
-             <height>530</height>
+             <width>931</width>
+             <height>730</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -419,6 +470,9 @@
              <widget class="QGroupBox" name="groupBox_4">
               <property name="title">
                <string>Powiadomienie przy zamykaniu aplikacji</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11">
                <item>
@@ -522,8 +576,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>631</width>
-             <height>530</height>
+             <width>931</width>
+             <height>730</height>
             </rect>
            </property>
           </widget>
