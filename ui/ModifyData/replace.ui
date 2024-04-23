@@ -10,13 +10,13 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>340</height>
+    <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>340</height>
+    <height>380</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,12 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QComboBox" name="comboBox_Column_List_Select">
+        <property name="minimumSize">
+         <size>
+          <width>362</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="placeholderText">
          <string>Wybierz kolumne...</string>
         </property>
@@ -38,6 +44,12 @@
       </item>
       <item>
        <widget class="QCheckBox" name="checkBox_Replace_All">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="text">
          <string>Zamień wartości w całym pliku</string>
         </property>
@@ -53,10 +65,23 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLineEdit" name="lineEdit_Value_To_Replace"/>
+       <widget class="QLineEdit" name="lineEdit_Value_To_Replace">
+        <property name="minimumSize">
+         <size>
+          <width>362</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="checkBox_Value_Nan">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="text">
          <string>Wartości NaN</string>
         </property>
@@ -64,6 +89,12 @@
       </item>
       <item>
        <widget class="QCheckBox" name="checkBox_Value_Null">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="text">
          <string>Wartości puste</string>
         </property>
@@ -79,15 +110,28 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QLineEdit" name="lineEdit_New_Value"/>
+       <widget class="QLineEdit" name="lineEdit_New_Value">
+        <property name="minimumSize">
+         <size>
+          <width>362</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_Info">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
      <property name="text">
-      <string/>
+      <string>Uzupełnij pola!</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

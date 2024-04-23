@@ -76,6 +76,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.ui.pushButton_Cancel.clicked.connect(self.window.close)
         self.ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
         self.ui.pushButton_Apply.clicked.connect(self.applyReplace)
+
+        self.window.adjustSize()
+
         self.window.show()
 
     def applyReplace(self):
