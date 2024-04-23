@@ -319,6 +319,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.window.closeEvent = self.closeEventDeleteNan
         self.ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
         self.messageInfoDeleteNan()
+
+        self.window.adjustSize()
+
         self.window.show()
 
     def messageInfoDeleteNan(self):

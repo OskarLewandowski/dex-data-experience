@@ -13,11 +13,13 @@ class Ui_Dialog_Delete_NaN(object):
     def setupUi(self, Dialog_Delete_NaN):
         Dialog_Delete_NaN.setObjectName("Dialog_Delete_NaN")
         Dialog_Delete_NaN.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
-        Dialog_Delete_NaN.resize(400, 200)
+        Dialog_Delete_NaN.resize(400, 217)
         Dialog_Delete_NaN.setMinimumSize(QtCore.QSize(400, 200))
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_Delete_NaN)
         self.verticalLayout.setObjectName("verticalLayout")
         self.textEdit_Info = QtWidgets.QTextEdit(parent=Dialog_Delete_NaN)
+        self.textEdit_Info.setMinimumSize(QtCore.QSize(382, 150))
+        self.textEdit_Info.setMaximumSize(QtCore.QSize(16777215, 150))
         self.textEdit_Info.setStyleSheet("QTextEdit {\n"
 "    font-weight: bold;\n"
 "    font-size: 16px;\n"
@@ -25,12 +27,16 @@ class Ui_Dialog_Delete_NaN(object):
         self.textEdit_Info.setReadOnly(True)
         self.textEdit_Info.setObjectName("textEdit_Info")
         self.verticalLayout.addWidget(self.textEdit_Info)
+        spacerItem = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        self.verticalLayout.addItem(spacerItem)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.pushButton_Apply = QtWidgets.QPushButton(parent=Dialog_Delete_NaN)
+        self.pushButton_Apply.setMinimumSize(QtCore.QSize(0, 25))
         self.pushButton_Apply.setObjectName("pushButton_Apply")
         self.horizontalLayout.addWidget(self.pushButton_Apply)
         self.pushButton_Cancel = QtWidgets.QPushButton(parent=Dialog_Delete_NaN)
+        self.pushButton_Cancel.setMinimumSize(QtCore.QSize(0, 25))
         self.pushButton_Cancel.setObjectName("pushButton_Cancel")
         self.horizontalLayout.addWidget(self.pushButton_Cancel)
         self.verticalLayout.addLayout(self.horizontalLayout)
