@@ -191,7 +191,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             msg = "Kolumna '{}' została usunięta".format(columnName)
             self.ui.label_Info.setText(msg)
         except Exception as e:
-            MessageModel.error("0023", str(e))
+            MessageModel.error("0023", "Nieprawidłowa nazwa kolumny!")
 
     def deleteRow(self):
         try:
@@ -206,7 +206,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             msg = "Wiersz '{}' został usunięty".format(index)
             self.ui.label_Info.setText(msg)
         except Exception as e:
-            MessageModel.error("0022", str(e))
+            MessageModel.error("0022", "Nieprawidłowy numer wiersza!")
 
     def openDelete(self):
         self.comboBox_Select_Data.setEnabled(False)
@@ -219,6 +219,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
         self.ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
         self.fillListDelete()
+
+        self.window.adjustSize()
+
         self.window.show()
 
     def fillListDelete(self):
