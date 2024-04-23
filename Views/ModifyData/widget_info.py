@@ -18,6 +18,13 @@ class Ui_Form_Info(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.textEdit_info = QtWidgets.QTextEdit(parent=Form_Info)
         self.textEdit_info.setEnabled(True)
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.textEdit_info.setFont(font)
+        self.textEdit_info.setStyleSheet("QTextEdit {\n"
+"    font-size: 14px;\n"
+"}\n"
+"")
         self.textEdit_info.setReadOnly(True)
         self.textEdit_info.setObjectName("textEdit_info")
         self.verticalLayout.addWidget(self.textEdit_info)
@@ -42,8 +49,8 @@ class Ui_Form_Info(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:14px; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"><br /></p></body></html>"))
         self.pushButton_Close.setText(_translate("Form_Info", "Zamknij"))
 
 
