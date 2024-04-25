@@ -26,6 +26,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         super().__init__()
         self.setupUi(self)
 
+        self.child_windows = []
         self.currentDataFrameGlobal = None
 
         # Connections
@@ -34,14 +35,14 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.comboBox_Select_Data.currentIndexChanged.connect(self.enableLoad)
         self.action_Save_as.triggered.connect(self.saveAsAction)
         self.action_More_Info.triggered.connect(self.createInfoWidget)
-        self.action_Search.triggered.connect(self.openSearchDialog)
-        self.action_Change_Headers.triggered.connect(self.openChangeHeaders)
+        self.action_Search.triggered.connect(self.createSearchDialog)
+        self.action_Change_Headers.triggered.connect(self.createChangeHeaders)
         self.pushButton_Save.clicked.connect(self.saveChanges)
-        self.action_Get_Dummies.triggered.connect(self.openGetDummies)
-        self.action_Delete_Nan.triggered.connect(self.openDeleteNan)
-        self.action_Change_Data_Type.triggered.connect(self.openChangeDataType)
-        self.action_Delete.triggered.connect(self.openDelete)
-        self.action_Change.triggered.connect(self.openReplace)
+        self.action_Get_Dummies.triggered.connect(self.createGetDummies)
+        self.action_Delete_Nan.triggered.connect(self.createDeleteNan)
+        self.action_Change_Data_Type.triggered.connect(self.createChangeDataType)
+        self.action_Delete.triggered.connect(self.createDelete)
+        self.action_Change.triggered.connect(self.createReplace)
 
     def createWindowModifyData(self):
         """
@@ -49,6 +50,17 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         """
         self.updateDataFrameList()
         self.show()
+
+    def closeEvent(self, event):
+        if self.child_windows:
+            for window in self.child_windows:
+                if window.isVisible():
+                    window.close()
+
+            self.child_windows.clear()
+
+        self.comboBox_Select_Data.setEnabled(True)
+        event.accept()
 
     def updateDataFrameList(self):
         nameList = DataStorageModel.get_all_keys()
@@ -63,34 +75,37 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.tableView_Data_Frame.setModel(None)
             self.disableWindowFunction()
 
-    def openReplace(self):
+    # Replace
+    def createReplace(self):
         self.comboBox_Select_Data.setEnabled(False)
 
-        self.window = QDialog()
-        self.ui = Ui_Dialog_Replace()
-        self.ui.setupUi(self.window)
-        self.window.closeEvent = self.closeEventReplace
-        self.ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
+        self.replace_window = QDialog()
+        self.replace_window_ui = Ui_Dialog_Replace()
+        self.replace_window_ui.setupUi(self.replace_window)
+        self.replace_window.closeEvent = self.closeEventReplace
+        self.replace_window_ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
         self.fillColumnNames()
-        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
-        self.ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
-        self.ui.pushButton_Apply.clicked.connect(self.applyReplace)
+        self.replace_window_ui.pushButton_Cancel.clicked.connect(self.replace_window.close)
+        self.replace_window_ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
+        self.replace_window_ui.pushButton_Apply.clicked.connect(self.applyReplace)
 
-        self.window.adjustSize()
+        self.replace_window.adjustSize()
 
-        self.window.show()
+        self.replace_window.show()
+
+        self.child_windows.append(self.replace_window)
 
     def applyReplace(self):
         try:
             df = pd.DataFrame(self.currentDataFrameGlobal)
 
-            valueToReplace = self.ui.lineEdit_Value_To_Replace.text()
-            newValue = self.ui.lineEdit_New_Value.text()
-            allColumnsIs = self.ui.checkBox_Replace_All.isChecked()
-            columnIs = self.ui.comboBox_Column_List_Select.currentText()
+            valueToReplace = self.replace_window_ui.lineEdit_Value_To_Replace.text()
+            newValue = self.replace_window_ui.lineEdit_New_Value.text()
+            allColumnsIs = self.replace_window_ui.checkBox_Replace_All.isChecked()
+            columnIs = self.replace_window_ui.comboBox_Column_List_Select.currentText()
 
-            nanValueIs = self.ui.checkBox_Value_Nan.isChecked()
-            nullValueIs = self.ui.checkBox_Value_Null.isChecked()
+            nanValueIs = self.replace_window_ui.checkBox_Value_Nan.isChecked()
+            nullValueIs = self.replace_window_ui.checkBox_Value_Null.isChecked()
 
             try:
                 valueToReplace = float(valueToReplace)
@@ -99,7 +114,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 pass
 
             if valueToReplace != "" and newValue != "" and (allColumnsIs is True or columnIs != ""):
-                self.ui.label_Info.clear()
+                self.replace_window_ui.label_Info.clear()
                 replace_dict = {valueToReplace: newValue}
                 if nanValueIs:
                     replace_dict[np.NaN] = newValue
@@ -114,35 +129,35 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 for column in columns:
                     df[column] = df[column].replace(replace_dict)
 
-                self.ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
+                self.replace_window_ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
                 self.displayData(df)
                 self.currentDataFrameGlobal = df
             else:
-                self.ui.label_Info.setText("Uzupełnij puste pola!")
+                self.replace_window_ui.label_Info.setText("Uzupełnij puste pola!")
         except Exception as e:
             MessageModel.error("0026", str(e))
 
     def closeEventReplace(self, event):
-        self.window.close()
+        self.replace_window.close()
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
     def fillColumnNames(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         columnName = df.columns.tolist()
-        self.ui.comboBox_Column_List_Select.addItems(columnName)
+        self.replace_window_ui.comboBox_Column_List_Select.addItems(columnName)
 
     def activeReplaceAll(self):
-        if self.ui.checkBox_Replace_All.isChecked():
-            self.ui.comboBox_Column_List_Select.setEnabled(False)
+        if self.replace_window_ui.checkBox_Replace_All.isChecked():
+            self.replace_window_ui.comboBox_Column_List_Select.setEnabled(False)
             self.addQCompleterAll()
         else:
-            self.ui.comboBox_Column_List_Select.setEnabled(True)
+            self.replace_window_ui.comboBox_Column_List_Select.setEnabled(True)
             self.addQCompleter()
 
     def addQCompleterAll(self):
         try:
-            if self.ui.checkBox_Replace_All.isChecked():
+            if self.replace_window_ui.checkBox_Replace_All.isChecked():
                 df = pd.DataFrame(self.currentDataFrameGlobal)
                 nameColumns = df.columns.tolist()
 
@@ -156,22 +171,22 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
                 completer = QCompleter(list(suggestions))
 
-                self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
+                self.replace_window_ui.lineEdit_Value_To_Replace.setCompleter(completer)
         except Exception as e:
             MessageModel.error("0025", str(e))
 
     def addQCompleter(self):
         try:
-            if not self.ui.checkBox_Replace_All.isChecked():
+            if not self.replace_window_ui.checkBox_Replace_All.isChecked():
                 df = pd.DataFrame(self.currentDataFrameGlobal)
-                nameColumn = self.ui.comboBox_Column_List_Select.currentText()
+                nameColumn = self.replace_window_ui.comboBox_Column_List_Select.currentText()
 
                 if nameColumn in df.columns:
                     suggestions = df[nameColumn].unique().tolist()
                     suggestions = [str(item) for item in suggestions]
 
                     completer = QCompleter(suggestions)
-                    self.ui.lineEdit_Value_To_Replace.setCompleter(completer)
+                    self.replace_window_ui.lineEdit_Value_To_Replace.setCompleter(completer)
                 else:
                     pass
             else:
@@ -179,23 +194,61 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         except Exception as e:
             MessageModel.error("0024", str(e))
 
+    # Delete
+    def createDelete(self):
+        self.comboBox_Select_Data.setEnabled(False)
+
+        self.delete_window = QDialog()
+        self.delete_window_ui = Ui_Dialog_Delete()
+        self.delete_window_ui.setupUi(self.delete_window)
+        self.delete_window.closeEvent = self.closeEventDelete
+        self.delete_window_ui.pushButton_Cancel.clicked.connect(self.delete_window.close)
+        self.delete_window_ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
+        self.delete_window_ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
+        self.fillListDelete()
+
+        self.delete_window.adjustSize()
+
+        self.delete_window.show()
+
+        self.child_windows.append(self.delete_window)
+
+    def fillListDelete(self):
+        df = pd.DataFrame(self.currentDataFrameGlobal)
+        namesList = df.columns.tolist()
+        rowCount = df.shape[0] - 1
+        msg = "Wybierz numer wiersza od \'0\' do \'{}\'".format(rowCount)
+        self.delete_window_ui.comboBox_Column_List_Select.addItems(namesList)
+        self.delete_window_ui.spinBox_Row_Number_Select.setSpecialValueText(msg)
+        self.delete_window_ui.spinBox_Row_Number_Select.setMaximum(rowCount)
+        self.delete_window_ui.spinBox_Row_Number_Select.setValue(-1)
+
+    def updateFillListDelete(self):
+        self.delete_window_ui.comboBox_Column_List_Select.clear()
+        self.delete_window_ui.spinBox_Row_Number_Select.clear()
+        self.fillListDelete()
+
+    def closeEventDelete(self, event):
+        self.comboBox_Select_Data.setEnabled(True)
+        event.accept()
+
     def deleteColumn(self):
         try:
             df = pd.DataFrame(self.currentDataFrameGlobal)
-            columnName = self.ui.comboBox_Column_List_Select.currentText()
+            columnName = self.delete_window_ui.comboBox_Column_List_Select.currentText()
             df = df.drop(columnName, axis=1)
             self.currentDataFrameGlobal = df
             self.displayData(df)
             self.updateFillListDelete()
             msg = "Kolumna '{}' została usunięta".format(columnName)
-            self.ui.label_Info.setText(msg)
+            self.delete_window_ui.label_Info.setText(msg)
         except Exception as e:
             MessageModel.error("0023", "Nieprawidłowa nazwa kolumny!")
 
     def deleteRow(self):
         try:
             df = pd.DataFrame(self.currentDataFrameGlobal)
-            index = self.ui.spinBox_Row_Number_Select.value()
+            index = self.delete_window_ui.spinBox_Row_Number_Select.value()
             df = df.drop(index)
             df = df.reset_index(drop=True)
 
@@ -203,58 +256,25 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.displayData(df)
             self.updateFillListDelete()
             msg = "Wiersz '{}' został usunięty".format(index)
-            self.ui.label_Info.setText(msg)
+            self.delete_window_ui.label_Info.setText(msg)
         except Exception as e:
             MessageModel.error("0022", "Nieprawidłowy numer wiersza!")
 
-    def openDelete(self):
+    # DataType
+    def createChangeDataType(self):
         self.comboBox_Select_Data.setEnabled(False)
 
-        self.window = QDialog()
-        self.ui = Ui_Dialog_Delete()
-        self.ui.setupUi(self.window)
-        self.window.closeEvent = self.closeEventDelete
-        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
-        self.ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
-        self.ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
-        self.fillListDelete()
-
-        self.window.adjustSize()
-
-        self.window.show()
-
-    def fillListDelete(self):
-        df = pd.DataFrame(self.currentDataFrameGlobal)
-        namesList = df.columns.tolist()
-        rowCount = df.shape[0] - 1
-        msg = "Wybierz numer wiersza od \'0\' do \'{}\'".format(rowCount)
-        self.ui.comboBox_Column_List_Select.addItems(namesList)
-        self.ui.spinBox_Row_Number_Select.setSpecialValueText(msg)
-        self.ui.spinBox_Row_Number_Select.setMaximum(rowCount)
-        self.ui.spinBox_Row_Number_Select.setValue(-1)
-
-    def updateFillListDelete(self):
-        self.ui.comboBox_Column_List_Select.clear()
-        self.ui.spinBox_Row_Number_Select.clear()
-        self.fillListDelete()
-
-    def closeEventDelete(self, event):
-        self.window.close()
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
-
-    def openChangeDataType(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
-        self.window = QDialog()
-        self.ui = Ui_Dialog_Change_Datatype()
-        self.ui.setupUi(self.window)
+        self.change_datatype_window = QDialog()
+        self.change_datatype_window_ui = Ui_Dialog_Change_Datatype()
+        self.change_datatype_window_ui.setupUi(self.change_datatype_window)
         self.listCurrentDataTypes()
         self.listNewDataTyps()
-        self.window.closeEvent = self.closeEventChangeDataType
-        self.ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
-        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
-        self.window.show()
+        self.change_datatype_window.closeEvent = self.closeEventChangeDataType
+        self.change_datatype_window_ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
+        self.change_datatype_window_ui.pushButton_Cancel.clicked.connect(self.change_datatype_window.close)
+        self.change_datatype_window.show()
+
+        self.child_windows.append(self.change_datatype_window)
 
     def listCurrentDataTypes(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
@@ -266,7 +286,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             add = "{0} : ({1})".format(x, y)
             finalList.append(add)
 
-        self.ui.comboBox_Current_Datatype.addItems(finalList)
+        self.change_datatype_window_ui.comboBox_Current_Datatype.addItems(finalList)
 
     def listNewDataTyps(self):
         dataTyps = ["Liczby całkowite : (int64)",
@@ -276,14 +296,14 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                     "Data i czas : (datetime64)",
                     "Punkt czasowy : (timedelta64)"]
 
-        self.ui.comboBox_New_Datatype.addItems(dataTyps)
+        self.change_datatype_window_ui.comboBox_New_Datatype.addItems(dataTyps)
 
     def applyChangeDataType(self):
         try:
             df = pd.DataFrame(self.currentDataFrameGlobal)
             namesListOrginal = df.columns.tolist()
-            indexCurrentType = self.ui.comboBox_Current_Datatype.currentIndex()
-            indexNewType = self.ui.comboBox_New_Datatype.currentIndex()
+            indexCurrentType = self.change_datatype_window_ui.comboBox_Current_Datatype.currentIndex()
+            indexNewType = self.change_datatype_window_ui.comboBox_New_Datatype.currentIndex()
 
             dataTypes = ['int64', 'object', 'bool', 'float64', 'datetime64', 'timedelta64']
 
@@ -294,37 +314,40 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.currentDataFrameGlobal = df
             self.updateListCurrentDataTypes()
             msg = "Typ danych w kolumnie '{}' został pomyślnie zmieniony".format(namesListOrginal[indexCurrentType])
-            self.ui.label_Info.setText(msg)
+            self.change_datatype_window_ui.label_Info.setText(msg)
         except:
             msg = "Kolumna '{}' posiada nieodpowiednie dane".format(namesListOrginal[indexCurrentType])
-            self.ui.label_Info.setText(msg)
+            self.change_datatype_window_ui.label_Info.setText(msg)
 
     def updateListCurrentDataTypes(self):
-        self.ui.comboBox_Current_Datatype.clear()
-        self.ui.comboBox_New_Datatype.clear()
+        self.change_datatype_window_ui.comboBox_Current_Datatype.clear()
+        self.change_datatype_window_ui.comboBox_New_Datatype.clear()
 
         self.listCurrentDataTypes()
         self.listNewDataTyps()
 
     def closeEventChangeDataType(self, event):
-        self.window.close()
+        self.change_datatype_window.close()
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
-    def openDeleteNan(self):
+    # Delete NaN
+    def createDeleteNan(self):
         self.comboBox_Select_Data.setEnabled(False)
 
-        self.window = QDialog()
-        self.ui = Ui_Dialog_Delete_NaN()
-        self.ui.setupUi(self.window)
-        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
-        self.window.closeEvent = self.closeEventDeleteNan
-        self.ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
+        self.delete_nan_window = QDialog()
+        self.delete_nan_window_ui = Ui_Dialog_Delete_NaN()
+        self.delete_nan_window_ui.setupUi(self.delete_nan_window)
+        self.delete_nan_window_ui.pushButton_Cancel.clicked.connect(self.delete_nan_window.close)
+        self.delete_nan_window.closeEvent = self.closeEventDeleteNan
+        self.delete_nan_window_ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
         self.messageInfoDeleteNan()
 
-        self.window.adjustSize()
+        self.delete_nan_window.adjustSize()
 
-        self.window.show()
+        self.delete_nan_window.show()
+
+        self.child_windows.append(self.delete_nan_window)
 
     def messageInfoDeleteNan(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
@@ -335,12 +358,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         rowSum = rowCountBefore - rowCountAfter
 
         if rowSum == 0:
-            self.ui.pushButton_Apply.setEnabled(False)
+            self.delete_nan_window_ui.pushButton_Apply.setEnabled(False)
 
         msg = ("Ilość wierszy przed usunięciem: {0}\n"
                "Ilość wierszy po usunięciu: {1}\n\n"
                "Czy chcesz usunąć {2} rekordów?").format(rowCountBefore, rowCountAfter, rowSum)
-        self.ui.textEdit_Info.setText(msg)
+        self.delete_nan_window_ui.textEdit_Info.setText(msg)
 
     def applyDeleteNan(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
@@ -353,11 +376,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.messageInfoDeleteNan()
 
     def closeEventDeleteNan(self, event):
-        self.window.close()
+        self.delete_nan_window.close()
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
-    def openGetDummies(self):
+    # Get Dummies
+    def createGetDummies(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
 
@@ -374,6 +398,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.get_dummies_window.closeEvent = self.closeEventGetDummies
 
         self.get_dummies_window.show()
+
+        self.child_windows.append(self.get_dummies_window)
 
     def applyGetDummies(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
@@ -415,28 +441,29 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         except Exception as e:
             MessageModel.error("0021", str(e))
 
-    def openChangeHeaders(self):
+    def createChangeHeaders(self):
 
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
 
         self.comboBox_Select_Data.setEnabled(False)
 
-        self.window = QDialog()
-        self.ui = Ui_Dialog_change_headers()
-        self.ui.setupUi(self.window)
+        self.change_headers_window = QDialog()
+        self.change_headers_window_ui = Ui_Dialog_change_headers()
+        self.change_headers_window_ui.setupUi(self.change_headers_window)
 
-        self.window.closeEvent = self.closeEventChangeHeader
-        self.ui.pushButton_Cancel.clicked.connect(self.window.close)
-        self.ui.pushButton_Apply.clicked.connect(self.changeHeader)
-        self.ui.comboBox_headers_list.addItems(namesList)
+        self.change_headers_window.closeEvent = self.closeEventChangeHeader
+        self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
+        self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
 
-        self.window.show()
+        self.change_headers_window.show()
+
+        self.child_windows.append(self.change_headers_window)
 
     def changeHeader(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
-        newHeader = self.ui.lineEdit_new_header_name.text()
-        currentHeader = self.ui.comboBox_headers_list.currentText()
+        newHeader = self.change_headers_window_ui.lineEdit_new_header_name.text()
+        currentHeader = self.change_headers_window_ui.comboBox_headers_list.currentText()
         namesList = df.columns.tolist()
 
         if newHeader != "" and currentHeader != "":
@@ -444,54 +471,57 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 df.rename(columns={currentHeader: newHeader}, inplace=True)
                 self.currentDataFrameGlobal = df
                 msg = "Nagłówek '{}' został zmieniony".format(currentHeader)
-                self.ui.label_info_text.setText(msg)
+                self.change_headers_window_ui.label_info_text.setText(msg)
                 self.updateHeaderList()
-                self.ui.lineEdit_new_header_name.clear()
+                self.change_headers_window_ui.lineEdit_new_header_name.clear()
             else:
                 msg = "Nagłówek '{}' już istnieje".format(newHeader)
-                self.ui.label_info_text.setText(msg)
+                self.change_headers_window_ui.label_info_text.setText(msg)
         else:
-            self.ui.label_info_text.setText("Pola nie mogą być puste")
+            self.change_headers_window_ui.label_info_text.setText("Pola nie mogą być puste")
 
     def updateHeaderList(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
-        self.ui.comboBox_headers_list.clear()
-        self.ui.comboBox_headers_list.addItems(namesList)
+        self.change_headers_window_ui.comboBox_headers_list.clear()
+        self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
         self.displayData(df)
 
     def closeEventChangeHeader(self, event):
-        self.window.close()
+        self.change_headers_window.close()
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
-    def openSearchDialog(self):
+    # Search Dialog
+    def createSearchDialog(self):
         self.comboBox_Select_Data.setEnabled(False)
 
-        self.window = QDialog()
-        self.ui = Ui_Dialog_Search()
-        self.ui.setupUi(self.window)
-        self.ui.pushButton_Clear.clicked.connect(self.closeActionSearchDialog)
-        self.ui.pushButton_Search.clicked.connect(self.actionSearchDialog)
-        self.window.closeEvent = self.closeEventSearchDialog
-        self.window.show()
+        self.search_dialog_window = QDialog()
+        self.search_dialog_window_ui = Ui_Dialog_Search()
+        self.search_dialog_window_ui.setupUi(self.search_dialog_window)
+        self.search_dialog_window_ui.pushButton_Clear.clicked.connect(self.closeActionSearchDialog)
+        self.search_dialog_window_ui.pushButton_Search.clicked.connect(self.actionSearchDialog)
+        self.search_dialog_window.closeEvent = self.closeEventSearchDialog
+        self.search_dialog_window.show()
+
+        self.child_windows.append(self.search_dialog_window)
 
     def closeEventSearchDialog(self, event):
-        self.window.close()
+        self.search_dialog_window.close()
         self.displayData(self.currentDataFrameGlobal)
         self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
     def closeActionSearchDialog(self):
-        self.window.close()
+        self.search_dialog_window.close()
 
     def actionSearchDialog(self):
         try:
-            search_phrase = str(self.ui.lineEdit_Search_Text.text())
+            search_phrase = str(self.search_dialog_window_ui.lineEdit_Search_Text.text())
 
             if not search_phrase:
                 self.displayData(self.currentDataFrameGlobal)
-            elif self.ui.checkBox_Case.isChecked():
+            elif self.search_dialog_window_ui.checkBox_Case.isChecked():
                 mask = self.currentDataFrameGlobal.astype(str).apply(
                     lambda row: row.str.contains(search_phrase, case=True).any(), axis=1)
             else:
@@ -597,18 +627,20 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
                 MessageModel.statusSaveAsFile(saveFileName[0])
 
-
-
         except Exception as e:
             MessageModel.error("0018", str(e))
 
     # Info Widget
     def createInfoWidget(self):
+        self.comboBox_Select_Data.setEnabled(False)
+
         self.window_info_widget = QWidget()
         self.window_info_widget_ui = Ui_Form_Info()
         self.window_info_widget_ui.setupUi(self.window_info_widget)
+        self.window_info_widget.closeEvent = self.closeEventInfoWidget
         self.window_info_widget.show()
 
+        self.child_windows.append(self.window_info_widget)
         self.addDataToInfoWidgetWindow()
 
     def addDataToInfoWidgetWindow(self):
@@ -619,3 +651,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.window_info_widget_ui.textEdit_info.setPlainText(info_text)
         else:
             self.window_info_widget_ui.textEdit_info.setPlainText("Wystąpił błąd: Brak danych")
+
+    def closeEventInfoWidget(self, event):
+        self.comboBox_Select_Data.setEnabled(True)
+        event.accept()

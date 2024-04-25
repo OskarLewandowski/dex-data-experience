@@ -108,5 +108,22 @@
  <resources>
   <include location="../images/app-icon/app-icon.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_Cancel</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog_change_headers</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

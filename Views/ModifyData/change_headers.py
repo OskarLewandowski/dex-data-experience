@@ -46,6 +46,7 @@ class Ui_Dialog_change_headers(object):
         self.verticalLayout_2.addLayout(self.verticalLayout)
 
         self.retranslateUi(Dialog_change_headers)
+        self.pushButton_Cancel.clicked.connect(Dialog_change_headers.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog_change_headers)
 
     def retranslateUi(self, Dialog_change_headers):
