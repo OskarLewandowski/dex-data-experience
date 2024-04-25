@@ -291,8 +291,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
 
     def displayDataInTableView(self, data_frame):
         try:
-            data = data_frame.head(15)
-            model = DataFrameModel(data)
+            model = DataFrameModel(data_frame)
             self.tableView_Data_Table.setModel(model)
         except Exception as e:
             MessageModel.error("0002", str(e))

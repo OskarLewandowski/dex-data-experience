@@ -83,7 +83,7 @@ class Ui_MainWindow_modify_data(object):
         self.action_Get_Dummies = QtGui.QAction(parent=MainWindow_modify_data)
         self.action_Get_Dummies.setObjectName("action_Get_Dummies")
         self.action_More_Info = QtGui.QAction(parent=MainWindow_modify_data)
-        self.action_More_Info.setCheckable(True)
+        self.action_More_Info.setCheckable(False)
         self.action_More_Info.setObjectName("action_More_Info")
         self.action_Search = QtGui.QAction(parent=MainWindow_modify_data)
         self.action_Search.setObjectName("action_Search")

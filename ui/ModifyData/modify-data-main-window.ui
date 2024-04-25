@@ -229,7 +229,7 @@
   </action>
   <action name="action_More_Info">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Informacje dodatkowe</string>

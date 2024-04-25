@@ -27,14 +27,13 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.setupUi(self)
 
         self.currentDataFrameGlobal = None
-        self.info_dialog = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
         self.action_Exit.triggered.connect(self.close)
         self.comboBox_Select_Data.currentIndexChanged.connect(self.enableLoad)
         self.action_Save_as.triggered.connect(self.saveAsAction)
-        self.action_More_Info.triggered.connect(self.showInfoWidget)
+        self.action_More_Info.triggered.connect(self.createInfoWidget)
         self.action_Search.triggered.connect(self.openSearchDialog)
         self.action_Change_Headers.triggered.connect(self.openChangeHeaders)
         self.pushButton_Save.clicked.connect(self.saveChanges)
@@ -46,7 +45,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     def createWindowModifyData(self):
         """
-        Show add file window
+        Show modify file window
         """
         self.updateDataFrameList()
         self.show()
@@ -603,31 +602,20 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         except Exception as e:
             MessageModel.error("0018", str(e))
 
-    def showInfoWidget(self):
-        if self.currentDataFrameGlobal is not None and self.action_More_Info.isChecked():
+    # Info Widget
+    def createInfoWidget(self):
+        self.window_info_widget = QWidget()
+        self.window_info_widget_ui = Ui_Form_Info()
+        self.window_info_widget_ui.setupUi(self.window_info_widget)
+        self.window_info_widget.show()
 
+        self.addDataToInfoWidgetWindow()
+
+    def addDataToInfoWidgetWindow(self):
+        if self.currentDataFrameGlobal is not None:
             buffer = io.StringIO()
             self.currentDataFrameGlobal.info(buf=buffer)
             info_text = buffer.getvalue()
-
-            self.window = QWidget()
-            self.ui = Ui_Form_Info()
-            self.ui.setupUi(self.window)
-
-            self.ui.textEdit_info.setPlainText(info_text)
-            self.ui.pushButton_Close.clicked.connect(self.closeButton)
-            self.window.closeEvent = self.myCloseEvent
-            self.ui.pushButton_Close.setShortcut("Ctrl+I")
-
-            self.window.show()
-
-        elif not self.action_More_Info.isChecked():
-            self.window.close()
-
-    def closeButton(self):
-        self.action_More_Info.setChecked(False)
-        self.window.close()
-
-    def myCloseEvent(self, event):
-        self.action_More_Info.setChecked(False)
-        event.accept()
+            self.window_info_widget_ui.textEdit_info.setPlainText(info_text)
+        else:
+            self.window_info_widget_ui.textEdit_info.setPlainText("Wystąpił błąd: Brak danych")
