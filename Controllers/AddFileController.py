@@ -1,6 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap, QIcon
-from PyQt6.QtWidgets import QDialog, QMessageBox, QFileDialog
+from PyQt6.QtWidgets import QDialog, QFileDialog
 from Views.AddFile.add_file_main_window_v2 import Ui_Dialog_Add_File
 from Models.data_frame_model import DataFrameModel
 from Models.data_storage_model import DataStorageModel

@@ -1,10 +1,10 @@
 from Models.message_model import MessageModel
-import qdarktheme
 from PyQt6.QtWidgets import QMainWindow, QColorDialog, QPushButton
 from PyQt6.QtCore import Qt, QDir, QFile, QCoreApplication
 from qt_material import QtStyleTools
 from xml.etree import ElementTree as ET
 from Views.Settings.settings_window import Ui_MainWindow_Settings
+import qdarktheme
 import json
 
 

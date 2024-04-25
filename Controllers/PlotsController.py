@@ -1,4 +1,3 @@
-import base64
 from PyQt6 import QtGui
 from PyQt6.QtWidgets import QMainWindow, QFileDialog, QVBoxLayout, QWidget
 from matplotlib import pyplot as plt
@@ -12,9 +11,10 @@ from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
 from Views.Main.main_window import Ui_MainWindow_Main
 from Views.Plots.scatter_plot_window import Ui_MainWindow_Scatter_Plot
+import seaborn as sns
+import base64
 import os
 import io
-import seaborn as sns
 
 
 class PlotsController(QMainWindow, Ui_MainWindow_Main):

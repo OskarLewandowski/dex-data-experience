@@ -1,5 +1,3 @@
-import sys
-
 from Views.Main.about_app import Ui_Dialog_About_App
 from PyQt6.QtPrintSupport import QPrinter, QPrintDialog, QPrintPreviewDialog
 from PyQt6 import QtGui, QtCore
@@ -11,14 +9,15 @@ from Views.Main.rename_key_dataframe import Ui_Dialog_Rename_Key_Dataframe
 from Views.Main.delete_dataframe import Ui_Dialog_Delete_Dataframe
 from Models.data_storage_model import DataStorageModel
 from Models.message_model import MessageModel
-from io import StringIO
 from Views.Main.main_window import Ui_MainWindow_Main
-import pandas as pd
-import json
-import os
 from Views.Main.data_preview import Ui_MainWindow_Data_Preview
 from Models.data_frame_model import DataFrameModel
 from Views.Main.guide_window import Ui_MainWindow_Guide
+from io import StringIO
+import pandas as pd
+import json
+import sys
+import os
 
 
 class MainController(QMainWindow, Ui_MainWindow_Main):
