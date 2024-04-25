@@ -132,6 +132,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 self.replace_window_ui.label_Info.setText("Zamiana wybranych wartości zakończona pomyślnie")
                 self.displayData(df)
                 self.currentDataFrameGlobal = df
+
+                self.updateAddQCompleter()
             else:
                 self.replace_window_ui.label_Info.setText("Uzupełnij puste pola!")
         except Exception as e:
@@ -153,6 +155,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.addQCompleterAll()
         else:
             self.replace_window_ui.comboBox_Column_List_Select.setEnabled(True)
+            self.addQCompleter()
+
+    def updateAddQCompleter(self):
+        if self.replace_window_ui.checkBox_Replace_All.isChecked():
+            self.addQCompleterAll()
+        elif not self.replace_window_ui.checkBox_Replace_All.isChecked():
             self.addQCompleter()
 
     def addQCompleterAll(self):
