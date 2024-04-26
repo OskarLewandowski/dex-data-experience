@@ -529,20 +529,21 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             if dataKey and self.currentDataFrameGlobal is None and previousDataKey is None:
                 self.loadDataFrame()
             elif dataKey and previousDataKey:
-                storageDataFrame = DataStorageModel.get(previousDataKey)
+                if dataKey != previousDataKey:
+                    storageDataFrame = DataStorageModel.get(previousDataKey)
 
-                if not storageDataFrame.equals(self.currentDataFrameGlobal):
-                    confirmed = MessageModel.saveConfirmation(
-                        text=f"Czy chcesz zapisać zmiany w zbiorze '{previousDataKey}'?",
-                        bntYesText="Zapisz zmiany",
-                        bntAbortText="Nie zapisuj zmian")
+                    if not storageDataFrame.equals(self.currentDataFrameGlobal):
+                        confirmed = MessageModel.saveConfirmation(
+                            text=f"Czy chcesz zapisać zmiany w zbiorze '{previousDataKey}'?",
+                            bntYesText="Zapisz zmiany",
+                            bntAbortText="Nie zapisuj zmian")
 
-                    if confirmed:
-                        df = pd.DataFrame(self.currentDataFrameGlobal)
-                        DataStorageModel.update(previousDataKey, df)
+                        if confirmed:
+                            df = pd.DataFrame(self.currentDataFrameGlobal)
+                            DataStorageModel.update(previousDataKey, df)
 
-                    self.closeOpenWindow()
-                    self.loadDataFrame()
+                        self.closeOpenWindow()
+                        self.loadDataFrame()
 
                 else:
                     self.closeOpenWindow()

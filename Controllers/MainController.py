@@ -195,7 +195,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                     else:
                         self.window_rename_key_dataframe_ui.label_info_text.setText(
-                            f"Nazwa zbioru '{oldKey}' już istnieje")
+                            f"Nazwa zbioru '{newKey}' już istnieje")
                 else:
                     self.window_rename_key_dataframe_ui.label_info_text.setText("Pola nie mogą być puste")
 
