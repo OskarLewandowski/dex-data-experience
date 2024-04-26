@@ -59,7 +59,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
             self.child_windows.clear()
 
-        self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
     def updateDataFrameList(self):
@@ -77,12 +76,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Replace
     def createReplace(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
         self.replace_window = QDialog()
         self.replace_window_ui = Ui_Dialog_Replace()
         self.replace_window_ui.setupUi(self.replace_window)
-        self.replace_window.closeEvent = self.closeEventReplace
         self.replace_window_ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
         self.fillColumnNames()
         self.replace_window_ui.pushButton_Cancel.clicked.connect(self.replace_window.close)
@@ -138,11 +134,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 self.replace_window_ui.label_Info.setText("Uzupełnij puste pola!")
         except Exception as e:
             MessageModel.error("0026", str(e))
-
-    def closeEventReplace(self, event):
-        self.replace_window.close()
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
 
     def fillColumnNames(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
@@ -204,12 +195,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Delete
     def createDelete(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
         self.delete_window = QDialog()
         self.delete_window_ui = Ui_Dialog_Delete()
         self.delete_window_ui.setupUi(self.delete_window)
-        self.delete_window.closeEvent = self.closeEventDelete
         self.delete_window_ui.pushButton_Cancel.clicked.connect(self.delete_window.close)
         self.delete_window_ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
         self.delete_window_ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
@@ -235,10 +223,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.delete_window_ui.comboBox_Column_List_Select.clear()
         self.delete_window_ui.spinBox_Row_Number_Select.clear()
         self.fillListDelete()
-
-    def closeEventDelete(self, event):
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
 
     def deleteColumn(self):
         try:
@@ -270,14 +254,11 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # DataType
     def createChangeDataType(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
         self.change_datatype_window = QDialog()
         self.change_datatype_window_ui = Ui_Dialog_Change_Datatype()
         self.change_datatype_window_ui.setupUi(self.change_datatype_window)
         self.listCurrentDataTypes()
         self.listNewDataTyps()
-        self.change_datatype_window.closeEvent = self.closeEventChangeDataType
         self.change_datatype_window_ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
         self.change_datatype_window_ui.pushButton_Cancel.clicked.connect(self.change_datatype_window.close)
         self.change_datatype_window.show()
@@ -334,20 +315,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.listCurrentDataTypes()
         self.listNewDataTyps()
 
-    def closeEventChangeDataType(self, event):
-        self.change_datatype_window.close()
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
-
     # Delete NaN
     def createDeleteNan(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
         self.delete_nan_window = QDialog()
         self.delete_nan_window_ui = Ui_Dialog_Delete_NaN()
         self.delete_nan_window_ui.setupUi(self.delete_nan_window)
         self.delete_nan_window_ui.pushButton_Cancel.clicked.connect(self.delete_nan_window.close)
-        self.delete_nan_window.closeEvent = self.closeEventDeleteNan
         self.delete_nan_window_ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
         self.messageInfoDeleteNan()
 
@@ -383,17 +356,10 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.displayData(df)
             self.messageInfoDeleteNan()
 
-    def closeEventDeleteNan(self, event):
-        self.delete_nan_window.close()
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
-
     # Get Dummies
     def createGetDummies(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
-
-        self.comboBox_Select_Data.setEnabled(False)
 
         self.get_dummies_window = QDialog()
         self.get_dummies_window_ui = Ui_Dialog_Get_Dummies()
@@ -402,8 +368,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
         self.get_dummies_window_ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
         self.get_dummies_window_ui.pushButton_Cancel.clicked.connect(self.get_dummies_window.close)
-
-        self.get_dummies_window.closeEvent = self.closeEventGetDummies
 
         self.get_dummies_window.show()
 
@@ -427,11 +391,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.currentDataFrameGlobal = df
         self.updateGetDummiesList()
 
-    def closeEventGetDummies(self, event):
-        self.get_dummies_window.close()
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
-
     def updateGetDummiesList(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
@@ -450,17 +409,13 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             MessageModel.error("0021", str(e))
 
     def createChangeHeaders(self):
-
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
-
-        self.comboBox_Select_Data.setEnabled(False)
 
         self.change_headers_window = QDialog()
         self.change_headers_window_ui = Ui_Dialog_change_headers()
         self.change_headers_window_ui.setupUi(self.change_headers_window)
 
-        self.change_headers_window.closeEvent = self.closeEventChangeHeader
         self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
         self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
 
@@ -495,15 +450,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
         self.displayData(df)
 
-    def closeEventChangeHeader(self, event):
-        self.change_headers_window.close()
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
-
     # Search Dialog
     def createSearchDialog(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
         self.search_dialog_window = QDialog()
         self.search_dialog_window_ui = Ui_Dialog_Search()
         self.search_dialog_window_ui.setupUi(self.search_dialog_window)
@@ -515,9 +463,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.child_windows.append(self.search_dialog_window)
 
     def closeEventSearchDialog(self, event):
-        self.search_dialog_window.close()
         self.displayData(self.currentDataFrameGlobal)
-        self.comboBox_Select_Data.setEnabled(True)
         event.accept()
 
     def closeActionSearchDialog(self):
@@ -640,12 +586,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Info Widget
     def createInfoWidget(self):
-        self.comboBox_Select_Data.setEnabled(False)
-
         self.window_info_widget = QWidget()
         self.window_info_widget_ui = Ui_Form_Info()
         self.window_info_widget_ui.setupUi(self.window_info_widget)
-        self.window_info_widget.closeEvent = self.closeEventInfoWidget
         self.window_info_widget.show()
 
         self.child_windows.append(self.window_info_widget)
@@ -659,7 +602,3 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.window_info_widget_ui.textEdit_info.setPlainText(info_text)
         else:
             self.window_info_widget_ui.textEdit_info.setPlainText("Wystąpił błąd: Brak danych")
-
-    def closeEventInfoWidget(self, event):
-        self.comboBox_Select_Data.setEnabled(True)
-        event.accept()
