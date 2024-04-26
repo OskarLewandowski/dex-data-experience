@@ -1,5 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QFileDialog, QCompleter, QDialog, QMessageBox, QWidget
-from PyQt6 import QtGui
+from PyQt6.QtWidgets import QMainWindow, QFileDialog, QCompleter, QDialog, QWidget
 from Views.ModifyData.widget_info import Ui_Form_Info
 from Views.ModifyData.dialog_search import Ui_Dialog_Search
 from Views.ModifyData.change_headers import Ui_Dialog_change_headers
@@ -28,11 +27,12 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
         self.child_windows = []
         self.currentDataFrameGlobal = None
+        self.previousDataKeyGlobal = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
         self.action_Exit.triggered.connect(self.close)
-        self.comboBox_Select_Data.currentIndexChanged.connect(self.enableLoad)
+        self.comboBox_Select_Data.currentIndexChanged.connect(self.loadDataWithReminderAboutSaveChanges)
         self.action_Save_as.triggered.connect(self.saveAsAction)
         self.action_More_Info.triggered.connect(self.createInfoWidget)
         self.action_Search.triggered.connect(self.createSearchDialog)
@@ -52,14 +52,16 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.show()
 
     def closeEvent(self, event):
+        self.closeOpenWindow()
+        event.accept()
+
+    def closeOpenWindow(self):
         if self.child_windows:
             for window in self.child_windows:
                 if window.isVisible():
                     window.close()
 
             self.child_windows.clear()
-
-        event.accept()
 
     def updateDataFrameList(self):
         nameList = DataStorageModel.get_all_keys()
@@ -490,10 +492,17 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             MessageModel.error("0019", str(e))
 
     def loadDataFrame(self):
-        self.enableWindowFunction()
-        data = DataStorageModel.get(self.comboBox_Select_Data.currentText())
-        self.currentDataFrameGlobal = data
-        self.displayData(self.currentDataFrameGlobal)
+        try:
+            dataKey = self.comboBox_Select_Data.currentText()
+
+            if dataKey:
+                self.enableWindowFunction()
+                data = DataStorageModel.get(dataKey)
+                self.currentDataFrameGlobal = data
+                self.previousDataKeyGlobal = dataKey
+                self.displayData(data)
+        except Exception as e:
+            MessageModel.error("0034", str(e))
 
     def displayData(self, data):
         model = DataFrameModel(data)
@@ -513,8 +522,35 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.pushButton_Save.setEnabled(False)
         self.action_Save_as.setEnabled(False)
 
-    def enableLoad(self, index):
-        if index >= 0:
+    def loadDataWithReminderAboutSaveChanges(self):
+        try:
+            dataKey = self.comboBox_Select_Data.currentText()
+            previousDataKey = self.previousDataKeyGlobal
+
+            if dataKey and self.currentDataFrameGlobal is None and previousDataKey is None:
+                self.loadDataFrame()
+            elif dataKey and previousDataKey:
+                storageDataFrame = DataStorageModel.get(previousDataKey)
+
+                if not storageDataFrame.equals(self.currentDataFrameGlobal):
+                    confirmed = MessageModel.saveConfirmation(
+                        text=f"Czy chcesz zapisać zmiany w zbiorze '{previousDataKey}'?",
+                        bntYesText="Zapisz zmiany",
+                        bntAbortText="Nie zapisuj zmian")
+
+                    if confirmed:
+                        df = pd.DataFrame(self.currentDataFrameGlobal)
+                        DataStorageModel.update(previousDataKey, df)
+
+                    self.closeOpenWindow()
+                    self.loadDataFrame()
+
+                else:
+                    self.closeOpenWindow()
+                    self.loadDataFrame()
+
+        except:
+            self.closeOpenWindow()
             self.loadDataFrame()
 
     def saveAsAction(self):
