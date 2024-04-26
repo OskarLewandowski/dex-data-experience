@@ -117,6 +117,11 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                 # print("RDATA_1")
                 self.loadDataRData()
                 self.disableGroupBoxLoadDataSettings()
+            else:
+                parts = filePath.split('.')
+                extension = parts[1].upper()
+                MessageModel.error("0035",
+                                   f"Nieprawidłowy format pliku.\nRozszerzenie {extension} nie jest obsługiwane.")
         except:
             self.clear()
 
