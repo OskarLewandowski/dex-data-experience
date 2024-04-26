@@ -411,30 +411,30 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             MessageModel.error("0021", str(e))
 
     def createChangeHeaders(self):
-        df = pd.DataFrame(self.currentDataFrameGlobal)
-        namesList = df.columns.tolist()
+        try:
+            namesList = self.currentDataFrameGlobal.columns.tolist()
 
-        self.change_headers_window = QDialog()
-        self.change_headers_window_ui = Ui_Dialog_change_headers()
-        self.change_headers_window_ui.setupUi(self.change_headers_window)
+            self.change_headers_window = QDialog()
+            self.change_headers_window_ui = Ui_Dialog_change_headers()
+            self.change_headers_window_ui.setupUi(self.change_headers_window)
 
-        self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
-        self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
+            self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
+            self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
 
-        self.change_headers_window.show()
+            self.change_headers_window.show()
 
-        self.child_windows.append(self.change_headers_window)
+            self.child_windows.append(self.change_headers_window)
+        except Exception as e:
+            MessageModel.error("0036", str(e))
 
     def changeHeader(self):
-        df = pd.DataFrame(self.currentDataFrameGlobal)
         newHeader = self.change_headers_window_ui.lineEdit_new_header_name.text()
         currentHeader = self.change_headers_window_ui.comboBox_headers_list.currentText()
-        namesList = df.columns.tolist()
+        namesList = self.currentDataFrameGlobal.columns.tolist()
 
         if newHeader != "" and currentHeader != "":
             if not newHeader in namesList:
-                df.rename(columns={currentHeader: newHeader}, inplace=True)
-                self.currentDataFrameGlobal = df
+                self.currentDataFrameGlobal.rename(columns={currentHeader: newHeader}, inplace=True)
                 msg = "Nagłówek '{}' został zmieniony".format(currentHeader)
                 self.change_headers_window_ui.label_info_text.setText(msg)
                 self.updateHeaderList()
@@ -446,11 +446,10 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.change_headers_window_ui.label_info_text.setText("Pola nie mogą być puste")
 
     def updateHeaderList(self):
-        df = pd.DataFrame(self.currentDataFrameGlobal)
-        namesList = df.columns.tolist()
+        namesList = self.currentDataFrameGlobal.columns.tolist()
         self.change_headers_window_ui.comboBox_headers_list.clear()
         self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
-        self.displayData(df)
+        self.displayData(self.currentDataFrameGlobal)
 
     # Search Dialog
     def createSearchDialog(self):

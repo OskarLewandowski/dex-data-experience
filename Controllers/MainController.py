@@ -423,6 +423,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                 for key, jsonData in data_frames.items():
                     df = pd.read_json(StringIO(jsonData), orient="split")
+                    df.columns = [str(col) for col in df.columns]
+
                     DataStorageModel.add(key, df)
 
                 self.setSavedFilePath(fileName[0])
