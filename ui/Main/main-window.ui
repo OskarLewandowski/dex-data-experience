@@ -171,6 +171,11 @@ font-family: &quot;Segoe UI&quot;;
      <string>?</string>
     </property>
     <addaction name="action_About_Application"/>
+   </widget>
+   <widget class="QMenu" name="menu_Guide">
+    <property name="title">
+     <string>Przewodnik</string>
+    </property>
     <addaction name="action_Guide"/>
    </widget>
    <addaction name="menu_File"/>
@@ -180,6 +185,7 @@ font-family: &quot;Segoe UI&quot;;
    <addaction name="menu_Analysis"/>
    <addaction name="menu_Charts"/>
    <addaction name="menu_Settings"/>
+   <addaction name="menu_Guide"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
