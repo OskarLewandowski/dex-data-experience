@@ -123,7 +123,7 @@ font-family: &quot;Segoe UI&quot;;
     </widget>
     <widget class="QMenu" name="menu_Correlation">
      <property name="title">
-      <string>Korelacja</string>
+      <string>Korelacje</string>
      </property>
      <addaction name="action_Pearson_Correlation"/>
      <addaction name="action_Spearman_Correlation"/>

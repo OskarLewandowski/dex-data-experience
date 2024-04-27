@@ -356,7 +356,7 @@ class Ui_MainWindow_Main(object):
         self.menu_Format.setTitle(_translate("MainWindow_Main", "Format"))
         self.menu_Analysis.setTitle(_translate("MainWindow_Main", "Analiza"))
         self.menu_Normality_Tests.setTitle(_translate("MainWindow_Main", "Testy normalności"))
-        self.menu_Correlation.setTitle(_translate("MainWindow_Main", "Korelacja"))
+        self.menu_Correlation.setTitle(_translate("MainWindow_Main", "Korelacje"))
         self.menu_Tests_T_Student.setTitle(_translate("MainWindow_Main", "Testy t-Studenta"))
         self.menu_Charts.setTitle(_translate("MainWindow_Main", "Wykresy"))
         self.menu_Settings.setTitle(_translate("MainWindow_Main", "Ustawienia"))

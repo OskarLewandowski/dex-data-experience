@@ -47,7 +47,7 @@
       </item>
       <item>
        <property name="text">
-        <string>Wykresy</string>
+        <string>Analiza danych</string>
        </property>
       </item>
       <item>
@@ -60,7 +60,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget_Content">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Add_Data">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -231,7 +231,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Plots">
+      <widget class="QWidget" name="Analysis_Data">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QTextEdit" name="textEdit_Plots">
@@ -246,7 +246,25 @@ hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:700;&quot;&gt;Wykresy&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:700;&quot;&gt;Analiza danych&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;&lt;br /&gt;Aby przeprowadzić analizę z dodanych zbiorów danych, należy wybrać opcję &lt;/span&gt;&lt;span style=&quot; font-size:20pt; font-weight:700; font-style:italic;&quot;&gt;„Analiza”&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; z górnego paska, a następnie wybrać interesującą nas analizę.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Podstawowe statystyki:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Dostarczają podstawowych informacji o zbiorze danych, takich jak średnia, mediana, wariancja czy odchylenie standardowe. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;&lt;br /&gt;Szereg rozdzielczy:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Metoda prezentacji danych statystycznych, która grupuje indywidualne obserwacje w przedziały i pokazuje liczbę wystąpień w każdym z nich, umożliwiając szybką wizualizację rozkładu danych. Pozwala na zapisanie szeregu jako zbioru danych, co ułatwia tworzenie wartościowych wykresów.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:700;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Testy normalności:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Sprawdzają, czy rozkład danych jest zgodny z rozkładem normalnym, co jest założeniem wielu innych testów statystycznych. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Korelacje:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Obejmuje różne techniki statystyczne do oceny związku między zmiennymi.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Testy t-Studenta:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Porównują średnie dwóch grup, aby stwierdzić, czy istnieją między nimi statystycznie istotne różnice. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Jednoczynnikowa ANOVA:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Umożliwia porównanie średnich wartości trzech lub więcej grup, by sprawdzić, czy przynajmniej jedna z nich różni się istotnie. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Test Chi-kwadrat:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Bada zależności między zmiennymi kategorycznymi, sprawdzając, czy rozkład obserwacji odbiega od rozkładu oczekiwanego. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Test Kruskala-Wallisa:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Jest nieparametrycznym odpowiednikiem jednoczynnikowej ANOVA, używanym, gdy dane nie spełniają założeń ANOVA. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:700;&quot;&gt;Test Tukeya:&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; Wykorzystywany po jednoczynnikowej ANOVA, służy do porównania par średnich, aby ustalić, które dokładnie średnie różnią się od siebie.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>

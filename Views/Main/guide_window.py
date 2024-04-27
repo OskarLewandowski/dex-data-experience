@@ -76,11 +76,11 @@ class Ui_MainWindow_Guide(object):
         self.horizontalLayout_3.addItem(spacerItem3)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.stackedWidget_Content.addWidget(self.Modify_Data)
-        self.Plots = QtWidgets.QWidget()
-        self.Plots.setObjectName("Plots")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.Plots)
+        self.Analysis_Data = QtWidgets.QWidget()
+        self.Analysis_Data.setObjectName("Analysis_Data")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.Analysis_Data)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.textEdit_Plots = QtWidgets.QTextEdit(parent=self.Plots)
+        self.textEdit_Plots = QtWidgets.QTextEdit(parent=self.Analysis_Data)
         self.textEdit_Plots.setReadOnly(True)
         self.textEdit_Plots.setObjectName("textEdit_Plots")
         self.verticalLayout_4.addWidget(self.textEdit_Plots)
@@ -89,14 +89,14 @@ class Ui_MainWindow_Guide(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem4)
-        self.pushButton_Close_3 = QtWidgets.QPushButton(parent=self.Plots)
+        self.pushButton_Close_3 = QtWidgets.QPushButton(parent=self.Analysis_Data)
         self.pushButton_Close_3.setObjectName("pushButton_Close_3")
         self.horizontalLayout_4.addWidget(self.pushButton_Close_3)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem5)
         self.verticalLayout_4.addLayout(self.horizontalLayout_4)
-        self.stackedWidget_Content.addWidget(self.Plots)
+        self.stackedWidget_Content.addWidget(self.Analysis_Data)
         self.Distribution_Series = QtWidgets.QWidget()
         self.Distribution_Series.setObjectName("Distribution_Series")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.Distribution_Series)
@@ -122,7 +122,7 @@ class Ui_MainWindow_Guide(object):
         MainWindow_Guide.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Guide)
-        self.stackedWidget_Content.setCurrentIndex(1)
+        self.stackedWidget_Content.setCurrentIndex(2)
         self.listWidget_Category_List.currentRowChanged['int'].connect(
             self.stackedWidget_Content.setCurrentIndex)  # type: ignore
         self.pushButton_Close_1.clicked.connect(MainWindow_Guide.close)  # type: ignore
@@ -157,7 +157,7 @@ class Ui_MainWindow_Guide(object):
         item = self.listWidget_Category_List.item(1)
         item.setText(_translate("MainWindow_Guide", "Modyfikowanie danych"))
         item = self.listWidget_Category_List.item(2)
-        item.setText(_translate("MainWindow_Guide", "Wykresy"))
+        item.setText(_translate("MainWindow_Guide", "Analiza danych"))
         item = self.listWidget_Category_List.item(3)
         item.setText(_translate("MainWindow_Guide", "Szereg rozdzielczy"))
         self.listWidget_Category_List.setSortingEnabled(__sortingEnabled)
@@ -242,7 +242,25 @@ class Ui_MainWindow_Guide(object):
                                                "li.unchecked::marker { content: \"\\2610\"; }\n"
                                                "li.checked::marker { content: \"\\2612\"; }\n"
                                                "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                               "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykresy</span></p></body></html>"))
+                                               "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Analiza danych</span></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"><br />Aby przeprowadzić analizę z dodanych zbiorów danych, należy wybrać opcję </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">„Analiza”</span><span style=\" font-size:20pt;\"> z górnego paska, a następnie wybrać interesującą nas analizę.</span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Podstawowe statystyki:</span><span style=\" font-size:20pt;\"> Dostarczają podstawowych informacji o zbiorze danych, takich jak średnia, mediana, wariancja czy odchylenie standardowe. </span></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\"><br />Szereg rozdzielczy:</span><span style=\" font-size:20pt;\"> Metoda prezentacji danych statystycznych, która grupuje indywidualne obserwacje w przedziały i pokazuje liczbę wystąpień w każdym z nich, umożliwiając szybką wizualizację rozkładu danych. Pozwala na zapisanie szeregu jako zbioru danych, co ułatwia tworzenie wartościowych wykresów.</span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:700;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Testy normalności:</span><span style=\" font-size:20pt;\"> Sprawdzają, czy rozkład danych jest zgodny z rozkładem normalnym, co jest założeniem wielu innych testów statystycznych. </span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Korelacje:</span><span style=\" font-size:20pt;\"> Obejmuje różne techniki statystyczne do oceny związku między zmiennymi.</span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Testy t-Studenta:</span><span style=\" font-size:20pt;\"> Porównują średnie dwóch grup, aby stwierdzić, czy istnieją między nimi statystycznie istotne różnice. </span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Jednoczynnikowa ANOVA:</span><span style=\" font-size:20pt;\"> Umożliwia porównanie średnich wartości trzech lub więcej grup, by sprawdzić, czy przynajmniej jedna z nich różni się istotnie. </span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Chi-kwadrat:</span><span style=\" font-size:20pt;\"> Bada zależności między zmiennymi kategorycznymi, sprawdzając, czy rozkład obserwacji odbiega od rozkładu oczekiwanego. </span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Kruskala-Wallisa:</span><span style=\" font-size:20pt;\"> Jest nieparametrycznym odpowiednikiem jednoczynnikowej ANOVA, używanym, gdy dane nie spełniają założeń ANOVA. </span></p>\n"
+                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Tukeya:</span><span style=\" font-size:20pt;\"> Wykorzystywany po jednoczynnikowej ANOVA, służy do porównania par średnich, aby ustalić, które dokładnie średnie różnią się od siebie.</span></p></body></html>"))
         self.pushButton_Close_3.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_Distribution_Series.setHtml(_translate("MainWindow_Guide",
                                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
