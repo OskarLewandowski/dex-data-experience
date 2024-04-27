@@ -20,7 +20,7 @@ class Ui_MainWindow_Guide(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.listWidget_Category_List = QtWidgets.QListWidget(parent=self.centralwidget)
-        self.listWidget_Category_List.setMaximumSize(QtCore.QSize(150, 16777215))
+        self.listWidget_Category_List.setMaximumSize(QtCore.QSize(160, 16777215))
         self.listWidget_Category_List.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.listWidget_Category_List.setObjectName("listWidget_Category_List")
         item = QtWidgets.QListWidgetItem()
@@ -122,7 +122,7 @@ class Ui_MainWindow_Guide(object):
         MainWindow_Guide.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Guide)
-        self.stackedWidget_Content.setCurrentIndex(0)
+        self.stackedWidget_Content.setCurrentIndex(1)
         self.listWidget_Category_List.currentRowChanged['int'].connect(
             self.stackedWidget_Content.setCurrentIndex)  # type: ignore
         self.pushButton_Close_1.clicked.connect(MainWindow_Guide.close)  # type: ignore
@@ -138,11 +138,15 @@ class Ui_MainWindow_Guide(object):
         image_filename2 = "guide/Screenshot_2.png"
         image_filename3 = "guide/Screenshot_3.png"
         image_filename4 = "guide/Screenshot_4.png"
+        image_filename5 = "guide/Screenshot_5.png"
+        image_filename6 = "guide/Screenshot_6.png"
 
         image_filename1 = os.path.join(image_directory, image_filename1)
         image_filename2 = os.path.join(image_directory, image_filename2)
         image_filename3 = os.path.join(image_directory, image_filename3)
         image_filename4 = os.path.join(image_directory, image_filename4)
+        image_filename5 = os.path.join(image_directory, image_filename5)
+        image_filename6 = os.path.join(image_directory, image_filename6)
 
         _translate = QtCore.QCoreApplication.translate
         MainWindow_Guide.setWindowTitle(_translate("MainWindow_Guide", "Przewodnik"))
@@ -151,7 +155,7 @@ class Ui_MainWindow_Guide(object):
         item = self.listWidget_Category_List.item(0)
         item.setText(_translate("MainWindow_Guide", "Dodawanie danych"))
         item = self.listWidget_Category_List.item(1)
-        item.setText(_translate("MainWindow_Guide", "Modyfikuj dane"))
+        item.setText(_translate("MainWindow_Guide", "Modyfikowanie danych"))
         item = self.listWidget_Category_List.item(2)
         item.setText(_translate("MainWindow_Guide", "Wykresy"))
         item = self.listWidget_Category_List.item(3)
@@ -199,7 +203,36 @@ class Ui_MainWindow_Guide(object):
                                                      "li.unchecked::marker { content: \"\\2610\"; }\n"
                                                      "li.checked::marker { content: \"\\2612\"; }\n"
                                                      "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                                     "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Modyfikuj dane</span></p></body></html>"))
+                                                     "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Modyfikowanie danych</span></p>\n"
+                                                     "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                                     "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Aby zmodyfikować dodane zbiory danych, należy wybrać opcję </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">&quot;Dane&quot;</span><span style=\" font-size:20pt;\"> z górnego paska, a następnie </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">&quot;Modyfikuj dane&quot;</span><span style=\" font-size:20pt;\"> lub skorzystać z paska narzędzi.</span></p>\n"
+                                                     "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                     f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename6}\" /></p>\n"
+                                                     "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> <span style=\" font-size:20pt;\"> <br />Okno </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">&quot;Modyfikuj dane&quot;</span><span style=\" font-size:20pt;\"> pozwala na:</span></p>\n"
+                                                     "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zmianę nagłówków kolumn w zbiorze danych.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zmianę typu danych w kolumnie.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zmianę danych w zbiorze.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Zastosowanie gorącego kodowania.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Usunięcie wierszy zawierających wartości NaN.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Usunięcie wybranych kolumn lub wierszy.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Wyszukiwanie wartości w zbiorze.</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Uzyskanie informacji o zbiorze.</li></ul>\n"
+                                                     "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                     f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename5}\" /></p>\n"
+                                                     "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
+                                                     "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /><span style=\" font-size:20pt;\">Zbiory danych można wyeksportować do pliku, wybierając </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">&quot;Plik&quot;</span><span style=\" font-size:20pt;\">, a następnie </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">&quot;Zapisz jako&quot;</span><span style=\" font-size:20pt;\">. Dostępne opcje zapisu zbioru danych do pliku to:</span></p>\n"
+                                                     "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik CSV</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik TSV</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik XLSX</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik JSON</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik XML</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik PDF</li>\n"
+                                                     "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Plik RDATA</li></ul>\n"
+                                                     "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
+                                                     "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700; text-decoration: underline;\">Uwaga!</span><span style=\" font-size:20pt;\"> Aby dokonane zmiany w zbiorze zostały zachowane, należy </span><span style=\" font-size:20pt; font-weight:700;\">zapisać zmiany</span><span style=\" font-size:20pt;\">.</span></p>\n"
+                                                     "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Close_2.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_Plots.setHtml(_translate("MainWindow_Guide",
                                                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
