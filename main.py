@@ -11,6 +11,9 @@ import sys
 import os
 
 
+# import pyi_splash
+
+
 class Main:
     def __init__(self):
         # Windows Icon
@@ -46,7 +49,10 @@ translator = QTranslator()
 app = QApplication(sys.argv)
 
 splash_pix = QtGui.QPixmap(getFullPath("images/app-icon/dex_splash_3.png"))
-splash = QtWidgets.QSplashScreen(splash_pix)
+splash = QtWidgets.QSplashScreen(splash_pix, Qt.WindowType.WindowStaysOnTopHint)
+
+# pyi_splash.close()
+
 splash.show()
 
 window = Main()
