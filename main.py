@@ -45,17 +45,8 @@ def getFullPath(relative_path):
 translator = QTranslator()
 app = QApplication(sys.argv)
 
-splash_pix = QtGui.QPixmap(getFullPath("images/app-icon/dex_splash.png"))
+splash_pix = QtGui.QPixmap(getFullPath("images/app-icon/dex_splash_3.png"))
 splash = QtWidgets.QSplashScreen(splash_pix)
-
-font = splash.font()
-font.setPointSize(18)
-font.setBold(True)
-splash.setFont(font)
-
-splash.showMessage("Aplikacja się uruchamia. Proszę czekać...",
-                   Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignBottom,
-                   Qt.GlobalColor.black)
 splash.show()
 
 window = Main()
