@@ -276,7 +276,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
             if filePath:
                 rdata = pyreadr.read_r(filePath)
                 keys = rdata.keys()
-                obj = pd.DataFrame()
+                obj = []
 
                 for key in keys:
                     df = rdata[key]
@@ -284,12 +284,13 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
                     if df.shape[0] < df.shape[1]:
                         df = df.T
 
-                    obj[key] = df
+                    obj.append(df)
 
-                obj.index = range(len(obj))
+                combined_df = pd.concat(obj, axis=1)
+                combined_df.index = range(len(combined_df))
 
-                self.displayDataInTableView(obj)
-                self.dataFrameGlobal = obj
+                self.displayDataInTableView(combined_df)
+                self.dataFrameGlobal = combined_df
 
         except Exception as e:
             MessageModel.error("0017", str(e))
