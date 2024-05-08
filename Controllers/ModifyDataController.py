@@ -32,6 +32,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.search_dialog_window = None
         self.get_dummies_window = None
         self.delete_nan_window = None
+        self.change_headers_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -427,20 +428,28 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         except Exception as e:
             MessageModel.error("0021", str(e))
 
+    # Change headers
     def createChangeHeaders(self):
         try:
             namesList = self.currentDataFrameGlobal.columns.tolist()
 
-            self.change_headers_window = QDialog()
-            self.change_headers_window_ui = Ui_Dialog_change_headers()
-            self.change_headers_window_ui.setupUi(self.change_headers_window)
+            if self.change_headers_window is not None and self.change_headers_window.isVisible():
+                self.change_headers_window_ui.comboBox_headers_list.clear()
+                self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
 
-            self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
-            self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
+                self.change_headers_window.raise_()
+                self.change_headers_window.activateWindow()
+            else:
+                self.change_headers_window = QDialog()
+                self.change_headers_window_ui = Ui_Dialog_change_headers()
+                self.change_headers_window_ui.setupUi(self.change_headers_window)
 
-            self.change_headers_window.show()
+                self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
+                self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
 
-            self.child_windows.append(self.change_headers_window)
+                self.change_headers_window.show()
+
+                self.child_windows.append(self.change_headers_window)
         except Exception as e:
             MessageModel.error("0036", str(e))
 
