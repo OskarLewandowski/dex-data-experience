@@ -31,6 +31,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.window_info_widget = None
         self.search_dialog_window = None
         self.get_dummies_window = None
+        self.delete_nan_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -324,18 +325,22 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Delete NaN
     def createDeleteNan(self):
-        self.delete_nan_window = QDialog()
-        self.delete_nan_window_ui = Ui_Dialog_Delete_NaN()
-        self.delete_nan_window_ui.setupUi(self.delete_nan_window)
-        self.delete_nan_window_ui.pushButton_Cancel.clicked.connect(self.delete_nan_window.close)
-        self.delete_nan_window_ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
-        self.messageInfoDeleteNan()
+        if self.delete_nan_window is not None and self.delete_nan_window.isVisible():
+            self.delete_nan_window.raise_()
+            self.delete_nan_window.activateWindow()
+        else:
+            self.delete_nan_window = QDialog()
+            self.delete_nan_window_ui = Ui_Dialog_Delete_NaN()
+            self.delete_nan_window_ui.setupUi(self.delete_nan_window)
 
-        self.delete_nan_window.adjustSize()
+            self.delete_nan_window_ui.pushButton_Cancel.clicked.connect(self.delete_nan_window.close)
+            self.delete_nan_window_ui.pushButton_Apply.clicked.connect(self.applyDeleteNan)
+            self.messageInfoDeleteNan()
 
-        self.delete_nan_window.show()
+            self.delete_nan_window.adjustSize()
+            self.delete_nan_window.show()
 
-        self.child_windows.append(self.delete_nan_window)
+            self.child_windows.append(self.delete_nan_window)
 
     def messageInfoDeleteNan(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
