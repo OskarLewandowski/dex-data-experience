@@ -89,9 +89,10 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
     # Replace
     def createReplace(self):
         if self.replace_window is not None and self.replace_window.isVisible():
+            self.fillColumnNames()
+
             self.replace_window.raise_()
             self.replace_window.activateWindow()
-
         else:
             self.replace_window = QDialog()
             self.replace_window_ui = Ui_Dialog_Replace()
@@ -99,6 +100,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
             self.replace_window_ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
             self.fillColumnNames()
+
             self.replace_window_ui.pushButton_Cancel.clicked.connect(self.replace_window.close)
             self.replace_window_ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
             self.replace_window_ui.pushButton_Apply.clicked.connect(self.applyReplace)
@@ -155,6 +157,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
     def fillColumnNames(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         columnName = df.columns.tolist()
+
+        self.replace_window_ui.comboBox_Column_List_Select.clear()
         self.replace_window_ui.comboBox_Column_List_Select.addItems(columnName)
 
     def activeReplaceAll(self):
@@ -280,7 +284,6 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
     def createChangeDataType(self):
         if self.change_datatype_window is not None and self.change_datatype_window.isVisible():
             self.listCurrentDataTypes()
-            self.listNewDataTyps()
 
             self.change_datatype_window.raise_()
             self.change_datatype_window.activateWindow()
@@ -309,6 +312,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             add = "{0} : ({1})".format(x, y)
             finalList.append(add)
 
+        self.change_datatype_window_ui.comboBox_Current_Datatype.clear()
         self.change_datatype_window_ui.comboBox_Current_Datatype.addItems(finalList)
 
     def listNewDataTyps(self):
