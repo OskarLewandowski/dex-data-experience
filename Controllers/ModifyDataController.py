@@ -29,6 +29,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.currentDataFrameGlobal = None
         self.previousDataKeyGlobal = None
         self.window_info_widget = None
+        self.search_dialog_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -456,15 +457,19 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Search Dialog
     def createSearchDialog(self):
-        self.search_dialog_window = QDialog()
-        self.search_dialog_window_ui = Ui_Dialog_Search()
-        self.search_dialog_window_ui.setupUi(self.search_dialog_window)
-        self.search_dialog_window_ui.pushButton_Clear.clicked.connect(self.closeActionSearchDialog)
-        self.search_dialog_window_ui.pushButton_Search.clicked.connect(self.actionSearchDialog)
-        self.search_dialog_window.closeEvent = self.closeEventSearchDialog
-        self.search_dialog_window.show()
+        if self.search_dialog_window is not None and self.search_dialog_window.isVisible():
+            self.search_dialog_window.raise_()
+            self.search_dialog_window.activateWindow()
+        else:
+            self.search_dialog_window = QDialog()
+            self.search_dialog_window_ui = Ui_Dialog_Search()
+            self.search_dialog_window_ui.setupUi(self.search_dialog_window)
+            self.search_dialog_window_ui.pushButton_Clear.clicked.connect(self.closeActionSearchDialog)
+            self.search_dialog_window_ui.pushButton_Search.clicked.connect(self.actionSearchDialog)
+            self.search_dialog_window.closeEvent = self.closeEventSearchDialog
+            self.search_dialog_window.show()
 
-        self.child_windows.append(self.search_dialog_window)
+            self.child_windows.append(self.search_dialog_window)
 
     def closeEventSearchDialog(self, event):
         self.displayData(self.currentDataFrameGlobal)
