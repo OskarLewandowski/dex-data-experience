@@ -53,6 +53,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     def closeEvent(self, event):
         self.closeOpenWindow()
+        self.currentDataFrameGlobal = None
+        self.previousDataKeyGlobal = None
         event.accept()
 
     def closeOpenWindow(self):
@@ -496,7 +498,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
             if dataKey:
                 self.enableWindowFunction()
-                data = DataStorageModel.get(dataKey)
+                data = DataStorageModel.copy_by_key(dataKey)
                 self.currentDataFrameGlobal = data
                 self.previousDataKeyGlobal = dataKey
                 self.displayData(data)
@@ -544,10 +546,17 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
                         self.closeOpenWindow()
                         self.loadDataFrame()
+                    else:
+                        self.closeOpenWindow()
+                        self.loadDataFrame()
 
                 else:
                     self.closeOpenWindow()
                     self.loadDataFrame()
+
+            else:
+                self.closeOpenWindow()
+                self.loadDataFrame()
 
         except:
             self.closeOpenWindow()

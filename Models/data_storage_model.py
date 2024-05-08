@@ -47,6 +47,13 @@ class DataStorageModel:
         return cls._dataFrames.copy()
 
     @classmethod
+    def copy_by_key(cls, key):
+        if key in cls._dataFrames:
+            return cls._dataFrames[key].copy()
+        else:
+            return None
+
+    @classmethod
     def clear(cls):
         cls._dataFrames.clear()
 
@@ -102,3 +109,10 @@ class DataStorageModel:
     @classmethod
     def count_dataframes(cls):
         return len(cls._dataFrames)
+
+    @classmethod
+    def display_data(cls):
+        for key, df in cls._dataFrames.items():
+            print(f"\nZbiór: '{key}'")
+            print(df.head(), "\n")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
