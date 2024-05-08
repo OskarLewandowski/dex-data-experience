@@ -34,6 +34,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.delete_nan_window = None
         self.change_headers_window = None
         self.change_datatype_window = None
+        self.delete_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -205,19 +206,26 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Delete
     def createDelete(self):
-        self.delete_window = QDialog()
-        self.delete_window_ui = Ui_Dialog_Delete()
-        self.delete_window_ui.setupUi(self.delete_window)
-        self.delete_window_ui.pushButton_Cancel.clicked.connect(self.delete_window.close)
-        self.delete_window_ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
-        self.delete_window_ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
-        self.fillListDelete()
+        if self.delete_window is not None and self.delete_window.isVisible():
+            self.fillListDelete()
 
-        self.delete_window.adjustSize()
+            self.delete_window.raise_()
+            self.delete_window.activateWindow()
+        else:
+            self.delete_window = QDialog()
+            self.delete_window_ui = Ui_Dialog_Delete()
+            self.delete_window_ui.setupUi(self.delete_window)
 
-        self.delete_window.show()
+            self.delete_window_ui.pushButton_Cancel.clicked.connect(self.delete_window.close)
+            self.delete_window_ui.pushButton_Apply_Delete_Column.clicked.connect(self.deleteColumn)
+            self.delete_window_ui.pushButton_Apply_Delete_Row.clicked.connect(self.deleteRow)
 
-        self.child_windows.append(self.delete_window)
+            self.fillListDelete()
+
+            self.delete_window.adjustSize()
+            self.delete_window.show()
+
+            self.child_windows.append(self.delete_window)
 
     def fillListDelete(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
