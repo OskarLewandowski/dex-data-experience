@@ -30,6 +30,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.previousDataKeyGlobal = None
         self.window_info_widget = None
         self.search_dialog_window = None
+        self.get_dummies_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -367,17 +368,24 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         df = pd.DataFrame(self.currentDataFrameGlobal)
         namesList = df.columns.tolist()
 
-        self.get_dummies_window = QDialog()
-        self.get_dummies_window_ui = Ui_Dialog_Get_Dummies()
-        self.get_dummies_window_ui.setupUi(self.get_dummies_window)
+        if self.get_dummies_window is not None and self.get_dummies_window.isVisible():
+            self.get_dummies_window_ui.comboBox_Select_Data.clear()
+            self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
 
-        self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
-        self.get_dummies_window_ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
-        self.get_dummies_window_ui.pushButton_Cancel.clicked.connect(self.get_dummies_window.close)
+            self.get_dummies_window.raise_()
+            self.get_dummies_window.activateWindow()
+        else:
+            self.get_dummies_window = QDialog()
+            self.get_dummies_window_ui = Ui_Dialog_Get_Dummies()
+            self.get_dummies_window_ui.setupUi(self.get_dummies_window)
 
-        self.get_dummies_window.show()
+            self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
+            self.get_dummies_window_ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
+            self.get_dummies_window_ui.pushButton_Cancel.clicked.connect(self.get_dummies_window.close)
 
-        self.child_windows.append(self.get_dummies_window)
+            self.get_dummies_window.show()
+
+            self.child_windows.append(self.get_dummies_window)
 
     def applyGetDummies(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
