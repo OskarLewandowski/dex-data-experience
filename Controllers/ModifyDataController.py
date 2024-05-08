@@ -35,6 +35,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.change_headers_window = None
         self.change_datatype_window = None
         self.delete_window = None
+        self.replace_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -87,20 +88,25 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Replace
     def createReplace(self):
-        self.replace_window = QDialog()
-        self.replace_window_ui = Ui_Dialog_Replace()
-        self.replace_window_ui.setupUi(self.replace_window)
-        self.replace_window_ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
-        self.fillColumnNames()
-        self.replace_window_ui.pushButton_Cancel.clicked.connect(self.replace_window.close)
-        self.replace_window_ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
-        self.replace_window_ui.pushButton_Apply.clicked.connect(self.applyReplace)
+        if self.replace_window is not None and self.replace_window.isVisible():
+            self.replace_window.raise_()
+            self.replace_window.activateWindow()
 
-        self.replace_window.adjustSize()
+        else:
+            self.replace_window = QDialog()
+            self.replace_window_ui = Ui_Dialog_Replace()
+            self.replace_window_ui.setupUi(self.replace_window)
 
-        self.replace_window.show()
+            self.replace_window_ui.comboBox_Column_List_Select.currentIndexChanged.connect(self.addQCompleter)
+            self.fillColumnNames()
+            self.replace_window_ui.pushButton_Cancel.clicked.connect(self.replace_window.close)
+            self.replace_window_ui.checkBox_Replace_All.toggled.connect(self.activeReplaceAll)
+            self.replace_window_ui.pushButton_Apply.clicked.connect(self.applyReplace)
 
-        self.child_windows.append(self.replace_window)
+            self.replace_window.adjustSize()
+            self.replace_window.show()
+
+            self.child_windows.append(self.replace_window)
 
     def applyReplace(self):
         try:
