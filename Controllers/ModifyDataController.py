@@ -33,6 +33,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.get_dummies_window = None
         self.delete_nan_window = None
         self.change_headers_window = None
+        self.change_datatype_window = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -263,16 +264,26 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # DataType
     def createChangeDataType(self):
-        self.change_datatype_window = QDialog()
-        self.change_datatype_window_ui = Ui_Dialog_Change_Datatype()
-        self.change_datatype_window_ui.setupUi(self.change_datatype_window)
-        self.listCurrentDataTypes()
-        self.listNewDataTyps()
-        self.change_datatype_window_ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
-        self.change_datatype_window_ui.pushButton_Cancel.clicked.connect(self.change_datatype_window.close)
-        self.change_datatype_window.show()
+        if self.change_datatype_window is not None and self.change_datatype_window.isVisible():
+            self.listCurrentDataTypes()
+            self.listNewDataTyps()
 
-        self.child_windows.append(self.change_datatype_window)
+            self.change_datatype_window.raise_()
+            self.change_datatype_window.activateWindow()
+        else:
+            self.change_datatype_window = QDialog()
+            self.change_datatype_window_ui = Ui_Dialog_Change_Datatype()
+            self.change_datatype_window_ui.setupUi(self.change_datatype_window)
+
+            self.listCurrentDataTypes()
+            self.listNewDataTyps()
+
+            self.change_datatype_window_ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
+            self.change_datatype_window_ui.pushButton_Cancel.clicked.connect(self.change_datatype_window.close)
+
+            self.change_datatype_window.show()
+
+            self.child_windows.append(self.change_datatype_window)
 
     def listCurrentDataTypes(self):
         df = pd.DataFrame(self.currentDataFrameGlobal)
