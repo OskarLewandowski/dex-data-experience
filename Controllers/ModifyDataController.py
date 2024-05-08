@@ -28,6 +28,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         self.child_windows = []
         self.currentDataFrameGlobal = None
         self.previousDataKeyGlobal = None
+        self.window_info_widget = None
 
         # Connections
         self.pushButton_Cancel.clicked.connect(self.close)
@@ -631,13 +632,17 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     # Info Widget
     def createInfoWidget(self):
-        self.window_info_widget = QWidget()
-        self.window_info_widget_ui = Ui_Form_Info()
-        self.window_info_widget_ui.setupUi(self.window_info_widget)
-        self.window_info_widget.show()
+        if self.window_info_widget is not None and self.window_info_widget.isVisible():
+            self.window_info_widget.raise_()
+            self.window_info_widget.activateWindow()
+        else:
+            self.window_info_widget = QWidget()
+            self.window_info_widget_ui = Ui_Form_Info()
+            self.window_info_widget_ui.setupUi(self.window_info_widget)
+            self.window_info_widget.show()
 
-        self.child_windows.append(self.window_info_widget)
-        self.addDataToInfoWidgetWindow()
+            self.child_windows.append(self.window_info_widget)
+            self.addDataToInfoWidgetWindow()
 
     def addDataToInfoWidgetWindow(self):
         if self.currentDataFrameGlobal is not None:
