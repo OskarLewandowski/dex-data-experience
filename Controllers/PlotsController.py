@@ -31,19 +31,24 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
     def exportAsPng(self, window):
         try:
-            fileFilter = ('Plik PNG (*.png)')
+            dir = os.path.expanduser("~/Desktop/")
 
-            filePath = QFileDialog.getSaveFileName(
-                caption="Eksportuj wykres",
-                directory=os.path.expanduser("~/Desktop/wykres.png"),
-                filter=fileFilter,
-                initialFilter='Plik PNG (*.png)')
+            saveFileDialog = QFileDialog()
+            saveFileDialog.setWindowTitle("Eksportuj wykres")
+            saveFileDialog.setNameFilter("Plik PNG (*.png)")
+            saveFileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptSave)
+            saveFileDialog.setDirectory(dir)
+            saveFileDialog.selectNameFilter("Plik PNG (*.png)")
+            saveFileDialog.selectFile("nowy.png")
 
-            filePath = str(filePath[0])
+            if saveFileDialog.exec():
+                selectedFiles = saveFileDialog.selectedFiles()
+                filePath = selectedFiles[0]
+                filePath = self.main.adjustFilename(filePath, "png")
 
-            if filePath.endswith(".png"):
-                self.canvas.figure.savefig(filePath, format='png')
-                MessageModel.show_toast("Wykres został zapisany jako plik png", 2000, window)
+                if filePath.endswith(".png"):
+                    self.canvas.figure.savefig(filePath, format='png')
+                    MessageModel.show_toast("Wykres został zapisany jako plik png", 2000, window)
 
         except Exception as e:
             MessageModel.error("0030", str(e))
