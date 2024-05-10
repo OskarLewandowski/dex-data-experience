@@ -20,7 +20,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Gorące kodowanie</string>
+   <string>Zmienne pozorne (one-hot encoding)</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

@@ -21,10 +21,12 @@ class Ui_MainWindow_modify_data(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.comboBox_Select_Data = QtWidgets.QComboBox(parent=self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.MinimumExpanding,
+                                           QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.comboBox_Select_Data.sizePolicy().hasHeightForWidth())
@@ -32,7 +34,8 @@ class Ui_MainWindow_modify_data(object):
         self.comboBox_Select_Data.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.comboBox_Select_Data.setObjectName("comboBox_Select_Data")
         self.horizontalLayout.addWidget(self.comboBox_Select_Data)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableView_Data_Frame = QtWidgets.QTableView(parent=self.centralwidget)
@@ -41,7 +44,8 @@ class Ui_MainWindow_modify_data(object):
         self.verticalLayout.addWidget(self.tableView_Data_Frame)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.pushButton_Save = QtWidgets.QPushButton(parent=self.centralwidget)
         self.pushButton_Save.setEnabled(False)
@@ -131,7 +135,7 @@ class Ui_MainWindow_modify_data(object):
         self.action_Change_Headers.setShortcut(_translate("MainWindow_modify_data", "Ctrl+L"))
         self.action_Change_Data_Type.setText(_translate("MainWindow_modify_data", "Zmień typ danych"))
         self.action_Change_Data_Type.setShortcut(_translate("MainWindow_modify_data", "Ctrl+T"))
-        self.action_Get_Dummies.setText(_translate("MainWindow_modify_data", "Gorące kodowanie"))
+        self.action_Get_Dummies.setText(_translate("MainWindow_modify_data", "Zmienne pozorne (one-hot encoding)"))
         self.action_Get_Dummies.setShortcut(_translate("MainWindow_modify_data", "Ctrl+G"))
         self.action_More_Info.setText(_translate("MainWindow_modify_data", "Informacje dodatkowe"))
         self.action_More_Info.setShortcut(_translate("MainWindow_modify_data", "Ctrl+I"))
@@ -143,6 +147,7 @@ class Ui_MainWindow_modify_data(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow_modify_data = QtWidgets.QMainWindow()
     ui = Ui_MainWindow_modify_data()

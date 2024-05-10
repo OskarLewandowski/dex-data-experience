@@ -221,7 +221,7 @@
   </action>
   <action name="action_Get_Dummies">
    <property name="text">
-    <string>Gorące kodowanie</string>
+    <string>Zmienne pozorne (one-hot encoding)</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>

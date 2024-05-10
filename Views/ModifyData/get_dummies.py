@@ -43,7 +43,7 @@ class Ui_Dialog_Get_Dummies(object):
 
     def retranslateUi(self, Dialog_Get_Dummies):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_Get_Dummies.setWindowTitle(_translate("Dialog_Get_Dummies", "Gorące kodowanie"))
+        Dialog_Get_Dummies.setWindowTitle(_translate("Dialog_Get_Dummies", "Zmienne pozorne (one-hot encoding)"))
         self.comboBox_Select_Data.setPlaceholderText(
             _translate("Dialog_Get_Dummies", "Wybierz kolumnę do przeprowadzenia kodowania etykiet..."))
         self.checkBox_Keep_Data.setText(_translate("Dialog_Get_Dummies", "Zachowaj orginalną kolumnę z danymi"))
