@@ -63,7 +63,7 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
     def chooseFile(self):
         try:
             filePath = None
-            fileFilter = "Pliki tekstowe (*.json; *.txt; *.csv; *.tsv);;Arkusz kalkulacyjny (*.xlsx; *.xls);;Pliki R (*.RData);;Wszystkie pliki (*.*)"
+            fileFilter = "Pliki CSV (*.csv);;Pliki TSV (*.tsv);;Pliki JSON (*.json);;Pliki TXT (*.txt);;Pliki tekstowe (*.json; *.txt; *.csv; *.tsv);;Arkusz kalkulacyjny (*.xlsx; *.xls);;Pliki R (*.RData);;Wszystkie pliki (*.*)"
             excelExt = ['.xlsx', '.xls']
             dir = os.path.expanduser("~/Desktop/")
 
