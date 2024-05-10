@@ -445,17 +445,24 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
     def saveProjectNew(self):
         try:
-            fileFilter = 'Plik Dex (*.dex);;Wszystkie pliki (*.*)'
+            dir = os.path.expanduser("~/Desktop/")
 
-            fileName = QFileDialog.getSaveFileName(
-                caption="Zapisz nowy projekt",
-                directory=os.path.expanduser("~/Desktop/" + "nowy.dex"),
-                filter=fileFilter,
-                initialFilter="Plik Dex (*.dex)"
-            )
+            saveFileDialog = QFileDialog()
+            saveFileDialog.setWindowTitle("Zapisz nowy projekt")
+            saveFileDialog.setNameFilter("Plik Dex (*.dex)")
+            saveFileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptSave)
+            saveFileDialog.setDirectory(dir)
+            saveFileDialog.selectNameFilter("Plik Dex (*.dex)")
+            saveFileDialog.selectFile("nowy.dex")
 
-            if fileName[0]:
-                self.save(fileName[0])
+            if saveFileDialog.exec():
+                selectedFiles = saveFileDialog.selectedFiles()
+                selectedFiles = selectedFiles[0]
+
+                selectedFiles = self.adjustFilename(selectedFiles, "dex")
+
+                if selectedFiles:
+                    self.save(selectedFiles)
 
         except Exception as e:
             MessageModel.error("0007", str(e))
@@ -557,3 +564,14 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_guide_ui = Ui_MainWindow_Guide()
         self.window_guide_ui.setupUi(self.window_guide)
         self.window_guide.show()
+
+    def adjustFilename(self, filePath, extension):
+        if not extension.startswith('.'):
+            extension = '.' + extension
+
+        extensionLength = len(extension)
+
+        if filePath[-extensionLength:] != extension:
+            filePath += extension
+
+        return filePath
