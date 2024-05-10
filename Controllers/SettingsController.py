@@ -229,6 +229,11 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
                 self.app.setStyleSheet(""" * {
                                                 color: white;
                                              }
+                                             
+                                           QToolTip {
+                                                        color: black;
+                                                    }                                             
+                                             
                                        """)
             else:
                 self.main.addIconsToActions("black")
