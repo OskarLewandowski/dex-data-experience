@@ -621,7 +621,7 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     def saveAsAction(self):
         try:
-            fileFilter = "CSV (*.csv);;TSV (*.tsv);;Excel (*.xlsx);;JSON (*.json);;XML (*.xml);;PDF (*.pdf);;R (*.RData)"
+            fileFilter = "Plik CSV (*.csv);;Plik TSV (*.tsv);;Plik Excel (*.xlsx);;Plik JSON (*.json);;Plik XML (*.xml);;Plik PDF (*.pdf);;Plik R (*.RData)"
             currentDataName = self.comboBox_Select_Data.currentText()
             dir = os.path.expanduser("~/Desktop/")
             if currentDataName:
@@ -639,17 +639,28 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                         0], saveFileDialog.selectedNameFilter()
                     df = pd.DataFrame(self.currentDataFrameGlobal)
 
-                    if selectedFilter == "CSV (*.csv)":
+                    if selectedFilter == "Plik CSV (*.csv)":
+                        selectedFile = self.adjustFilename(selectedFile, "csv")
                         df.to_csv(selectedFile, index=False)
-                    elif selectedFilter == "TSV (*.tsv)":
+
+                    elif selectedFilter == "Plik TSV (*.tsv)":
+                        selectedFile = self.adjustFilename(selectedFile, "tsv")
                         df.to_csv(selectedFile, sep='\t', index=False)
-                    elif selectedFilter == "Excel (*.xlsx)":
+
+                    elif selectedFilter == "Plik Excel (*.xlsx)":
+                        selectedFile = self.adjustFilename(selectedFile, "xlsx")
                         df.to_excel(selectedFile, index=False)
-                    elif selectedFilter == "JSON (*.json)":
+
+                    elif selectedFilter == "Plik JSON (*.json)":
+                        selectedFile = self.adjustFilename(selectedFile, "json")
                         df.to_json(selectedFile, orient="records", index=False)
-                    elif selectedFilter == "XML (*.xml)":
+
+                    elif selectedFilter == "Plik XML (*.xml)":
+                        selectedFile = self.adjustFilename(selectedFile, "xml")
                         df.to_xml(selectedFile, index=False)
-                    elif selectedFilter == "PDF (*.pdf)":
+
+                    elif selectedFilter == "Plik PDF (*.pdf)":
+                        selectedFile = self.adjustFilename(selectedFile, "pdf")
                         doc = SimpleDocTemplate(selectedFile, pagesize=letter)
                         elements = []
                         chunk_size = 1000
@@ -674,13 +685,25 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                             elements.append(PageBreak())
 
                         doc.build(elements)
-                    elif selectedFilter == "R (*.RData)":
+                    elif selectedFilter == "Plik R (*.RData)":
+                        selectedFile = self.adjustFilename(selectedFile, "RData")
                         pyreadr.write_rdata(selectedFile, df, df_name="dataset")
 
                     MessageModel.statusSaveAsFile(selectedFile)
 
         except Exception as e:
             MessageModel.error("0018", str(e))
+
+    def adjustFilename(self, filePath, extension):
+        if not extension.startswith('.'):
+            extension = '.' + extension
+
+        extensionLength = len(extension)
+
+        if filePath[-extensionLength:] != extension:
+            filePath += extension
+
+        return filePath
 
     # Info Widget
     def createInfoWidget(self):
