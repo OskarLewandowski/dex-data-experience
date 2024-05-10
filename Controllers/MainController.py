@@ -233,6 +233,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                 if filePath.endswith(".pdf"):
                     self.exportAsPdf(filePath)
+            else:
+                MessageModel.error("1001", "Wystąpił błąd!")
+
 
         except Exception as e:
             MessageModel.error("0012", str(e))
@@ -478,6 +481,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
                 if selectedFiles:
                     self.save(selectedFiles)
+            else:
+                MessageModel.error("1001", "Wystąpił błąd!")
+
 
         except Exception as e:
             MessageModel.error("0007", str(e))
