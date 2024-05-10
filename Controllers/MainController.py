@@ -215,18 +215,25 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
     def exportAs(self):
         try:
-            fileFilter = ('Plik PDF (*.pdf)')
+            dir = os.path.expanduser("~/Desktop/")
 
-            filePath = QFileDialog.getSaveFileName(
-                caption="Eksportuj plik",
-                directory=os.path.expanduser("~/Desktop/raport.pdf"),
-                filter=fileFilter,
-                initialFilter='Plik PDF (*.pdf)')
+            saveFileDialog = QFileDialog()
+            saveFileDialog.setWindowTitle("Eksportuj plik")
+            saveFileDialog.setNameFilter("Plik PDF (*.pdf)")
+            saveFileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptSave)
+            saveFileDialog.setDirectory(dir)
+            saveFileDialog.selectNameFilter("Plik PDF (*.pdf)")
+            saveFileDialog.selectFile("nowy.pdf")
 
-            filePath = str(filePath[0])
+            if saveFileDialog.exec():
+                selectedFiles = saveFileDialog.selectedFiles()
+                filePath = selectedFiles[0]
 
-            if filePath.endswith(".pdf"):
-                self.exportAsPdf(filePath)
+                filePath = self.adjustFilename(filePath, "pdf")
+
+                if filePath.endswith(".pdf"):
+                    self.exportAsPdf(filePath)
+
         except Exception as e:
             MessageModel.error("0012", str(e))
 
