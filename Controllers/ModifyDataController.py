@@ -621,67 +621,63 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
     def saveAsAction(self):
         try:
-            fileFilter = ("CSV (rozdzielany przecinkami) (*.csv);;"
-                          "TSV (rozdzielany tabulatorem) (*.tsv);;"
-                          "Skoroszyt programu Excel (*.xlsx);;"
-                          "Plik JSON (*.json);;"
-                          "Plik XML (*.xml);;"
-                          "Plik PDF (*.pdf);;"
-                          "Plik R (*.RData)")
-
+            fileFilter = "CSV (*.csv);;TSV (*.tsv);;Excel (*.xlsx);;JSON (*.json);;XML (*.xml);;PDF (*.pdf);;R (*.RData)"
             currentDataName = self.comboBox_Select_Data.currentText()
-            fileName = "{}.csv".format(currentDataName)
+            dir = os.path.expanduser("~/Desktop/")
+            if currentDataName:
+                fileName = f"{currentDataName}.csv"
 
-            saveFileName = QFileDialog.getSaveFileName(
-                caption="Zapisz jako",
-                directory=os.path.expanduser("~/Desktop/" + fileName),
-                filter=fileFilter,
-                initialFilter="CSV (rozdzielany przecinkami) (*.csv)"
-            )
+                saveFileDialog = QFileDialog()
+                saveFileDialog.setWindowTitle("Zapisz jako")
+                saveFileDialog.setNameFilter(fileFilter)
+                saveFileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptSave)
+                saveFileDialog.setDirectory(dir)
+                saveFileDialog.selectFile(fileName)
 
-            if saveFileName[0]:
-                df = pd.DataFrame(self.currentDataFrameGlobal)
+                if saveFileDialog.exec():
+                    selectedFile, selectedFilter = saveFileDialog.selectedFiles()[
+                        0], saveFileDialog.selectedNameFilter()
+                    df = pd.DataFrame(self.currentDataFrameGlobal)
 
-                # Save to CSV
-                if saveFileName[1] == "CSV (rozdzielany przecinkami) (*.csv)":
-                    df.to_csv(saveFileName[0], index=False)
-                elif saveFileName[1] == "TSV (rozdzielany tabulatorem) (*.tsv)":
-                    df.to_csv(saveFileName[0], sep='\t', index=False)
-                elif saveFileName[1] == "Skoroszyt programu Excel (*.xlsx)":
-                    df.to_excel(saveFileName[0], index=False)
-                elif saveFileName[1] == "Plik JSON (*.json)":
-                    df.to_json(saveFileName[0], orient="records", index=False)
-                elif saveFileName[1] == "Plik XML (*.xml)":
-                    df.to_xml(saveFileName[0], index=False)
-                elif saveFileName[1] == "Plik PDF (*.pdf)":
-                    doc = SimpleDocTemplate(saveFileName[0], pagesize=letter)
+                    if selectedFilter == "CSV (*.csv)":
+                        df.to_csv(selectedFile, index=False)
+                    elif selectedFilter == "TSV (*.tsv)":
+                        df.to_csv(selectedFile, sep='\t', index=False)
+                    elif selectedFilter == "Excel (*.xlsx)":
+                        df.to_excel(selectedFile, index=False)
+                    elif selectedFilter == "JSON (*.json)":
+                        df.to_json(selectedFile, orient="records", index=False)
+                    elif selectedFilter == "XML (*.xml)":
+                        df.to_xml(selectedFile, index=False)
+                    elif selectedFilter == "PDF (*.pdf)":
+                        doc = SimpleDocTemplate(selectedFile, pagesize=letter)
+                        elements = []
+                        chunk_size = 1000
 
-                    elements = []
-                    chunk_size = 1000
+                        for i in range(0, len(df), chunk_size):
+                            chunk = df.iloc[i:i + chunk_size]
+                            table_data = [chunk.columns.tolist()] + chunk.values.tolist()
+                            table = Table(table_data)
 
-                    for i in range(0, len(df), chunk_size):
-                        chunk = df.iloc[i:i + chunk_size]
-                        table_data = [chunk.columns.tolist()] + chunk.values.tolist()
-                        table = Table(table_data)
+                            style = TableStyle([
+                                ('BACKGROUND', (0, 0), (-1, 0), (0.8, 0.8, 0.8)),
+                                ('TEXTCOLOR', (0, 0), (-1, 0), (0, 0, 0)),
+                                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                                ('BACKGROUND', (0, 1), (-1, -1), (0.85, 0.85, 0.85)),
+                                ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0))
+                            ])
+                            table.setStyle(style)
 
-                        style = TableStyle([('BACKGROUND', (0, 0), (-1, 0), (0.8, 0.8, 0.8)),
-                                            ('TEXTCOLOR', (0, 0), (-1, 0), (0, 0, 0)),
-                                            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                                            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                                            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                                            ('BACKGROUND', (0, 1), (-1, -1), (0.85, 0.85, 0.85)),
-                                            ('GRID', (0, 0), (-1, -1), 1, (0, 0, 0)),
-                                            ])
-                        table.setStyle(style)
+                            elements.append(table)
+                            elements.append(PageBreak())
 
-                        elements.append(table)
-                        elements.append(PageBreak())
+                        doc.build(elements)
+                    elif selectedFilter == "R (*.RData)":
+                        pyreadr.write_rdata(selectedFile, df, df_name="dataset")
 
-                    doc.build(elements)
-                elif saveFileName[1] == "Plik R (*.RData)":
-                    pyreadr.write_rdata(saveFileName[0], df)
-
-                MessageModel.statusSaveAsFile(saveFileName[0])
+                    MessageModel.statusSaveAsFile(selectedFile)
 
         except Exception as e:
             MessageModel.error("0018", str(e))
