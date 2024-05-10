@@ -63,28 +63,26 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
     def chooseFile(self):
         try:
             filePath = None
-            fileFilter = ('Pliki tekstowe (*.json; *.txt; *.csv; *.tsv);;'
-                          'Arkusz kalkulacyjny (*.xlsx; *.xls);;'
-                          'Pliki R (*.RData);;'
-                          'Wszystkie pliki (*.*)')
-
+            fileFilter = "Pliki tekstowe (*.json; *.txt; *.csv; *.tsv);;Arkusz kalkulacyjny (*.xlsx; *.xls);;Pliki R (*.RData);;Wszystkie pliki (*.*)"
             excelExt = ['.xlsx', '.xls']
+            dir = os.path.expanduser("~/Desktop/")
 
-            fileName = QFileDialog.getOpenFileName(
-                caption="Wybierz plik",
-                directory=os.path.expanduser("~/Desktop"),
-                filter=fileFilter,
-                initialFilter='Wszystkie pliki (*.*)')
+            openFileDialog = QFileDialog()
+            openFileDialog.setWindowTitle("Wybierz plik")
+            openFileDialog.setNameFilter(fileFilter)
+            openFileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptOpen)
+            openFileDialog.setDirectory(dir)
+            openFileDialog.selectNameFilter("Wszystkie pliki (*.*)")
 
-            if fileName[0]:
-                filePath = str(fileName[0])
-                self.filePathGlobal = filePath
-                fileName = os.path.basename(filePath)
-
-                self.fileNameGlobal = fileName
-
-                self.lineEdit_Filename.setText(fileName)
-                self.enableLockedButton()
+            if openFileDialog.exec():
+                selectedFiles = openFileDialog.selectedFiles()
+                if selectedFiles:
+                    filePath = selectedFiles[0]
+                    self.filePathGlobal = filePath
+                    fileName = os.path.basename(filePath)
+                    self.fileNameGlobal = fileName
+                    self.lineEdit_Filename.setText(fileName)
+                    self.enableLockedButton()
 
             # first data load by default settings
             if filePath.endswith(".csv"):
