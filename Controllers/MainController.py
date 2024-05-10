@@ -406,36 +406,44 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
     def openFile(self):
         try:
-            fileFilter = 'Plik Dex (*.dex)'
-            fileName = QFileDialog.getOpenFileName(
-                caption="Wczytaj projekt",
-                directory=os.path.expanduser("~/Desktop/"),
-                filter=fileFilter,
-                initialFilter="Plik Dex (*.dex)"
-            )
+            dir = os.path.expanduser("~/Desktop/")
 
-            if fileName[0]:
-                text_data = ""
-                data_frames = {}
+            openFileDialog = QFileDialog()
+            openFileDialog.setWindowTitle("Wczytaj projekt")
+            openFileDialog.setNameFilter("Plik Dex (*.dex)")
+            openFileDialog.setAcceptMode(QFileDialog.AcceptMode.AcceptOpen)
+            openFileDialog.setDirectory(dir)
+            openFileDialog.selectNameFilter("Plik Dex (*.dex)")
 
-                with open(fileName[0], "r") as file:
-                    data = json.load(file)
+            if openFileDialog.exec():
+                selectedFiles = openFileDialog.selectedFiles()
+                fileName = selectedFiles[0]
 
-                text_data = data.get("text_data", "")
-                self.textEdit_Board.setHtml(text_data)
+                if fileName.endswith(".dex"):
+                    text_data = ""
+                    data_frames = {}
 
-                data_frames = data.get("data_frames", {})
+                    with open(fileName, "r") as file:
+                        data = json.load(file)
 
-                DataStorageModel.clear()
+                    text_data = data.get("text_data", "")
+                    self.textEdit_Board.setHtml(text_data)
 
-                for key, jsonData in data_frames.items():
-                    df = pd.read_json(StringIO(jsonData), orient="split")
-                    df.columns = [str(col) for col in df.columns]
+                    data_frames = data.get("data_frames", {})
 
-                    DataStorageModel.add(key, df)
+                    DataStorageModel.clear()
 
-                self.setSavedFilePath(fileName[0])
-                self.updateStatusBar()
+                    for key, jsonData in data_frames.items():
+                        df = pd.read_json(StringIO(jsonData), orient="split")
+                        df.columns = [str(col) for col in df.columns]
+
+                        DataStorageModel.add(key, df)
+
+                    self.setSavedFilePath(fileName)
+                    self.updateStatusBar()
+            else:
+                MessageModel.error("1001", "Wystąpił błąd!")
+
 
         except Exception as e:
             MessageModel.error("0009", str(e))
