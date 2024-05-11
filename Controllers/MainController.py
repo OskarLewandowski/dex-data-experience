@@ -577,6 +577,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_guide = QMainWindow()
         self.window_guide_ui = Ui_MainWindow_Guide()
         self.window_guide_ui.setupUi(self.window_guide)
+
+        self.center(self.window_guide)
+
         self.window_guide.show()
 
     def adjustFilename(self, filePath, extension):
@@ -589,3 +592,10 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
             filePath += extension
 
         return filePath
+
+    def center(self, window):
+        qr = window.frameGeometry()
+        cp = self.screen().availableGeometry().center()
+
+        qr.moveCenter(cp)
+        window.move(qr.topLeft())
