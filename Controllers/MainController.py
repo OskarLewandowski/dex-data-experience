@@ -136,6 +136,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_delete_dataframe_ui.comboBox_Keys_List.addItems(dataKeys)
         self.window_delete_dataframe_ui.pushButton_Apply.clicked.connect(self.deleteDataframe)
 
+        self.center(self.window_delete_dataframe)
+
         self.window_delete_dataframe.show()
 
     def deleteDataframe(self):
@@ -169,6 +171,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_rename_key_dataframe_ui.comboBox_Keys_List.addItems(dataKeys)
         self.window_rename_key_dataframe_ui.pushButton_Apply.clicked.connect(self.renameKeyDataframe)
+
+        self.center(self.window_rename_key_dataframe)
 
         self.window_rename_key_dataframe.show()
 
@@ -536,6 +540,9 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_about_app = QDialog()
         self.window_about_app_ui = Ui_Dialog_About_App()
         self.window_about_app_ui.setupUi(self.window_about_app)
+
+        self.center(self.window_about_app)
+
         self.window_about_app.show()
 
     def createDataPreviewWindow(self):
@@ -553,6 +560,8 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
 
         if self.selectedDataNameForDataPreviewGlobal:
             self.window_data_preview_ui.comboBox_Select_Data.setCurrentText(self.selectedDataNameForDataPreviewGlobal)
+
+        self.center(self.window_data_preview)
 
         self.window_data_preview.show()
 
@@ -579,6 +588,7 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_guide_ui.setupUi(self.window_guide)
 
         self.window_guide_ui.textBrowser_Plots.anchorClicked.connect(self.switchStackedWidgetByUrl)
+
         self.center(self.window_guide)
 
         self.window_guide.show()
