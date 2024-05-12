@@ -1379,6 +1379,9 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
                 df.index.name = indexName
                 df = df.reset_index()
 
+                if indexName == "Przedział":
+                    df[indexName] = df[indexName].astype('string')
+
                 self.dataframe_distribution_series = df
 
                 self.window_distribution_series_ui.textEdit_Preview_Board.clear()
