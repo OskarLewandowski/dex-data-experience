@@ -736,6 +736,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.window_info_widget = QWidget()
             self.window_info_widget_ui = Ui_Form_Info()
             self.window_info_widget_ui.setupUi(self.window_info_widget)
+
+            self.main.center(self.window_info_widget)
+
             self.window_info_widget.show()
 
             self.child_windows.append(self.window_info_widget)
