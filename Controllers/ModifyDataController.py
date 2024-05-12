@@ -21,9 +21,10 @@ import os
 
 
 class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
-    def __init__(self):
+    def __init__(self, main_controller):
         super().__init__()
         self.setupUi(self)
+        self.main = main_controller
 
         self.child_windows = []
         self.currentDataFrameGlobal = None
@@ -106,6 +107,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.replace_window_ui.pushButton_Apply.clicked.connect(self.applyReplace)
 
             self.replace_window.adjustSize()
+
+            self.main.center(self.replace_window)
+
             self.replace_window.show()
 
             self.child_windows.append(self.replace_window)
@@ -233,6 +237,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.fillListDelete()
 
             self.delete_window.adjustSize()
+
+            self.main.center(self.delete_window)
+
             self.delete_window.show()
 
             self.child_windows.append(self.delete_window)
@@ -297,6 +304,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
 
             self.change_datatype_window_ui.pushButton_Apply.clicked.connect(self.applyChangeDataType)
             self.change_datatype_window_ui.pushButton_Cancel.clicked.connect(self.change_datatype_window.close)
+
+            self.main.center(self.change_datatype_window)
 
             self.change_datatype_window.show()
 
@@ -368,6 +377,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.messageInfoDeleteNan()
 
             self.delete_nan_window.adjustSize()
+
+            self.main.center(self.delete_nan_window)
+
             self.delete_nan_window.show()
 
             self.child_windows.append(self.delete_nan_window)
@@ -417,6 +429,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.get_dummies_window_ui.comboBox_Select_Data.addItems(namesList)
             self.get_dummies_window_ui.pushButton_Apply.clicked.connect(self.applyGetDummies)
             self.get_dummies_window_ui.pushButton_Cancel.clicked.connect(self.get_dummies_window.close)
+
+            self.main.center(self.get_dummies_window)
 
             self.get_dummies_window.show()
 
@@ -476,6 +490,8 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
                 self.change_headers_window_ui.pushButton_Apply.clicked.connect(self.changeHeader)
                 self.change_headers_window_ui.comboBox_headers_list.addItems(namesList)
 
+                self.main.center(self.change_headers_window)
+
                 self.change_headers_window.show()
 
                 self.child_windows.append(self.change_headers_window)
@@ -518,6 +534,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
             self.search_dialog_window_ui.pushButton_Clear.clicked.connect(self.closeActionSearchDialog)
             self.search_dialog_window_ui.pushButton_Search.clicked.connect(self.actionSearchDialog)
             self.search_dialog_window.closeEvent = self.closeEventSearchDialog
+
+            self.main.center(self.search_dialog_window)
+
             self.search_dialog_window.show()
 
             self.child_windows.append(self.search_dialog_window)
