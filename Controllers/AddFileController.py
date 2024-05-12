@@ -58,6 +58,9 @@ class AddFileController(QDialog, Ui_Dialog_Add_File):
         """
         self.clear()
         self.setWindowFlags(Qt.WindowType.WindowMinMaxButtonsHint | Qt.WindowType.WindowCloseButtonHint)
+
+        self.main.center(self)
+
         self.show()
 
     def chooseFile(self):

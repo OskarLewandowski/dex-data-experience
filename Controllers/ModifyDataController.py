@@ -58,6 +58,9 @@ class ModifyDataController(QMainWindow, Ui_MainWindow_modify_data):
         Show modify file window
         """
         self.updateDataFrameList()
+
+        self.main.center(self)
+
         self.show()
 
     def closeEvent(self, event):

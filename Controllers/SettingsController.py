@@ -158,6 +158,8 @@ class SettingsController(QMainWindow, Ui_MainWindow_Settings, QtStyleTools):
         self.applyCustomStylesheet(custom_colors)
 
     def showSettingsWindow(self):
+        self.main.center(self)
+
         self.show()
 
     def populateLanguage(self):
