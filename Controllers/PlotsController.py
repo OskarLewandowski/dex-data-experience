@@ -138,6 +138,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_scatter_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_scatter_plot)
+
         self.window_scatter_plot.show()
 
     def drawScatterPlot(self):
@@ -263,6 +265,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_line_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawLinePlot)
 
         self.window_line_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_line_plot)
 
         self.window_line_plot.show()
 
@@ -395,6 +399,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_bar_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_bar_plot)
+
         self.window_bar_plot.show()
 
     def drawBarPlot(self):
@@ -526,6 +532,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_hist_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_hist_plot)
+
         self.window_hist_plot.show()
 
     def drawHistPlot(self):
@@ -644,6 +652,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_box_plot_ui.lineEdit_Label_Y.editingFinished.connect(self.drawBoxPlot)
 
         self.window_box_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_box_plot)
 
         self.window_box_plot.show()
 
@@ -766,6 +776,8 @@ class PlotsController(QMainWindow, Ui_MainWindow_Main):
         self.window_pie_plot_ui.doubleSpinBox_Radius.valueChanged.connect(self.drawPiePlot)
 
         self.window_pie_plot_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_pie_plot)
 
         self.window_pie_plot.show()
 
