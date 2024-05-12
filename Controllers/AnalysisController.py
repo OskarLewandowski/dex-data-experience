@@ -107,6 +107,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_basic_stats_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_basic_stats)
+
         self.window_basic_stats.show()
 
     def writeBasicStats(self):
@@ -190,6 +192,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_correlation_ui.checkBox_Description_Of_Results.clicked.connect(self.writeCorrelation)
 
         self.window_correlation_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_correlation)
 
         self.window_correlation.show()
 
@@ -284,6 +288,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_shapiro_wilka_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_test_shapiro_wilka)
+
         self.window_test_shapiro_wilka.show()
 
     def writeTestShapiroWilka(self):
@@ -359,6 +365,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_andersona_darlinga_ui.pushButton_Data_Preview.clicked.connect(
             self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_test_andersona_darlinga)
 
         self.window_test_andersona_darlinga.show()
 
@@ -444,6 +452,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_kolmogorova_smirnova_ui.pushButton_Data_Preview.clicked.connect(
             self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_test_kolmogorova_smirnova)
+
         self.window_test_kolmogorova_smirnova.show()
 
     def writeTestKolmogorovaSmirnova(self):
@@ -516,6 +526,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_lillieforsa_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_test_lillieforsa)
+
         self.window_test_lillieforsa.show()
 
     def writeTestLillieforsa(self):
@@ -587,6 +599,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_jarque_bera_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestJarqueBera)
 
         self.window_test_jarque_bera_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_test_jarque_bera)
 
         self.window_test_jarque_bera.show()
 
@@ -663,6 +677,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_ind_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
         self.window_test_t_studenta_ind_ui.comboBox_Alternative.currentIndexChanged.connect(self.writeTestTStudentaInd)
+
+        self.main.center(self.window_test_t_studenta_ind)
 
         self.window_test_t_studenta_ind.show()
 
@@ -764,6 +780,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_anova_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestAnova)
 
         self.window_test_anova_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_test_anova)
 
         self.window_test_anova.show()
 
@@ -878,6 +896,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_chi_square_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestChiSquare)
 
         self.window_test_chi_square_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_test_chi_square)
 
         self.window_test_chi_square.show()
 
@@ -1015,6 +1035,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_kruskala_wallisa_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_test_kruskala_wallisa)
+
         self.window_test_kruskala_wallisa.show()
 
         self.writeTestKruskalaWallisa()
@@ -1128,6 +1150,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_tukeya_ui.checkBox_Description_Of_Results.clicked.connect(self.writeTestTukeya)
 
         self.window_test_tukeya_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
+
+        self.main.center(self.window_test_tukeya)
 
         self.window_test_tukeya.show()
 
@@ -1290,6 +1314,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_distribution_series_ui.spinBox_Bins.valueChanged.connect(self.writeDistributionSeries)
         self.window_distribution_series_ui.lineEdit_Custom_Bins.textEdited.connect(self.writeDistributionSeries)
 
+        self.main.center(self.window_distribution_series)
+
         self.window_distribution_series.show()
 
     def showCustomBins(self):
@@ -1448,6 +1474,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_correlation_pearson_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_correlation_pearson)
+
         self.window_correlation_pearson.show()
 
     def writeCorrelationPearson(self):
@@ -1568,6 +1596,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_correlation_kendall_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_correlation_kendall)
+
         self.window_correlation_kendall.show()
 
     def writeCorrelationKendall(self):
@@ -1665,6 +1695,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_correlation_spearman_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
+        self.main.center(self.window_correlation_spearman)
+
         self.window_correlation_spearman.show()
 
     def writeCorrelationSpearman(self):
@@ -1757,6 +1789,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
         self.window_test_t_studenta_rel_ui.pushButton_Data_Preview.clicked.connect(self.main.createDataPreviewWindow)
 
         self.window_test_t_studenta_rel_ui.comboBox_Alternative.currentIndexChanged.connect(self.writeTestTStudentaRel)
+
+        self.main.center(self.window_test_t_studenta_rel)
 
         self.window_test_t_studenta_rel.show()
 
@@ -1866,6 +1900,8 @@ class AnalysisController(QMainWindow, Ui_MainWindow_Main):
 
         self.window_test_t_studenta_1samp_ui.pushButton_Add_As_Param_Popmean.clicked.connect(
             self.addResultPopmeanToParam)
+
+        self.main.center(self.window_test_t_studenta_1samp)
 
         self.window_test_t_studenta_1samp.show()
 
