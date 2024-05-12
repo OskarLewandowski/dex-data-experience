@@ -13,16 +13,28 @@ class Ui_MainWindow_Guide(object):
     def setupUi(self, MainWindow_Guide):
         MainWindow_Guide.setObjectName("MainWindow_Guide")
         MainWindow_Guide.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
-        MainWindow_Guide.resize(1500, 900)
+        MainWindow_Guide.resize(1600, 900)
         MainWindow_Guide.setMinimumSize(QtCore.QSize(800, 600))
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow_Guide)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.listWidget_Category_List = QtWidgets.QListWidget(parent=self.centralwidget)
-        self.listWidget_Category_List.setMaximumSize(QtCore.QSize(160, 16777215))
+        self.listWidget_Category_List.setMaximumSize(QtCore.QSize(170, 16777215))
         self.listWidget_Category_List.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.listWidget_Category_List.setObjectName("listWidget_Category_List")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_Category_List.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_Category_List.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_Category_List.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_Category_List.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_Category_List.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_Category_List.addItem(item)
         item = QtWidgets.QListWidgetItem()
         self.listWidget_Category_List.addItem(item)
         item = QtWidgets.QListWidgetItem()
@@ -82,10 +94,10 @@ class Ui_MainWindow_Guide(object):
         self.Analysis_Data.setObjectName("Analysis_Data")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.Analysis_Data)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.textEdit_Plots = QtWidgets.QTextEdit(parent=self.Analysis_Data)
-        self.textEdit_Plots.setReadOnly(True)
-        self.textEdit_Plots.setObjectName("textEdit_Plots")
-        self.verticalLayout_4.addWidget(self.textEdit_Plots)
+        self.textEdit_Data_Analysis = QtWidgets.QTextEdit(parent=self.Analysis_Data)
+        self.textEdit_Data_Analysis.setReadOnly(True)
+        self.textEdit_Data_Analysis.setObjectName("textEdit_Data_Analysis")
+        self.verticalLayout_4.addWidget(self.textEdit_Data_Analysis)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
@@ -120,31 +132,85 @@ class Ui_MainWindow_Guide(object):
         self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.stackedWidget_Content.addWidget(self.Distribution_Series)
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.page)
+        self.Plots = QtWidgets.QWidget()
+        self.Plots.setObjectName("Plots")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.Plots)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.textEdit = QtWidgets.QTextEdit(parent=self.page)
-        self.textEdit.setObjectName("textEdit")
-        self.verticalLayout_5.addWidget(self.textEdit)
+        self.textBrowser_Plots = QtWidgets.QTextBrowser(parent=self.Plots)
+        self.textBrowser_Plots.setObjectName("textBrowser_Plots")
+        self.verticalLayout_5.addWidget(self.textBrowser_Plots)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem8)
-        self.pushButton_Close_5 = QtWidgets.QPushButton(parent=self.page)
+        self.pushButton_Close_5 = QtWidgets.QPushButton(parent=self.Plots)
         self.pushButton_Close_5.setObjectName("pushButton_Close_5")
         self.horizontalLayout_6.addWidget(self.pushButton_Close_5)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
                                             QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem9)
         self.verticalLayout_5.addLayout(self.horizontalLayout_6)
-        self.stackedWidget_Content.addWidget(self.page)
+        self.stackedWidget_Content.addWidget(self.Plots)
+        self.Scatter_Plot = QtWidgets.QWidget()
+        self.Scatter_Plot.setObjectName("Scatter_Plot")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.Scatter_Plot)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.textEdit_2 = QtWidgets.QTextEdit(parent=self.Scatter_Plot)
+        self.textEdit_2.setReadOnly(True)
+        self.textEdit_2.setObjectName("textEdit_2")
+        self.verticalLayout_6.addWidget(self.textEdit_2)
+        self.stackedWidget_Content.addWidget(self.Scatter_Plot)
+        self.Line_Plot = QtWidgets.QWidget()
+        self.Line_Plot.setObjectName("Line_Plot")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.Line_Plot)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.textEdit_3 = QtWidgets.QTextEdit(parent=self.Line_Plot)
+        self.textEdit_3.setReadOnly(True)
+        self.textEdit_3.setObjectName("textEdit_3")
+        self.verticalLayout_7.addWidget(self.textEdit_3)
+        self.stackedWidget_Content.addWidget(self.Line_Plot)
+        self.Bar_Plot = QtWidgets.QWidget()
+        self.Bar_Plot.setObjectName("Bar_Plot")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.Bar_Plot)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.textEdit_4 = QtWidgets.QTextEdit(parent=self.Bar_Plot)
+        self.textEdit_4.setReadOnly(True)
+        self.textEdit_4.setObjectName("textEdit_4")
+        self.verticalLayout_8.addWidget(self.textEdit_4)
+        self.stackedWidget_Content.addWidget(self.Bar_Plot)
+        self.Histogram = QtWidgets.QWidget()
+        self.Histogram.setObjectName("Histogram")
+        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.Histogram)
+        self.verticalLayout_9.setObjectName("verticalLayout_9")
+        self.textEdit_5 = QtWidgets.QTextEdit(parent=self.Histogram)
+        self.textEdit_5.setReadOnly(True)
+        self.textEdit_5.setObjectName("textEdit_5")
+        self.verticalLayout_9.addWidget(self.textEdit_5)
+        self.stackedWidget_Content.addWidget(self.Histogram)
+        self.Box_Plot = QtWidgets.QWidget()
+        self.Box_Plot.setObjectName("Box_Plot")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.Box_Plot)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.textEdit_6 = QtWidgets.QTextEdit(parent=self.Box_Plot)
+        self.textEdit_6.setReadOnly(True)
+        self.textEdit_6.setObjectName("textEdit_6")
+        self.verticalLayout_10.addWidget(self.textEdit_6)
+        self.stackedWidget_Content.addWidget(self.Box_Plot)
+        self.Pie_Chart = QtWidgets.QWidget()
+        self.Pie_Chart.setObjectName("Pie_Chart")
+        self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.Pie_Chart)
+        self.verticalLayout_11.setObjectName("verticalLayout_11")
+        self.textEdit_7 = QtWidgets.QTextEdit(parent=self.Pie_Chart)
+        self.textEdit_7.setReadOnly(True)
+        self.textEdit_7.setObjectName("textEdit_7")
+        self.verticalLayout_11.addWidget(self.textEdit_7)
+        self.stackedWidget_Content.addWidget(self.Pie_Chart)
         self.horizontalLayout.addWidget(self.stackedWidget_Content)
         MainWindow_Guide.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow_Guide)
-        self.stackedWidget_Content.setCurrentIndex(4)
+        self.stackedWidget_Content.setCurrentIndex(0)
         self.listWidget_Category_List.currentRowChanged['int'].connect(
             self.stackedWidget_Content.setCurrentIndex)  # type: ignore
         self.pushButton_Close_1.clicked.connect(MainWindow_Guide.close)  # type: ignore
@@ -165,6 +231,13 @@ class Ui_MainWindow_Guide(object):
         image_filename6 = "guide/Screenshot_6.png"
         image_filename7 = "guide/Screenshot_7.png"
         image_filename8 = "guide/Screenshot_8.png"
+        image_filename9 = "guide/Screenshot_9.png"
+        image_filename10 = "guide/Screenshot_10.png"
+        image_filename11 = "guide/Screenshot_11.png"
+        image_filename12 = "guide/Screenshot_12.png"
+        image_filename13 = "guide/Screenshot_13.png"
+        image_filename14 = "guide/Screenshot_14.png"
+        image_filename15 = "guide/Screenshot_15.png"
 
         image_filename1 = os.path.join(image_directory, image_filename1)
         image_filename2 = os.path.join(image_directory, image_filename2)
@@ -174,6 +247,13 @@ class Ui_MainWindow_Guide(object):
         image_filename6 = os.path.join(image_directory, image_filename6)
         image_filename7 = os.path.join(image_directory, image_filename7)
         image_filename8 = os.path.join(image_directory, image_filename8)
+        image_filename9 = os.path.join(image_directory, image_filename9)
+        image_filename10 = os.path.join(image_directory, image_filename10)
+        image_filename11 = os.path.join(image_directory, image_filename11)
+        image_filename12 = os.path.join(image_directory, image_filename12)
+        image_filename13 = os.path.join(image_directory, image_filename13)
+        image_filename14 = os.path.join(image_directory, image_filename14)
+        image_filename15 = os.path.join(image_directory, image_filename15)
 
         _translate = QtCore.QCoreApplication.translate
         MainWindow_Guide.setWindowTitle(_translate("MainWindow_Guide", "Przewodnik"))
@@ -189,6 +269,18 @@ class Ui_MainWindow_Guide(object):
         item.setText(_translate("MainWindow_Guide", "Szereg rozdzielczy"))
         item = self.listWidget_Category_List.item(4)
         item.setText(_translate("MainWindow_Guide", "Wykresy"))
+        item = self.listWidget_Category_List.item(5)
+        item.setText(_translate("MainWindow_Guide", "Wykres punktowy"))
+        item = self.listWidget_Category_List.item(6)
+        item.setText(_translate("MainWindow_Guide", "Wykres liniowy"))
+        item = self.listWidget_Category_List.item(7)
+        item.setText(_translate("MainWindow_Guide", "Wykres słupkowy"))
+        item = self.listWidget_Category_List.item(8)
+        item.setText(_translate("MainWindow_Guide", "Histogram"))
+        item = self.listWidget_Category_List.item(9)
+        item.setText(_translate("MainWindow_Guide", "Wykres pudełkowy"))
+        item = self.listWidget_Category_List.item(10)
+        item.setText(_translate("MainWindow_Guide", "Wykres kołowy"))
         self.listWidget_Category_List.setSortingEnabled(__sortingEnabled)
         self.textEdit_Add_Data.setHtml(_translate("MainWindow_Guide",
                                                   "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -263,33 +355,35 @@ class Ui_MainWindow_Guide(object):
                                                      "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700; text-decoration: underline;\">Uwaga!</span><span style=\" font-size:20pt;\"> Aby dokonane zmiany w zbiorze zostały zachowane, należy </span><span style=\" font-size:20pt; font-weight:700;\">zapisać zmiany</span><span style=\" font-size:20pt;\">.</span></p>\n"
                                                      "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Close_2.setText(_translate("MainWindow_Guide", "Zamknij"))
-        self.textEdit_Plots.setHtml(_translate("MainWindow_Guide",
-                                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-                                               "p, li { white-space: pre-wrap; }\n"
-                                               "hr { height: 1px; border-width: 0; }\n"
-                                               "li.unchecked::marker { content: \"\\2610\"; }\n"
-                                               "li.checked::marker { content: \"\\2612\"; }\n"
-                                               "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                               "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Analiza danych</span></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"><br />Aby przeprowadzić analizę z dodanych zbiorów danych, należy wybrać opcję </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">„Analiza”</span><span style=\" font-size:20pt;\"> z górnego paska, a następnie wybrać interesującą nas analizę.</span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Podstawowe statystyki:</span><span style=\" font-size:20pt;\"> Dostarczają podstawowych informacji o zbiorze danych, takich jak średnia, mediana, wariancja czy odchylenie standardowe. </span></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\"><br />Szereg rozdzielczy:</span><span style=\" font-size:20pt;\"> Metoda prezentacji danych statystycznych, która grupuje indywidualne obserwacje w przedziały i pokazuje liczbę wystąpień w każdym z nich, umożliwiając szybką wizualizację rozkładu danych. Pozwala na zapisanie szeregu jako zbioru danych, co ułatwia tworzenie wartościowych wykresów.</span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:700;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Testy normalności:</span><span style=\" font-size:20pt;\"> Sprawdzają, czy rozkład danych jest zgodny z rozkładem normalnym, co jest założeniem wielu innych testów statystycznych. </span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Korelacje:</span><span style=\" font-size:20pt;\"> Obejmuje różne techniki statystyczne do oceny związku między zmiennymi.</span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Testy t-Studenta:</span><span style=\" font-size:20pt;\"> Porównują średnie dwóch grup, aby stwierdzić, czy istnieją między nimi statystycznie istotne różnice. </span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Jednoczynnikowa ANOVA:</span><span style=\" font-size:20pt;\"> Umożliwia porównanie średnich wartości trzech lub więcej grup, by sprawdzić, czy przynajmniej jedna z nich różni się istotnie. </span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Chi-kwadrat:</span><span style=\" font-size:20pt;\"> Bada zależności między zmiennymi kategorycznymi, sprawdzając, czy rozkład obserwacji odbiega od rozkładu oczekiwanego. </span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Kruskala-Wallisa:</span><span style=\" font-size:20pt;\"> Jest nieparametrycznym odpowiednikiem jednoczynnikowej ANOVA, używanym, gdy dane nie spełniają założeń ANOVA. </span></p>\n"
-                                               "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                               "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Tukeya:</span><span style=\" font-size:20pt;\"> Wykorzystywany po jednoczynnikowej ANOVA, służy do porównania par średnich, aby ustalić, które dokładnie średnie różnią się od siebie.</span></p></body></html>"))
+        self.textEdit_Data_Analysis.setHtml(_translate("MainWindow_Guide",
+                                                       "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                       "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                                       "p, li { white-space: pre-wrap; }\n"
+                                                       "hr { height: 1px; border-width: 0; }\n"
+                                                       "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                                       "li.checked::marker { content: \"\\2612\"; }\n"
+                                                       "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                                       "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Analiza danych</span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:700;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Aby przeprowadzić analizę z dodanych zbiorów danych, należy wybrać opcję </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">„Analiza”</span><span style=\" font-size:20pt;\"> z górnego paska, a następnie wybrać interesującą nas analizę. </span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Podstawowe statystyki: </span><span style=\" font-size:20pt;\">Dostarczają podstawowych informacji o zbiorze danych, takich jak średnia, mediana, wariancja czy odchylenie standardowe. </span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Szereg rozdzielczy:</span><span style=\" font-size:20pt;\"> Metoda prezentacji danych statystycznych, która wyznacza liczbę wystąpień indywidualnych obserwacji (cecha jakościowa lub dyskretna) lub najpierw grupuje je w przedziały, a następnie wyznacza liczbę wystąpień w każdym z nich (cecha ciągła). Umożliwia to szybką wizualizację rozkładu danych. Pozwala na zapisanie szeregu jako zbioru danych, co ułatwia tworzenie wartościowych wykresów. </span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Testy normalności:</span><span style=\" font-size:20pt;\"> Sprawdzają, czy rozkład danych jest zgodny z rozkładem normalnym, co jest założeniem wielu innych testów statystycznych.</span></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Korelacje:</span><span style=\" font-size:20pt;\"> Obejmuje różne techniki statystyczne do oceny związku między zmiennymi.</span></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Testy t-Studenta:</span><span style=\" font-size:20pt;\"> Porównują średnie jednej lub dwóch grup, aby stwierdzić, czy istnieją między nimi statystycznie istotne różnice. </span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Jednoczynnikowa ANOVA:</span><span style=\" font-size:20pt;\"> Umożliwia porównanie średnich wartości trzech lub więcej grup, by sprawdzić, czy przynajmniej dwie z nich różnią się istotnie. </span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Chi-kwadrat:</span><span style=\" font-size:20pt;\"> Bada zależności między zmiennymi kategorycznymi, sprawdzając, czy rozkład obserwacji odbiega od rozkładu oczekiwanego. </span></p>\n"
+                                                       "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Kruskala-Wallisa:</span><span style=\" font-size:20pt;\"> Jest nieparametrycznym odpowiednikiem jednoczynnikowej ANOVA, używanym, gdy dane nie spełniają założeń ANOVA.</span></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
+                                                       "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\">Test Tukeya:</span><span style=\" font-size:20pt;\"> Wykorzystywany po jednoczynnikowej ANOVA, służy do porównania par średnich, aby ustalić, które dokładnie średnie różnią się od siebie. </span></p></body></html>"))
         self.pushButton_Close_3.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_Distribution_Series.setHtml(_translate("MainWindow_Guide",
                                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -302,123 +396,207 @@ class Ui_MainWindow_Guide(object):
                                                              "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Szereg rozdzielczy</span></p>\n"
                                                              "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:700;\"> </span></p>\n"
                                                              "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przy pomocy szeregu rozdzielczego można łatwo zobaczyć i porównać liczebność oraz relatywną częstość występowania różnych grup w zbiorze danych, co jest pomocne w wizualizacji i interpretacji danych. Wynik można zapisać jako zbiór danych, który możemy wykorzystać w tworzeniu wykresów.</span></p>\n"
-                                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">  </span><span style=\" font-size:20pt; font-weight:700;\"> </span></p>\n"
-                                                             f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename7}\" /></p>\n"
-                                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
-                                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład zastosowania to przedstawienie rozkładu procentowego płci na wykresie kołowym.</span></p>\n"
                                                              "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                                             f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename8}\" /></p></body></html>"))
+                                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład stworzenia szeregu rozdzielczego dla zmiennej dyskretnej:</span></p>\n"
+                                                             f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename7}\" /></p>\n"
+                                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład stworzenia szeregu rozdzielczego dla zmiennej ciągłej (automatyczne wygnerowanie 10 przedziałów):</span></p>\n"
+                                                             f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename9}\" /></p>\n"
+                                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład stworzenia szeregu rozdzielczego dla zmiennej ciągłej (własne przedziały):</span></p>\n"
+                                                             f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename10}\" /></p>\n"
+                                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+                                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton_Close_4.setText(_translate("MainWindow_Guide", "Zamknij"))
-        self.textEdit.setHtml(_translate("MainWindow_Guide",
-                                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-                                         "p, li { white-space: pre-wrap; }\n"
-                                         "hr { height: 1px; border-width: 0; }\n"
-                                         "li.unchecked::marker { content: \"\\2610\"; }\n"
-                                         "li.checked::marker { content: \"\\2612\"; }\n"
-                                         "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                         "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykresy</span></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"><br />Z dodanych zbiorów danych można stworzyć następujące wykresy:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Punktowy</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Liniowy</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Słupkowy</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Histogram</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pudełkowy</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Kołowy</li></ul>\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres punktowy posiada następujące parametry:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Wskaźnik na dane źródłowe do wygenerowania wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Wybór kolumny danych do reprezentacji na osi poziomej.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Wybór kolumny danych do reprezentacji na osi pionowej.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna danych używana do grupowania i kolorowania punktów w celu wizualnego oddzielenia kategorii.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Rozmiar punktów</span>: Kolumna danych determinująca wielkość punktów na wykresie, co umożliwia reprezentowanie dodatkowej zmiennej.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień punktów</span>: Zestaw barw lub styl używany do nadania koloru punktom, co może pomóc w różnicowaniu między grupami.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Kształt punktów</span>: Określa kształt wyświetlanych punktów; domyślnie jest to koło.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Ustawienie kontrolujące, czy i jak legenda jest wyświetlana, aby wyjaśnić, co oznaczają poszczególne kolory i rozmiary punktów.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst wyświetlany na górze wykresu jako jego tytuł.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst wyświetlany jako etykieta dla osi X.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst wyświetlany jako etykieta dla osi Y.</li></ul>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"> </span></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres liniowy posiada następujące parametry:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Wskaźnik na zestaw danych, z którego będą wykorzystywane dane do wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna z zestawu danych, która ma być wykorzystana jako wartości dla osi X.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna z zestawu danych, która ma być wykorzystana jako wartości dla osi Y.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna z zestawu danych, która będzie używana do grupowania danych i nadania koloru poszczególnym liniom wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Rozmiar punktów</span>: Kolumna, która określa rozmiar punktów na wykresie, co umożliwia wizualne reprezentowanie dodatkowej zmiennej.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień</span>: Określa schemat kolorów (paleta), który zostanie zastosowany do różnych grup danych na wykresie.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Kształt punktów</span>: Określa, jakiego kształtu punkty będą użyte na wykresie.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Estymator</span>: Metoda używana do agregowania wielu wartości y dla pojedynczego x, najczęściej \'mean\' (średnia).</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Przedział ufności</span>: Określa, czy i jakie przedziały ufności (np. 95%) mają być rysowane wokół estymowanych wartości.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Kontroluje, czy i w jaki sposób wyświetlana jest legenda, która identyfikuje grupy danych.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który zostanie umieszczony jako tytuł wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst wyświetlany jako etykieta dla osi X.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst wyświetlany jako etykieta dla osi Y.</li></ul>\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres słupkowy posiada następujące parametry:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Wskaźnik na źródłowy zestaw danych dla wykresu słupkowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna zestawu danych, która będzie wykorzystywana dla osi poziomej wykresu słupkowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna zestawu danych, która będzie wykorzystywana dla osi pionowej wykresu słupkowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna z zestawu danych, której wartości są używane do grupowania słupków i nadawania im różnych kolorów.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień słupków</span>: Wybór palety kolorów dla słupków.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Estymator</span>: Funkcja estymująca (np. średnia), która jest używana do obliczania wartości przedstawianych przez słupki.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Przedział ufności</span>: Poziom ufności dla przedziału ufności słupków (np. 95%), pokazujący niepewność estymacji.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Orientacja</span>: Określa orientację słupków na wykresie – poziomą lub pionową.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Kontroluje wyświetlanie legendy, która identyfikuje grupy danych według kolorów słupków.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który będzie wyświetlany jako tytuł wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst, który będzie służył jako etykieta dla osi X.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst, który będzie służył jako etykieta dla osi Y.</li></ul>\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Histogram posiada następujące parametry:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Zestaw danych, z którego pobierane są informacje do stworzenia histogramu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna zestawu danych, która będzie używana dla wartości osi poziomej, reprezentująca zmienne do podziału na biny (przedziały).</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna zestawu danych, która będzie używana dla wartości osi pionowej, zwykle używana do wyświetlania wag dla każdego bina.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna zestawu danych, która służy do grupowania danych w różne biny histogramu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień histogramów</span>: Wybór schematu kolorystycznego dla różnych grup danych w histogramie.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Statystyka</span>: Statystyczna funkcja agregacji danych dla binnów, na przykład \'count\' pokazuje liczbę obserwacji w każdym binie.</li>\n"
-                                         "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-count</span><span style=\" font-size:20pt;\">: pokazuje liczbę obserwacji w każdym binie,</span></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-frequency</span><span style=\" font-size:20pt;\">: pokazuje liczbę obserwacji podzieloną przez szerokość binu,</span></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-probability</span><span style=\" font-size:20pt;\">: normalizuje tak, aby wysokość słupków sumowała się do 1,</span></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-percent</span><span style=\" font-size:20pt;\">: normalizuje tak, aby wysokość słupków sumowała się do 100,</span></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-density</span><span style=\" font-size:20pt;\">: normalizuje tak, aby całkowita powierzchnia histogramu równała się 1​​.</span></p>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Metoda prezentacji wielokrotnych kategorii</span>: Sposób układania wielokrotnych kategorii na histogramie, np. warstwami (\'layer\').</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Sposób rysowania</span>: Determinuje, czy biny są rysowane jako słupki (\'bars\') lub linie.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Ustawienia decydujące o wyświetlaniu legendy, która identyfikuje poszczególne grupy danych.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który będzie wyświetlany jako tytuł nad histogramem.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst etykiety osi X.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst etykiety osi Y.</li></ul>\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres pudełkowy posiada następujące parametry:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Zestaw danych, z którego zostaną pobrane wartości do wygenerowania wykresu pudełkowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna zestawu danych, którą chcesz umieścić na osi poziomej wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna zestawu danych, którą chcesz umieścić na osi pionowej wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna zestawu danych używana do grupowania danych na wykresie, co umożliwia porównanie rozkładów między różnymi kategoriami.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień pudełek</span>: Wybór palety kolorów do wyróżnienia grup reprezentowanych przez różne pudełka.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Orientacja</span>: Określenie orientacji pudełek na wykresie, czy będą one poziome czy pionowe.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Opcja, która określa, czy i jak legenda ma być wyświetlana, pomaga zidentyfikować, które grupy odpowiadają którym pudełkom.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który zostanie wyświetlony jako tytuł nad wykresem pudełkowym.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Opis osi poziomej wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Opis osi pionowej wykresu.</li></ul>\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres kołowy posiada następujące parametry:</span></p>\n"
-                                         "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Zestaw danych używany do stworzenia wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Dane na wykresie</span>: Kolumna zestawu danych, z której pobierane są wartości numeryczne do określenia wielkości segmentów wykresu kołowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykiety</span>: Kolumna zestawu danych używana do oznaczenia etykietami poszczególnych segmentów wykresu.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Promień wykresu kołowego</span>: Wartość numeryczna określająca rozmiar wykresu kołowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień wykresu</span>: Wybór palety kolorów dla segmentów wykresu kołowego.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Kolor etykiet</span>: Kolor tekstu etykiet segmentów.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Położenie legendy</span>: Określenie najlepszego miejsca dla legendy (‘best’ oznacza automatyczny wybór najlepszej lokacji).</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Nazwa legendy</span>: Tytuł dla legendy, jeśli jest używana.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst wyświetlany nad wykresem kołowym jako tytuł.</li>\n"
-                                         "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span> i <span style=\" font-weight:700;\">Etykieta osi Y</span>: Mimo że na wykresie kołowym zazwyczaj nie ma tradycyjnych osi, te pola mogą być używane do dodatkowych informacji lub opisu kontekstu danych.</li></ul></body></html>"))
+        self.textBrowser_Plots.setHtml(_translate("MainWindow_Guide",
+                                                  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                  "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                                  "p, li { white-space: pre-wrap; }\n"
+                                                  "hr { height: 1px; border-width: 0; }\n"
+                                                  "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                                  "li.checked::marker { content: \"\\2612\"; }\n"
+                                                  "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                                  "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykresy</span></p>\n"
+                                                  "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\"><br />Z dodanych zbiorów danych oraz stworzonych za pomocą </span><a href=\"szereg_rozdzielczy\"><span style=\" font-size:20pt; font-weight:700; text-decoration: underline; color:#5454FF;\">Szeregu rozdzielczego</span></a><span style=\" font-size:20pt;\"> można stworzyć następujące wykresy:</span></p>\n"
+                                                  "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                                  "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Punktowy <a href=\"punktowy\"><span style=\" font-weight:700; text-decoration: underline; color:#5454FF;\">Opis</span></a></li>\n"
+                                                  "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Liniowy <a href=\"liniowy\"><span style=\" font-weight:700; text-decoration: underline; color:#5454FF;\">Opis</span></a></li>\n"
+                                                  "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Słupkowy <a href=\"slupkowy\"><span style=\" font-weight:700; text-decoration: underline; color:#5454FF;\">Opis</span></a></li>\n"
+                                                  "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Histogram <a href=\"histogram\"><span style=\" font-weight:700; text-decoration: underline; color:#5454FF;\">Opis</span></a></li>\n"
+                                                  "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pudełkowy <a href=\"pudelkowy\"><span style=\" font-weight:700; text-decoration: underline; color:#5454FF;\">Opis</span></a></li>\n"
+                                                  "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Kołowy <a href=\"kolowy\"><span style=\" font-weight:700; text-decoration: underline; color:#5454FF;\">Opis</span></a></li></ul>\n"
+                                                  "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                                  "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykresy posiadają parametry, które pozwalają na dostosowanie wykresów. Po wybraniu zbioru w parametrze </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">Zbiór danych </span><span style=\" font-size:20pt;\">program wygeneruje automatycznie propozycje wykresu. Z wyjątkiem wykresu kołowego w, którym spowoduje to jedynie możliwość wyboru w parametrach </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">Dane na wykresie</span><span style=\" font-size:20pt;\"> oraz </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">Etykiety</span><span style=\" font-size:20pt;\"> kolumny z wybranego zbioru danych. W parametrach odpowiedzialnych za ustawienie kolumn z danymi na osiach (</span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">Oś X </span><span style=\" font-size:20pt;\">i</span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\"> Oś Y</span><span style=\" font-size:20pt;\">), będą do wyboru jedynie kolumny z wybranego zbioru danych. Dodawanie opisów do wykresu (tytuł oraz etykiety) zatwierdza się przyciskiem </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">ENTER</span><span style=\" font-size:20pt;\"> lub po przez naciśniecie przycisku </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">Generuj wykres.</span></p></body></html>"))
         self.pushButton_Close_5.setText(_translate("MainWindow_Guide", "Zamknij"))
+        self.textEdit_2.setHtml(_translate("MainWindow_Guide",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "hr { height: 1px; border-width: 0; }\n"
+                                           "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                           "li.checked::marker { content: \"\\2612\"; }\n"
+                                           "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykres punktowy</span></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres punktowy posiada następujące parametry:</span></p>\n"
+                                           "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Wskaźnik na dane źródłowe do wygenerowania wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Wybór kolumny danych do reprezentacji na osi poziomej.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Wybór kolumny danych do reprezentacji na osi pionowej.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna danych używana do grupowania i kolorowania punktów w celu wizualnego oddzielenia kategorii.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Rozmiar punktów</span>: Kolumna danych determinująca wielkość punktów na wykresie, co umożliwia reprezentowanie dodatkowej zmiennej.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień punktów</span>: Zestaw barw lub styl używany do nadania koloru punktom, co może pomóc w różnicowaniu między grupami.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Kształt punktów</span>: Określa kształt wyświetlanych punktów; domyślnie jest to koło.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Ustawienie kontrolujące, czy i jak legenda jest wyświetlana, aby wyjaśnić, co oznaczają poszczególne kolory i rozmiary punktów.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst wyświetlany na górze wykresu jako jego tytuł.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst wyświetlany jako etykieta dla osi X.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst wyświetlany jako etykieta dla osi Y.</li></ul>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu punktowego:</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename11}\" /></p>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_3.setHtml(_translate("MainWindow_Guide",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "hr { height: 1px; border-width: 0; }\n"
+                                           "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                           "li.checked::marker { content: \"\\2612\"; }\n"
+                                           "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykres liniowy</span></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres liniowy posiada następujące parametry:</span></p>\n"
+                                           "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Wskaźnik na zestaw danych, z którego będą wykorzystywane dane do wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna z zestawu danych, która ma być wykorzystana jako wartości dla osi X.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna z zestawu danych, która ma być wykorzystana jako wartości dla osi Y.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna z zestawu danych, która będzie używana do grupowania danych i nadania koloru poszczególnym liniom wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Rozmiar punktów</span>: Kolumna, która określa rozmiar punktów na wykresie, co umożliwia wizualne reprezentowanie dodatkowej zmiennej.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień</span>: Określa schemat kolorów (paleta), który zostanie zastosowany do różnych grup danych na wykresie.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Kształt punktów</span>: Określa, jakiego kształtu punkty będą użyte na wykresie.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Estymator</span>: Metoda używana do agregowania wielu wartości y dla pojedynczego x, najczęściej \'mean\' (średnia).</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Przedział ufności</span>: Określa, czy i jakie przedziały ufności (np. 95%) mają być rysowane wokół estymowanych wartości.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Kontroluje, czy i w jaki sposób wyświetlana jest legenda, która identyfikuje grupy danych.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który zostanie umieszczony jako tytuł wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst wyświetlany jako etykieta dla osi X.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst wyświetlany jako etykieta dla osi Y.</li></ul>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu liniowego:</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename12}\" /></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_4.setHtml(_translate("MainWindow_Guide",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "hr { height: 1px; border-width: 0; }\n"
+                                           "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                           "li.checked::marker { content: \"\\2612\"; }\n"
+                                           "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykres słupkowy</span></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres słupkowy posiada następujące parametry:</span></p>\n"
+                                           "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Wskaźnik na źródłowy zestaw danych dla wykresu słupkowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna zestawu danych, która będzie wykorzystywana dla osi poziomej wykresu słupkowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna zestawu danych, która będzie wykorzystywana dla osi pionowej wykresu słupkowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna z zestawu danych, której wartości są używane do grupowania słupków i nadawania im różnych kolorów.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień słupków</span>: Wybór palety kolorów dla słupków.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Estymator</span>: Funkcja estymująca (np. średnia), która jest używana do obliczania wartości przedstawianych przez słupki.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Przedział ufności</span>: Poziom ufności dla przedziału ufności słupków (np. 95%), pokazujący niepewność estymacji.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Orientacja</span>: Określa orientację słupków na wykresie – poziomą lub pionową.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Kontroluje wyświetlanie legendy, która identyfikuje grupy danych według kolorów słupków.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który będzie wyświetlany jako tytuł wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst, który będzie służył jako etykieta dla osi X.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst, który będzie służył jako etykieta dla osi Y.</li></ul>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu słupkowego:</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename13}\" /></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_5.setHtml(_translate("MainWindow_Guide",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "hr { height: 1px; border-width: 0; }\n"
+                                           "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                           "li.checked::marker { content: \"\\2612\"; }\n"
+                                           "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Histogram</span></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Histogram posiada następujące parametry:</span></p>\n"
+                                           "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Zestaw danych, z którego pobierane są informacje do stworzenia histogramu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna zestawu danych, która będzie używana dla wartości osi poziomej, reprezentująca zmienne do podziału na przedziały (biny).</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna zestawu danych, która będzie używana dla wartości osi pionowej, zwykle używana do wyświetlania wag dla każdego przedziału.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna zestawu danych, która służy do grupowania danych w różne przedziały histogramu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień histogramów</span>: Wybór schematu kolorystycznego dla różnych grup danych w histogramie.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Statystyka</span>: Statystyczna funkcja agregacji danych dla przedziałów, na przykład \'count\' pokazuje liczbę obserwacji w każdym przedziale.</li>\n"
+                                           "<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-count</span><span style=\" font-size:20pt;\">: pokazuje liczbę obserwacji w każdym przedziale,</span></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-frequency</span><span style=\" font-size:20pt;\">: pokazuje liczbę obserwacji podzieloną przez szerokość przedziału,</span></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-probability</span><span style=\" font-size:20pt;\">: normalizuje tak, aby wysokość słupków sumowała się do 1,</span></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-percent</span><span style=\" font-size:20pt;\">: normalizuje tak, aby wysokość słupków sumowała się do 100,</span></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'Courier New\'; font-size:20pt;\">-density</span><span style=\" font-size:20pt;\">: normalizuje tak, aby całkowita powierzchnia histogramu równała się 1​​.</span></p>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Metoda prezentacji wielokrotnych kategorii</span>: Sposób układania wielokrotnych kategorii na histogramie, np. warstwami (\'layer\').</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Sposób rysowania</span>: Determinuje, czy przedziały są rysowane jako słupki (\'bars\').</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Ustawienia decydujące o wyświetlaniu legendy, która identyfikuje poszczególne grupy danych.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który będzie wyświetlany jako tytuł nad histogramem.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Tekst etykiety osi X.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Tekst etykiety osi Y.</li></ul>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład histogramu:</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename14}\" /></p>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_6.setHtml(_translate("MainWindow_Guide",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "hr { height: 1px; border-width: 0; }\n"
+                                           "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                           "li.checked::marker { content: \"\\2612\"; }\n"
+                                           "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykres pudełkowy</span></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres pudełkowy posiada następujące parametry:</span></p>\n"
+                                           "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Zestaw danych, z którego zostaną pobrane wartości do wygenerowania wykresu pudełkowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś X</span>: Kolumna zestawu danych, którą chcesz umieścić na osi poziomej wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Oś Y</span>: Kolumna zestawu danych, którą chcesz umieścić na osi pionowej wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Grupowanie</span>: Kolumna zestawu danych używana do grupowania danych na wykresie, co umożliwia porównanie rozkładów między różnymi kategoriami.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień pudełek</span>: Wybór palety kolorów do wyróżnienia grup reprezentowanych przez różne pudełka.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Orientacja</span>: Określenie orientacji pudełek na wykresie, czy będą one poziome czy pionowe.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Legenda</span>: Opcja, która określa, czy i jak legenda ma być wyświetlana, pomaga zidentyfikować, które grupy odpowiadają którym pudełkom.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst, który zostanie wyświetlony jako tytuł nad wykresem pudełkowym.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span>: Opis osi poziomej wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi Y</span>: Opis osi pionowej wykresu.</li></ul>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu pudełkowego:</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename15}\" /></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit_7.setHtml(_translate("MainWindow_Guide",
+                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                           "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+                                           "p, li { white-space: pre-wrap; }\n"
+                                           "hr { height: 1px; border-width: 0; }\n"
+                                           "li.unchecked::marker { content: \"\\2610\"; }\n"
+                                           "li.checked::marker { content: \"\\2612\"; }\n"
+                                           "</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                           "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">Wykres kołowy</span></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt; font-weight:700;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Wykres kołowy posiada następujące parametry:</span></p>\n"
+                                           "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\">\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Zbiór danych</span>: Zestaw danych używany do stworzenia wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Dane na wykresie</span>: Kolumna zestawu danych, z której pobierane są wartości numeryczne do określenia wielkości segmentów wykresu kołowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykiety</span>: Kolumna zestawu danych używana do oznaczenia etykietami poszczególnych segmentów wykresu.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Promień wykresu kołowego</span>: Wartość numeryczna określająca rozmiar wykresu kołowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Odcień wykresu</span>: Wybór palety kolorów dla segmentów wykresu kołowego.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Kolor etykiet</span>: Kolor tekstu etykiet segmentów.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Położenie legendy</span>: Określenie najlepszego miejsca dla legendy (‘best’ oznacza automatyczny wybór najlepszej lokacji).</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Nazwa legendy</span>: Tytuł dla legendy, jeśli jest używana.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst wyświetlany nad wykresem kołowym jako tytuł.</li>\n"
+                                           "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span> i <span style=\" font-weight:700;\">Etykieta osi Y</span>: Mimo że na wykresie kołowym zazwyczaj nie ma tradycyjnych osi, te pola mogą być używane do dodatkowych informacji lub opisu kontekstu danych.</li></ul>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu kołowego:</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename8}\" /></p></body></html>"))
 
 
 if __name__ == "__main__":

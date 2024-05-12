@@ -578,9 +578,33 @@ class MainController(QMainWindow, Ui_MainWindow_Main):
         self.window_guide_ui = Ui_MainWindow_Guide()
         self.window_guide_ui.setupUi(self.window_guide)
 
+        self.window_guide_ui.textBrowser_Plots.anchorClicked.connect(self.switchStackedWidgetByUrl)
         self.center(self.window_guide)
 
         self.window_guide.show()
+
+    def switchStackedWidgetByUrl(self, url):
+        try:
+            linkMap = {
+                'szereg_rozdzielczy': 3,
+                'punktowy': 5,
+                'liniowy': 6,
+                'slupkowy': 7,
+                'histogram': 8,
+                'pudelkowy': 9,
+                'kolowy': 10
+            }
+
+            name = url.toString()
+
+            if name in linkMap:
+                index = int(linkMap[name])
+
+                self.window_guide_ui.stackedWidget_Content.setCurrentIndex(index)
+                self.window_guide_ui.listWidget_Category_List.setCurrentRow(index)
+                self.window_guide_ui.textBrowser_Plots.reload()
+        except Exception as e:
+            MessageModel.error("0037", str(e))
 
     def adjustFilename(self, filePath, extension):
         if not extension.startswith('.'):
