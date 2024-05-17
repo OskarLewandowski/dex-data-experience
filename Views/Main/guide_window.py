@@ -238,6 +238,7 @@ class Ui_MainWindow_Guide(object):
         image_filename13 = "guide/Screenshot_13.png"
         image_filename14 = "guide/Screenshot_14.png"
         image_filename15 = "guide/Screenshot_15.png"
+        image_filename16 = "guide/Screenshot_16.png"
 
         image_filename1 = os.path.join(image_directory, image_filename1)
         image_filename2 = os.path.join(image_directory, image_filename2)
@@ -254,6 +255,7 @@ class Ui_MainWindow_Guide(object):
         image_filename13 = os.path.join(image_directory, image_filename13)
         image_filename14 = os.path.join(image_directory, image_filename14)
         image_filename15 = os.path.join(image_directory, image_filename15)
+        image_filename16 = os.path.join(image_directory, image_filename16)
 
         _translate = QtCore.QCoreApplication.translate
         MainWindow_Guide.setWindowTitle(_translate("MainWindow_Guide", "Przewodnik"))
@@ -595,8 +597,15 @@ class Ui_MainWindow_Guide(object):
                                            "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Tytuł wykresu</span>: Tekst wyświetlany nad wykresem kołowym jako tytuł.</li>\n"
                                            "<li style=\" font-size:20pt;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Etykieta osi X</span> i <span style=\" font-weight:700;\">Etykieta osi Y</span>: Mimo że na wykresie kołowym zazwyczaj nie ma tradycyjnych osi, te pola mogą być używane do dodatkowych informacji lub opisu kontekstu danych.</li></ul>\n"
                                            "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Do stworzenia wartościowego wykresu kołowego należy stworzyć nowy zbiór danych, wykorzystując </span><span style=\" font-size:20pt; font-weight:700; font-style:italic;\">&quot;Szereg rozdzielczy&quot;</span><span style=\" font-size:20pt;\">. Pozwoli to prawidłowo przedstawić na wykresie dowolne dane z naszych zbiorów. </span></p>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu kołowego:</span></p>\n"
-                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename8}\" /></p></body></html>"))
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">1) Tworzę zbiór danych za pomocą szeregu rozdzielczego, który wykorzystam do prezentacji na wykresie kołowym. Zapisuję szereg rozdzielczy jako nowy zbiór danych. </span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename16}\" /></p>\n"
+                                           "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt;\"><br /></p>\n"
+                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">2) Wykorzystuję stworzony zbiór do stworzenia wykresu.</span></p>\n"
+                                           f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename8}\" /></p>\n"
+                                           "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
 
 
 if __name__ == "__main__":
