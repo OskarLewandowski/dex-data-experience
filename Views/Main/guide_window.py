@@ -160,6 +160,18 @@ class Ui_MainWindow_Guide(object):
         self.textEdit_2.setReadOnly(True)
         self.textEdit_2.setObjectName("textEdit_2")
         self.verticalLayout_6.addWidget(self.textEdit_2)
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_7.addItem(spacerItem10)
+        self.pushButton_Close_6 = QtWidgets.QPushButton(parent=self.Scatter_Plot)
+        self.pushButton_Close_6.setObjectName("pushButton_Close_6")
+        self.horizontalLayout_7.addWidget(self.pushButton_Close_6)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_7.addItem(spacerItem11)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_7)
         self.stackedWidget_Content.addWidget(self.Scatter_Plot)
         self.Line_Plot = QtWidgets.QWidget()
         self.Line_Plot.setObjectName("Line_Plot")
@@ -169,6 +181,18 @@ class Ui_MainWindow_Guide(object):
         self.textEdit_3.setReadOnly(True)
         self.textEdit_3.setObjectName("textEdit_3")
         self.verticalLayout_7.addWidget(self.textEdit_3)
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem12)
+        self.pushButton_Close_7 = QtWidgets.QPushButton(parent=self.Line_Plot)
+        self.pushButton_Close_7.setObjectName("pushButton_Close_7")
+        self.horizontalLayout_8.addWidget(self.pushButton_Close_7)
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem13)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_8)
         self.stackedWidget_Content.addWidget(self.Line_Plot)
         self.Bar_Plot = QtWidgets.QWidget()
         self.Bar_Plot.setObjectName("Bar_Plot")
@@ -178,6 +202,18 @@ class Ui_MainWindow_Guide(object):
         self.textEdit_4.setReadOnly(True)
         self.textEdit_4.setObjectName("textEdit_4")
         self.verticalLayout_8.addWidget(self.textEdit_4)
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_9.addItem(spacerItem14)
+        self.pushButton_Close_8 = QtWidgets.QPushButton(parent=self.Bar_Plot)
+        self.pushButton_Close_8.setObjectName("pushButton_Close_8")
+        self.horizontalLayout_9.addWidget(self.pushButton_Close_8)
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_9.addItem(spacerItem15)
+        self.verticalLayout_8.addLayout(self.horizontalLayout_9)
         self.stackedWidget_Content.addWidget(self.Bar_Plot)
         self.Histogram = QtWidgets.QWidget()
         self.Histogram.setObjectName("Histogram")
@@ -187,6 +223,18 @@ class Ui_MainWindow_Guide(object):
         self.textEdit_5.setReadOnly(True)
         self.textEdit_5.setObjectName("textEdit_5")
         self.verticalLayout_9.addWidget(self.textEdit_5)
+        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
+        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem16)
+        self.pushButton_Close_9 = QtWidgets.QPushButton(parent=self.Histogram)
+        self.pushButton_Close_9.setObjectName("pushButton_Close_9")
+        self.horizontalLayout_10.addWidget(self.pushButton_Close_9)
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem17)
+        self.verticalLayout_9.addLayout(self.horizontalLayout_10)
         self.stackedWidget_Content.addWidget(self.Histogram)
         self.Box_Plot = QtWidgets.QWidget()
         self.Box_Plot.setObjectName("Box_Plot")
@@ -196,6 +244,18 @@ class Ui_MainWindow_Guide(object):
         self.textEdit_6.setReadOnly(True)
         self.textEdit_6.setObjectName("textEdit_6")
         self.verticalLayout_10.addWidget(self.textEdit_6)
+        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
+        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem18)
+        self.pushButton_Close_10 = QtWidgets.QPushButton(parent=self.Box_Plot)
+        self.pushButton_Close_10.setObjectName("pushButton_Close_10")
+        self.horizontalLayout_11.addWidget(self.pushButton_Close_10)
+        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem19)
+        self.verticalLayout_10.addLayout(self.horizontalLayout_11)
         self.stackedWidget_Content.addWidget(self.Box_Plot)
         self.Pie_Chart = QtWidgets.QWidget()
         self.Pie_Chart.setObjectName("Pie_Chart")
@@ -205,6 +265,18 @@ class Ui_MainWindow_Guide(object):
         self.textEdit_7.setReadOnly(True)
         self.textEdit_7.setObjectName("textEdit_7")
         self.verticalLayout_11.addWidget(self.textEdit_7)
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        spacerItem20 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem20)
+        self.pushButton_Close_11 = QtWidgets.QPushButton(parent=self.Pie_Chart)
+        self.pushButton_Close_11.setObjectName("pushButton_Close_11")
+        self.horizontalLayout_12.addWidget(self.pushButton_Close_11)
+        spacerItem21 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                             QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem21)
+        self.verticalLayout_11.addLayout(self.horizontalLayout_12)
         self.stackedWidget_Content.addWidget(self.Pie_Chart)
         self.horizontalLayout.addWidget(self.stackedWidget_Content)
         MainWindow_Guide.setCentralWidget(self.centralwidget)
@@ -218,6 +290,12 @@ class Ui_MainWindow_Guide(object):
         self.pushButton_Close_3.clicked.connect(MainWindow_Guide.close)  # type: ignore
         self.pushButton_Close_4.clicked.connect(MainWindow_Guide.close)  # type: ignore
         self.pushButton_Close_5.clicked.connect(MainWindow_Guide.close)  # type: ignore
+        self.pushButton_Close_6.clicked.connect(MainWindow_Guide.close)  # type: ignore
+        self.pushButton_Close_7.clicked.connect(MainWindow_Guide.close)  # type: ignore
+        self.pushButton_Close_8.clicked.connect(MainWindow_Guide.close)  # type: ignore
+        self.pushButton_Close_9.clicked.connect(MainWindow_Guide.close)  # type: ignore
+        self.pushButton_Close_10.clicked.connect(MainWindow_Guide.close)  # type: ignore
+        self.pushButton_Close_11.clicked.connect(MainWindow_Guide.close)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow_Guide)
 
     def retranslateUi(self, MainWindow_Guide):
@@ -457,6 +535,7 @@ class Ui_MainWindow_Guide(object):
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu punktowego:</span></p>\n"
                                            f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename11}\" /></p>\n"
                                            "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton_Close_6.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_3.setHtml(_translate("MainWindow_Guide",
                                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -486,6 +565,7 @@ class Ui_MainWindow_Guide(object):
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu liniowego:</span></p>\n"
                                            f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename12}\" /></p>\n"
                                            "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton_Close_7.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_4.setHtml(_translate("MainWindow_Guide",
                                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -514,6 +594,7 @@ class Ui_MainWindow_Guide(object):
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład wykresu słupkowego:</span></p>\n"
                                            f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename13}\" /></p>\n"
                                            "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton_Close_8.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_5.setHtml(_translate("MainWindow_Guide",
                                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -547,6 +628,7 @@ class Ui_MainWindow_Guide(object):
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">Przykład histogramu:</span></p>\n"
                                            f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename14}\" /></p>\n"
                                            "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton_Close_9.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_6.setHtml(_translate("MainWindow_Guide",
                                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -574,6 +656,7 @@ class Ui_MainWindow_Guide(object):
                                            f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename15}\" /></p>\n"
                                            "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
                                            "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton_Close_10.setText(_translate("MainWindow_Guide", "Zamknij"))
         self.textEdit_7.setHtml(_translate("MainWindow_Guide",
                                            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -606,6 +689,7 @@ class Ui_MainWindow_Guide(object):
                                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt;\">2) Wykorzystuję stworzony zbiór do stworzenia wykresu.</span></p>\n"
                                            f"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"{image_filename8}\" /></p>\n"
                                            "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.pushButton_Close_11.setText(_translate("MainWindow_Guide", "Zamknij"))
 
 
 if __name__ == "__main__":
