@@ -48,15 +48,15 @@ This project is the outcome of a master's thesis focused on creating a tool for 
     ```
 
 # Pobierz
-- Dex dla Windows: [Windows v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Windows-v0.3.1.zip)
-- Dex dla Linux [Linux v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Linux-v0.3.1.tar.gz)
+- Pobierz Dex dla Windows: [Windows v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Windows-v0.3.1.zip)
+- Pobierz Dex dla Linux: [Linux v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Linux-v0.3.1.tar.gz)
 
 Po pobraniu i rozpakowaniu pliku, uruchom plik Dex.exe (Windows) lub Dex (Linux).
 W przypadku problemu z uruchomieniem pliku Dex na Linux, należy dodać uprawnienie do wykonywania pliku przy użyciu komendy: ``` chmod +x Dex ```
 
 # Download
-- Download Dex for [Windows v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Windows-v0.3.1.zip)
-- Download Dex for [Linux v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Linux-v0.3.1.tar.gz)
+- Download Dex for Windows: [Windows v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Windows-v0.3.1.zip)
+- Download Dex for Linux: [Linux v0.3.1](https://github.com/OskarLewandowski/dex-data-experience/releases/download/v0.3.1/Dex-Linux-v0.3.1.tar.gz)
 
 After downloading and unpacking the file, run Dex.exe (Windows) or Dex (Linux). 
 If you encounter any issues running the Dex file on Linux, you need to add execute permissions to the file using the command: ```chmod +x Dex ```
