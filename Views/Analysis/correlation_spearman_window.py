@@ -206,7 +206,7 @@ class Ui_MainWindow_Correlation_Spearman(object):
         self.toolButton_Data_Column.setText(_translate("MainWindow_Correlation_Spearman", "X"))
         self.comboBox_Data_Column.setPlaceholderText(
             _translate("MainWindow_Correlation_Spearman", "Wybierz zbiór danych..."))
-        self.label_2.setText(_translate("MainWindow_Correlation_Spearman", "Zbiór danych 2 (opcjonalnie):"))
+        self.label_2.setText(_translate("MainWindow_Correlation_Spearman", "Zbiór danych 2:"))
         self.toolButton_Data_Column_2.setText(_translate("MainWindow_Correlation_Spearman", "X"))
         self.comboBox_Data_Column_2.setPlaceholderText(
             _translate("MainWindow_Correlation_Spearman", "Wybierz zbiór danych..."))
